@@ -1,0 +1,186 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ChevronDown, Sparkles } from "lucide-react";
+
+interface HeroProps {
+  onCTAClick: () => void;
+}
+
+export default function HeroSection({ onCTAClick }: HeroProps) {
+  const scrollDown = () => {
+    const el = document.querySelector("#pitch-deck");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <section
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 0,
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+        paddingTop: "6rem",
+      }}
+    >
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          left: 0,
+          top: 0,
+          objectFit: "cover",
+          zIndex: 0,
+        }}
+      >
+        <source src="/background.mp4" type="video/mp4" />
+      </video>
+
+      {/* Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          left: 0,
+          top: 0,
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          zIndex: 1,
+        }}
+      />
+
+      {/* Floating orbs */}
+      <motion.div
+        animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: "absolute", top: "15%", right: "8%",
+          width: 350, height: 350, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(0,119,194,0.06) 0%, transparent 65%)",
+          filter: "blur(50px)", pointerEvents: "none",
+          zIndex: 2,
+        }}
+      />
+      <motion.div
+        animate={{ y: [0, 15, 0], x: [0, -8, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        style={{
+          position: "absolute", bottom: "20%", left: "5%",
+          width: 280, height: 280, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(0,119,194,0.05) 0%, transparent 65%)",
+          filter: "blur(50px)", pointerEvents: "none",
+          zIndex: 2,
+        }}
+      />
+
+      {/* Content */}
+      <div className="container-xl" style={{ textAlign: "center", position: "relative", zIndex: 3 }}>
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ scale: 1.05, boxShadow: "0 6px 20px rgba(0,119,194,0.12)" }}
+          style={{
+            display: "inline-flex", alignItems: "center", gap: "0.5rem",
+            padding: "0.5rem 1.25rem",
+            background: "rgba(0,119,194,0.06)",
+            border: "1px solid rgba(0,119,194,0.12)",
+            borderRadius: "100px", marginBottom: "2.5rem",
+            cursor: "default", transition: "all 0.3s ease",
+          }}
+        >
+          <motion.div animate={{ rotate: [0, 180, 360] }} transition={{ duration: 3, repeat: Infinity }}>
+            <Sparkles size={14} color="#0077c2" />
+          </motion.div>
+          <span style={{
+            fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", fontWeight: 600,
+            letterSpacing: "0.2em", textTransform: "uppercase", color: "#0077c2",
+          }}>
+            Comprehensive Capital Advisory
+          </span>
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          style={{
+            marginBottom: "1.5rem", maxWidth: 900, margin: "0 auto 1.5rem",
+            fontSize: "clamp(2.5rem, 6vw, 4.5rem)", fontWeight: 800,
+            fontFamily: "'Inter', sans-serif", lineHeight: 1.08,
+            letterSpacing: "-0.03em", color: "#111827",
+          }}
+        >
+          Create.
+          <br />
+          Convert.
+          <br />
+          <span style={{
+            background: "linear-gradient(135deg, #0077c2 0%, #44a8ee 50%, #0077c2 100%)",
+            backgroundSize: "200% 200%", animation: "gradient-shift 4s ease infinite",
+            WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
+          }}>
+            Scale.
+          </span>
+        </motion.h1>
+
+        {/* Subheadline */}
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+          style={{
+            fontSize: "clamp(1rem, 2.2vw, 1.25rem)", maxWidth: 650,
+            margin: "0 auto 3rem", lineHeight: 1.6, fontWeight: 400,
+            color: "#6b7280", fontFamily: "'Inter', sans-serif",
+          }}
+        >
+          Accelerate your capital acquisition strategy with sophisticated, AI-driven presentation development designed to engage institutional investors and facilitate scalable growth.
+        </motion.p>
+
+        {/* CTAs */}
+      </div>
+
+      {/* Scroll indicator */}
+      <motion.button
+        onClick={scrollDown}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        style={{
+          position: "absolute", bottom: "2.5rem", left: "50%",
+          transform: "translateX(-50%)", background: "none", border: "none",
+          cursor: "pointer", display: "flex", flexDirection: "column",
+          alignItems: "center", gap: "0.5rem", color: "#9ca3af",
+        }}
+        whileHover={{ color: "#374151" }}
+      >
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em" }}>
+          SCROLL
+        </span>
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
+          <ChevronDown size={18} />
+        </motion.div>
+      </motion.button>
+
+      <style jsx>{`
+        @keyframes gradient-shift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+      `}</style>
+    </section>
+  );
+}
