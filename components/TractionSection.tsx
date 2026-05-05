@@ -1,7 +1,30 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView, animate } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { Logos3 } from "@/components/blocks/Logos3";
+
+function Counter({ start, end, suffix }: { start: number; end: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (inView && ref.current) {
+      const controls = animate(start, end, {
+        duration: 2,
+        ease: "easeOut",
+        onUpdate(value) {
+          if (ref.current) {
+            ref.current.textContent = Math.round(value) + suffix;
+          }
+        }
+      });
+      return () => controls.stop();
+    }
+  }, [inView, start, end, suffix]);
+
+  return <span ref={ref}>{start}{suffix}</span>;
+}
 
 export default function TractionSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -67,12 +90,12 @@ export default function TractionSection() {
           }}
         >
           {[
-            { num: "73%", label: "Initial rejection rate in standard presentations; mitigated via our narrative strategies.", delay: 0.3 },
-            { num: "5×", label: "Exponential Increase in Investor Responses", delay: 0.4 },
-            { num: "80%", label: "Enhanced Probability of Successful Conversion", delay: 0.5 },
-          ].map((stat) => (
+            { start: 30, end: 73, suffix: "%", label: "Initial rejection rate in standard presentations; mitigated via our narrative strategies.", delay: 0.3 },
+            { start: 1, end: 5, suffix: "×", label: "Exponential Increase in Investor Responses", delay: 0.4 },
+            { start: 45, end: 80, suffix: "%", label: "Enhanced Probability of Successful Conversion", delay: 0.5 },
+          ].map((stat, i) => (
             <motion.div
-              key={stat.num}
+              key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.3, delay: stat.delay * 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -91,7 +114,7 @@ export default function TractionSection() {
                 background: "linear-gradient(135deg, #0077c2, #44a8ee)",
                 WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
               }}>
-                {stat.num}
+                <Counter start={stat.start} end={stat.end} suffix={stat.suffix} />
               </div>
               <div style={{
                 fontSize: "0.9rem", color: "#6b7280", lineHeight: 1.65,
@@ -103,6 +126,11 @@ export default function TractionSection() {
           ))}
         </motion.div>
       </motion.div>
+
+      {/* Scrolling Logos */}
+      <div className="relative z-10 w-full mt-10">
+        <Logos3 />
+      </div>
     </section>
   );
 }

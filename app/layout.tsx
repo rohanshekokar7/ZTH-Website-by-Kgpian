@@ -59,9 +59,9 @@ export default function RootLayout({
             ~100ms of font download latency. ──────────────────────── */}
       </head>
       <body>
-        <SmoothScroll>
+        {/* <SmoothScroll> */}
           <ThemeProvider>{children}</ThemeProvider>
-        </SmoothScroll>
+        {/* </SmoothScroll> */}
       </body>
     </html>
   );

@@ -33,14 +33,14 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Loader */}
+      {/* Smart Page Loader */}
       {!loaded && <Loader onComplete={handleLoaderComplete} />}
 
       {/* Main app  */}
       <div
         style={{
           opacity: loaded ? 1 : 0,
-          transition: "opacity 0.6s ease",
+          transition: "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
           position: "relative",
           zIndex: 1,
         }}

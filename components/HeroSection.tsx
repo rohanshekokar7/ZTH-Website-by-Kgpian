@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
+import { TextScramble } from "@/components/ui/text-scramble";
 
 const ZTHCoin3D = dynamic(() => import("./ZTHCoin3D"), { ssr: false });
 
@@ -29,8 +30,8 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
       {/* Overlay */}
       <div className="hero-overlay" />
 
-      {/* Floating ambient orbs */}
-      <motion.div
+      {/* Floating ambient orbs (commented out for performance) */}
+      {/* <motion.div
         animate={{ y: [0, -22, 0], x: [0, 12, 0] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         className="hero-orb hero-orb--tr"
@@ -39,7 +40,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
         animate={{ y: [0, 16, 0], x: [0, -10, 0] }}
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         className="hero-orb hero-orb--bl"
-      />
+      /> */}
 
       {/* ── Two-column layout ──────────────────────────────────────────────── */}
       <div className="container-xl hero-inner">
@@ -100,8 +101,8 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
             <button className="btn-primary" onClick={onCTAClick}>
               Get Started
             </button>
-            <button className="btn-secondary" onClick={scrollDown}>
-              See Our Work
+            <button className="btn-secondary flex items-center justify-center p-0 overflow-hidden" onClick={scrollDown} style={{ padding: "0.5rem 1.5rem" }}>
+              <TextScramble text="See Our Work" />
             </button>
           </motion.div>
         </div>
