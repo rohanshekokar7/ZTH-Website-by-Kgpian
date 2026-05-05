@@ -12,29 +12,30 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
 
   return (
     <section ref={containerRef} className="section-pad"
-      style={{ background: "#f8fafc", position: "relative", overflow: "hidden" }}
+      style={{ background: "#FFFFFF", position: "relative", overflow: "hidden" }}
     >
+      {/* Top separator */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 1,
-        background: "linear-gradient(90deg, transparent, rgba(0,119,194,0.12), transparent)",
+        background: "linear-gradient(90deg, transparent, rgba(25,118,210,0.3), transparent)",
       }} />
 
       {/* Radial glow */}
       <div style={{
         position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
         width: "70vw", height: "70vw", maxWidth: 800, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(0,119,194,0.05) 0%, transparent 60%)",
+        background: "radial-gradient(circle, rgba(25,118,210,0.12) 0%, transparent 60%)",
         filter: "blur(80px)", pointerEvents: "none",
       }} />
 
       <div className="container-xl" style={{ perspective: 1200 }}>
         <motion.div style={{ scale, opacity, transformStyle: "preserve-3d" }}>
           <div style={{
-            background: "linear-gradient(145deg, rgba(0,119,194,0.06), rgba(0,119,194,0.01))",
-            border: "1px solid rgba(0,119,194,0.1)",
+            background: "#52555F",
+            border: "1px solid rgba(255,255,255,0.06)",
             borderRadius: "2rem", padding: "clamp(3rem, 8vw, 5rem)",
             textAlign: "center", position: "relative", overflow: "hidden",
-            boxShadow: "0 30px 80px rgba(0,0,0,0.04)",
+            boxShadow: "0 30px 80px rgba(0,0,0,0.12)",
           }}>
             {/* Corner accents */}
             {["top-left", "top-right", "bottom-left", "bottom-right"].map((pos) => (
@@ -43,10 +44,10 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
                 ...(pos.includes("top") ? { top: "1.5rem" } : { bottom: "1.5rem" }),
                 ...(pos.includes("left") ? { left: "1.5rem" } : { right: "1.5rem" }),
                 width: 30, height: 30,
-                borderTop: pos.includes("top") ? "1px solid rgba(0,119,194,0.15)" : "none",
-                borderBottom: pos.includes("bottom") ? "1px solid rgba(0,119,194,0.15)" : "none",
-                borderLeft: pos.includes("left") ? "1px solid rgba(0,119,194,0.15)" : "none",
-                borderRight: pos.includes("right") ? "1px solid rgba(0,119,194,0.15)" : "none",
+                borderTop: pos.includes("top") ? "1px solid rgba(25,118,210,0.3)" : "none",
+                borderBottom: pos.includes("bottom") ? "1px solid rgba(25,118,210,0.3)" : "none",
+                borderLeft: pos.includes("left") ? "1px solid rgba(25,118,210,0.3)" : "none",
+                borderRight: pos.includes("right") ? "1px solid rgba(25,118,210,0.3)" : "none",
               }} />
             ))}
 
@@ -55,14 +56,14 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               style={{
                 display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                padding: "0.45rem 1.1rem", background: "rgba(0,119,194,0.08)",
-                border: "1px solid rgba(0,119,194,0.12)", borderRadius: "100px", marginBottom: "2rem",
+                padding: "0.45rem 1.1rem", background: "rgba(25,118,210,0.15)",
+                border: "1px solid rgba(25,118,210,0.3)", borderRadius: "100px", marginBottom: "2rem",
               }}
             >
-              <Sparkles size={14} color="#0077c2" />
+              <Sparkles size={14} color="#90CAF9" />
               <span style={{
                 fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", fontWeight: 600,
-                letterSpacing: "0.2em", textTransform: "uppercase", color: "#0077c2",
+                letterSpacing: "0.2em", textTransform: "uppercase", color: "#90CAF9",
               }}>
                 Start Your Journey
               </span>
@@ -73,22 +74,19 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 fontFamily: "'Inter', sans-serif", fontWeight: 800,
-                fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "#111827",
+                fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "#FFFFFF",
                 lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "1.5rem",
               }}
             >
               Ready to Raise{" "}
-              <span style={{
-                background: "linear-gradient(135deg, #0077c2, #44a8ee)",
-                WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
-              }}>Your Round?</span>
+              <span style={{ color: "#90CAF9" }}>Your Round?</span>
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
               transition={{ delay: 0.2 }}
               style={{
-                fontFamily: "'Inter', sans-serif", fontSize: "1.1rem", color: "#6b7280",
+                fontFamily: "'Inter', sans-serif", fontSize: "1.1rem", color: "#A1A1AA",
                 lineHeight: 1.6, maxWidth: 560, margin: "0 auto 3rem",
               }}
             >
@@ -102,27 +100,27 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
             >
               <motion.button
                 onClick={onCTAClick}
-                whileHover={{ scale: 1.05, boxShadow: "0 12px 48px rgba(0,119,194,0.3)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0 12px 48px rgba(25,118,210,0.4)" }}
                 whileTap={{ scale: 0.95 }}
                 style={{
                   fontSize: "1.05rem", padding: "1.1rem 2.75rem",
-                  background: "#0077c2", color: "#fff", border: "none",
+                  background: "#1976D2", color: "#fff", border: "none",
                   borderRadius: "100px", fontFamily: "'Inter', sans-serif",
                   fontWeight: 600, cursor: "pointer", display: "inline-flex",
                   alignItems: "center", gap: "0.5rem",
-                  boxShadow: "0 4px 20px rgba(0,119,194,0.25)",
+                  boxShadow: "0 4px 20px rgba(25,118,210,0.35)",
                 }}
               >
                 Schedule Initial Consultation <ArrowRight size={17} />
               </motion.button>
               <motion.button
                 onClick={() => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })}
-                whileHover={{ scale: 1.05, borderColor: "#0077c2" }}
+                whileHover={{ scale: 1.05, borderColor: "#90CAF9", color: "#90CAF9" }}
                 whileTap={{ scale: 0.95 }}
                 style={{
                   fontSize: "1.05rem", padding: "1.1rem 2.75rem",
-                  background: "transparent", color: "#374151",
-                  border: "1px solid #d1d5db", borderRadius: "100px",
+                  background: "transparent", color: "#FFFFFF",
+                  border: "1.5px solid rgba(255,255,255,0.2)", borderRadius: "100px",
                   fontFamily: "'Inter', sans-serif", fontWeight: 600,
                   cursor: "pointer", transition: "all 0.3s ease",
                 }}
@@ -140,9 +138,9 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
               {["No long-term contract", "Free 30-min discovery", "Money-back guarantee"].map((text) => (
                 <div key={text} style={{
                   display: "flex", alignItems: "center", gap: "0.5rem",
-                  fontFamily: "'Inter', sans-serif", fontSize: "0.8rem", color: "#6b7280",
+                  fontFamily: "'Inter', sans-serif", fontSize: "0.8rem", color: "#71717A",
                 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#0077c2" }} />
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#1976D2" }} />
                   {text}
                 </div>
               ))}

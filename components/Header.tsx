@@ -5,12 +5,12 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "Pitch Deck Services", href: "#pitch-deck" },
-  { label: "Investor Mock Room", href: "#mock-room" },
-  { label: "Funding", href: "#funding" },
-  { label: "Consultation", href: "#consultation" },
-  { label: "Zth Insider", href: "#insider" },
+  { label: "Home", href: "/" },
+  { label: "Pitch Deck Services", href: "/#pitch-deck" },
+  { label: "Investor Mock Room", href: "/#mock-room" },
+  { label: "Funding", href: "/resources#funding" },
+  { label: "Consultation", href: "/resources#consultation" },
+  { label: "Zth Insider", href: "/resources#insider" },
 ];
 
 export default function Header({ onBookNow }: { onBookNow: () => void }) {
@@ -23,12 +23,18 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
   useEffect(() => {
     const handler = () => {
       const currentScrollY = window.scrollY;
-      if (window.innerWidth <= 768) {
-        if (currentScrollY > lastScrollY.current && currentScrollY > 60) setIsHidden(true);
-        else if (currentScrollY < lastScrollY.current) setIsHidden(false);
-      } else {
+
+      if (currentScrollY < 10) {
+        // Always show at the very top
+        setIsHidden(false);
+      } else if (currentScrollY > lastScrollY.current) {
+        // Scrolling DOWN → hide navbar
+        setIsHidden(true);
+      } else if (currentScrollY < lastScrollY.current) {
+        // Scrolling UP → show navbar
         setIsHidden(false);
       }
+
       lastScrollY.current = currentScrollY;
       setScrolled(currentScrollY > 10);
     };
@@ -39,11 +45,22 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
   const handleNavClick = (href: string, label: string) => {
     setMenuOpen(false);
     setActiveLink(label);
-    if (href === "#") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Parse path and hash from href
+    const [path, hash] = href.split("#");
+    const targetHash = hash ? "#" + hash : "";
+
+    if (window.location.pathname === path) {
+      // If we're already on the target page, scroll smoothly
+      if (targetHash) {
+        const el = document.querySelector(targetHash);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     } else {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+      // Otherwise navigate
+      window.location.href = href;
     }
   };
 
@@ -57,7 +74,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           transform: `translateX(-50%) translateY(${isHidden ? "-150%" : "0"})`,
           width: "93.5vw",
           maxWidth: "1100px",
-          background: scrolled ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.85)",
+          background: scrolled ? "rgba(248, 250, 252, 0.92)" : "rgba(248, 250, 252, 0.85)",
           border: "1px solid rgba(0,0,0,0.06)",
           borderRadius: "9999px",
           padding: "1rem 1.5rem 1rem 2rem",
@@ -78,10 +95,10 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         <a href="#" className="mobile-logo-wrap" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
           <div style={{
             width: "40px", height: "40px", borderRadius: "50%",
-            background: "linear-gradient(135deg, #0077c2, #44a8ee)",
+            background: "linear-gradient(135deg, #1976D2, #0D47A1)",
             display: "flex", alignItems: "center", justifyContent: "center",
             color: "white", fontFamily: "'Inter', sans-serif",
-            boxShadow: "0 2px 10px rgba(0,119,194,0.2)",
+            boxShadow: "0 2px 10px rgba(25,118,210,0.2)",
             transition: "box-shadow 0.3s ease",
           }}>
             <span style={{ fontSize: "1.5rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-1px", position: "relative", left: "-3px" }}>
@@ -98,7 +115,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
             onClick={() => handleNavClick(link.href, link.label)}
             style={{
               background: "none", border: "none", cursor: "pointer",
-              color: activeLink === link.label ? "#111827" : "#6b7280",
+              color: activeLink === link.label ? "var(--zth-text)" : "var(--zth-muted)",
               fontSize: "0.8585rem",
               fontWeight: activeLink === link.label ? 700 : 500,
               padding: "0.25rem 0",
@@ -106,14 +123,14 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
               transition: "color 0.2s ease",
               fontFamily: "'Inter', sans-serif",
             }}
-            onMouseEnter={(e) => { if (activeLink !== link.label) e.currentTarget.style.color = "#374151"; }}
-            onMouseLeave={(e) => { if (activeLink !== link.label) e.currentTarget.style.color = "#6b7280"; }}
+            onMouseEnter={(e) => { if (activeLink !== link.label) e.currentTarget.style.color = "var(--zth-text)"; }}
+            onMouseLeave={(e) => { if (activeLink !== link.label) e.currentTarget.style.color = "var(--zth-muted)"; }}
           >
             {link.label}
             {activeLink === link.label && (
               <span style={{
                 position: "absolute", bottom: "-2px", left: "50%", transform: "translateX(-50%)",
-                width: "4px", height: "4px", borderRadius: "50%", background: "#0077c2",
+                width: "4px", height: "4px", borderRadius: "50%", background: "var(--zth-accent)",
               }} />
             )}
           </button>
@@ -124,11 +141,11 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           href="/login"
           className="mobile-hide"
           style={{
-            textDecoration: "none", color: "#6b7280", fontSize: "0.85rem",
+            textDecoration: "none", color: "var(--zth-muted)", fontSize: "0.85rem",
             fontWeight: 500, cursor: "pointer", transition: "color 0.2s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#111827")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "#6b7280")}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--zth-text)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--zth-muted)")}
         >
           Login
         </Link>
@@ -136,15 +153,15 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           onClick={onBookNow}
           className="mobile-hide"
           style={{
-            background: "linear-gradient(135deg, #0077c2, #0087db)",
+            background: "linear-gradient(135deg, #1976D2, #0D47A1)",
             color: "#ffffff", border: "none", borderRadius: "9999px",
             padding: "0.55rem 1.3rem", fontSize: "0.85rem", fontWeight: 600,
             cursor: "pointer", transition: "all 0.3s ease",
-            boxShadow: "0 2px 10px rgba(0,119,194,0.2)",
+            boxShadow: "0 2px 10px rgba(25,118,210,0.2)",
             fontFamily: "'Inter', sans-serif",
           }}
-          onMouseOver={(e) => { e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,119,194,0.3)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-          onMouseOut={(e) => { e.currentTarget.style.boxShadow = "0 2px 10px rgba(0,119,194,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}
+          onMouseOver={(e) => { e.currentTarget.style.boxShadow = "0 6px 20px rgba(25,118,210,0.3)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+          onMouseOut={(e) => { e.currentTarget.style.boxShadow = "0 2px 10px rgba(25,118,210,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}
         >
           Book now
         </button>
@@ -153,7 +170,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           onClick={() => setMenuOpen(!menuOpen)}
           style={{
             background: "none", border: "none", cursor: "pointer",
-            color: "#374151", display: "none", padding: "0.5rem",
+            color: "#333333", display: "none", padding: "0.5rem",
           }}
           className="mobile-menu-btn"
         >
@@ -190,7 +207,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
               background: "none", border: "none", cursor: "pointer",
               fontFamily: "'Inter', sans-serif", fontSize: "1.5rem",
               fontWeight: activeLink === link.label ? 800 : 500,
-              color: activeLink === link.label ? "#111827" : "#6b7280",
+              color: activeLink === link.label ? "#1A1A1A" : "#555555",
               letterSpacing: "-0.02em",
               transform: menuOpen ? "translateX(0)" : "translateX(40px)",
               opacity: menuOpen ? 1 : 0,
@@ -205,7 +222,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           onClick={() => setMenuOpen(false)}
           style={{
             fontFamily: "'Inter', sans-serif", fontSize: "1.5rem", fontWeight: 700,
-            color: "#0077c2", textDecoration: "none", letterSpacing: "-0.02em",
+            color: "#1976D2", textDecoration: "none", letterSpacing: "-0.02em",
             opacity: menuOpen ? 1 : 0, transform: menuOpen ? "translateX(0)" : "translateX(40px)",
             transition: `all 0.4s ease 0.35s`, marginTop: "0.5rem",
           }}
@@ -215,7 +232,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         <button
           onClick={() => { setMenuOpen(false); onBookNow(); }}
           style={{
-            background: "#0077c2", color: "#fff", border: "none", borderRadius: "9999px",
+            background: "#1976D2", color: "#fff", border: "none", borderRadius: "9999px",
             padding: "0.875rem 2.5rem", fontFamily: "'Inter', sans-serif",
             fontSize: "1rem", fontWeight: 600, cursor: "pointer",
             opacity: menuOpen ? 1 : 0, transform: menuOpen ? "translateX(0)" : "translateX(40px)",

@@ -55,24 +55,24 @@ export default function BookPage() {
       {/* Decorative background elements */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
-        background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,119,194,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 100% 50%, rgba(0,119,194,0.04) 0%, transparent 50%), radial-gradient(ellipse 50% 50% at 0% 80%, rgba(0,119,194,0.03) 0%, transparent 50%)",
+        background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(25,118,210,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 100% 50%, rgba(25,118,210,0.04) 0%, transparent 50%), radial-gradient(ellipse 50% 50% at 0% 80%, rgba(25,118,210,0.03) 0%, transparent 50%)",
         pointerEvents: "none",
       }} />
 
       {/* Floating orbs */}
       <div className="animate-float" style={{
         position: "absolute", top: "10%", right: "5%", width: 300, height: 300, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(0,119,194,0.06) 0%, transparent 65%)", filter: "blur(40px)", pointerEvents: "none",
+        background: "radial-gradient(circle, rgba(25,118,210,0.06) 0%, transparent 65%)", filter: "blur(40px)", pointerEvents: "none",
       }} />
       <div className="animate-float" style={{
         position: "absolute", bottom: "15%", left: "3%", width: 250, height: 250, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(0,119,194,0.04) 0%, transparent 65%)", filter: "blur(40px)", pointerEvents: "none", animationDelay: "2s",
+        background: "radial-gradient(circle, rgba(25,118,210,0.04) 0%, transparent 65%)", filter: "blur(40px)", pointerEvents: "none", animationDelay: "2s",
       }} />
 
       {/* Grid pattern */}
       <div style={{
         position: "absolute", inset: 0,
-        backgroundImage: "linear-gradient(rgba(0,119,194,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,119,194,0.03) 1px, transparent 1px)",
+        backgroundImage: "linear-gradient(rgba(25,118,210,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(25,118,210,0.03) 1px, transparent 1px)",
         backgroundSize: "60px 60px",
         maskImage: "radial-gradient(ellipse 70% 70% at 50% 30%, black 0%, transparent 70%)",
         pointerEvents: "none",
@@ -88,11 +88,11 @@ export default function BookPage() {
         >
           <Link href="/" style={{
             display: "inline-flex", alignItems: "center", gap: "0.5rem",
-            textDecoration: "none", color: "#6b7280", fontFamily: "'Inter', sans-serif",
+            textDecoration: "none", color: "#555555", fontFamily: "'Inter', sans-serif",
             fontSize: "0.9rem", fontWeight: 500, transition: "color 0.2s",
           }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#0077c2")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#6b7280")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#1976D2")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
           >
             <ArrowLeft size={16} /> Back to Home
           </Link>
@@ -111,30 +111,29 @@ export default function BookPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
-              padding: "0.5rem 1.25rem", background: "rgba(0,119,194,0.08)",
-              border: "1px solid rgba(0,119,194,0.15)", borderRadius: "100px", marginBottom: "1.5rem",
+              padding: "0.5rem 1.25rem", background: "rgba(25,118,210,0.08)",
+              border: "1px solid rgba(25,118,210,0.15)", borderRadius: "100px", marginBottom: "1.5rem",
             }}
           >
-            <Sparkles size={14} color="#0077c2" />
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#0077c2" }}>
+            <Sparkles size={14} color="#1976D2" />
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#1976D2" }}>
               Free Consultation
             </span>
           </motion.div>
 
           <h1 style={{
             fontFamily: "'Inter', sans-serif", fontSize: "clamp(2rem, 5vw, 3rem)",
-            fontWeight: 800, color: "#111827", lineHeight: 1.15, letterSpacing: "-0.03em", marginBottom: "1rem",
+            fontWeight: 800, color: "#1A1A1A", lineHeight: 1.15, letterSpacing: "-0.03em", marginBottom: "1rem",
           }}>
             Book Your{" "}
             <span style={{
-              background: "linear-gradient(135deg, #0077c2 0%, #44a8ee 50%, #0077c2 100%)",
-              WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
+              color: "#1976D2",
             }}>
               Discovery Call
             </span>
           </h1>
           <p style={{
-            fontFamily: "'Inter', sans-serif", fontSize: "1.05rem", color: "#6b7280",
+            fontFamily: "'Inter', sans-serif", fontSize: "1.05rem", color: "#555555",
             lineHeight: 1.6, maxWidth: 550, margin: "0 auto",
           }}>
             Tell us about your startup and we&apos;ll craft a tailored fundraising strategy — no commitment, maximum clarity.
@@ -151,13 +150,13 @@ export default function BookPage() {
           {trustItems.map((item) => (
             <div key={item.text} style={{
               display: "flex", alignItems: "center", gap: "0.5rem",
-              fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", color: "#6b7280",
+              fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", color: "#555555",
             }}>
               <div style={{
-                width: 32, height: 32, borderRadius: "0.5rem", background: "rgba(0,119,194,0.08)",
+                width: 32, height: 32, borderRadius: "0.5rem", background: "rgba(25,118,210,0.08)",
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
-                <item.icon size={15} color="#0077c2" />
+                <item.icon size={15} color="#1976D2" />
               </div>
               {item.text}
             </div>
@@ -180,23 +179,23 @@ export default function BookPage() {
               initial={{ scale: 0 }} animate={{ scale: 1 }}
               transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
             >
-              <CheckCircle size={64} color="#0077c2" style={{ margin: "0 auto 1.5rem" }} />
+              <CheckCircle size={64} color="#1976D2" style={{ margin: "0 auto 1.5rem" }} />
             </motion.div>
             <h2 style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 800, fontSize: "1.75rem",
-              color: "#111827", marginBottom: "0.75rem",
+              color: "#1A1A1A", marginBottom: "0.75rem",
             }}>
               You&apos;re In! 🎉
             </h2>
             <p style={{
-              fontFamily: "'Inter', sans-serif", fontSize: "1rem", color: "#6b7280",
+              fontFamily: "'Inter', sans-serif", fontSize: "1rem", color: "#555555",
               lineHeight: 1.6, maxWidth: 400, margin: "0 auto 2rem",
             }}>
-              A member of our team will reach out to <strong style={{ color: "#111827" }}>{form.email}</strong> within 24 hours.
+              A member of our team will reach out to <strong style={{ color: "#1A1A1A" }}>{form.email}</strong> within 24 hours.
             </p>
             <Link href="/" style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
-              padding: "0.875rem 2rem", background: "#0077c2", color: "#fff",
+              padding: "0.875rem 2rem", background: "#1976D2", color: "#fff",
               borderRadius: "100px", textDecoration: "none",
               fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "0.9rem",
               transition: "all 0.3s ease",
@@ -219,7 +218,7 @@ export default function BookPage() {
               {/* Name Fields */}
               <div>
                 <div style={{ marginBottom: "0.75rem" }}>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#374151" }}>Name</span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#333333" }}>Name</span>
                 </div>
                 <div className="book-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                   <div>
@@ -229,11 +228,11 @@ export default function BookPage() {
                       style={{
                         width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
                         border: errors.firstName ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#f9fafb", color: "#111827", outline: "none",
+                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
                         fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
                         transition: "border 0.2s ease, box-shadow 0.2s ease",
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#0077c2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,119,194,0.1)"; }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = errors.firstName ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
                     />
                     {errors.firstName && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.firstName}</span>}
@@ -245,11 +244,11 @@ export default function BookPage() {
                       style={{
                         width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
                         border: errors.lastName ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#f9fafb", color: "#111827", outline: "none",
+                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
                         fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
                         transition: "border 0.2s ease, box-shadow 0.2s ease",
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#0077c2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,119,194,0.1)"; }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = errors.lastName ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
                     />
                     {errors.lastName && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.lastName}</span>}
@@ -260,7 +259,7 @@ export default function BookPage() {
               {/* Contact Details */}
               <div>
                 <div style={{ marginBottom: "0.75rem" }}>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#374151" }}>Contact Details</span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#333333" }}>Contact Details</span>
                 </div>
                 <div className="book-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                   <div>
@@ -270,11 +269,11 @@ export default function BookPage() {
                       style={{
                         width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
                         border: errors.email ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#f9fafb", color: "#111827", outline: "none",
+                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
                         fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
                         transition: "border 0.2s ease, box-shadow 0.2s ease",
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#0077c2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,119,194,0.1)"; }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = errors.email ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
                     />
                     {errors.email && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.email}</span>}
@@ -285,11 +284,11 @@ export default function BookPage() {
                       type="tel" value={form.phone} onChange={(e) => update("phone", e.target.value)}
                       style={{
                         width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
-                        border: "1px solid #e5e7eb", background: "#f9fafb", color: "#111827",
+                        border: "1px solid #e5e7eb", background: "#F5F7FA", color: "#1A1A1A",
                         outline: "none", fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
                         transition: "border 0.2s ease, box-shadow 0.2s ease",
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#0077c2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,119,194,0.1)"; }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
                     />
                   </div>
@@ -299,7 +298,7 @@ export default function BookPage() {
               {/* Business Information */}
               <div>
                 <div style={{ marginBottom: "0.75rem" }}>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#374151" }}>Business Information</span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#333333" }}>Business Information</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                   <div>
@@ -309,11 +308,11 @@ export default function BookPage() {
                       style={{
                         width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
                         border: errors.company ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#f9fafb", color: "#111827", outline: "none",
+                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
                         fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
                         transition: "border 0.2s ease, box-shadow 0.2s ease",
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#0077c2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,119,194,0.1)"; }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = errors.company ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
                     />
                     {errors.company && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.company}</span>}
@@ -325,11 +324,11 @@ export default function BookPage() {
                       style={{
                         width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
                         border: errors.message ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#f9fafb", color: "#111827", outline: "none",
+                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
                         fontFamily: "'Inter', sans-serif", fontSize: "0.95rem", resize: "vertical",
                         transition: "border 0.2s ease, box-shadow 0.2s ease",
                       }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#0077c2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,119,194,0.1)"; }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = errors.message ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
                     />
                     {errors.message && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.message}</span>}
@@ -342,15 +341,15 @@ export default function BookPage() {
                 <motion.button
                   type="submit"
                   disabled={loading}
-                  whileHover={{ scale: 1.03, boxShadow: "0 12px 40px rgba(0,119,194,0.25)" }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 12px 40px rgba(25,118,210,0.25)" }}
                   whileTap={{ scale: 0.97 }}
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                    padding: "1rem 3rem", background: "linear-gradient(135deg, #0077c2 0%, #44a8ee 50%, #0077c2 100%)",
+                    padding: "1rem 3rem", background: "linear-gradient(135deg, #1976D2 0%, #90CAF9 50%, #1976D2 100%)",
                     backgroundSize: "200% 200%", color: "#fff", border: "none", borderRadius: "100px",
                     fontFamily: "'Inter', sans-serif", fontSize: "1rem", fontWeight: 700,
                     cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1,
-                    transition: "all 0.3s ease", boxShadow: "0 4px 20px rgba(0,119,194,0.2)",
+                    transition: "all 0.3s ease", boxShadow: "0 4px 20px rgba(25,118,210,0.2)",
                     animation: "gradient-shift 3s ease infinite",
                   }}
                 >

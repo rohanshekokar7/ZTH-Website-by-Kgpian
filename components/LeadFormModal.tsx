@@ -82,8 +82,7 @@ export default function LeadFormModal({ isOpen, onClose, source = "website" }: P
             <div style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 800, fontSize: "1.5rem",
-              background: "var(--gradient-gold)",
-              WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
+              color: "#1976D2",
               marginBottom: "0.25rem",
             }}>
               {success ? "You're in! 🎉" : step === 1 ? "Get Started with Zth" : "Tell Us More"}
@@ -178,7 +177,7 @@ export default function LeadFormModal({ isOpen, onClose, source = "website" }: P
                     padding: "0.4rem 0.9rem",
                     borderRadius: "100px",
                     background: form.stage === s.value ? "var(--zth-gold-dim)" : "rgba(255,255,255,0.04)",
-                    border: `1px solid ${form.stage === s.value ? "rgba(0,119,194,0.3)" : "var(--zth-border)"}`,
+                    border: `1px solid ${form.stage === s.value ? "rgba(25,118,210,0.3)" : "var(--zth-border)"}`,
                     color: form.stage === s.value ? "var(--zth-gold)" : "var(--zth-muted)",
                     fontFamily: "'Inter', sans-serif",
                     fontSize: "0.8rem", fontWeight: 600, cursor: "pointer",
@@ -198,7 +197,7 @@ export default function LeadFormModal({ isOpen, onClose, source = "website" }: P
                     padding: "0.4rem 0.9rem",
                     borderRadius: "100px",
                     background: form.source === s.value ? "var(--zth-gold-dim)" : "rgba(255,255,255,0.04)",
-                    border: `1px solid ${form.source === s.value ? "rgba(0,119,194,0.3)" : "var(--zth-border)"}`,
+                    border: `1px solid ${form.source === s.value ? "rgba(25,118,210,0.3)" : "var(--zth-border)"}`,
                     color: form.source === s.value ? "var(--zth-gold)" : "var(--zth-muted)",
                     fontFamily: "'Inter', sans-serif",
                     fontSize: "0.8rem", fontWeight: 600, cursor: "pointer",

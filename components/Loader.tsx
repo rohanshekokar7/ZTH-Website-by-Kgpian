@@ -44,8 +44,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
               style={{
                 width: 40,
                 height: 40,
-                borderLeft: "1px solid rgba(0,119,194,0.3)",
-                borderTop: "1px solid rgba(0,119,194,0.3)",
+                borderLeft: "1px solid rgba(25,118,210,0.3)",
+                borderTop: "1px solid rgba(25,118,210,0.3)",
               }}
             />
           </div>
@@ -57,8 +57,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
               style={{
                 width: 40,
                 height: 40,
-                borderRight: "1px solid rgba(0,119,194,0.3)",
-                borderTop: "1px solid rgba(0,119,194,0.3)",
+                borderRight: "1px solid rgba(25,118,210,0.3)",
+                borderTop: "1px solid rgba(25,118,210,0.3)",
               }}
             />
           </div>
@@ -70,8 +70,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
               style={{
                 width: 40,
                 height: 40,
-                borderLeft: "1px solid rgba(0,119,194,0.3)",
-                borderBottom: "1px solid rgba(0,119,194,0.3)",
+                borderLeft: "1px solid rgba(25,118,210,0.3)",
+                borderBottom: "1px solid rgba(25,118,210,0.3)",
               }}
             />
           </div>
@@ -83,8 +83,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
               style={{
                 width: 40,
                 height: 40,
-                borderRight: "1px solid rgba(0,119,194,0.3)",
-                borderBottom: "1px solid rgba(0,119,194,0.3)",
+                borderRight: "1px solid rgba(25,118,210,0.3)",
+                borderBottom: "1px solid rgba(25,118,210,0.3)",
               }}
             />
           </div>
@@ -101,7 +101,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
               width: "84px",
               height: "84px",
               borderRadius: "50%",
-              backgroundColor: "#0077c2",
+              backgroundColor: "#1976D2",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

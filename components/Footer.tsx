@@ -7,21 +7,21 @@ const footerWords = ["create", "convert", "scale"];
 /* ── Every typed line in the footer ───────────────────────────────── */
 const LINES = [
   // Contact
-  { id: "email",   value: "admin@zth.co.in",        href: "mailto:admin@zth.co.in", delay: 300  },
-  { id: "phone1",  value: "+91 721 942 2299",        href: "tel:+917219422299",      delay: 900  },
-  { id: "phone2",  value: "+91 93566 17639",         href: "tel:+919356617639",      delay: 1500 },
+  { id: "email", value: "admin@zth.co.in", href: "mailto:admin@zth.co.in", delay: 300 },
+  { id: "phone1", value: "+91 721 942 2299", href: "tel:+917219422299", delay: 900 },
+  { id: "phone2", value: "+91 93566 17639", href: "tel:+919356617639", delay: 1500 },
   // Navigate
-  { id: "nav0",    value: "About",                   href: "#",                      delay: 200  },
-  { id: "nav1",    value: "Services",                href: "#",                      delay: 420  },
-  { id: "nav2",    value: "Pitch Deck",              href: "#",                      delay: 640  },
-  { id: "nav3",    value: "Mock Room",               href: "#",                      delay: 860  },
-  { id: "nav4",    value: "Investors",               href: "#",                      delay: 1080 },
+  { id: "nav0", value: "About", href: "#", delay: 200 },
+  { id: "nav1", value: "Services", href: "#", delay: 420 },
+  { id: "nav2", value: "Pitch Deck", href: "#", delay: 640 },
+  { id: "nav3", value: "Mock Room", href: "#", delay: 860 },
+  { id: "nav4", value: "Investors", href: "#", delay: 1080 },
   // Follow
-  { id: "soc0",    value: "LinkedIn ↗",             href: "https://www.linkedin.com/company/zth2/", delay: 350 },
-  { id: "soc1",    value: "X ↗",                    href: "https://x.com/Zthsass",  delay: 620  },
+  { id: "soc0", value: "LinkedIn ↗", href: "https://www.linkedin.com/company/zth2/", delay: 350 },
+  { id: "soc1", value: "X ↗", href: "https://x.com/Zthsass", delay: 620 },
   // Bottom
-  { id: "copy",    value: `© ${new Date().getFullYear()} Zth, Inc. All rights reserved.`, href: null, delay: 1800 },
-  { id: "backtxt", value: "Back to top",            href: null,                     delay: 1700 },
+  { id: "copy", value: `© ${new Date().getFullYear()} Zth, Inc. All rights reserved.`, href: null, delay: 1800 },
+  { id: "backtxt", value: "Back to top", href: null, delay: 1700 },
 ];
 
 export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
@@ -77,7 +77,7 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
 
   /* ── Helper: typed span with blinking cursor ─────────────────── */
   const T = ({ id, href, cls = "" }: { id: string; href: string | null; cls?: string }) => {
-    const val  = LINES.find(l => l.id === id)!.value;
+    const val = LINES.find(l => l.id === id)!.value;
     const done = typed[id].length >= val.length;
     const node = (
       <>
@@ -114,7 +114,7 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
             <button className="ft-cta" onClick={onCTAClick}>
               Book a free call
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M1 6.5h11M6.5 1l5.5 5.5L6.5 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M1 6.5h11M6.5 1l5.5 5.5L6.5 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
           </div>
@@ -174,7 +174,7 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           <button className="ft-uptbtn" onClick={() => { onCTAClick?.(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
             <T id="backtxt" href={null} />
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path d="M6.5 11V2M2 6.5l4.5-4.5 4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M6.5 11V2M2 6.5l4.5-4.5 4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>
@@ -184,46 +184,46 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
       <style jsx>{`
         .ft-root {
           position: relative;
-          background: #eef5ff;
-          color: #111827;
+          background: #18181B;
+          color: #FFFFFF;
           font-family: 'Inter', sans-serif;
           overflow: hidden;
-          border-top: 1px solid rgba(0,119,194,0.12);
+          border-top: 1px solid rgba(255,255,255,0.05);
         }
         .ft-glow {
           position: absolute; top: -80px; right: 10%;
           width: 400px; height: 400px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(0,119,194,0.08) 0%, transparent 65%);
+          background: radial-gradient(circle, rgba(25,118,210,0.15) 0%, transparent 65%);
           filter: blur(60px); pointer-events: none;
         }
         .ft-wrap {
           position: relative; z-index: 1;
           max-width: 1200px; margin: 0 auto;
-          padding: clamp(3.5rem,7vw,5.5rem) clamp(1.25rem,5vw,3rem) 0;
+          padding: clamp(2.5rem,5vw,4rem) clamp(1.25rem,5vw,3rem) 0;
         }
         .ft-top {
           display: grid;
           grid-template-columns: 1fr 1.5fr;
           gap: clamp(2rem,6vw,6rem);
           align-items: start;
-          padding-bottom: clamp(2.5rem,5vw,4rem);
+          padding-bottom: clamp(1.5rem,3vw,2.5rem);
         }
         /* Brand */
         .ft-brand { display: flex; flex-direction: column; gap: 0; }
         .ft-eyebrow {
           display: block; font-size: 0.65rem; font-weight: 700;
           letter-spacing: 0.3em; text-transform: uppercase;
-          color: #9ca3af; margin-bottom: 1.1rem;
+          color: #A1A1AA; margin-bottom: 1.1rem;
         }
         .ft-headline {
           font-size: clamp(2.4rem,4.5vw,3.8rem);
           font-weight: 900; line-height: 1.0;
-          letter-spacing: -0.04em; color: #111827;
+          letter-spacing: -0.04em; color: #FFFFFF;
           margin: 0 0 2rem;
         }
         /* Flip word */
         .ft-flip {
-          display: inline-block; color: #0077c2;
+          display: inline-block; color: #1976D2;
           white-space: nowrap;
           transform-origin: center;
           transform-style: preserve-3d;
@@ -243,14 +243,14 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
         .ft-cta {
           display: inline-flex; align-items: center; gap: 0.5rem;
           padding: 0.7rem 1.5rem;
-          background: #0077c2; color: #fff;
+          background: #1976D2; color: #fff;
           border: none; border-radius: 100px;
           font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600;
           cursor: pointer; transition: all 0.25s ease;
-          box-shadow: 0 4px 20px rgba(0,119,194,0.2);
+          box-shadow: 0 4px 20px rgba(25,118,210,0.2);
           align-self: flex-start;
         }
-        .ft-cta:hover { background: #0087db; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,119,194,0.3); }
+        .ft-cta:hover { background: #0D47A1; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(25,118,210,0.3); }
         /* Columns */
         .ft-cols { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(1.5rem,4vw,3rem); align-items: start; }
         .ft-col  { display: flex; flex-direction: column; gap: 1.1rem; }
@@ -259,7 +259,7 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           letter-spacing: 0.38em; text-transform: uppercase;
           color: #9ca3af;
           padding-bottom: 0.75rem;
-          border-bottom: 1px solid rgba(0,0,0,0.08);
+          border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .ft-col-body { display: flex; flex-direction: column; gap: 0.55rem; }
         .ft-grp { display: flex; flex-direction: column; gap: 0.2rem; margin-bottom: 0.6rem; }
@@ -271,43 +271,36 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
         /* Typed value */
         .ft-tv {
           font-size: 0.88rem; font-weight: 400;
-          color: #374151; line-height: 1.5;
+          color: #E4E4E7; line-height: 1.5;
           min-height: 1.3em;
         }
         .ft-lnk { text-decoration: none; transition: color 0.2s ease; }
-        .ft-lnk:hover { color: #0077c2; }
-        .ft-nav { font-size: 0.9rem; font-weight: 500; color: #374151; transition: color 0.2s ease, transform 0.2s ease; display: inline-flex; align-items: center; width: fit-content; }
-        .ft-nav:hover { color: #0077c2; transform: translateX(3px); }
+        .ft-lnk:hover { color: #1976D2; }
+        .ft-nav { font-size: 0.9rem; font-weight: 500; color: #E4E4E7; transition: color 0.2s ease, transform 0.2s ease; display: inline-flex; align-items: center; width: fit-content; }
+        .ft-nav:hover { color: #1976D2; transform: translateX(3px); }
         /* Blinking cursor */
         .ft-cur {
-          display: inline-block; color: #0077c2; font-weight: 300;
+          display: inline-block; color: #1976D2; font-weight: 300;
           margin-left: 1px;
           animation: blink 0.75s step-end infinite;
         }
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
         /* Divider */
-        .ft-div { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,119,194,0.15), transparent); }
-        /* Bottom bar */
-        .ft-bot {
-          display: flex; align-items: center; justify-content: space-between;
-          padding: 1.25rem 0 clamp(1.5rem,3vw,2rem); gap: 1rem;
-        }
-        .ft-bot-l { display: flex; align-items: center; gap: 1.25rem; }
-        .ft-logo {
-          font-size: 1.1rem; font-weight: 900; letter-spacing: -0.04em;
-          background: linear-gradient(135deg, #0077c2, #44a8ee);
-          -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
+        .ft-div { width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin: 1.5rem 0; }
+        
+        .ft-bot { display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 1.5rem; }
+        .ft-bot-l { display: flex; align-items: center; gap: 1rem; }
+        .ft-logo { font-size: 1.2rem; font-weight: 800; color: #1976D2; letter-spacing: -0.05em; }
         .ft-copy { font-size: 0.72rem; color: #9ca3af; font-weight: 400; }
         .ft-uptbtn {
           display: inline-flex; align-items: center; gap: 0.5rem;
-          background: none; border: 1px solid rgba(0,0,0,0.1);
+          background: none; border: 1px solid rgba(255,255,255,0.2);
           border-radius: 100px; padding: 0.45rem 1rem;
           font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500;
-          color: #6b7280; cursor: pointer;
+          color: #E4E4E7; cursor: pointer;
           transition: all 0.25s ease;
         }
-        .ft-uptbtn:hover { border-color: #0077c2; color: #0077c2; transform: translateY(-2px); }
+        .ft-uptbtn:hover { border-color: #1976D2; color: #1976D2; transform: translateY(-2px); }
         /* Responsive */
         @media (max-width: 960px) {
           .ft-top { grid-template-columns: 1fr; gap: 2.5rem; }

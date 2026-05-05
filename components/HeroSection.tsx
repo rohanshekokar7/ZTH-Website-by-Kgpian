@@ -66,7 +66,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
         style={{
           position: "absolute", top: "15%", right: "8%",
           width: 350, height: 350, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0,119,194,0.06) 0%, transparent 65%)",
+          background: "radial-gradient(circle, rgba(25,118,210,0.06) 0%, transparent 65%)",
           filter: "blur(50px)", pointerEvents: "none",
           zIndex: 2,
         }}
@@ -77,7 +77,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
         style={{
           position: "absolute", bottom: "20%", left: "5%",
           width: 280, height: 280, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0,119,194,0.05) 0%, transparent 65%)",
+          background: "radial-gradient(circle, rgba(25,118,210,0.05) 0%, transparent 65%)",
           filter: "blur(50px)", pointerEvents: "none",
           zIndex: 2,
         }}
@@ -90,22 +90,22 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           initial={{ opacity: 0, y: 20, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          whileHover={{ scale: 1.05, boxShadow: "0 6px 20px rgba(0,119,194,0.12)" }}
+          whileHover={{ scale: 1.05, boxShadow: "0 6px 20px rgba(25,118,210,0.12)" }}
           style={{
             display: "inline-flex", alignItems: "center", gap: "0.5rem",
             padding: "0.5rem 1.25rem",
-            background: "rgba(0,119,194,0.06)",
-            border: "1px solid rgba(0,119,194,0.12)",
+            background: "rgba(25,118,210,0.06)",
+            border: "1px solid rgba(25,118,210,0.12)",
             borderRadius: "100px", marginBottom: "2.5rem",
             cursor: "default", transition: "all 0.3s ease",
           }}
         >
           <motion.div animate={{ rotate: [0, 180, 360] }} transition={{ duration: 3, repeat: Infinity }}>
-            <Sparkles size={14} color="#0077c2" />
+            <Sparkles size={14} color="#1976D2" />
           </motion.div>
           <span style={{
             fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", fontWeight: 600,
-            letterSpacing: "0.2em", textTransform: "uppercase", color: "#0077c2",
+            letterSpacing: "0.2em", textTransform: "uppercase", color: "#1976D2",
           }}>
             Comprehensive Capital Advisory
           </span>
@@ -120,18 +120,14 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
             marginBottom: "1.5rem", maxWidth: 900, margin: "0 auto 1.5rem",
             fontSize: "clamp(2.5rem, 6vw, 4.5rem)", fontWeight: 800,
             fontFamily: "'Inter', sans-serif", lineHeight: 1.08,
-            letterSpacing: "-0.03em", color: "#111827",
+            letterSpacing: "-0.03em", color: "#1A1A1A",
           }}
         >
           Create.
           <br />
           Convert.
           <br />
-          <span style={{
-            background: "linear-gradient(135deg, #0077c2 0%, #44a8ee 50%, #0077c2 100%)",
-            backgroundSize: "200% 200%", animation: "gradient-shift 4s ease infinite",
-            WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
-          }}>
+          <span style={{ color: "#1976D2" }}>
             Scale.
           </span>
         </motion.h1>
@@ -144,7 +140,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           style={{
             fontSize: "clamp(1rem, 2.2vw, 1.25rem)", maxWidth: 650,
             margin: "0 auto 3rem", lineHeight: 1.6, fontWeight: 400,
-            color: "#6b7280", fontFamily: "'Inter', sans-serif",
+            color: "#555555", fontFamily: "'Inter', sans-serif",
           }}
         >
           Accelerate your capital acquisition strategy with sophisticated, AI-driven presentation development designed to engage institutional investors and facilitate scalable growth.
@@ -165,7 +161,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           cursor: "pointer", display: "flex", flexDirection: "column",
           alignItems: "center", gap: "0.5rem", color: "#9ca3af",
         }}
-        whileHover={{ color: "#374151" }}
+        whileHover={{ color: "#333333" }}
       >
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em" }}>
           SCROLL

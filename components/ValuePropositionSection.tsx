@@ -20,13 +20,13 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
         position: "relative",
         padding: "clamp(6rem, 12vw, 10rem) 1rem",
         overflow: "hidden",
-        background: "#f8fafc",
+        background: "#F5F7FA",
       }}
     >
       {/* Top accent */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 1,
-        background: "linear-gradient(90deg, transparent, rgba(0,119,194,0.12), transparent)",
+        background: "linear-gradient(90deg, transparent, rgba(25,118,210,0.12), transparent)",
       }} />
 
       {/* Background glow */}
@@ -36,7 +36,7 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
         style={{
           position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
           width: "80vw", height: "80vw", maxWidth: 1000, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0,119,194,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(25,118,210,0.04) 0%, transparent 70%)",
           filter: "blur(80px)", pointerEvents: "none",
         }}
       />
@@ -54,15 +54,14 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
             <h2 style={{
               fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 800,
               fontFamily: "'Inter', sans-serif", lineHeight: 1.1,
-              marginBottom: "0.5rem", color: "#111827", letterSpacing: "-0.03em",
+              marginBottom: "0.5rem", color: "#1A1A1A", letterSpacing: "-0.03em",
             }}>
               Join Waitlist
             </h2>
             <h2 style={{
               fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 800,
               fontFamily: "'Inter', sans-serif", lineHeight: 1.1,
-              background: "linear-gradient(135deg, #0077c2, #44a8ee)",
-              WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
+              color: "#1976D2",
               letterSpacing: "-0.03em", marginBottom: "2rem",
             }}>
               Instead of Raise Capital
@@ -70,7 +69,7 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
           </motion.div>
 
           <motion.p variants={itemVariants} style={{
-            fontSize: "clamp(1rem, 2vw, 1.15rem)", color: "#0077c2",
+            fontSize: "clamp(1rem, 2vw, 1.15rem)", color: "#1976D2",
             fontWeight: 600, marginBottom: "1.5rem", fontFamily: "'Inter', sans-serif",
             letterSpacing: "0.08em", textTransform: "uppercase",
           }}>
@@ -78,7 +77,7 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
           </motion.p>
 
           <motion.p variants={itemVariants} style={{
-            fontSize: "clamp(1rem, 1.8vw, 1.15rem)", color: "#6b7280",
+            fontSize: "clamp(1rem, 1.8vw, 1.15rem)", color: "#555555",
             lineHeight: 1.7, marginBottom: "3rem", maxWidth: 650, fontWeight: 400,
             textAlign: "center",
           }}>
@@ -90,15 +89,15 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
           <motion.div variants={itemVariants}>
             <motion.button
               onClick={onCTAClick}
-              whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(0,119,194,0.25)" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(25,118,210,0.25)" }}
               whileTap={{ scale: 0.95 }}
               style={{
                 fontSize: "1rem", padding: "1.1rem 2.75rem",
                 display: "flex", alignItems: "center", gap: "0.75rem",
                 fontFamily: "'Inter', sans-serif", fontWeight: 600,
-                background: "#0077c2", color: "#fff",
+                background: "#1976D2", color: "#fff",
                 border: "none", borderRadius: "100px", cursor: "pointer",
-                boxShadow: "0 4px 20px rgba(0,119,194,0.2)",
+                boxShadow: "0 4px 20px rgba(25,118,210,0.2)",
                 transition: "all 0.3s ease",
               }}
             >
@@ -111,7 +110,7 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
       {/* Bottom accent */}
       <div style={{
         position: "absolute", bottom: 0, left: 0, right: 0, height: 1,
-        background: "linear-gradient(90deg, transparent, rgba(0,119,194,0.08), transparent)",
+        background: "linear-gradient(90deg, transparent, rgba(25,118,210,0.08), transparent)",
       }} />
     </section>
   );

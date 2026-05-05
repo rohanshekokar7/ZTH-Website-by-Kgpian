@@ -9,11 +9,7 @@ import HeroSection from "@/components/HeroSection";
 import ValuePropositionSection from "@/components/ValuePropositionSection";
 import PitchDeckSection from "@/components/PitchDeckSection";
 import MockRoomSection from "@/components/MockRoomSection";
-import ServicesSection from "@/components/ServicesSection";
 import TractionSection from "@/components/TractionSection";
-import FundingSection from "@/components/FundingSection";
-import ConsultationSection from "@/components/ConsultationSection";
-import InsiderSection from "@/components/InsiderSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import PitchDeckServices from "@/components/PitchDeckServices";
@@ -43,18 +39,13 @@ export default function HomePage() {
 
         <main>
           <HeroSection onCTAClick={goToBook} />
-          
+
           {/* Wrapper for remaining sections so they slide over the sticky Hero */}
           <div style={{ position: "relative", zIndex: 10, background: "#ffffff", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>
             <ValuePropositionSection onCTAClick={goToBook} />
-            <PitchDeckSection onCTAClick={goToBook} />
             <PitchDeckServices />
-            <TractionSection />
             <MockRoomSection onCTAClick={goToBook} />
-            <ServicesSection onCTAClick={goToBook} />
-            <FundingSection onCTAClick={goToBook} />
-            <ConsultationSection onCTAClick={goToBook} />
-            <InsiderSection onCTAClick={goToBook} />
+            <TractionSection />
             <CTASection onCTAClick={goToBook} />
           </div>
         </main>

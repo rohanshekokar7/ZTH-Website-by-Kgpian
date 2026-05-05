@@ -8,7 +8,7 @@ const articles = [
   {
     category: "Fundraising", title: "Why 90% of Pitch Decks Fail in the First 30 Seconds",
     excerpt: "Most founders think their deck fails because of bad financials. The truth is far simpler — and more fixable.",
-    readTime: "6 min", gradient: "linear-gradient(135deg, rgba(0,119,194,0.06), rgba(0,119,194,0.01))",
+    readTime: "6 min", gradient: "linear-gradient(135deg, rgba(25,118,210,0.06), rgba(25,118,210,0.01))",
   },
   {
     category: "Investor Relations", title: "The 5 Questions Every VC Asks That Most Founders Can't Answer",
@@ -36,7 +36,7 @@ export default function InsiderSection({ onCTAClick }: { onCTAClick: () => void 
     >
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 1,
-        background: "linear-gradient(90deg, transparent, rgba(0,119,194,0.12), transparent)",
+        background: "linear-gradient(90deg, transparent, rgba(25,118,210,0.12), transparent)",
       }} />
 
       <div className="container-xl">
@@ -53,14 +53,13 @@ export default function InsiderSection({ onCTAClick }: { onCTAClick: () => void 
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 fontFamily: "'Inter', sans-serif", fontWeight: 800,
-                fontSize: "clamp(1.75rem, 3.5vw, 2.8rem)", color: "#111827",
+                fontSize: "clamp(1.75rem, 3.5vw, 2.8rem)", color: "#1A1A1A",
                 lineHeight: 1.15, letterSpacing: "-0.03em",
               }}
             >
               Knowledge That{" "}
               <span style={{
-                background: "linear-gradient(135deg, #0077c2, #44a8ee)",
-                WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent",
+                color: "#1976D2",
               }}>Gets You Funded</span>
             </motion.h2>
           </div>
@@ -90,10 +89,10 @@ export default function InsiderSection({ onCTAClick }: { onCTAClick: () => void 
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.5rem" }}>
                 <span style={{
-                  padding: "0.25rem 0.75rem", background: "rgba(0,119,194,0.08)",
-                  border: "1px solid rgba(0,119,194,0.12)", borderRadius: "100px",
+                  padding: "0.25rem 0.75rem", background: "rgba(25,118,210,0.08)",
+                  border: "1px solid rgba(25,118,210,0.12)", borderRadius: "100px",
                   fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", fontWeight: 700,
-                  letterSpacing: "0.1em", color: "#0077c2",
+                  letterSpacing: "0.1em", color: "#1976D2",
                 }}>
                   {articles[0].category}
                 </span>
@@ -104,41 +103,41 @@ export default function InsiderSection({ onCTAClick }: { onCTAClick: () => void 
               <h3 style={{
                 fontFamily: "'Inter', sans-serif", fontWeight: 700,
                 fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-                color: "#111827", lineHeight: 1.25, marginBottom: "1rem",
+                color: "#1A1A1A", lineHeight: 1.25, marginBottom: "1rem",
               }}>
                 {articles[0].title}
               </h3>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.95rem", color: "#6b7280", lineHeight: 1.65, marginBottom: "2rem" }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.95rem", color: "#555555", lineHeight: 1.65, marginBottom: "2rem" }}>
                 {articles[0].excerpt}
               </p>
               <div style={{
                 display: "flex", alignItems: "center", gap: "0.4rem",
-                fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", fontWeight: 700, color: "#0077c2",
+                fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", fontWeight: 700, color: "#1976D2",
               }}>
                 Read Article <ArrowRight size={14} />
               </div>
             </div>
 
             <div style={{
-              background: "rgba(0,119,194,0.04)", border: "1px solid rgba(0,119,194,0.08)",
+              background: "rgba(25,118,210,0.04)", border: "1px solid rgba(25,118,210,0.08)",
               borderRadius: "1rem", padding: "2rem",
               display: "flex", flexDirection: "column", gap: "0.75rem",
             }}>
-              <div style={{ height: 6, width: "70%", background: "rgba(0,119,194,0.2)", borderRadius: 3 }} />
+              <div style={{ height: 6, width: "70%", background: "rgba(25,118,210,0.2)", borderRadius: 3 }} />
               <div style={{ height: 4, width: "90%", background: "rgba(0,0,0,0.04)", borderRadius: 3 }} />
               <div style={{ height: 4, width: "60%", background: "rgba(0,0,0,0.03)", borderRadius: 3 }} />
-              <div style={{ height: 60, background: "rgba(0,119,194,0.03)", borderRadius: "0.75rem", marginTop: "0.5rem", border: "1px solid rgba(0,119,194,0.06)" }} />
+              <div style={{ height: 60, background: "rgba(25,118,210,0.03)", borderRadius: "0.75rem", marginTop: "0.5rem", border: "1px solid rgba(25,118,210,0.06)" }} />
               <div style={{ height: 4, width: "80%", background: "rgba(0,0,0,0.04)", borderRadius: 3 }} />
               <div style={{ display: "flex", gap: "0.5rem", marginTop: "0.5rem" }}>
                 {[65, 40, 75, 55, 90].map((h, i) => (
                   <div key={i} style={{
                     flex: 1, height: h, borderRadius: "4px 4px 0 0",
-                    background: i === 4 ? "linear-gradient(135deg, #0077c2, #44a8ee)" : "rgba(0,0,0,0.04)",
+                    background: i === 4 ? "linear-gradient(135deg, #1976D2, #90CAF9)" : "rgba(0,0,0,0.04)",
                     alignSelf: "flex-end",
                   }} />
                 ))}
               </div>
-              <TrendingUp size={20} color="#0077c2" style={{ marginTop: "0.25rem" }} />
+              <TrendingUp size={20} color="#1976D2" style={{ marginTop: "0.25rem" }} />
             </div>
           </div>
         </motion.div>
@@ -164,18 +163,18 @@ export default function InsiderSection({ onCTAClick }: { onCTAClick: () => void 
                   padding: "0.2rem 0.6rem", background: "rgba(0,0,0,0.03)",
                   border: "1px solid rgba(0,0,0,0.06)", borderRadius: "100px",
                   fontFamily: "'Inter', sans-serif", fontSize: "0.65rem", fontWeight: 700,
-                  letterSpacing: "0.1em", color: "#6b7280",
+                  letterSpacing: "0.1em", color: "#555555",
                 }}>
                   {article.category}
                 </span>
               </div>
               <h3 style={{
                 fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "1rem",
-                color: "#111827", lineHeight: 1.35, marginBottom: "0.75rem",
+                color: "#1A1A1A", lineHeight: 1.35, marginBottom: "0.75rem",
               }}>
                 {article.title}
               </h3>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.8rem", color: "#6b7280", lineHeight: 1.65, marginBottom: "1.5rem" }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.8rem", color: "#555555", lineHeight: 1.65, marginBottom: "1.5rem" }}>
                 {article.excerpt}
               </p>
               <div style={{
@@ -188,7 +187,7 @@ export default function InsiderSection({ onCTAClick }: { onCTAClick: () => void 
                 }}>
                   <Clock size={12} /> {article.readTime} read
                 </span>
-                <ArrowRight size={14} color="#0077c2" />
+                <ArrowRight size={14} color="#1976D2" />
               </div>
             </motion.div>
           ))}
