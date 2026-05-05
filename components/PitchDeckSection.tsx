@@ -10,7 +10,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 /* ── card data ─────────────────────────────────────────────────── */
 /* Single brand colour throughout — matches the main website */
 const ACCENT = "#0077c2";
-const RGB    = "0,119,194";
+const RGB = "0,119,194";
 
 const CARDS = [
   {
@@ -54,14 +54,14 @@ const CARDS = [
 interface Props { onCTAClick: () => void; }
 
 export default function PitchDeckSection({ onCTAClick }: Props) {
-  const pinRef     = useRef<HTMLDivElement>(null);
-  const cardRefs   = useRef<(HTMLDivElement | null)[]>([]);
-  const overlayRefs= useRef<(HTMLDivElement | null)[]>([]);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const overlayRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
-    const cards    = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
     const overlays = overlayRefs.current.filter(Boolean) as HTMLDivElement[];
-    const N        = cards.length;
+    const N = cards.length;
 
     // All cards except the first start below the viewport
     gsap.set(cards.slice(1), { yPercent: 100 });
@@ -70,12 +70,12 @@ export default function PitchDeckSection({ onCTAClick }: Props) {
     // One master timeline — pinned for (N-1) viewports of scroll
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger:          pinRef.current,
-        start:            "top top",
-        end:              `+=${(N - 1) * 80}vh`,
-        pin:              true,
-        scrub:            2.5,           // matches Lenis duration:1.5 for silky feel
-        anticipatePin:    1,
+        trigger: pinRef.current,
+        start: "top top",
+        end: `+=${(N - 1) * 80}vh`,
+        pin: true,
+        scrub: 1,             // snappier than 2.5 — responsive + smooth with Lenis
+        anticipatePin: 1,
         invalidateOnRefresh: true,
       },
     });
@@ -90,7 +90,7 @@ export default function PitchDeckSection({ onCTAClick }: Props) {
       // Every card below the incoming one compresses + darkens
       for (let j = 0; j < i; j++) {
         const depth = i - j;
-        tl.to(cards[j],    { scale: 1 - depth * 0.035, ease: "none", duration: 1 }, step);
+        tl.to(cards[j], { scale: 1 - depth * 0.035, ease: "none", duration: 1 }, step);
         tl.to(overlays[j], { opacity: Math.min(depth * 0.15, 0.45), ease: "none", duration: 1 }, step);
       }
     }
@@ -129,11 +129,11 @@ export default function PitchDeckSection({ onCTAClick }: Props) {
               ref={el => { cardRefs.current[i] = el; }}
               className="relative w-full rounded-[1.5rem] overflow-hidden flex flex-col"
               style={{
-                maxWidth:        960,
-                minHeight:       "calc(68vh - 1.5rem)",
-                background:      card.bg,
-                border:          `1px solid rgba(${RGB},0.1)`,
-                boxShadow:       `0 20px 50px rgba(0,0,0,0.07), 0 0 0 1px rgba(${RGB},0.04)`,
+                maxWidth: 960,
+                minHeight: "calc(68vh - 1.5rem)",
+                background: card.bg,
+                border: `1px solid rgba(${RGB},0.1)`,
+                boxShadow: `0 20px 50px rgba(0,0,0,0.07), 0 0 0 1px rgba(${RGB},0.04)`,
                 transformOrigin: "50% 0%",    // scale compresses from the top-centre of the card
               }}
             >
@@ -154,8 +154,8 @@ export default function PitchDeckSection({ onCTAClick }: Props) {
                       className="inline-block text-[0.6rem] font-bold tracking-[0.28em] uppercase px-3 py-1 rounded-full mb-3"
                       style={{
                         background: `rgba(${RGB},0.08)`,
-                        color:      ACCENT,
-                        border:     `1px solid rgba(${RGB},0.18)`,
+                        color: ACCENT,
+                        border: `1px solid rgba(${RGB},0.18)`,
                       }}
                     >
                       {card.num} / 04
@@ -169,7 +169,7 @@ export default function PitchDeckSection({ onCTAClick }: Props) {
                     className="inline-flex items-center gap-2 text-[0.82rem] font-semibold text-white px-5 py-2.5 rounded-full transition-all duration-200 hover:-translate-y-0.5 flex-shrink-0"
                     style={{
                       background: ACCENT,
-                      boxShadow:  `0 4px 16px rgba(${RGB},0.3)`,
+                      boxShadow: `0 4px 16px rgba(${RGB},0.3)`,
                     }}
                   >
                     Get Started

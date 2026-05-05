@@ -1,28 +1,74 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 const footerWords = ["create", "convert", "scale"];
 
-/* ── Every typed line in the footer ───────────────────────────────── */
+/* ── Footer line definitions ─────────────────────────────────────── */
 const LINES = [
-  // Contact
   { id: "email",   value: "admin@zth.co.in",        href: "mailto:admin@zth.co.in", delay: 300  },
   { id: "phone1",  value: "+91 721 942 2299",        href: "tel:+917219422299",      delay: 900  },
   { id: "phone2",  value: "+91 93566 17639",         href: "tel:+919356617639",      delay: 1500 },
-  // Navigate
   { id: "nav0",    value: "About",                   href: "#",                      delay: 200  },
   { id: "nav1",    value: "Services",                href: "#",                      delay: 420  },
   { id: "nav2",    value: "Pitch Deck",              href: "#",                      delay: 640  },
   { id: "nav3",    value: "Mock Room",               href: "#",                      delay: 860  },
   { id: "nav4",    value: "Investors",               href: "#",                      delay: 1080 },
-  // Follow
   { id: "soc0",    value: "LinkedIn ↗",             href: "https://www.linkedin.com/company/zth2/", delay: 350 },
   { id: "soc1",    value: "X ↗",                    href: "https://x.com/Zthsass",  delay: 620  },
-  // Bottom
   { id: "copy",    value: `© ${new Date().getFullYear()} Zth, Inc. All rights reserved.`, href: null, delay: 1800 },
   { id: "backtxt", value: "Back to top",            href: null,                     delay: 1700 },
 ];
+
+/* ── Typing animation via direct DOM manipulation ────────────────
+   The old approach used setInterval + setState for every character,
+   causing ~20 React re-renders/sec across 12 simultaneous intervals.
+   
+   New approach: each <span> has a ref, and we write textContent
+   directly — ZERO React re-renders during the typing phase. ───── */
+
+function TypedSpan({ id, href, cls = "", started }: {
+  id: string; href: string | null; cls?: string; started: boolean;
+}) {
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const cursorRef = useRef<HTMLSpanElement>(null);
+  const line = LINES.find(l => l.id === id)!;
+
+  useEffect(() => {
+    if (!started || !spanRef.current) return;
+    let i = 0;
+    const tos: ReturnType<typeof setTimeout>[] = [];
+
+    const t = setTimeout(() => {
+      const iv = setInterval(() => {
+        i++;
+        if (spanRef.current) spanRef.current.textContent = line.value.slice(0, i);
+        if (cursorRef.current) cursorRef.current.style.display = i >= line.value.length ? "none" : "inline-block";
+        if (i >= line.value.length) clearInterval(iv);
+      }, 52);
+      tos.push(iv as unknown as ReturnType<typeof setTimeout>);
+    }, line.delay);
+    tos.push(t);
+
+    return () => tos.forEach(clearTimeout);
+  }, [started, line.value, line.delay]);
+
+  const inner = (
+    <>
+      <span ref={spanRef} />
+      <span ref={cursorRef} className="ft-cur" aria-hidden style={{ display: "none" }}>|</span>
+    </>
+  );
+
+  if (!href) return <span className={`ft-tv ${cls}`}>{inner}</span>;
+  const isExt = href.startsWith("http");
+  return (
+    <a href={href} className={`ft-tv ft-lnk ${cls}`}
+      {...(isExt ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+      {inner}
+    </a>
+  );
+}
 
 export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
   /* ── Flip word animation ─────────────────────────────────────── */
@@ -38,72 +84,28 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
     return () => clearInterval(id);
   }, []);
 
-  /* ── Typing animation ────────────────────────────────────────── */
+  /* ── Intersection observer to start typing ───────────────────── */
   const footerRef = useRef<HTMLElement>(null);
   const [started, setStarted] = useState(false);
-  const [typed, setTyped] = useState<Record<string, string>>(
-    Object.fromEntries(LINES.map(l => [l.id, ""]))
-  );
+
+  const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
+    if (entries[0].isIntersecting) setStarted(true);
+  }, []);
 
   useEffect(() => {
     const el = footerRef.current;
     if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setStarted(true); obs.disconnect(); } },
-      { threshold: 0.1 }
-    );
+    const obs = new IntersectionObserver(handleIntersection, { threshold: 0.1 });
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const tos: ReturnType<typeof setTimeout>[] = [];
-    const ivs: ReturnType<typeof setInterval>[] = [];
-    LINES.forEach(({ id, value, delay }) => {
-      const t = setTimeout(() => {
-        let i = 0;
-        const iv = setInterval(() => {
-          i++;
-          setTyped(p => ({ ...p, [id]: value.slice(0, i) }));
-          if (i >= value.length) clearInterval(iv);
-        }, 52);
-        ivs.push(iv);
-      }, delay);
-      tos.push(t);
-    });
-    return () => { tos.forEach(clearTimeout); ivs.forEach(clearInterval); };
-  }, [started]);
-
-  /* ── Helper: typed span with blinking cursor ─────────────────── */
-  const T = ({ id, href, cls = "" }: { id: string; href: string | null; cls?: string }) => {
-    const val  = LINES.find(l => l.id === id)!.value;
-    const done = typed[id].length >= val.length;
-    const node = (
-      <>
-        {typed[id]}
-        {!done && typed[id].length > 0 && <span className="ft-cur" aria-hidden>|</span>}
-      </>
-    );
-    if (!href) return <span className={`ft-tv ${cls}`}>{node}</span>;
-    const isExt = href.startsWith("http");
-    return (
-      <a href={href} className={`ft-tv ft-lnk ${cls}`}
-        {...(isExt ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-        {node}
-      </a>
-    );
-  };
+  }, [handleIntersection]);
 
   return (
     <footer className="ft-root" ref={footerRef}>
       <div className="ft-glow" />
       <div className="ft-wrap">
 
-        {/* ── TOP: headline left + 3 cols right ─────────────────── */}
         <div className="ft-top">
-
-          {/* Headline */}
           <div className="ft-brand">
             <span className="ft-eyebrow">/ Let&apos;s work together</span>
             <h2 className="ft-headline">
@@ -119,60 +121,52 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
             </button>
           </div>
 
-          {/* 3 columns */}
           <div className="ft-cols">
-
-            {/* Contact */}
             <div className="ft-col">
               <span className="ft-col-lbl">/ Contact</span>
               <div className="ft-col-body">
                 <div className="ft-grp">
                   <span className="ft-key">Email</span>
-                  <T id="email" href="mailto:admin@zth.co.in" />
+                  <TypedSpan id="email" href="mailto:admin@zth.co.in" started={started} />
                 </div>
                 <div className="ft-grp">
                   <span className="ft-key">Phone</span>
-                  <T id="phone1" href="tel:+917219422299" />
-                  <T id="phone2" href="tel:+919356617639" />
+                  <TypedSpan id="phone1" href="tel:+917219422299" started={started} />
+                  <TypedSpan id="phone2" href="tel:+919356617639" started={started} />
                 </div>
               </div>
             </div>
 
-            {/* Navigate */}
             <div className="ft-col">
               <span className="ft-col-lbl">/ Navigate</span>
               <nav className="ft-col-body">
-                <T id="nav0" href="#" cls="ft-nav" />
-                <T id="nav1" href="#" cls="ft-nav" />
-                <T id="nav2" href="#" cls="ft-nav" />
-                <T id="nav3" href="#" cls="ft-nav" />
-                <T id="nav4" href="#" cls="ft-nav" />
+                <TypedSpan id="nav0" href="#" cls="ft-nav" started={started} />
+                <TypedSpan id="nav1" href="#" cls="ft-nav" started={started} />
+                <TypedSpan id="nav2" href="#" cls="ft-nav" started={started} />
+                <TypedSpan id="nav3" href="#" cls="ft-nav" started={started} />
+                <TypedSpan id="nav4" href="#" cls="ft-nav" started={started} />
               </nav>
             </div>
 
-            {/* Follow */}
             <div className="ft-col">
               <span className="ft-col-lbl">/ Follow</span>
               <div className="ft-col-body">
-                <T id="soc0" href="https://www.linkedin.com/company/zth2/" cls="ft-nav" />
-                <T id="soc1" href="https://x.com/Zthsass" cls="ft-nav" />
+                <TypedSpan id="soc0" href="https://www.linkedin.com/company/zth2/" cls="ft-nav" started={started} />
+                <TypedSpan id="soc1" href="https://x.com/Zthsass" cls="ft-nav" started={started} />
               </div>
             </div>
-
           </div>
         </div>
 
-        {/* ── Divider ───────────────────────────────────────────── */}
         <div className="ft-div" />
 
-        {/* ── Bottom bar ────────────────────────────────────────── */}
         <div className="ft-bot">
           <div className="ft-bot-l">
             <span className="ft-logo">Zth</span>
-            <T id="copy" href={null} cls="ft-copy" />
+            <TypedSpan id="copy" href={null} cls="ft-copy" started={started} />
           </div>
           <button className="ft-uptbtn" onClick={() => { onCTAClick?.(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
-            <T id="backtxt" href={null} />
+            <TypedSpan id="backtxt" href={null} started={started} />
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
               <path d="M6.5 11V2M2 6.5l4.5-4.5 4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -208,7 +202,6 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           align-items: start;
           padding-bottom: clamp(2.5rem,5vw,4rem);
         }
-        /* Brand */
         .ft-brand { display: flex; flex-direction: column; gap: 0; }
         .ft-eyebrow {
           display: block; font-size: 0.65rem; font-weight: 700;
@@ -221,13 +214,13 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           letter-spacing: -0.04em; color: #111827;
           margin: 0 0 2rem;
         }
-        /* Flip word */
         .ft-flip {
           display: inline-block; color: #0077c2;
           white-space: nowrap;
           transform-origin: center;
           transform-style: preserve-3d;
           backface-visibility: hidden;
+          will-change: transform, opacity;
         }
         .ft-flip.flip-out { animation: flip-out 0.28s cubic-bezier(0.4,0,1,1) forwards; }
         .ft-flip.flip-in  { animation: flip-in  0.30s cubic-bezier(0,0,0.6,1)   forwards; }
@@ -239,7 +232,6 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           from { transform: rotateX(-90deg) scaleY(0.4); opacity: 0; }
           to   { transform: rotateX(0)      scaleY(1);   opacity: 1; }
         }
-        /* CTA */
         .ft-cta {
           display: inline-flex; align-items: center; gap: 0.5rem;
           padding: 0.7rem 1.5rem;
@@ -251,7 +243,6 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           align-self: flex-start;
         }
         .ft-cta:hover { background: #0087db; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,119,194,0.3); }
-        /* Columns */
         .ft-cols { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(1.5rem,4vw,3rem); align-items: start; }
         .ft-col  { display: flex; flex-direction: column; gap: 1.1rem; }
         .ft-col-lbl {
@@ -268,7 +259,6 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           letter-spacing: 0.2em; text-transform: uppercase;
           color: #d1d5db;
         }
-        /* Typed value */
         .ft-tv {
           font-size: 0.88rem; font-weight: 400;
           color: #374151; line-height: 1.5;
@@ -278,16 +268,13 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
         .ft-lnk:hover { color: #0077c2; }
         .ft-nav { font-size: 0.9rem; font-weight: 500; color: #374151; transition: color 0.2s ease, transform 0.2s ease; display: inline-flex; align-items: center; width: fit-content; }
         .ft-nav:hover { color: #0077c2; transform: translateX(3px); }
-        /* Blinking cursor */
         .ft-cur {
           display: inline-block; color: #0077c2; font-weight: 300;
           margin-left: 1px;
           animation: blink 0.75s step-end infinite;
         }
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-        /* Divider */
         .ft-div { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,119,194,0.15), transparent); }
-        /* Bottom bar */
         .ft-bot {
           display: flex; align-items: center; justify-content: space-between;
           padding: 1.25rem 0 clamp(1.5rem,3vw,2rem); gap: 1rem;
@@ -308,7 +295,6 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           transition: all 0.25s ease;
         }
         .ft-uptbtn:hover { border-color: #0077c2; color: #0077c2; transform: translateY(-2px); }
-        /* Responsive */
         @media (max-width: 960px) {
           .ft-top { grid-template-columns: 1fr; gap: 2.5rem; }
         }
@@ -319,7 +305,6 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
           .ft-copy { display: none; }
         }
       `}</style>
-
 
     </footer>
   );

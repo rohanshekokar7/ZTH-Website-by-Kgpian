@@ -1,31 +1,89 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+/* ── Smart Loader ────────────────────────────────────────────────────
+   Instead of faking progress with a random setInterval, this loader
+   ties its progress bar to REAL browser readiness signals:
+     • document.readyState → tracks HTML/CSS/sync-script parsing
+     • window "load" event → tracks all sub-resources (images, video)
+   The visual still feels smooth because we lerp toward the real
+   target, but now the loader genuinely waits for the page to be
+   ready before dismissing — no more "double load" stutter. ──────── */
 
 export default function Loader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const rafRef = useRef<number>(0);
+  const targetRef = useRef(0);
+  const currentRef = useRef(0);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+
+  const finish = useCallback(() => {
+    targetRef.current = 100;
+    // Let the lerp animation catch up before dismissing
+    setTimeout(() => {
+      setDone(true);
+      setTimeout(() => onCompleteRef.current(), 300);
+    }, 200);
+  }, []);
 
   useEffect(() => {
-    let current = 0;
-    intervalRef.current = setInterval(() => {
-      const increment = current < 70 ? Math.random() * 4 + 1 : Math.random() * 1.5 + 0.5;
-      current = Math.min(current + increment, 100);
-      setProgress(Math.floor(current));
+    // ── Track real browser readiness ──
+    if (document.readyState === "complete") {
+      targetRef.current = 100;
+    } else {
+      // interactive = DOM ready (~60%), complete = all sub-resources
+      const onInteractive = () => { targetRef.current = Math.max(targetRef.current, 60); };
+      const onLoad = () => { targetRef.current = 100; };
 
-      if (current >= 100) {
-        clearInterval(intervalRef.current!);
-        setTimeout(() => {
-          setDone(true);
-          setTimeout(onComplete, 600);
-        }, 400);
+      if (document.readyState === "interactive") onInteractive();
+      document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") onInteractive();
+        if (document.readyState === "complete") onLoad();
+      });
+      window.addEventListener("load", onLoad);
+
+      // Safety net: never hold the loader beyond 5s even if resources stall
+      const safetyTimeout = setTimeout(() => {
+        targetRef.current = 100;
+      }, 2500);
+
+      return () => clearTimeout(safetyTimeout);
+    }
+  }, []);
+
+  useEffect(() => {
+    // ── Smooth lerp loop (runs at 60fps, but only setState when value changes) ──
+    let lastRendered = 0;
+    const tick = () => {
+      // Lerp current toward target — snap when close to avoid asymptote stall
+      const diff = targetRef.current - currentRef.current;
+      if (diff < 1) {
+        currentRef.current = targetRef.current;
+      } else {
+        currentRef.current += diff * 0.18;
       }
-    }, 50);
 
-    return () => clearInterval(intervalRef.current!);
-  }, [onComplete]);
+      // Only trigger React re-render when integer value changes
+      const floored = Math.min(Math.floor(currentRef.current), 100);
+      if (floored !== lastRendered) {
+        lastRendered = floored;
+        setProgress(floored);
+
+        if (floored >= 100) {
+          finish();
+          return; // stop the loop
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [finish]);
 
   return (
     <AnimatePresence>
@@ -143,7 +201,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
             <div className="loader-bar">
               <div
                 className="loader-bar-fill"
-                style={{ width: `${progress}%`, transition: "width 0.05s linear" }}
+                style={{ width: `${progress}%`, transition: "width 0.15s ease-out" }}
               />
             </div>
 
