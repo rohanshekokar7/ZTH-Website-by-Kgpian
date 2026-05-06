@@ -130,7 +130,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           <br />
           Convert.
           <br />
-          <span style={{ color: "#90CAF9" }}>
+          <span style={{ color: "#1976D2" }}>
             Scale.
           </span>
         </motion.h1>

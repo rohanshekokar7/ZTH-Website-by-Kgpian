@@ -72,8 +72,8 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           top: "1.25rem",
           left: "50%",
           transform: `translateX(-50%) translateY(${isHidden ? "-150%" : "0"})`,
-          width: "96vw",
-          maxWidth: "1380px",
+          width: "86.4vw",
+          maxWidth: "1229px",
           background: scrolled
             ? "rgba(255, 255, 255, 0.92)"
             : "rgba(10, 10, 20, 0.35)",
@@ -168,27 +168,22 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           onClick={onBookNow}
           className="mobile-hide"
           style={{
-            background: scrolled
-              ? "linear-gradient(135deg, #1976D2, #0D47A1)"
-              : "rgba(255,255,255,0.18)",
+            background: "linear-gradient(135deg, #1976D2, #0D47A1)",
             color: "#ffffff",
-            border: scrolled ? "none" : "1px solid rgba(255,255,255,0.35)",
+            border: "none",
             borderRadius: "9999px",
             padding: "0.55rem 1.3rem", fontSize: "0.85rem", fontWeight: 600,
             cursor: "pointer", transition: "all 0.35s ease",
-            boxShadow: scrolled ? "0 2px 10px rgba(25,118,210,0.2)" : "0 2px 12px rgba(0,0,0,0.2)",
-            backdropFilter: scrolled ? "none" : "blur(8px)",
+            boxShadow: "0 2px 10px rgba(25,118,210,0.2)",
             fontFamily: "'Inter', sans-serif",
           }}
           onMouseOver={(e) => {
-            e.currentTarget.style.boxShadow = scrolled ? "0 6px 20px rgba(25,118,210,0.35)" : "0 6px 20px rgba(0,0,0,0.3)";
+            e.currentTarget.style.boxShadow = "0 6px 20px rgba(25,118,210,0.35)";
             e.currentTarget.style.transform = "translateY(-1px)";
-            if (!scrolled) e.currentTarget.style.background = "rgba(255,255,255,0.28)";
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.boxShadow = scrolled ? "0 2px 10px rgba(25,118,210,0.2)" : "0 2px 12px rgba(0,0,0,0.2)";
+            e.currentTarget.style.boxShadow = "0 2px 10px rgba(25,118,210,0.2)";
             e.currentTarget.style.transform = "translateY(0)";
-            if (!scrolled) e.currentTarget.style.background = "rgba(255,255,255,0.18)";
           }}
         >
           Book now
