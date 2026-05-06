@@ -46,16 +46,17 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
         <source src="/background.mp4" type="video/mp4" />
       </video>
 
-      {/* Overlay */}
+      {/* Very subtle bottom fade so scroll indicator stays legible */}
       <div
         style={{
           position: "absolute",
-          width: "100%",
-          height: "100%",
+          bottom: 0,
           left: 0,
-          top: 0,
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          right: 0,
+          height: "180px",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.25) 100%)",
           zIndex: 1,
+          pointerEvents: "none",
         }}
       />
 
@@ -94,10 +95,11 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           style={{
             display: "inline-flex", alignItems: "center", gap: "0.5rem",
             padding: "0.5rem 1.25rem",
-            background: "rgba(25,118,210,0.06)",
-            border: "1px solid rgba(25,118,210,0.12)",
+            background: "rgba(255,255,255,0.12)",
+            border: "1px solid rgba(255,255,255,0.25)",
             borderRadius: "100px", marginBottom: "2.5rem",
             cursor: "default", transition: "all 0.3s ease",
+            backdropFilter: "blur(8px)",
           }}
         >
           <motion.div animate={{ rotate: [0, 180, 360] }} transition={{ duration: 3, repeat: Infinity }}>
@@ -105,7 +107,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           </motion.div>
           <span style={{
             fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", fontWeight: 600,
-            letterSpacing: "0.2em", textTransform: "uppercase", color: "#1976D2",
+            letterSpacing: "0.2em", textTransform: "uppercase", color: "#ffffff",
           }}>
             Comprehensive Capital Advisory
           </span>
@@ -120,14 +122,15 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
             marginBottom: "1.5rem", maxWidth: 900, margin: "0 auto 1.5rem",
             fontSize: "clamp(2.5rem, 6vw, 4.5rem)", fontWeight: 800,
             fontFamily: "'Inter', sans-serif", lineHeight: 1.08,
-            letterSpacing: "-0.03em", color: "#1A1A1A",
+            letterSpacing: "-0.03em", color: "#ffffff",
+            textShadow: "0 2px 20px rgba(0,0,0,0.4)",
           }}
         >
           Create.
           <br />
           Convert.
           <br />
-          <span style={{ color: "#1976D2" }}>
+          <span style={{ color: "#90CAF9" }}>
             Scale.
           </span>
         </motion.h1>
@@ -140,7 +143,8 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           style={{
             fontSize: "clamp(1rem, 2.2vw, 1.25rem)", maxWidth: 650,
             margin: "0 auto 3rem", lineHeight: 1.6, fontWeight: 400,
-            color: "#555555", fontFamily: "'Inter', sans-serif",
+            color: "rgba(255,255,255,0.85)", fontFamily: "'Inter', sans-serif",
+            textShadow: "0 1px 8px rgba(0,0,0,0.3)",
           }}
         >
           Accelerate your capital acquisition strategy with sophisticated, AI-driven presentation development designed to engage institutional investors and facilitate scalable growth.
@@ -159,9 +163,9 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           position: "absolute", bottom: "2.5rem", left: "50%",
           transform: "translateX(-50%)", background: "none", border: "none",
           cursor: "pointer", display: "flex", flexDirection: "column",
-          alignItems: "center", gap: "0.5rem", color: "#9ca3af",
+          alignItems: "center", gap: "0.5rem", color: "rgba(255,255,255,0.7)",
         }}
-        whileHover={{ color: "#333333" }}
+        whileHover={{ color: "#ffffff" }}
       >
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em" }}>
           SCROLL
