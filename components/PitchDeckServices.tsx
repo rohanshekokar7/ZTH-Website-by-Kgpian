@@ -64,8 +64,8 @@ const Card = ({ card, i, progress, range, targetScale }: any) => {
   const cardStyle: React.CSSProperties = {
     margin: '0 auto',
     background: card.bgColor,
-    padding: '4rem',
-    borderRadius: '40px',
+    padding: 'clamp(1.5rem, 5vw, 4rem)',
+    borderRadius: 'clamp(20px, 3vw, 40px)',
     borderTop: `6px solid ${card.bgColor}`,
     borderLeft: `1px solid ${card.bgColor}`,
     borderRight: `1px solid ${card.bgColor}`,
@@ -73,7 +73,7 @@ const Card = ({ card, i, progress, range, targetScale }: any) => {
     boxShadow: '0 -20px 40px rgba(0, 0, 0, 0.08)',
     width: '100%',
     maxWidth: '1200px',
-    minHeight: '600px',
+    minHeight: 'clamp(420px, 70vh, 600px)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -84,9 +84,9 @@ const Card = ({ card, i, progress, range, targetScale }: any) => {
   };
 
   return (
-    <div ref={containerRef} style={styleBase}>
+    <div ref={containerRef} style={{ ...styleBase, height: 'auto', minHeight: '100vh' }}>
       <motion.div style={{ ...cardStyle, scale }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '3rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'clamp(1.5rem, 4vw, 3rem)', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start' }}>
             <span style={{
               display: 'inline-block',
@@ -123,7 +123,7 @@ const Card = ({ card, i, progress, range, targetScale }: any) => {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', flexGrow: 1 }}>
-          <h2 style={{ fontSize: '6rem', fontWeight: 900, lineHeight: 0.85, letterSpacing: '-0.04em', margin: 0 }}>
+          <h2 style={{ fontSize: 'clamp(2.8rem, 8vw, 6rem)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.04em', margin: 0 }}>
             <span style={{ color: card.textLight ? '#FFFFFF' : '#18181B', display: 'block' }}>{card.titleFirst}</span>
             <span style={{ color: card.textLight ? 'rgba(255,255,255,0.38)' : 'rgba(24,24,27,0.38)', display: 'block' }}>{card.titleSecond}</span>
           </h2>
@@ -198,7 +198,7 @@ export default function PitchDeckServices({ className }: { className?: string })
           gap: '0.04em',
         }}>
           {/* Line 1 */}
-          <div style={{ display: 'block', whiteSpace: 'nowrap' }}>
+          <div style={{ display: 'block', flexWrap: 'wrap' }}>
             {[
               { word: 'We', accent: false },
               { word: 'are', accent: false },
@@ -217,7 +217,7 @@ export default function PitchDeckServices({ className }: { className?: string })
             ))}
           </div>
           {/* Line 2 */}
-          <div style={{ display: 'block', whiteSpace: 'nowrap' }}>
+          <div style={{ display: 'block', flexWrap: 'wrap' }}>
             {[
               { word: 'on', accent: false },
               { word: 'translating', accent: false },
@@ -235,7 +235,7 @@ export default function PitchDeckServices({ className }: { className?: string })
             ))}
           </div>
           {/* Line 3 */}
-          <div style={{ display: 'block', whiteSpace: 'nowrap' }}>
+          <div style={{ display: 'block', flexWrap: 'wrap' }}>
             {[
               { word: 'into', accent: false },
               { word: 'dynamic', accent: false },
@@ -271,6 +271,19 @@ export default function PitchDeckServices({ className }: { className?: string })
           );
         })}
       </div>
+
+      <style jsx>{`
+        @media (max-width: 640px) {
+          /* Force the sticky cards to not use full vh on mobile */
+          div[style*="minHeight: '100vh'"] {
+            min-height: 80vh !important;
+          }
+          /* Tighten up stacking offset on mobile */
+          div[style*="top: calc"] {
+            top: 0 !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

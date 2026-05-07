@@ -31,11 +31,11 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
       <div className="container-xl" style={{ perspective: 1200 }}>
         <motion.div style={{ scale, opacity, transformStyle: "preserve-3d" }}>
           <div style={{
-            background: "#52555F",
-            border: "1px solid rgba(255,255,255,0.06)",
+            background: "linear-gradient(145deg, #0A192F 0%, #112240 100%)",
+            border: "1px solid rgba(25,118,210,0.3)",
             borderRadius: "2rem", padding: "clamp(3rem, 8vw, 5rem)",
             textAlign: "center", position: "relative", overflow: "hidden",
-            boxShadow: "0 30px 80px rgba(0,0,0,0.12)",
+            boxShadow: "0 30px 80px rgba(25,118,210,0.15)",
           }}>
             {/* Corner accents */}
             {["top-left", "top-right", "bottom-left", "bottom-right"].map((pos) => (

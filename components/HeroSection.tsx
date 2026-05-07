@@ -9,8 +9,7 @@ interface HeroProps {
 
 export default function HeroSection({ onCTAClick }: HeroProps) {
   const scrollDown = () => {
-    const el = document.querySelector("#pitch-deck");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
   };
 
   return (
@@ -147,7 +146,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
             textShadow: "0 1px 8px rgba(0,0,0,0.3)",
           }}
         >
-          Accelerate your capital acquisition strategy with sophisticated, AI-driven presentation development designed to engage institutional investors and facilitate scalable growth.
+          End-to-end startup fundraising infrastructure combining AI tools, strategic advisory, and execution support for founders building scalable companies.
         </motion.p>
 
         {/* CTAs */}

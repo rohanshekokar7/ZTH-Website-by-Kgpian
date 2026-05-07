@@ -10,6 +10,7 @@ import ValuePropositionSection from "@/components/ValuePropositionSection";
 import PitchDeckSection from "@/components/PitchDeckSection";
 import MockRoomSection from "@/components/MockRoomSection";
 import TractionSection from "@/components/TractionSection";
+import TestimonialsAndLogos from "@/components/TestimonialsAndLogos";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import PitchDeckServices from "@/components/PitchDeckServices";
@@ -46,6 +47,7 @@ export default function HomePage() {
             <PitchDeckServices />
             <MockRoomSection onCTAClick={goToBook} />
             <TractionSection />
+            <TestimonialsAndLogos />
             <CTASection onCTAClick={goToBook} />
           </div>
         </main>

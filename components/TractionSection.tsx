@@ -16,10 +16,10 @@ function AnimatedCounter({ value, suffix, delay }: { value: number; suffix: stri
       const step = (timestamp: number) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        
+
         // easeOutExpo
         const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        
+
         setCount(Math.floor(easeProgress * value));
 
         if (progress < 1) {

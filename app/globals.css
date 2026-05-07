@@ -755,7 +755,86 @@ body {
     padding: 1.75rem 1.5rem;
     border-radius: 1.25rem;
   }
+
+  /* ── Services section heading ── */
+  .services-heading-line {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  /* ── Stacking cards: reduce full-screen height so they don't eat too much space ── */
+  .pitch-card-sticky {
+    min-height: 80vh !important;
+    height: auto !important;
+  }
+
+  /* ── MockRoom steps grid: single column ── */
+  div[style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Who We Are cards: single column ── */
+  div[style*="repeat(3, 1fr)"],
+  div[style*="repeat(3,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Testimonial 2-col grid: single column ── */
+  div[style*="40%"],
+  div[style*="60%"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  /* ── Testimonial sticky layout: remove sticky ── */
+  .testimonials-sticky-left {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* ── Book page: stack columns ── */
+  div[style*="gridTemplateColumns: \"1fr 1fr\""] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Section padding reduction ── */
+  .section-pad {
+    padding-top: clamp(3rem, 10vw, 5rem) !important;
+    padding-bottom: clamp(3rem, 10vw, 5rem) !important;
+  }
+
+  /* ── Logo marquee cards: slightly smaller ── */
+  div[style*="minWidth: \"140px\""] {
+    min-width: 110px !important;
+    padding: 0.6rem 1rem !important;
+  }
+
+  /* ── CTA section: stack buttons ── */
+  div[style*="justifyContent: \"center\", flexWrap"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  /* ── ValueProposition trust stats: 2 per row ── */
+  div[style*="gap: \"3rem\""] {
+    gap: 1.5rem !important;
+  }
 }
+
+@media (max-width: 480px) {
+  /* ── Testimonial cards: portrait ratio off, auto height ── */
+  div[style*="aspectRatio: \"3/4\""] {
+    aspect-ratio: auto !important;
+    min-height: 420px !important;
+  }
+
+  /* ── Hero headline: slightly smaller ── */
+  h1[style*="clamp(2.5rem"] {
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+}
+
 
 @theme inline {
   --font-heading: var(--font-sans);

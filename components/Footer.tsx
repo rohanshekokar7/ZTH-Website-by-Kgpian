@@ -171,7 +171,7 @@ export default function Footer({ onCTAClick }: { onCTAClick?: () => void }) {
             <span className="ft-logo">Zth</span>
             <T id="copy" href={null} cls="ft-copy" />
           </div>
-          <button className="ft-uptbtn" onClick={() => { onCTAClick?.(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+          <button className="ft-uptbtn" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); }}>
             <T id="backtxt" href={null} />
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
               <path d="M6.5 11V2M2 6.5l4.5-4.5 4.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

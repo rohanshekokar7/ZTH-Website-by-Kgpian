@@ -1,25 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, CheckCircle, Loader2, Sparkles, Shield, Clock, Users } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Mail, Phone, MapPin, CheckCircle } from "lucide-react";
 import Link from "next/link";
-
-const trustItems = [
-  { icon: Clock, text: "30-Min Free Discovery" },
-  { icon: Shield, text: "No Long-Term Contract" },
-  { icon: Users, text: "500+ Founders Helped" },
-];
 
 export default function BookPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
-    phone: "",
     company: "",
+    service: "",
     message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -31,12 +24,12 @@ export default function BookPage() {
 
   const validate = () => {
     const errs: Record<string, string> = {};
-    if (!form.firstName.trim()) errs.firstName = "First name is required";
-    if (!form.lastName.trim()) errs.lastName = "Last name is required";
-    if (!form.email.trim()) errs.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = "Enter a valid email";
-    if (!form.company.trim()) errs.company = "Company name is required";
-    if (!form.message.trim()) errs.message = "Please tell us how we can help";
+    if (!form.name.trim()) errs.name = "Required";
+    if (!form.email.trim()) errs.email = "Required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = "Invalid email";
+    if (!form.company.trim()) errs.company = "Required";
+    if (!form.service) errs.service = "Please select a service";
+    if (!form.message.trim()) errs.message = "Required";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -45,341 +38,387 @@ export default function BookPage() {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1800));
+    await new Promise((r) => setTimeout(r, 1600));
     setLoading(false);
     setSubmitted(true);
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#ffffff", position: "relative", overflow: "hidden" }}>
-      {/* Decorative background elements */}
+    <div style={{
+      minHeight: "100vh",
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      background: "#ffffff",
+      fontFamily: "'Inter', sans-serif",
+      position: "relative",
+      overflow: "hidden",
+    }}>
+
+      {/* ── LEFT COLUMN — Pitch Deck Background ── */}
       <div style={{
-        position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
-        background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(25,118,210,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 100% 50%, rgba(25,118,210,0.04) 0%, transparent 50%), radial-gradient(ellipse 50% 50% at 0% 80%, rgba(25,118,210,0.03) 0%, transparent 50%)",
-        pointerEvents: "none",
-      }} />
+        position: "relative",
+        overflow: "hidden",
+        minHeight: "100vh",
+      }}>
+        {/* Pitch deck image as background */}
+        <div style={{
+          position: "absolute", inset: 0,
+          backgroundImage: "url('/pitch-deck-manual-2.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          filter: "brightness(0.35)",
+        }} />
 
-      {/* Floating orbs */}
-      <div className="animate-float" style={{
-        position: "absolute", top: "10%", right: "5%", width: 300, height: 300, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(25,118,210,0.06) 0%, transparent 65%)", filter: "blur(40px)", pointerEvents: "none",
-      }} />
-      <div className="animate-float" style={{
-        position: "absolute", bottom: "15%", left: "3%", width: 250, height: 250, borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(25,118,210,0.04) 0%, transparent 65%)", filter: "blur(40px)", pointerEvents: "none", animationDelay: "2s",
-      }} />
+        {/* Gradient overlay for readability */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(135deg, rgba(25,118,210,0.4) 0%, rgba(10,25,47,0.7) 60%, rgba(0,0,0,0.6) 100%)",
+        }} />
 
-      {/* Grid pattern */}
-      <div style={{
-        position: "absolute", inset: 0,
-        backgroundImage: "linear-gradient(rgba(25,118,210,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(25,118,210,0.03) 1px, transparent 1px)",
-        backgroundSize: "60px 60px",
-        maskImage: "radial-gradient(ellipse 70% 70% at 50% 30%, black 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
-
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 800, margin: "0 auto", padding: "clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem)" }}>
-        {/* Back link */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{ marginBottom: "2rem" }}
-        >
-          <Link href="/" style={{
-            display: "inline-flex", alignItems: "center", gap: "0.5rem",
-            textDecoration: "none", color: "#555555", fontFamily: "'Inter', sans-serif",
-            fontSize: "0.9rem", fontWeight: 500, transition: "color 0.2s",
-          }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#1976D2")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
-          >
-            <ArrowLeft size={16} /> Back to Home
-          </Link>
-        </motion.div>
-
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{ textAlign: "center", marginBottom: "3rem" }}
-        >
+        {/* Content on top of image */}
+        <div style={{
+          position: "relative", zIndex: 1,
+          display: "flex", flexDirection: "column", justifyContent: "space-between",
+          padding: "clamp(2.5rem, 5vw, 5rem)",
+          height: "100%",
+          minHeight: "100vh",
+        }}>
+          {/* Logo / Back */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: "0.5rem",
-              padding: "0.5rem 1.25rem", background: "rgba(25,118,210,0.08)",
-              border: "1px solid rgba(25,118,210,0.15)", borderRadius: "100px", marginBottom: "1.5rem",
-            }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <Sparkles size={14} color="#1976D2" />
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#1976D2" }}>
-              Free Consultation
-            </span>
-          </motion.div>
-
-          <h1 style={{
-            fontFamily: "'Inter', sans-serif", fontSize: "clamp(2rem, 5vw, 3rem)",
-            fontWeight: 800, color: "#1A1A1A", lineHeight: 1.15, letterSpacing: "-0.03em", marginBottom: "1rem",
-          }}>
-            Book Your{" "}
-            <span style={{
-              color: "#1976D2",
-            }}>
-              Discovery Call
-            </span>
-          </h1>
-          <p style={{
-            fontFamily: "'Inter', sans-serif", fontSize: "1.05rem", color: "#555555",
-            lineHeight: 1.6, maxWidth: 550, margin: "0 auto",
-          }}>
-            Tell us about your startup and we&apos;ll craft a tailored fundraising strategy — no commitment, maximum clarity.
-          </p>
-        </motion.div>
-
-        {/* Trust badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          style={{ display: "flex", justifyContent: "center", gap: "2rem", flexWrap: "wrap", marginBottom: "3rem" }}
-        >
-          {trustItems.map((item) => (
-            <div key={item.text} style={{
-              display: "flex", alignItems: "center", gap: "0.5rem",
-              fontFamily: "'Inter', sans-serif", fontSize: "0.85rem", color: "#555555",
-            }}>
-              <div style={{
-                width: 32, height: 32, borderRadius: "0.5rem", background: "rgba(25,118,210,0.08)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                <item.icon size={15} color="#1976D2" />
-              </div>
-              {item.text}
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Form Card */}
-        {submitted ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            style={{
-              background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "1.5rem",
-              padding: "clamp(2rem, 5vw, 4rem)", textAlign: "center",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
-            }}
-          >
-            <motion.div
-              initial={{ scale: 0 }} animate={{ scale: 1 }}
-              transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
-            >
-              <CheckCircle size={64} color="#1976D2" style={{ margin: "0 auto 1.5rem" }} />
-            </motion.div>
-            <h2 style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 800, fontSize: "1.75rem",
-              color: "#1A1A1A", marginBottom: "0.75rem",
-            }}>
-              You&apos;re In! 🎉
-            </h2>
-            <p style={{
-              fontFamily: "'Inter', sans-serif", fontSize: "1rem", color: "#555555",
-              lineHeight: 1.6, maxWidth: 400, margin: "0 auto 2rem",
-            }}>
-              A member of our team will reach out to <strong style={{ color: "#1A1A1A" }}>{form.email}</strong> within 24 hours.
-            </p>
             <Link href="/" style={{
-              display: "inline-flex", alignItems: "center", gap: "0.5rem",
-              padding: "0.875rem 2rem", background: "#1976D2", color: "#fff",
-              borderRadius: "100px", textDecoration: "none",
-              fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: "0.9rem",
-              transition: "all 0.3s ease",
-            }}>
-              <ArrowLeft size={16} /> Back to Home
+              display: "inline-flex", alignItems: "center", gap: "0.35rem",
+              textDecoration: "none", color: "rgba(255,255,255,0.6)",
+              fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.1em",
+              textTransform: "uppercase", transition: "color 0.2s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+            >
+              ← Back to Zth
             </Link>
           </motion.div>
-        ) : (
+
+          {/* Main headline */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            style={{
-              background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "1.5rem",
-              padding: "clamp(2rem, 5vw, 3rem)",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
-            }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: "4rem", paddingBottom: "4rem" }}
           >
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-              {/* Name Fields */}
-              <div>
-                <div style={{ marginBottom: "0.75rem" }}>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#333333" }}>Name</span>
-                </div>
-                <div className="book-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.8rem", color: "#9ca3af", marginBottom: "0.4rem", fontFamily: "'Inter'" }}>First Name *</label>
-                    <input
-                      type="text" value={form.firstName} onChange={(e) => update("firstName", e.target.value)}
-                      style={{
-                        width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
-                        border: errors.firstName ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
-                        fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
-                        transition: "border 0.2s ease, box-shadow 0.2s ease",
-                      }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
-                      onBlur={(e) => { e.currentTarget.style.borderColor = errors.firstName ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
-                    />
-                    {errors.firstName && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.firstName}</span>}
-                  </div>
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.8rem", color: "#9ca3af", marginBottom: "0.4rem", fontFamily: "'Inter'" }}>Last Name *</label>
-                    <input
-                      type="text" value={form.lastName} onChange={(e) => update("lastName", e.target.value)}
-                      style={{
-                        width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
-                        border: errors.lastName ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
-                        fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
-                        transition: "border 0.2s ease, box-shadow 0.2s ease",
-                      }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
-                      onBlur={(e) => { e.currentTarget.style.borderColor = errors.lastName ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
-                    />
-                    {errors.lastName && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.lastName}</span>}
-                  </div>
-                </div>
-              </div>
+            <p style={{
+              fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.3em",
+              textTransform: "uppercase", color: "#90CAF9", marginBottom: "1.5rem",
+            }}>
+              / Pitch Deck Services
+            </p>
+            <h1 style={{
+              fontSize: "clamp(2.4rem, 4.5vw, 4rem)",
+              fontWeight: 900, lineHeight: 1.0,
+              letterSpacing: "-0.04em",
+              color: "#ffffff",
+              marginBottom: "2rem",
+            }}>
+              Let&apos;s build<br />
+              your{" "}
+              <span style={{ color: "#90CAF9" }}>perfect</span><br />
+              pitch together.
+            </h1>
+            <p style={{
+              fontSize: "clamp(0.9rem, 1.4vw, 1rem)",
+              color: "rgba(255,255,255,0.6)", lineHeight: 1.75,
+              maxWidth: "400px",
+            }}>
+              We craft investor-ready pitch decks that combine compelling narrative, clean design, and strategic financial storytelling — built to raise real capital.
+            </p>
 
-              {/* Contact Details */}
-              <div>
-                <div style={{ marginBottom: "0.75rem" }}>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#333333" }}>Contact Details</span>
+            {/* Trust badges */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginTop: "2.5rem" }}>
+              {[
+                "✓  500+ pitch decks delivered globally",
+                "✓  94% investor meeting conversion rate",
+                "✓  72 hr average first-draft turnaround",
+              ].map((item) => (
+                <div key={item} style={{
+                  fontSize: "0.82rem", color: "rgba(255,255,255,0.55)",
+                  fontWeight: 500, letterSpacing: "0.01em",
+                }}>
+                  {item}
                 </div>
-                <div className="book-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.8rem", color: "#9ca3af", marginBottom: "0.4rem", fontFamily: "'Inter'" }}>Email Address *</label>
-                    <input
-                      type="email" value={form.email} onChange={(e) => update("email", e.target.value)}
-                      style={{
-                        width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
-                        border: errors.email ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
-                        fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
-                        transition: "border 0.2s ease, box-shadow 0.2s ease",
-                      }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
-                      onBlur={(e) => { e.currentTarget.style.borderColor = errors.email ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
-                    />
-                    {errors.email && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.email}</span>}
-                  </div>
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.8rem", color: "#9ca3af", marginBottom: "0.4rem", fontFamily: "'Inter'" }}>Phone Number</label>
-                    <input
-                      type="tel" value={form.phone} onChange={(e) => update("phone", e.target.value)}
-                      style={{
-                        width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
-                        border: "1px solid #e5e7eb", background: "#F5F7FA", color: "#1A1A1A",
-                        outline: "none", fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
-                        transition: "border 0.2s ease, box-shadow 0.2s ease",
-                      }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
-                      onBlur={(e) => { e.currentTarget.style.borderColor = "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
-                    />
-                  </div>
-                </div>
-              </div>
+              ))}
+            </div>
+          </motion.div>
 
-              {/* Business Information */}
-              <div>
-                <div style={{ marginBottom: "0.75rem" }}>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#333333" }}>Business Information</span>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.8rem", color: "#9ca3af", marginBottom: "0.4rem", fontFamily: "'Inter'" }}>Startup / Company Name *</label>
-                    <input
-                      type="text" value={form.company} onChange={(e) => update("company", e.target.value)}
-                      style={{
-                        width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
-                        border: errors.company ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
-                        fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
-                        transition: "border 0.2s ease, box-shadow 0.2s ease",
-                      }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
-                      onBlur={(e) => { e.currentTarget.style.borderColor = errors.company ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
-                    />
-                    {errors.company && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.company}</span>}
-                  </div>
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.8rem", color: "#9ca3af", marginBottom: "0.4rem", fontFamily: "'Inter'" }}>How can we help you? *</label>
-                    <textarea
-                      rows={4} value={form.message} onChange={(e) => update("message", e.target.value)}
-                      style={{
-                        width: "100%", padding: "0.875rem 1rem", borderRadius: "0.75rem",
-                        border: errors.message ? "1.5px solid #ef4444" : "1px solid #e5e7eb",
-                        background: "#F5F7FA", color: "#1A1A1A", outline: "none",
-                        fontFamily: "'Inter', sans-serif", fontSize: "0.95rem", resize: "vertical",
-                        transition: "border 0.2s ease, box-shadow 0.2s ease",
-                      }}
-                      onFocus={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(25,118,210,0.1)"; }}
-                      onBlur={(e) => { e.currentTarget.style.borderColor = errors.message ? "#ef4444" : "#e5e7eb"; e.currentTarget.style.boxShadow = "none"; }}
-                    />
-                    {errors.message && <span style={{ color: "#ef4444", fontSize: "0.75rem", marginTop: "0.25rem", fontFamily: "'Inter'" }}>{errors.message}</span>}
-                  </div>
-                </div>
+          {/* Contact info */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
+          >
+            <div style={{ width: "100%", height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "1.5rem" }} />
+            {[
+              { icon: Mail, text: "admin@zth.co.in" },
+              { icon: Phone, text: "+91 721 942 2299" },
+              { icon: MapPin, text: "Mumbai, India" },
+            ].map(({ icon: Icon, text }) => (
+              <div key={text} style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                <Icon size={14} color="rgba(255,255,255,0.4)" />
+                <span style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)", letterSpacing: "0.01em" }}>
+                  {text}
+                </span>
               </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
 
-              {/* Submit */}
-              <div style={{ textAlign: "center", marginTop: "0.5rem" }}>
+      {/* ── RIGHT COLUMN — Light Form ── */}
+      <div style={{
+        background: "#ffffff",
+        display: "flex", flexDirection: "column", justifyContent: "center",
+        padding: "clamp(2.5rem, 5vw, 5rem)",
+        overflowY: "auto",
+        borderLeft: "1px solid #f0f0f0",
+      }}>
+        <AnimatePresence mode="wait">
+          {submitted ? (
+            /* ── SUCCESS STATE ── */
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6 }}
+              style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
+            >
+              <motion.div
+                initial={{ scale: 0 }} animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+              >
+                <CheckCircle size={52} color="#1976D2" />
+              </motion.div>
+              <p style={{
+                fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.3em",
+                textTransform: "uppercase", color: "#1976D2",
+              }}>
+                / Inquiry Received
+              </p>
+              <h2 style={{
+                fontSize: "clamp(2rem, 3.5vw, 3rem)",
+                fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.04em",
+                color: "#1A1A1A",
+              }}>
+                <span style={{ color: "#1976D2" }}>Thank you</span> for<br />contacting us!
+              </h2>
+              <p style={{ fontSize: "1rem", color: "#666666", lineHeight: 1.7, maxWidth: "380px" }}>
+                We have received your message and will contact you shortly to follow up. If you would like to speak to someone immediately, feel free to call.
+              </p>
+              <div style={{ marginTop: "0.5rem" }}>
+                <Link href="/" style={{
+                  display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                  padding: "0.85rem 2rem",
+                  border: "1.5px solid #1A1A1A",
+                  borderRadius: "100px", textDecoration: "none",
+                  color: "#1A1A1A", fontSize: "0.85rem", fontWeight: 700,
+                  transition: "all 0.2s ease", letterSpacing: "0.02em",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.color = "#1976D2"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1A1A1A"; e.currentTarget.style.color = "#1A1A1A"; }}
+                >
+                  Back to home
+                </Link>
+              </div>
+            </motion.div>
+          ) : (
+            /* ── FORM STATE ── */
+            <motion.div
+              key="form"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <p style={{
+                fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.3em",
+                textTransform: "uppercase", color: "#1976D2", marginBottom: "0.75rem",
+              }}>
+                / Send Inquiry
+              </p>
+              <p style={{
+                fontSize: "clamp(0.88rem, 1.4vw, 1rem)",
+                color: "#888888", lineHeight: 1.7,
+                marginBottom: "2.75rem", maxWidth: "400px",
+              }}>
+                We&apos;re here to bring your concept to life, craft your investor story, or build your pitch deck from the ground up.
+              </p>
+
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
+
+                <UnderlineInput label="Name*" type="text" value={form.name} onChange={(v) => update("name", v)} error={errors.name} />
+                <UnderlineInput label="Email*" type="email" value={form.email} onChange={(v) => update("email", v)} error={errors.email} />
+                <UnderlineInput label="Company / Startup Name*" type="text" value={form.company} onChange={(v) => update("company", v)} error={errors.company} />
+
+                {/* Service Selector */}
+                <div style={{ position: "relative", marginBottom: "2.75rem" }}>
+                  <label style={{
+                    display: "block", fontSize: "0.78rem", fontWeight: 600,
+                    letterSpacing: "0.05em", color: "#888888", marginBottom: "1rem",
+                    textTransform: "uppercase",
+                  }}>
+                    I&apos;m looking for*
+                  </label>
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    {[
+                      { value: "consultation", label: "Free Consultation", sub: "Strategy & advisory call" },
+                      { value: "pitch-deck", label: "Pitch Deck", sub: "Design & content creation" },
+                    ].map((opt) => {
+                      const isSelected = form.service === opt.value;
+                      return (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => update("service", opt.value)}
+                          style={{
+                            flex: 1, padding: "1rem 1.25rem",
+                            background: isSelected ? "rgba(25,118,210,0.06)" : "#F8FAFC",
+                            border: isSelected ? "1.5px solid #1976D2" : "1.5px solid #e5e7eb",
+                            borderRadius: "0.75rem", cursor: "pointer",
+                            textAlign: "left", transition: "all 0.2s ease",
+                          }}
+                        >
+                          <div style={{
+                            fontSize: "0.88rem", fontWeight: 700,
+                            color: isSelected ? "#1976D2" : "#333333",
+                            marginBottom: "0.25rem", fontFamily: "'Inter', sans-serif",
+                          }}>
+                            {opt.label}
+                          </div>
+                          <div style={{
+                            fontSize: "0.72rem",
+                            color: isSelected ? "#1976D2" : "#999999",
+                            fontFamily: "'Inter', sans-serif",
+                          }}>
+                            {opt.sub}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {errors.service && <span style={{ color: "#ef4444", fontSize: "0.72rem", display: "block", marginTop: "0.5rem" }}>{errors.service}</span>}
+                </div>
+
+                {/* Message */}
+                <div style={{ position: "relative", marginBottom: "3rem" }}>
+                  <label style={{
+                    display: "block", fontSize: "0.78rem", fontWeight: 600,
+                    letterSpacing: "0.05em", textTransform: "uppercase",
+                    color: "#888888", marginBottom: "0.75rem",
+                  }}>
+                    Project Information*
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={form.message}
+                    onChange={(e) => update("message", e.target.value)}
+                    placeholder="Tell us about your startup, fundraising stage, and what you need..."
+                    style={{
+                      width: "100%", background: "transparent", border: "none",
+                      borderBottom: errors.message ? "1px solid #ef4444" : "1px solid #d1d5db",
+                      color: "#1A1A1A", outline: "none",
+                      fontFamily: "'Inter', sans-serif", fontSize: "0.95rem",
+                      resize: "none", padding: "0 0 0.75rem 0", lineHeight: 1.6,
+                      transition: "border-color 0.2s ease",
+                    }}
+                    onFocus={(e) => (e.currentTarget.style.borderBottomColor = "#1976D2")}
+                    onBlur={(e) => (e.currentTarget.style.borderBottomColor = errors.message ? "#ef4444" : "#d1d5db")}
+                  />
+                  {errors.message && <span style={{ color: "#ef4444", fontSize: "0.72rem", position: "absolute", bottom: "-1.2rem" }}>{errors.message}</span>}
+                </div>
+
+                {/* Submit */}
                 <motion.button
                   type="submit"
                   disabled={loading}
-                  whileHover={{ scale: 1.03, boxShadow: "0 12px 40px rgba(25,118,210,0.25)" }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 12px 30px rgba(25,118,210,0.2)" }}
                   whileTap={{ scale: 0.97 }}
                   style={{
-                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                    padding: "1rem 3rem", background: "linear-gradient(135deg, #1976D2 0%, #90CAF9 50%, #1976D2 100%)",
-                    backgroundSize: "200% 200%", color: "#fff", border: "none", borderRadius: "100px",
-                    fontFamily: "'Inter', sans-serif", fontSize: "1rem", fontWeight: 700,
-                    cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1,
-                    transition: "all 0.3s ease", boxShadow: "0 4px 20px rgba(25,118,210,0.2)",
-                    animation: "gradient-shift 3s ease infinite",
+                    display: "inline-flex", alignItems: "center", gap: "0.6rem",
+                    padding: "0.9rem 2.5rem",
+                    background: loading ? "#aaa" : "#1A1A1A",
+                    border: "none", borderRadius: "100px",
+                    color: "#ffffff", fontSize: "0.9rem", fontWeight: 700,
+                    cursor: loading ? "not-allowed" : "pointer",
+                    alignSelf: "flex-start",
+                    letterSpacing: "0.02em",
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
+                    transition: "background 0.2s ease",
                   }}
                 >
                   {loading ? (
-                    <><Loader2 size={18} style={{ animation: "spin 1s linear infinite" }} /> Submitting...</>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                      <span style={{ animation: "spin 1s linear infinite", display: "inline-block" }}>⟳</span>
+                      Sending...
+                    </span>
                   ) : (
-                    <>Submit Inquiry <ArrowRight size={18} /></>
+                    <>Send Inquiry <ArrowUpRight size={16} /></>
                   )}
                 </motion.button>
-              </div>
-            </form>
-          </motion.div>
-        )}
+
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <style jsx>{`
-        @keyframes gradient-shift {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
+        * { box-sizing: border-box; }
+        input::placeholder, textarea::placeholder { color: #c0c0c0; }
+        input:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+          -webkit-text-fill-color: #1A1A1A !important;
         }
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @media (max-width: 600px) {
-          .book-form-grid {
-            grid-template-columns: 1fr !important;
-          }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @media (max-width: 768px) {
+          div[style*="gridTemplateColumns"] { grid-template-columns: 1fr !important; }
         }
       `}</style>
+    </div>
+  );
+}
+
+function UnderlineInput({
+  label, type, value, onChange, error,
+}: {
+  label: string; type: string; value: string; onChange: (v: string) => void; error?: string;
+}) {
+  return (
+    <div style={{ position: "relative", marginBottom: "2.75rem" }}>
+      <label style={{
+        display: "block", fontSize: "0.78rem", fontWeight: 600,
+        letterSpacing: "0.05em", textTransform: "uppercase",
+        color: "#888888", marginBottom: "0.75rem",
+      }}>
+        {label}
+      </label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          width: "100%", background: "transparent", border: "none",
+          borderBottom: error ? "1px solid #ef4444" : "1px solid #d1d5db",
+          color: "#1A1A1A", outline: "none", padding: "0 0 0.75rem 0",
+          fontFamily: "'Inter', sans-serif", fontSize: "1rem",
+          transition: "border-color 0.2s ease",
+        }}
+        onFocus={(e) => (e.currentTarget.style.borderBottomColor = "#1976D2")}
+        onBlur={(e) => (e.currentTarget.style.borderBottomColor = error ? "#ef4444" : "#d1d5db")}
+      />
+      {error && <span style={{ color: "#ef4444", fontSize: "0.72rem", position: "absolute", bottom: "-1.2rem", left: 0 }}>{error}</span>}
     </div>
   );
 }
