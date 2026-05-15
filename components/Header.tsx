@@ -1,15 +1,109 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Pitch Deck Services", href: "/#pitch-deck" },
+  { 
+    label: "Pre-Fundraising", 
+    href: "/book?service=pre-fundraising",
+    dropdown: [
+      {
+        title: "Fundraising Support Services",
+        items: [
+          "Pitch Deck Advisory",
+          "Valuation Support",
+          "Financial Modeling",
+          "Fundraising Readiness",
+          "Investor Narrative Structuring",
+          "Market Research & Positioning",
+          "Business Plan / GTM Structuring",
+          "Pitch Simulation Prep",
+          "Due Diligence Preparation",
+          "Data Room Preparation",
+          "Startup Strategy Advisory",
+          "Company Profile"
+        ]
+      },
+      {
+        title: "Compliance and More",
+        items: [
+          "Company Incorporation",
+          "GST Registration & Filing",
+          "Startup India / DPIIT Registration",
+          "ROC Compliance",
+          "Legal Documentation",
+          "Accounting & CA Support",
+          "ESOP Structuring",
+          "Founder Agreements",
+          "Investment Documentation Support",
+          "Financial Documentation"
+        ]
+      }
+    ]
+  },
+  { 
+    label: "Capital Network", 
+    href: "/book?service=capital-network",
+    dropdown: [
+      {
+        title: "Active Fundraising Assistance",
+        items: [
+          "Investor Meeting Preparation",
+          "Pitch Day Support",
+          "Investor Narrative Support",
+          "Strategic Fundraising Advisory",
+          "Due Diligence Coordination",
+          "Investor Communication Support",
+          "Negotiation & Structuring Support",
+          "Fundraising Strategy Guidance",
+          "Investor Follow-Up Support",
+          "Fundraising Process Management"
+        ]
+      },
+      {
+        title: "Fund Ecosystem",
+        items: [
+          "Join as Business / Founder",
+          "Join as Investor",
+          "Join as Partner"
+        ]
+      }
+    ]
+  },
+  { 
+    label: "Post-Fundraise Partnership", 
+    href: "/book?service=post-fundraise",
+    dropdown: [
+      {
+        title: "Strategic Partnership",
+        items: [
+          "ZTH at Cap Table",
+          "Long-Term Financial Advisory",
+          "Growth Strategy Support",
+          "Investor Reporting Support",
+          "Governance & Structuring",
+          "Strategic Decision Support",
+          "Fund Utilization Planning",
+          "Follow-On Round Preparation"
+        ]
+      },
+      {
+        title: "Execution Network",
+        items: [
+          "Product & Tech Execution",
+          "Legal & Compliance Support",
+          "Branding & GTM Support",
+          "Finance & Accounting Support",
+          "Hiring & Talent Support",
+          "Operational Scaling Support"
+        ]
+      }
+    ]
+  },
   { label: "Investor Mock Room", href: "/#mock-room" },
-  { label: "Funding", href: "/resources#funding" },
-  { label: "Consultation", href: "/resources#consultation" },
   { label: "Zth Insider", href: "/resources#insider" },
 ];
 
@@ -69,22 +163,19 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
       <header
         style={{
           position: "fixed",
-          top: "1.25rem",
-          left: "50%",
-          transform: `translateX(-50%) translateY(${isHidden ? "-150%" : "0"})`,
-          width: "86.4vw",
-          maxWidth: "1229px",
+          top: "0",
+          left: "0",
+          transform: `translateY(${isHidden ? "-100%" : "0"})`,
+          width: "100%",
+          boxSizing: "border-box",
           background: scrolled
-            ? "rgba(255, 255, 255, 0.92)"
-            : "rgba(10, 10, 20, 0.35)",
-          border: scrolled
-            ? "1px solid rgba(0,0,0,0.07)"
-            : "1px solid rgba(255,255,255,0.14)",
-          borderRadius: "9999px",
-          padding: "1rem 1.5rem 1rem 2rem",
+            ? "rgba(10, 10, 15, 0.85)"
+            : "rgba(10, 10, 15, 0.35)",
+          borderBottom: "1px solid rgba(255,255,255,0.05)",
+          padding: "1rem 2rem",
           boxShadow: scrolled
-            ? "0 10px 40px -8px rgba(0,0,0,0.10), 0 4px 12px -4px rgba(0,0,0,0.04)"
-            : "0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1)",
+            ? "0 4px 30px rgba(0,0,0,0.3)"
+            : "none",
           backdropFilter: "blur(24px)",
           WebkitBackdropFilter: "blur(24px)",
           zIndex: 100,
@@ -113,40 +204,94 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
 
         {/* Desktop Nav */}
         {navLinks.map((link) => (
-          <button
+          <div
             key={link.label}
-            className="mobile-hide"
-            onClick={() => handleNavClick(link.href, link.label)}
-            style={{
-              background: "none", border: "none", cursor: "pointer",
-              color: scrolled
-                ? (activeLink === link.label ? "#1A1A1A" : "#666666")
-                : (activeLink === link.label ? "#ffffff" : "rgba(255,255,255,0.7)"),
-              fontSize: "0.8585rem",
-              fontWeight: activeLink === link.label ? 700 : 500,
-              padding: "0.25rem 0",
-              position: "relative",
-              transition: "color 0.3s ease",
-              fontFamily: "'Inter', sans-serif",
-            }}
-            onMouseEnter={(e) => {
-              if (activeLink !== link.label)
-                e.currentTarget.style.color = scrolled ? "#1A1A1A" : "#ffffff";
-            }}
-            onMouseLeave={(e) => {
-              if (activeLink !== link.label)
-                e.currentTarget.style.color = scrolled ? "#666666" : "rgba(255,255,255,0.7)";
-            }}
+            className="mobile-hide nav-item-container"
+            style={{ position: "relative", height: "100%", display: "flex", alignItems: "center" }}
           >
-            {link.label}
-            {activeLink === link.label && (
-              <span style={{
-                position: "absolute", bottom: "-2px", left: "50%", transform: "translateX(-50%)",
-                width: "4px", height: "4px", borderRadius: "50%",
-                background: scrolled ? "#1976D2" : "#ffffff",
-              }} />
+            <button
+              onClick={() => handleNavClick(link.href, link.label)}
+              style={{
+                background: "none", border: "none", cursor: "pointer",
+                color: activeLink === link.label ? "#ffffff" : "rgba(255,255,255,0.7)",
+                fontSize: "0.8585rem",
+                fontWeight: activeLink === link.label ? 700 : 500,
+                padding: "0.25rem 0",
+                position: "relative",
+                transition: "color 0.3s ease",
+                fontFamily: "'Inter', sans-serif",
+                display: "flex", alignItems: "center", gap: "4px"
+              }}
+              onMouseEnter={(e) => {
+                if (activeLink !== link.label)
+                  e.currentTarget.style.color = "#ffffff";
+              }}
+              onMouseLeave={(e) => {
+                if (activeLink !== link.label)
+                  e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+              }}
+            >
+              {link.label}
+              {link.dropdown && <ChevronDown size={14} style={{ opacity: 0.8, marginTop: "1px", transition: "transform 0.3s ease" }} className="dropdown-icon" />}
+              {activeLink === link.label && (
+                <span style={{
+                  position: "absolute", bottom: "-4px", left: "50%", transform: "translateX(-50%)",
+                  width: "4px", height: "4px", borderRadius: "50%",
+                  background: "#ffffff",
+                }} />
+              )}
+            </button>
+
+            {/* Mega Menu Dropdown */}
+            {link.dropdown && (
+              <div className="mega-menu" style={{
+                position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)",
+                width: "max-content",
+                background: "rgba(10, 10, 15, 0.95)",
+                backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: "16px", padding: "2rem 2.5rem",
+                display: "none", // Display managed by CSS hover
+                gap: "4rem",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05), 0 -4px 30px rgba(25,118,210,0.15)",
+                cursor: "default",
+                textAlign: "left"
+              }}>
+                {link.dropdown.map((section, idx) => (
+                  <div key={idx} style={{ display: "flex", flexDirection: "column", gap: "1.25rem", minWidth: "260px" }}>
+                    <h3 style={{ 
+                      color: "#90CAF9", fontSize: "0.85rem", fontWeight: 700, 
+                      letterSpacing: "0.5px", textTransform: "uppercase", margin: 0 
+                    }}>
+                      {section.title}
+                    </h3>
+                    <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+                      {section.items.map((item, i) => (
+                        <li key={i}>
+                          <a href={link.href} style={{ 
+                            color: "rgba(255,255,255,0.75)", textDecoration: "none", fontSize: "0.85rem",
+                            transition: "all 0.2s ease", cursor: "pointer", display: "inline-block",
+                            fontWeight: 500
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = "#ffffff";
+                            e.currentTarget.style.transform = "translateX(4px)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = "rgba(255,255,255,0.75)";
+                            e.currentTarget.style.transform = "translateX(0)";
+                          }}
+                          >
+                            {item}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             )}
-          </button>
+          </div>
         ))}
 
         {/* CTA */}
@@ -155,45 +300,27 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           className="mobile-hide"
           style={{
             textDecoration: "none",
-            color: scrolled ? "#666666" : "rgba(255,255,255,0.75)",
+            color: "rgba(255,255,255,0.75)",
             fontSize: "0.85rem",
             fontWeight: 500, cursor: "pointer", transition: "color 0.3s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = scrolled ? "#1A1A1A" : "#ffffff")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = scrolled ? "#666666" : "rgba(255,255,255,0.75)")}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.75)")}
         >
           Login
         </Link>
         <button
           onClick={onBookNow}
-          className="mobile-hide"
-          style={{
-            background: "linear-gradient(135deg, #1976D2, #0D47A1)",
-            color: "#ffffff",
-            border: "none",
-            borderRadius: "9999px",
-            padding: "0.55rem 1.3rem", fontSize: "0.85rem", fontWeight: 600,
-            cursor: "pointer", transition: "all 0.35s ease",
-            boxShadow: "0 2px 10px rgba(25,118,210,0.2)",
-            fontFamily: "'Inter', sans-serif",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.boxShadow = "0 6px 20px rgba(25,118,210,0.35)";
-            e.currentTarget.style.transform = "translateY(-1px)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.boxShadow = "0 2px 10px rgba(25,118,210,0.2)";
-            e.currentTarget.style.transform = "translateY(0)";
-          }}
+          className="mobile-hide book-now-btn"
         >
-          Book now
+          Book Now
         </button>
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           style={{
             background: "none", border: "none", cursor: "pointer",
-            color: scrolled ? "#333333" : "#ffffff",
+            color: "#ffffff",
             display: "none", padding: "0.5rem",
             transition: "color 0.3s ease",
           }}
@@ -272,6 +399,82 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         @media (max-width: 768px) {
           .mobile-menu-btn { display: block !important; }
           .mobile-hide { display: none !important; }
+        }
+        
+        .nav-item-container:hover .mega-menu {
+          display: flex !important;
+          animation: megaMenuFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .nav-item-container:hover .dropdown-icon {
+          transform: rotate(180deg);
+        }
+        
+        .mega-menu::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; width: 100%; height: 3px;
+          background: linear-gradient(135deg, #1976D2, #0D47A1);
+          border-top-left-radius: 16px;
+          border-top-right-radius: 16px;
+        }
+
+        .nav-item-container::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          height: 25px;
+        }
+
+        @keyframes megaMenuFade {
+          from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px) scale(0.98);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0) scale(1);
+          }
+        }
+        
+        .book-now-btn {
+          background: linear-gradient(135deg, #1976D2, #0D47A1);
+          color: #ffffff;
+          border: none;
+          border-radius: 9999px;
+          padding: 0.55rem 1.3rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+          font-family: 'Inter', sans-serif;
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+        }
+
+        .book-now-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+          transition: all 0.6s ease;
+          z-index: -1;
+        }
+
+        .book-now-btn:hover::before {
+          left: 100%;
+        }
+
+        .book-now-btn:hover {
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 8px 25px rgba(25, 118, 210, 0.5);
         }
       `}</style>
     </>

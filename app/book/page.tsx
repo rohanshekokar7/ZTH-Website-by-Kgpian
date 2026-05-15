@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Mail, Phone, MapPin, CheckCircle } from "lucide-react";
 import Link from "next/link";
@@ -8,18 +8,45 @@ import Link from "next/link";
 export default function BookPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<{
+    name: string;
+    email: string;
+    company: string;
+    services: string[];
+    message: string;
+  }>({
     name: "",
     email: "",
     company: "",
-    service: "",
+    services: [],
     message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const serviceParam = params.get("service");
+      if (serviceParam) {
+        setForm((f) => ({ ...f, services: [serviceParam] }));
+      }
+    }
+  }, []);
+
   const update = (field: string, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
     setErrors((e) => ({ ...e, [field]: "" }));
+  };
+
+  const toggleService = (value: string) => {
+    setForm((f) => {
+      const isSelected = f.services.includes(value);
+      const newServices = isSelected
+        ? f.services.filter((s) => s !== value)
+        : [...f.services, value];
+      return { ...f, services: newServices };
+    });
+    setErrors((e) => ({ ...e, services: "" }));
   };
 
   const validate = () => {
@@ -28,7 +55,7 @@ export default function BookPage() {
     if (!form.email.trim()) errs.email = "Required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = "Invalid email";
     if (!form.company.trim()) errs.company = "Required";
-    if (!form.service) errs.service = "Please select a service";
+    if (form.services.length === 0) errs.services = "Please select at least one service";
     if (!form.message.trim()) errs.message = "Required";
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -271,19 +298,20 @@ export default function BookPage() {
                   }}>
                     I&apos;m looking for*
                   </label>
-                  <div style={{ display: "flex", gap: "1rem" }}>
+                  <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {[
-                      { value: "consultation", label: "Free Consultation", sub: "Strategy & advisory call" },
-                      { value: "pitch-deck", label: "Pitch Deck", sub: "Design & content creation" },
+                      { value: "pre-fundraising", label: "Pre-Fundraising", sub: "Pitch decks, models & strategy" },
+                      { value: "capital-network", label: "Capital Network", sub: "Investor prep & ecosystem" },
+                      { value: "post-fundraise", label: "Post-Fundraise", sub: "Growth, hiring & execution" },
                     ].map((opt) => {
-                      const isSelected = form.service === opt.value;
+                      const isSelected = form.services.includes(opt.value);
                       return (
                         <button
                           key={opt.value}
                           type="button"
-                          onClick={() => update("service", opt.value)}
+                          onClick={() => toggleService(opt.value)}
                           style={{
-                            flex: 1, padding: "1rem 1.25rem",
+                            flex: "1 1 30%", padding: "1rem 1.25rem", minWidth: "140px",
                             background: isSelected ? "rgba(25,118,210,0.06)" : "#F8FAFC",
                             border: isSelected ? "1.5px solid #1976D2" : "1.5px solid #e5e7eb",
                             borderRadius: "0.75rem", cursor: "pointer",
@@ -308,7 +336,7 @@ export default function BookPage() {
                       );
                     })}
                   </div>
-                  {errors.service && <span style={{ color: "#ef4444", fontSize: "0.72rem", display: "block", marginTop: "0.5rem" }}>{errors.service}</span>}
+                  {errors.services && <span style={{ color: "#ef4444", fontSize: "0.72rem", display: "block", marginTop: "0.5rem" }}>{errors.services}</span>}
                 </div>
 
                 {/* Message */}

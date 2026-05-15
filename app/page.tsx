@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import Loader from "@/components/Loader";
@@ -19,7 +19,21 @@ export default function HomePage() {
   const [loaded, setLoaded] = useState(false);
   const router = useRouter();
 
-  const handleLoaderComplete = useCallback(() => setLoaded(true), []);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem("app_loaded") === "true") {
+        setLoaded(true);
+      }
+    }
+  }, []);
+
+  const handleLoaderComplete = useCallback(() => {
+    setLoaded(true);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("app_loaded", "true");
+    }
+  }, []);
+
   const goToBook = useCallback(() => router.push("/book"), [router]);
 
   return (
