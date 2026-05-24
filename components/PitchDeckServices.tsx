@@ -113,8 +113,8 @@ const cardsData = [
           </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '2rem' }}>
-          <Link 
-            href="/book" 
+          <Link
+            href="/book"
             style={{
               textDecoration: 'none',
               backgroundColor: '#1976D2',
@@ -257,21 +257,30 @@ export default function PitchDeckServices({ className }: { className?: string })
   });
 
   return (
-    <div className={className} style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', paddingTop: '2rem' }}>
+    <div className={className} style={{ position: 'relative', backgroundColor: '#FFFFFF', minHeight: '100vh', paddingTop: '2rem' }}>
 
-      {/* Section Header */}
-      <div 
-        ref={headerRef}
-        style={{ 
-        position: "sticky", 
-        top: 0, 
-        zIndex: 50, 
-        backgroundColor: "#FFFFFF", 
-        paddingTop: "2rem", 
-        paddingBottom: "0.5rem",
-        marginBottom: "0"
+      {/* Section Header Wrapper */}
+      <div style={{
+        position: 'absolute',
+        top: '2rem',
+        bottom: `calc(clamp(475px, 65vh, 580px) + ${headerHeight}px)`,
+        left: 0,
+        right: 0,
+        pointerEvents: 'none',
+        zIndex: 50
       }}>
-        <motion.div 
+        <div
+          ref={headerRef}
+          style={{
+            position: "sticky",
+            top: 0,
+            backgroundColor: "#FFFFFF",
+            paddingTop: "2rem",
+            paddingBottom: "0.5rem",
+            marginBottom: "0",
+            pointerEvents: 'auto'
+          }}>
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -289,21 +298,23 @@ export default function PitchDeckServices({ className }: { className?: string })
             PRE-FUNDRAISING
           </p>
           <h2 style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "clamp(2rem, 4vw, 3.2rem)",
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "clamp(2.5rem, 4.5vw, 3.5rem)",
             fontWeight: 900,
             color: "#1A1A1A",
-            letterSpacing: "-0.03em",
-            lineHeight: 1.1,
-            margin: 0,
-            maxWidth: "900px",
-            marginLeft: "auto",
-            marginRight: "auto"
+            letterSpacing: "-0.04em",
+            lineHeight: 1.15,
+            margin: "0 auto 1.5rem",
+            maxWidth: "850px"
           }}>
-            PRE-FUNDRAISING INFRASTRUCTURE
+            Pre-Fundraising <span style={{ color: "#1976D2" }}>Infrastructure.</span>
           </h2>
         </motion.div>
+        </div>
       </div>
+
+      {/* Spacer to replace header in document flow */}
+      <div style={{ height: headerHeight }} />
 
       {/* Stacking Cards */}
       <div ref={containerRef} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

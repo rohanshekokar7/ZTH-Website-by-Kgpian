@@ -196,8 +196,12 @@ body {
 /* ============================
    TYPOGRAPHY
 ============================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif !important;
+}
+
 .heading-display {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
   line-height: 1.0;
   letter-spacing: -0.04em;
@@ -227,7 +231,7 @@ body {
 }
 
 .label-small {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.25em;

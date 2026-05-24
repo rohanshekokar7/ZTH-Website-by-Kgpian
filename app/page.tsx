@@ -14,6 +14,7 @@ import TestimonialsAndLogos from "@/components/TestimonialsAndLogos";
 import Footer from "@/components/Footer";
 import PitchDeckServices from "@/components/PitchDeckServices";
 import CapitalSection from "@/components/CapitalSection";
+import CapitalNetworkSection from "@/components/CapitalNetworkSection";
 
 export default function HomePage() {
   const [loaded, setLoaded] = useState(false);
@@ -59,6 +60,7 @@ export default function HomePage() {
           <div style={{ position: "relative", zIndex: 10, background: "#FFFFFF", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>
             <CurvedMarquee />
             <PitchDeckServices />
+            <CapitalNetworkSection />
             <CapitalSection />
 
             <TestimonialsAndLogos />

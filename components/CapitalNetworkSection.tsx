@@ -14,25 +14,24 @@ const TEXT_MUTED = '#475569'; // Muted dark text
 
 // --─ Data ─────────────────────────────────────────────────────────────────────
 const cat1 = [
-  { n: '01', title: 'ZTH at Cap Table', desc: 'Long-term aligned partnerships with ventures across growth and strategic expansion journeys.' },
-  { n: '02', title: 'Financial Advisory', desc: 'Ongoing financial guidance, strategic planning, and operational decision support.' },
-  { n: '03', title: 'Growth & Governance', desc: 'Support across scaling strategy, investor communication, governance, and business structuring.' },
-  { n: '04', title: 'Follow-On Fundraising Support', desc: 'Preparation and strategic guidance for future fundraising rounds and investor engagement.' },
+  { n: '01', title: 'Investor Meeting Preparation', desc: 'Preparation support for investor conversations, presentations, and fundraising discussions.' },
+  { n: '02', title: 'Pitch Day Support', desc: 'Strategic support during pitch events, demo days, and investor-facing opportunities.' },
+  { n: '03', title: 'Deal Structuring Support', desc: 'Assistance across fundraising structuring, documentation coordination, and strategic financial discussions.' },
+  { n: '04', title: 'Due Diligence Coordination', desc: 'Support for investor data preparation, documentation workflows, and fundraising readiness processes.' },
+  { n: '05', title: 'Investor Communication Support', desc: 'Ongoing support across investor follow-ups, fundraising updates, and strategic communication.' },
 ];
 
 const cat2 = [
-  { n: '01', title: 'Product & Technology Support', desc: 'Strategic oversight for MVP development, technical architecture scaling, and engineering team building.' },
-  { n: '02', title: 'Branding & GTM Execution', desc: 'Go-to-market strategies, brand positioning, and execution support for acquiring early customers.' },
-  { n: '03', title: 'Legal & Compliance Coordination', desc: 'Guidance on venture structuring, IP protection, regulatory compliance, and term sheet structuring.' },
-  { n: '04', title: 'Finance & Accounting Support', desc: 'Financial modeling, bookkeeping oversight, cap table management, and unit economics optimization.' },
-  { n: '05', title: 'Operational Scaling Assistance', desc: 'Process optimization, talent acquisition strategies, and foundational business operations setup.' },
+  { n: '01', title: 'Founder Onboarding', desc: 'Access fundraising preparation, strategic support, and ecosystem connectivity through ZTH.' },
+  { n: '02', title: 'Investor Network', desc: 'Connect with curated ventures, strategic opportunities, and founder ecosystems.' },
+  { n: '03', title: 'Strategic Partnerships', desc: 'Collaborate across execution, advisory, operational support, and ecosystem growth initiatives.' },
 ];
 
 const traction = [
-  'Long-Term Founder Partnerships',
-  'Strategic Growth Support',
-  'Cross-Functional Execution Network',
-  'Venture Scaling Advisory',
+  'Founder & Investor Ecosystem',
+  'Strategic Fundraising Coordination',
+  'Curated Venture Support',
+  'Multi-Stage Capital Preparation',
 ];
 
 // --─ Primitives ───────────────────────────────────────────────────────────────
@@ -68,18 +67,18 @@ function SectionHeading({ title, delay = 0, inView }: { title: string; delay?: n
 }
 
 // --─ Main Component ───────────────────────────────────────────────────────────
-export default function CapitalSection({ className }: { className?: string }) {
+export default function CapitalNetworkSection({ className }: { className?: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-80px' });
 
   return (
     <section
       ref={sectionRef}
-      id="capital"
+      id="capital-network"
       className={className}
       style={{
         background: BG,
-        padding: '6rem 0 5rem',
+        padding: '6rem 0 8rem',
         fontFamily: "'Inter', sans-serif",
         position: 'relative',
         overflow: 'hidden'
@@ -89,11 +88,11 @@ export default function CapitalSection({ className }: { className?: string }) {
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <svg width="100%" height="100%" style={{ opacity: 0.3 }}>
           <defs>
-            <pattern id="premium-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <pattern id="premium-grid-network" width="40" height="40" patternUnits="userSpaceOnUse">
               <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,0,0,0.05)" strokeWidth="1" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#premium-grid)" />
+          <rect width="100%" height="100%" fill="url(#premium-grid-network)" />
         </svg>
         <div style={{
           position: 'absolute',
@@ -128,7 +127,7 @@ export default function CapitalSection({ className }: { className?: string }) {
               marginBottom: '1rem',
             }}
           >
-            POST-FUNDRAISING &amp; STRATEGIC PARTNERSHIP
+            CAPITAL NETWORK &amp; FUNDRAISING SUPPORT
           </p>
           <h2
             style={{
@@ -141,9 +140,9 @@ export default function CapitalSection({ className }: { className?: string }) {
               maxWidth: 850,
             }}
           >
-            Built For Long-Term Venture Alignment{' '}
+            Strategic Capital Support{' '}
             <span style={{ color: BLUE }}>
-              Beyond Capital.
+              Beyond Investor Introductions.
             </span>
           </h2>
 
@@ -157,14 +156,14 @@ export default function CapitalSection({ className }: { className?: string }) {
               fontFamily: "'Space Grotesk', sans-serif"
             }}
           >
-            ZTH continues supporting ventures beyond fundraising through strategic advisory, operational execution, financial guidance, and long-term ecosystem partnerships designed for sustainable growth.
+            ZTH supports ventures during active fundraising through strategic guidance, investor preparation, curated ecosystem access, and structured fundraising coordination.
           </p>
         </motion.div>
 
-        {/* -- SECTION 1: STRATEGIC PARTNERSHIP ────────────────────── */}
-        <SectionHeading title="Strategic Partnership" delay={0.2} inView={inView} />
+        {/* -- SECTION 1: DURING FUNDRAISING SUPPORT ────────────────────── */}
+        <SectionHeading title="During Fundraising Support" delay={0.2} inView={inView} />
 
-        <div className="cards-grid">
+        <div className="cards-grid-net">
           {cat1.map((item, i) => (
             <motion.div
               key={item.title}
@@ -191,10 +190,10 @@ export default function CapitalSection({ className }: { className?: string }) {
             >
               <StarBorder as="div" color={BLUE} speed="4s" thickness={2} className="w-full h-full" style={{ width: '100%', height: '100%' }}>
                 <div style={{
-                  padding: '2.5rem 2rem',
+                  padding: '1.5rem 1.25rem',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '1.25rem',
+                  gap: '0.75rem',
                   height: '100%',
                   background: CARD_BG,
                   backdropFilter: 'blur(16px)',
@@ -206,9 +205,9 @@ export default function CapitalSection({ className }: { className?: string }) {
                     <h3
                       style={{
                         color: TEXT_MAIN,
-                        fontSize: '1.35rem',
+                        fontSize: '1.15rem',
                         fontWeight: 800,
-                        marginBottom: '0.85rem',
+                        marginBottom: '0.5rem',
                         lineHeight: 1.3,
                         letterSpacing: '-0.01em',
                       }}
@@ -218,8 +217,8 @@ export default function CapitalSection({ className }: { className?: string }) {
                     <p
                       style={{
                         color: TEXT_MUTED,
-                        fontSize: '1rem',
-                        lineHeight: 1.65,
+                        fontSize: '0.9rem',
+                        lineHeight: 1.5,
                         margin: 0,
                       }}
                     >
@@ -232,10 +231,10 @@ export default function CapitalSection({ className }: { className?: string }) {
           ))}
         </div>
 
-        {/* -- SECTION 2: EXECUTION NETWORK ───────────────────────── */}
-        <SectionHeading title="Execution Network" delay={0.4} inView={inView} />
+        {/* -- SECTION 2: CAPITAL NETWORK ───────────────────────── */}
+        <SectionHeading title="Capital Network" delay={0.4} inView={inView} />
 
-        <div className="execution-grid">
+        <div className="execution-grid-net">
           {cat2.map((item, i) => (
             <motion.div
               key={item.title}
@@ -304,7 +303,7 @@ export default function CapitalSection({ className }: { className?: string }) {
         </div>
 
         {/* -- SECTION 3: TRACTION STRIP ──────────────────────────── */}
-        <SectionHeading title="Traction Strip" delay={0.6} inView={inView} />
+        <SectionHeading title="Ecosystem Highlights" delay={0.6} inView={inView} />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -388,7 +387,7 @@ export default function CapitalSection({ className }: { className?: string }) {
               transition: 'all 0.3s ease',
             }}
           >
-            Explore Strategic Partnership →
+            Apply For Capital Support →
           </motion.button>
 
           {/* Secondary */}
@@ -415,42 +414,42 @@ export default function CapitalSection({ className }: { className?: string }) {
               transition: 'all 0.3s ease',
             }}
           >
-            Partner With ZTH
+            Join The Network
           </motion.button>
         </motion.div>
       </div>
 
       <style jsx>{`
-        .cards-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.75rem;
-        }
-        .execution-grid {
+        .cards-grid-net {
           display: grid;
           grid-template-columns: repeat(5, 1fr);
           gap: 1.5rem;
         }
+        .execution-grid-net {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+        }
 
-        @media (max-width: 1200px) {
-          .execution-grid {
+        @media (max-width: 1400px) {
+          .cards-grid-net {
             grid-template-columns: repeat(3, 1fr);
           }
         }
 
         @media (max-width: 1024px) {
-          .cards-grid {
+          .cards-grid-net {
             grid-template-columns: repeat(2, 1fr);
           }
-          .execution-grid {
+          .execution-grid-net {
             grid-template-columns: repeat(2, 1fr);
           }
         }
         @media (max-width: 640px) {
-          .cards-grid {
+          .cards-grid-net {
             grid-template-columns: 1fr;
           }
-          .execution-grid {
+          .execution-grid-net {
             grid-template-columns: 1fr;
           }
         }
