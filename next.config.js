@@ -4,7 +4,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = withBundleAnalyzer({
-  // Add your Next.js config options here
+  turbopack: {
+    root: __dirname,
+  },
 });
 
 module.exports = nextConfig;
