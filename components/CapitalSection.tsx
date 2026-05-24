@@ -154,7 +154,7 @@ export default function CapitalSection({ className }: { className?: string }) {
               lineHeight: 1.7,
               maxWidth: 750,
               margin: '0 auto',
-              fontFamily: "'Space Grotesk', sans-serif"
+              fontFamily: "'Times New Roman', Times, serif"
             }}
           >
             ZTH continues supporting ventures beyond fundraising through strategic advisory, operational execution, financial guidance, and long-term ecosystem partnerships designed for sustainable growth.

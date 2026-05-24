@@ -153,7 +153,7 @@ export default function CapitalNetworkSection({ className }: { className?: strin
               lineHeight: 1.7,
               maxWidth: 750,
               margin: '0 auto',
-              fontFamily: "'Space Grotesk', sans-serif"
+              fontFamily: "'Times New Roman', Times, serif"
             }}
           >
             ZTH supports ventures during active fundraising through strategic guidance, investor preparation, curated ecosystem access, and structured fundraising coordination.

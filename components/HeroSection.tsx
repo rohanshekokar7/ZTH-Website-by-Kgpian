@@ -120,7 +120,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           style={{
             marginBottom: "1.5rem", maxWidth: 900, margin: "0 auto 1.5rem",
             fontSize: "clamp(2.5rem, 6vw, 4.5rem)", fontWeight: 800,
-            fontFamily: "'Inter', sans-serif", lineHeight: 1.08,
+            fontFamily: "Verdana, sans-serif", lineHeight: 1.08,
             letterSpacing: "-0.03em", color: "#ffffff",
             textShadow: "0 2px 20px rgba(0,0,0,0.4)",
           }}
@@ -142,7 +142,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           style={{
             fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)", maxWidth: 650,
             margin: "0 auto 3rem", lineHeight: 1.7, fontWeight: 400,
-            color: "rgba(255,255,255,0.85)", fontFamily: "'Space Grotesk', sans-serif",
+            color: "rgba(255,255,255,0.85)", fontFamily: "'Times New Roman', Times, serif",
             textShadow: "0 1px 8px rgba(0,0,0,0.3)",
           }}
         >

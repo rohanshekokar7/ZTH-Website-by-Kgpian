@@ -298,7 +298,7 @@ export default function PitchDeckServices({ className }: { className?: string })
             PRE-FUNDRAISING
           </p>
           <h2 style={{
-            fontFamily: "'Space Grotesk', sans-serif",
+            fontFamily: "'Times New Roman', Times, serif",
             fontSize: "clamp(2.5rem, 4.5vw, 3.5rem)",
             fontWeight: 900,
             color: "#1A1A1A",

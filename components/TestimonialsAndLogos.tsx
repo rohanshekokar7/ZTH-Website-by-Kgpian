@@ -470,7 +470,7 @@ export default function TestimonialsAndLogos() {
             style={{
               opacity: pOpacity,
               marginTop: "2.5rem",
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Times New Roman', Times, serif",
               fontSize: "clamp(1.01rem, 1.21vw, 1.11rem)",
               lineHeight: 1.7,
               color: "#4B5563",

@@ -107,7 +107,7 @@ export default function PitchDeckSection({ onCTAClick }: Props) {
             Pitch Deck Services
           </span>
         </div>
-        <p className="text-[#888888] text-[0.95rem] max-w-xs" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <p className="text-[#888888] text-[0.95rem] max-w-xs" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
           Scroll through four flagship offerings.
         </p>
       </div>
