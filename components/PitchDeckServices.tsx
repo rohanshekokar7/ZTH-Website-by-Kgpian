@@ -297,7 +297,12 @@ export default function PitchDeckServices({ className }: { className?: string })
           }}>
             PRE-FUNDRAISING
           </p>
-          <h2 style={{
+          <motion.h2
+            initial={{ filter: "blur(14px)", opacity: 0 }}
+            whileInView={{ filter: "blur(0px)", opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            style={{
             fontFamily: "'Times New Roman', Times, serif",
             fontSize: "clamp(2.5rem, 4.5vw, 3.5rem)",
             fontWeight: 900,
@@ -308,7 +313,7 @@ export default function PitchDeckServices({ className }: { className?: string })
             maxWidth: "850px"
           }}>
             Pre-Fundraising <span style={{ color: "#1976D2" }}>Infrastructure.</span>
-          </h2>
+          </motion.h2>
         </motion.div>
         </div>
       </div>

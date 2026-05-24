@@ -49,8 +49,10 @@ export default function ConsultationSection({ onCTAClick }: { onCTAClick: () => 
             Consultation
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 800,
               fontSize: "clamp(1.75rem, 3.5vw, 2.8rem)", color: "#1A1A1A",

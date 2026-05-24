@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import StarBorder from './StarBorder';
+import ScrollReveal from './ScrollReveal';
 
 // --─ Design tokens ────────────────────────────────────────────────────────────
 const BLUE = '#1976D2';
@@ -111,54 +112,69 @@ export default function CapitalNetworkSection({ className }: { className?: strin
         }}
       >
         {/* -- HEADER ─────────────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          style={{ textAlign: 'center', marginBottom: '3rem' }}
-        >
-          <p
-            style={{
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={false}
+            baseRotation={2}
+            wordAnimationEnd="bottom 80%"
+            style={{ display: 'block', marginBottom: '1rem' }}
+            textStyle={{
               fontSize: '0.8rem',
               fontWeight: 700,
               letterSpacing: '0.25em',
               color: BLUE,
               textTransform: 'uppercase',
-              marginBottom: '1rem',
+              margin: 0,
             }}
           >
-            CAPITAL NETWORK &amp; FUNDRAISING SUPPORT
-          </p>
-          <h2
+            CAPITAL NETWORK & FUNDRAISING SUPPORT
+          </ScrollReveal>
+
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={5}
+            blurStrength={10}
             style={{
+              display: 'block',
+              margin: '0 auto 1.5rem',
+              maxWidth: '850px',
+            }}
+            textStyle={{
               fontSize: 'clamp(2.5rem, 4.5vw, 3.5rem)',
               fontWeight: 900,
               color: TEXT_MAIN,
               letterSpacing: '-0.03em',
               lineHeight: 1.15,
-              margin: '0 auto 1.5rem',
-              maxWidth: 850,
+              margin: 0,
             }}
           >
-            Strategic Capital Support{' '}
-            <span style={{ color: BLUE }}>
-              Beyond Investor Introductions.
-            </span>
-          </h2>
+            Strategic Capital Support Beyond Investor Introductions.
+          </ScrollReveal>
 
-          <p
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={6}
+            wordAnimationEnd="bottom 80%"
             style={{
+              display: 'block',
+              maxWidth: '750px',
+              margin: '0 auto',
+            }}
+            textStyle={{
               fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)',
               color: TEXT_MUTED,
               lineHeight: 1.7,
-              maxWidth: 750,
-              margin: '0 auto',
-              fontFamily: "'Times New Roman', Times, serif"
+              fontFamily: "'Times New Roman', Times, serif",
+              margin: 0,
             }}
           >
             ZTH supports ventures during active fundraising through strategic guidance, investor preparation, curated ecosystem access, and structured fundraising coordination.
-          </p>
-        </motion.div>
+          </ScrollReveal>
+        </div>
 
         {/* -- SECTION 1: DURING FUNDRAISING SUPPORT ────────────────────── */}
         <SectionHeading title="During Fundraising Support" delay={0.2} inView={inView} />

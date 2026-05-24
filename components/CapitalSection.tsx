@@ -130,7 +130,10 @@ export default function CapitalSection({ className }: { className?: string }) {
           >
             POST-FUNDRAISING &amp; STRATEGIC PARTNERSHIP
           </p>
-          <h2
+          <motion.h2
+            initial={{ opacity: 0, y: 20, filter: 'blur(14px)' }}
+            animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontSize: 'clamp(2.5rem, 4.5vw, 3.5rem)',
               fontWeight: 900,
@@ -145,7 +148,7 @@ export default function CapitalSection({ className }: { className?: string }) {
             <span style={{ color: BLUE }}>
               Beyond Capital.
             </span>
-          </h2>
+          </motion.h2>
 
           <p
             style={{

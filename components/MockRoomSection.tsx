@@ -39,8 +39,10 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
             INVESTOR MOCK ROOM
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontWeight: 800,
               fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "#1A1A1A",
