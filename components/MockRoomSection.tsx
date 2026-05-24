@@ -59,7 +59,7 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
               fontSize: "1.1rem", color: "#4A4A4A", maxWidth: 800, margin: "0 auto", lineHeight: 1.6
             }}
           >
-            ZTH’s Investor Mock Room is designed to simulate real fundraising conversations before founders step into actual investor meetings. From pitch delivery and strategic storytelling to difficult investor questioning and live feedback sessions, founders gain the clarity, confidence, and preparation needed to raise capital more effectively.
+            ZTH’s Investor Mock Room simulates real fundraising conversations before actual investor meetings. Founders practice pitch delivery, handle tough investor questions, and receive live feedback to build confidence and raise capital more effectively.
           </motion.p>
         </div>
 

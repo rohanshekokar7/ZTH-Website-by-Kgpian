@@ -372,6 +372,7 @@ export default function TestimonialsAndLogos() {
       </div>
 
       <section
+        id="zth-insider"
         ref={sectionRef}
         style={{
           background: "#ffffff",

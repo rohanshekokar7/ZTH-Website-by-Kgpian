@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import SpotlightCard from './SpotlightCard';
 
 const BLUE = '#1976D2';
 const BLUE_LIGHT = '#E3F0FF';
@@ -32,77 +33,51 @@ const traction = [
 
 /* ── 3-D Card ───────────────────────────────────────────────────── */
 function Card3D({
-  n, title, desc, delay, color = BLUE,
+  title, desc, delay, color = BLUE,
 }: {
   n: string; title: string; desc: string; delay: number; color?: string;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -10, rotateX: -5, rotateY: 4, scale: 1.025 }}
-      style={{
-        transformPerspective: 900,
-        transformStyle: 'preserve-3d',
-        transition: 'box-shadow 0.3s ease',
-        height: '100%',
-      }}
+      style={{ height: '100%' }}
     >
-      <div style={{
-        background: '#ffffff',
-        borderRadius: '1.25rem',
-        padding: '2rem 1.75rem',
-        height: '100%',
-        border: '1px solid rgba(0,0,0,0.06)',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.03)',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.75rem',
-        cursor: 'default',
-        transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
-      }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = `0 20px 48px rgba(25,118,210,0.14), 0 0 0 1.5px ${color}`;
-          e.currentTarget.style.borderColor = `rgba(25,118,210,0.25)`;
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.03)';
-          e.currentTarget.style.borderColor = 'rgba(0,0,0,0.06)';
+      <SpotlightCard
+        spotlightColor="rgba(25, 118, 210, 0.18)"
+        className="spotlight-card-net"
+        style={{
+          background: '#ffffff',
+          borderRadius: '1.25rem',
+          padding: '2rem 1.75rem',
+          height: '100%',
+          border: '1px solid rgba(0,0,0,0.06)',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.75rem',
+          cursor: 'default',
+          position: 'relative',
         }}
       >
-        {/* Top accent */}
+        {/* Top accent line */}
         <div style={{
           position: 'absolute', top: 0, left: 0, right: 0, height: 3,
           background: `linear-gradient(90deg, ${color}, #90CAF9, transparent)`,
           borderRadius: '1.25rem 1.25rem 0 0',
         }} />
 
-        {/* Ghost number */}
-        <span style={{
-          position: 'absolute', bottom: '-0.5rem', right: '1rem',
-          fontSize: '5rem', fontWeight: 900, lineHeight: 1,
-          color: `rgba(25,118,210,0.05)`,
-          userSelect: 'none', pointerEvents: 'none',
-          fontFamily: "'Inter', sans-serif",
-          letterSpacing: '-0.04em',
-        }}>
-          {n}
-        </span>
-
-        {/* Number badge */}
-        <span style={{
-          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-          width: 32, height: 32, borderRadius: '8px',
-          background: BLUE_LIGHT, color: BLUE,
-          fontSize: '0.7rem', fontWeight: 800,
-          letterSpacing: '0.04em', flexShrink: 0,
-        }}>
-          {n}
-        </span>
+        {/* Bottom underline — appears on hover via CSS */}
+        <div className="card-underline-net" style={{
+          position: 'absolute', bottom: 0, left: '10%', right: '10%', height: 2,
+          background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
+          borderRadius: '0 0 4px 4px',
+          opacity: 0,
+          transition: 'opacity 0.35s ease, transform 0.35s ease',
+          transform: 'scaleX(0.4)',
+        }} />
 
         <h3 style={{
           color: TEXT_MAIN, fontSize: '1.05rem', fontWeight: 700,
@@ -117,7 +92,7 @@ function Card3D({
         }}>
           {desc}
         </p>
-      </div>
+      </SpotlightCard>
     </motion.div>
   );
 }
@@ -359,6 +334,10 @@ export default function CapitalNetworkSection({ className }: { className?: strin
       </div>
 
       <style jsx>{`
+        .spotlight-card-net:hover .card-underline-net {
+          opacity: 1 !important;
+          transform: scaleX(1) !important;
+        }
         .cards-grid-net {
           display: grid;
           grid-template-columns: repeat(5, 1fr);

@@ -105,7 +105,7 @@ const navLinks = [
     ],
   },
   { label: "Mock Room", href: "/#mock-room" },
-  { label: "ZTH Insider", href: "/#insider" },
+  { label: "ZTH Insider", href: "/#zth-insider" },
 ];
 
 // Map section IDs → nav label
@@ -117,6 +117,7 @@ const sectionMap: Record<string, string> = {
   "funding": "Post-Fundraise",
   "mock-room": "Mock Room",
   "insider": "ZTH Insider",
+  "zth-insider": "ZTH Insider",
 };
 
 export default function Header({ onBookNow }: { onBookNow: () => void }) {
@@ -147,36 +148,38 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Auto-highlight nav based on visible section
+  // Auto-highlight nav based on scroll position
   useEffect(() => {
     const ids = Object.keys(sectionMap);
-    const observers: IntersectionObserver[] = [];
 
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveLink(sectionMap[id]);
-          }
-        },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
+    const updateActive = () => {
+      if (window.scrollY < 80) {
+        setActiveLink("Home");
+        return;
+      }
 
-    // Reset to Home when scrolled back to top
-    const topHandler = () => {
-      if (window.scrollY < 80) setActiveLink("Home");
+      // Find which section occupies the 40% mark of the viewport
+      const probe = window.scrollY + window.innerHeight * 0.4;
+      let matched = "";
+
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        const bottom = top + el.offsetHeight;
+        if (probe >= top && probe <= bottom) {
+          matched = id;
+          // Don't break — last match (deepest section at that point) wins
+        }
+      }
+
+      if (matched) setActiveLink(sectionMap[matched]);
     };
-    window.addEventListener("scroll", topHandler, { passive: true });
 
-    return () => {
-      observers.forEach((o) => o.disconnect());
-      window.removeEventListener("scroll", topHandler);
-    };
+    window.addEventListener("scroll", updateActive, { passive: true });
+    updateActive(); // run once on mount
+
+    return () => window.removeEventListener("scroll", updateActive);
   }, []);
 
   const handleNavClick = (href: string, label: string) => {
