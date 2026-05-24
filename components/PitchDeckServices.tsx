@@ -13,8 +13,8 @@ const cardsData = [
     tags: [],
     body: (
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', height: '100%', maxWidth: '95%' }}>
-        <p style={{ color: 'rgba(227,242,253,0.85)', fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', lineHeight: 1.5, margin: 0 }}>From investor-ready pitch narratives and financial modeling to valuation strategy and operational readiness Zth helps founders and growing businesses prepare for high-stakes fundraising conversations with greater clarity and confidence.</p>
-        <p style={{ color: 'rgba(227,242,253,0.85)', fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', lineHeight: 1.5, margin: 0 }}>We bridge the gap between building a product and closing a round, handling the rigorous demands of institutional preparation so you can focus on scaling.</p>
+        <p style={{ color: 'rgba(224, 242, 254, 0.85)', fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', lineHeight: 1.5, margin: 0 }}>From investor-ready pitch narratives and financial modeling to valuation strategy and operational readiness Zth helps founders and growing businesses prepare for high-stakes fundraising conversations with greater clarity and confidence.</p>
+        <p style={{ color: 'rgba(224, 242, 254, 0.85)', fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', lineHeight: 1.5, margin: 0 }}>We bridge the gap between building a product and closing a round, handling the rigorous demands of institutional preparation so you can focus on scaling.</p>
       </div>
     ),
     bgColor: '#0E0F13',  /* Near black — band 1 */
@@ -29,20 +29,20 @@ const cardsData = [
     body: (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', maxWidth: '100%', alignContent: 'space-evenly', height: '100%' }}>
         <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Pitch Decks</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>We craft compelling narratives backed by hard data to capture investor interest immediately.</p>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Pitch Decks</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>We craft compelling narratives backed by hard data to capture investor interest immediately.</p>
         </div>
-        <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Financial Models</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Robust, investor-grade financial projections and unit economics that stand up to rigorous due diligence.</p>
+        <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Financial Models</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Robust, investor-grade financial projections and unit economics that stand up to rigorous due diligence.</p>
         </div>
-        <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Valuation Models</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Data-driven valuation frameworks to help you negotiate terms from a position of strength and clarity.</p>
+        <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Valuation Models</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Data-driven valuation frameworks to help you negotiate terms from a position of strength and clarity.</p>
         </div>
-        <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Information Memorandums</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Comprehensive dossiers detailing operations, market sizing, and strategy for serious institutional players.</p>
+        <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Information Memorandums</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Comprehensive dossiers detailing operations, market sizing, and strategy for serious institutional players.</p>
         </div>
       </div>
     ),
@@ -58,24 +58,24 @@ const cardsData = [
     body: (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', maxWidth: '100%', alignContent: 'space-evenly', height: '100%' }}>
         <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Company Incorporation</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>End-to-end entity registration and structural advisory tailored for venture-backed startups.</p>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Company Incorporation</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>End-to-end entity registration and structural advisory tailored for venture-backed startups.</p>
         </div>
-        <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>GST Registration & Regulatory Support</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Seamless management of mandatory filings to ensure your venture remains audit-ready.</p>
+        <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>GST Registration & Regulatory Support</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Seamless management of mandatory filings to ensure your venture remains audit-ready.</p>
         </div>
-        <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Legal & Financial Documentation</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Secure your equity with robust founder agreements, term sheet reviews, and cap table management.</p>
+        <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Legal & Financial Documentation</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Secure your equity with robust founder agreements, term sheet reviews, and cap table management.</p>
         </div>
-        <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Accounting & CA Support</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Dedicated bookkeeping and transparent financial reporting built for rigorous due diligence.</p>
+        <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Accounting & CA Support</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Dedicated bookkeeping and transparent financial reporting built for rigorous due diligence.</p>
         </div>
-        <div>
-          <h4 style={{ color: '#E3F2FD', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Startup India / DPIIT Assistance</h4>
-          <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Unlock government incentives and angel tax exemptions with our guided official support.</p>
+        <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+          <h4 style={{ color: '#E0F2FE', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', marginBottom: '0.5rem', fontWeight: 800 }}>Startup India / DPIIT Assistance</h4>
+          <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: 0 }}>Unlock government incentives and angel tax exemptions with our guided official support.</p>
         </div>
       </div>
     ),
@@ -91,25 +91,25 @@ const cardsData = [
     body: (
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', height: '100%' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', maxWidth: '100%', alignContent: 'space-evenly', height: '100%' }}>
-          <div style={{ borderLeft: '4px solid #1976D2', paddingLeft: '1rem' }}>
-            <div style={{ color: '#E3F2FD', fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: 800, lineHeight: 1.1 }}>100+</div>
-            <div style={{ color: 'rgba(227,242,253,0.9)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 700, marginTop: '0.25rem' }}>Ventures Supported</div>
-            <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: '0.5rem 0 0 0' }}>Empowering early-stage startups with the core infrastructure needed to scale efficiently.</p>
+          <div>
+            <div style={{ color: '#E0F2FE', fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: 800, lineHeight: 1.1 }}>100+</div>
+            <div style={{ color: 'rgba(224, 242, 254, 0.9)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 700, marginTop: '0.25rem' }}>Ventures Supported</div>
+            <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: '0.5rem 0 0 0' }}>Empowering early-stage startups with the core infrastructure needed to scale efficiently.</p>
           </div>
-          <div style={{ borderLeft: '4px solid #1976D2', paddingLeft: '1rem' }}>
-            <div style={{ color: '#E3F2FD', fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: 800, lineHeight: 1.1 }}>₹11–12 Cr+</div>
-            <div style={{ color: 'rgba(227,242,253,0.9)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 700, marginTop: '0.25rem' }}>Capital Facilitated</div>
-            <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: '0.5rem 0 0 0' }}>Preparing founders to successfully close seed and pre-Series A rounds with top-tier investors.</p>
+          <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+            <div style={{ color: '#E0F2FE', fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: 800, lineHeight: 1.1 }}>₹11–12 Cr+</div>
+            <div style={{ color: 'rgba(224, 242, 254, 0.9)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 700, marginTop: '0.25rem' }}>Capital Facilitated</div>
+            <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: '0.5rem 0 0 0' }}>Preparing founders to successfully close seed and pre-Series A rounds with top-tier investors.</p>
           </div>
-          <div style={{ borderLeft: '4px solid #1976D2', paddingLeft: '1rem' }}>
-            <div style={{ color: '#E3F2FD', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, lineHeight: 1.2 }}>Multi-Sector</div>
-            <div style={{ color: 'rgba(227,242,253,0.9)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 700, marginTop: '0.25rem' }}>Founder Advisory</div>
-            <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: '0.5rem 0 0 0' }}>Bespoke mentorship ensuring your strategy aligns with sector-specific investor expectations.</p>
+          <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+            <div style={{ color: '#E0F2FE', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, lineHeight: 1.2 }}>Multi-Sector</div>
+            <div style={{ color: 'rgba(224, 242, 254, 0.9)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 700, marginTop: '0.25rem' }}>Founder Advisory</div>
+            <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: '0.5rem 0 0 0' }}>Bespoke mentorship ensuring your strategy aligns with sector-specific investor expectations.</p>
           </div>
-          <div style={{ borderLeft: '4px solid #1976D2', paddingLeft: '1rem' }}>
-            <div style={{ color: '#E3F2FD', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, lineHeight: 1.2 }}>Strategic</div>
-            <div style={{ color: 'rgba(227,242,253,0.9)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 700, marginTop: '0.25rem' }}>Fundraising Prep</div>
-            <p style={{ color: 'rgba(227,242,253,0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: '0.5rem 0 0 0' }}>Systematically de-risking your venture and optimizing your data room for maximum conversion.</p>
+          <div style={{ borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.5rem' }}>
+            <div style={{ color: '#E0F2FE', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, lineHeight: 1.2 }}>Strategic</div>
+            <div style={{ color: 'rgba(224, 242, 254, 0.9)', fontSize: 'clamp(1.05rem, 1.5vw, 1.3rem)', fontWeight: 700, marginTop: '0.25rem' }}>Fundraising Prep</div>
+            <p style={{ color: 'rgba(224, 242, 254, 0.75)', fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)', lineHeight: 1.5, margin: '0.5rem 0 0 0' }}>Systematically de-risking your venture and optimizing your data room for maximum conversion.</p>
           </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '2rem' }}>
@@ -197,7 +197,7 @@ const Card = ({ card, progress, range, targetScale, i, headerHeight }: any) => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexShrink: 0 }}>
           <h2 style={{ fontSize: card.titleFontSize || 'clamp(1.8rem, 3.5vw, 3.5rem)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.04em', margin: 0 }}>
             <span style={{ color: card.textLight ? '#FFFFFF' : '#18181B', display: 'block' }}>{card.titleFirst}</span>
-            <span style={{ color: card.textLight ? 'rgba(255,255,255,0.38)' : 'rgba(24,24,27,0.38)', display: 'block' }}>{card.titleSecond}</span>
+            <span style={{ color: card.textLight ? '#1976D2' : 'rgba(24,24,27,0.38)', display: 'block' }}>{card.titleSecond}</span>
           </h2>
         </div>
 
