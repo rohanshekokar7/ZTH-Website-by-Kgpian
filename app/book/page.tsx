@@ -26,9 +26,14 @@ export default function BookPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const serviceParam = params.get("service");
-      if (serviceParam) {
-        setForm((f) => ({ ...f, services: [serviceParam] }));
+      // Support both ?services=a,b,c (from modal) and legacy ?service=x
+      const multi = params.get("services");
+      const single = params.get("service");
+      if (multi) {
+        const parsed = multi.split(",").map((s) => decodeURIComponent(s.trim())).filter(Boolean);
+        if (parsed.length) setForm((f) => ({ ...f, services: parsed }));
+      } else if (single) {
+        setForm((f) => ({ ...f, services: [decodeURIComponent(single)] }));
       }
     }
   }, []);
@@ -296,13 +301,41 @@ export default function BookPage() {
                     letterSpacing: "0.05em", color: "#888888", marginBottom: "1rem",
                     textTransform: "uppercase",
                   }}>
-                    I&apos;m looking for*
+                    Services selected*
                   </label>
-                  <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+
+                  {/* Selected chips */}
+                  {form.services.length > 0 && (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginBottom: "1rem" }}>
+                      {form.services.map((s) => (
+                        <span key={s} style={{
+                          display: "inline-flex", alignItems: "center", gap: "0.4rem",
+                          padding: "0.35rem 0.85rem",
+                          background: "rgba(25,118,210,0.08)",
+                          border: "1.5px solid #1976D2",
+                          borderRadius: "100px",
+                          fontSize: "0.8rem", fontWeight: 600, color: "#1976D2",
+                          fontFamily: "'Inter', sans-serif",
+                        }}>
+                          ✓ {s}
+                          <button type="button" onClick={() => toggleService(s)} style={{
+                            background: "none", border: "none", cursor: "pointer",
+                            color: "#1976D2", padding: 0, lineHeight: 1, fontSize: "0.9rem",
+                          }}>×</button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Broad category add-on tiles */}
+                  <p style={{ fontSize: "0.72rem", color: "#aaa", marginBottom: "0.65rem", fontFamily: "'Inter', sans-serif" }}>
+                    Add more categories:
+                  </p>
+                  <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                     {[
-                      { value: "pre-fundraising", label: "Pre-Fundraising", sub: "Pitch decks, models & strategy" },
-                      { value: "capital-network", label: "Capital Network", sub: "Investor prep & ecosystem" },
-                      { value: "post-fundraise", label: "Post-Fundraise", sub: "Growth, hiring & execution" },
+                      { value: "Pre-Fundraising", sub: "Pitch decks, models & strategy" },
+                      { value: "Capital Network", sub: "Investor prep & ecosystem" },
+                      { value: "Post-Fundraise", sub: "Growth, hiring & execution" },
                     ].map((opt) => {
                       const isSelected = form.services.includes(opt.value);
                       return (
@@ -311,7 +344,7 @@ export default function BookPage() {
                           type="button"
                           onClick={() => toggleService(opt.value)}
                           style={{
-                            flex: "1 1 30%", padding: "1rem 1.25rem", minWidth: "140px",
+                            flex: "1 1 28%", padding: "0.85rem 1rem", minWidth: "130px",
                             background: isSelected ? "rgba(25,118,210,0.06)" : "#F8FAFC",
                             border: isSelected ? "1.5px solid #1976D2" : "1.5px solid #e5e7eb",
                             borderRadius: "0.75rem", cursor: "pointer",
@@ -319,14 +352,14 @@ export default function BookPage() {
                           }}
                         >
                           <div style={{
-                            fontSize: "0.88rem", fontWeight: 700,
+                            fontSize: "0.85rem", fontWeight: 700,
                             color: isSelected ? "#1976D2" : "#333333",
-                            marginBottom: "0.25rem", fontFamily: "'Inter', sans-serif",
+                            marginBottom: "0.2rem", fontFamily: "'Inter', sans-serif",
                           }}>
-                            {opt.label}
+                            {opt.value}
                           </div>
                           <div style={{
-                            fontSize: "0.72rem",
+                            fontSize: "0.7rem",
                             color: isSelected ? "#1976D2" : "#999999",
                             fontFamily: "'Inter', sans-serif",
                           }}>

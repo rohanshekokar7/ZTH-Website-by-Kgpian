@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import ServiceModal from "./ServiceModal";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -104,15 +105,19 @@ const navLinks = [
     ],
   },
   { label: "Mock Room", href: "/#mock-room" },
-  {
-    label: "ZTH Insider",
-    href: "/resources#insider",
-    info: {
-      description: "Exclusive insights, fundraising strategies, investor psychology, and pitch deck breakdowns curated for ambitious founders.",
-      cta: "View All Articles",
-    },
-  },
+  { label: "ZTH Insider", href: "/#insider" },
 ];
+
+// Map section IDs → nav label
+const sectionMap: Record<string, string> = {
+  "pre-fundraising": "Pre-Fundraising",
+  "strategic-partnership": "Strategic Partnership",
+  "capital-network": "Strategic Partnership",
+  "post-fundraise": "Post-Fundraise",
+  "funding": "Post-Fundraise",
+  "mock-room": "Mock Room",
+  "insider": "ZTH Insider",
+};
 
 export default function Header({ onBookNow }: { onBookNow: () => void }) {
   const [scrolled, setScrolled] = useState(false);
@@ -120,7 +125,15 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
   const lastScrollY = useRef(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [pendingService, setPendingService] = useState<string | undefined>(undefined);
 
+  const openServiceModal = (service: string) => {
+    setPendingService(service);
+    setModalOpen(true);
+  };
+
+  // Scroll hide/show + scrolled state
   useEffect(() => {
     const handler = () => {
       const y = window.scrollY;
@@ -132,6 +145,38 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
     };
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  // Auto-highlight nav based on visible section
+  useEffect(() => {
+    const ids = Object.keys(sectionMap);
+    const observers: IntersectionObserver[] = [];
+
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveLink(sectionMap[id]);
+          }
+        },
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    // Reset to Home when scrolled back to top
+    const topHandler = () => {
+      if (window.scrollY < 80) setActiveLink("Home");
+    };
+    window.addEventListener("scroll", topHandler, { passive: true });
+
+    return () => {
+      observers.forEach((o) => o.disconnect());
+      window.removeEventListener("scroll", topHandler);
+    };
   }, []);
 
   const handleNavClick = (href: string, label: string) => {
@@ -223,9 +268,9 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                     background: activeLink === link.label ? "rgba(255,255,255,0.11)" : "transparent",
                     border: "none", cursor: "pointer",
                     color: activeLink === link.label ? "#ffffff" : "rgba(255,255,255,0.62)",
-                    fontSize: "0.8rem",
+                    fontSize: "0.875rem",
                     fontWeight: activeLink === link.label ? 600 : 450,
-                    padding: "0.42rem 0.85rem",
+                    padding: "0.42rem 0.9rem",
                     borderRadius: "100px",
                     transition: "all 0.18s ease",
                     fontFamily: "'Inter', sans-serif",
@@ -236,7 +281,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                   }}
                 >
                   {link.label}
-                  {(link.dropdown || (link as { info?: object }).info) && (
+                  {link.dropdown && (
                     <ChevronDown
                       size={11}
                       className="dropdown-icon"
@@ -244,76 +289,6 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                     />
                   )}
                 </button>
-
-                {/* ── Info Panel (ZTH Insider) ──────────────────── */}
-                {(link as { info?: { description: string; cta: string } }).info && (
-                  <div className="mega-menu info-panel" style={{
-                    position: "absolute",
-                    top: "calc(100% + 16px)",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: 320,
-                    background: "rgba(6, 6, 16, 0.98)",
-                    backdropFilter: "blur(32px)",
-                    WebkitBackdropFilter: "blur(32px)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    borderRadius: "20px",
-                    padding: "1.5rem 1.75rem",
-                    display: "none",
-                    flexDirection: "column",
-                    gap: "1rem",
-                    boxShadow: "0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.03)",
-                    cursor: "default",
-                    textAlign: "left",
-                    zIndex: 300,
-                  }}>
-                    {/* Label */}
-                    <p style={{
-                      color: "rgba(144,202,249,0.85)",
-                      fontSize: "0.665rem",
-                      fontWeight: 700,
-                      letterSpacing: "0.16em",
-                      textTransform: "uppercase",
-                      margin: 0,
-                      fontFamily: "'Inter', sans-serif",
-                    }}>
-                      ZTH Insider
-                    </p>
-                    {/* Description */}
-                    <p style={{
-                      color: "rgba(255,255,255,0.75)",
-                      fontSize: "0.925rem",
-                      fontWeight: 400,
-                      lineHeight: 1.65,
-                      margin: 0,
-                      fontFamily: "'Inter', sans-serif",
-                      letterSpacing: "-0.01em",
-                    }}>
-                      {(link as { info?: { description: string; cta: string } }).info!.description}
-                    </p>
-                    {/* CTA */}
-                    <a
-                      href={(link as { href: string }).href}
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.4rem",
-                        color: "#90CAF9",
-                        fontSize: "0.8rem",
-                        fontWeight: 600,
-                        textDecoration: "none",
-                        fontFamily: "'Inter', sans-serif",
-                        letterSpacing: "-0.01em",
-                        transition: "gap 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.gap = "0.65rem"; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.gap = "0.4rem"; }}
-                    >
-                      {(link as { info?: { description: string; cta: string } }).info!.cta}
-                      <ArrowRight size={12} />
-                    </a>
-                  </div>
-                )}
 
                 {/* ── Mega Menu ─────────────────────────────────── */}
                 {link.dropdown && (
@@ -341,16 +316,16 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                       <div key={idx} style={{ minWidth: 200 }}>
                         <p style={{
                           color: "rgba(144,202,249,0.85)",
-                          fontSize: "0.665rem",
+                          fontSize: "0.78rem",
                           fontWeight: 700,
                           letterSpacing: "0.16em",
                           textTransform: "uppercase",
-                          margin: "0 0 1rem",
+                          margin: "0 0 1.1rem",
                           fontFamily: "'Inter', sans-serif",
                         }}>
                           {section.title}
                         </p>
-                        <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+                        <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.55rem" }}>
                           {section.items.map((item, i) => (
                             <li key={i} style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
                               <span className="menu-dot" style={{
@@ -358,22 +333,26 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                                 background: "rgba(25,118,210,0.45)",
                                 flexShrink: 0, transition: "background 0.2s ease",
                               }} />
-                              <a
-                                href={link.href}
+                              <button
+                                onClick={() => openServiceModal(item)}
                                 className="menu-item-link"
                                 style={{
-                                  color: "rgba(255,255,255,0.6)",
-                                  textDecoration: "none",
-                                  fontSize: "0.8125rem",
+                                  color: "rgba(255,255,255,0.7)",
+                                  background: "none",
+                                  border: "none",
+                                  cursor: "pointer",
+                                  fontSize: "0.9rem",
                                   fontWeight: 450,
                                   transition: "all 0.18s ease",
                                   display: "inline-block",
                                   fontFamily: "'Inter', sans-serif",
                                   letterSpacing: "-0.01em",
+                                  padding: 0,
+                                  textAlign: "left",
                                 }}
                               >
                                 {item}
-                              </a>
+                              </button>
                             </li>
                           ))}
                         </ul>
@@ -388,11 +367,11 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
               href="/login"
               style={{
                 color: "rgba(255,255,255,0.62)",
-                fontSize: "0.8rem",
+                fontSize: "0.875rem",
                 fontWeight: 450,
                 textDecoration: "none",
                 transition: "all 0.18s ease",
-                padding: "0.42rem 0.85rem",
+                padding: "0.42rem 0.9rem",
                 letterSpacing: "-0.01em",
                 borderRadius: "100px",
                 whiteSpace: "nowrap",
@@ -564,11 +543,6 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           display: flex !important;
           animation: megaFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        /* Info panel is flex-column */
-        .nav-item-container:hover .info-panel {
-          flex-direction: column !important;
-        }
-
         /* Hover bridge so menu stays open while moving mouse */
         .nav-item-container::after {
           content: '';
@@ -638,6 +612,18 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         }
         .book-now-btn:active { transform: translateY(0); }
       `}</style>
+
+      {/* ── Service selection modal ──────────────────────────────── */}
+      <ServiceModal
+        isOpen={modalOpen}
+        initialService={pendingService}
+        onClose={() => setModalOpen(false)}
+        onBook={(services) => {
+          // Navigate to booking page with selected services in query
+          const query = encodeURIComponent(services.join(","));
+          window.location.href = `/book?services=${query}`;
+        }}
+      />
     </>
   );
 }
