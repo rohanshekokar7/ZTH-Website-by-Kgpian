@@ -49,7 +49,8 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
               lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "1.5rem"
             }}
           >
-            Practice The Pitch Before<br />You Enter The Real Room.
+            Practice The Pitch Before<br />
+            <span style={{ color: "#1976D2" }}>You Enter The Real Room.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -58,7 +59,7 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
               fontSize: "1.1rem", color: "#4A4A4A", maxWidth: 800, margin: "0 auto", lineHeight: 1.6
             }}
           >
-            Zth’s Investor Mock Room is designed to simulate real fundraising conversations before founders step into actual investor meetings. From pitch delivery and strategic storytelling to difficult investor questioning and live feedback sessions, founders gain the clarity, confidence, and preparation needed to raise capital more effectively.
+            ZTH’s Investor Mock Room is designed to simulate real fundraising conversations before founders step into actual investor meetings. From pitch delivery and strategic storytelling to difficult investor questioning and live feedback sessions, founders gain the clarity, confidence, and preparation needed to raise capital more effectively.
           </motion.p>
         </div>
 

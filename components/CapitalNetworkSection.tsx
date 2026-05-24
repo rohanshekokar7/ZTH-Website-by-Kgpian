@@ -131,28 +131,27 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             CAPITAL NETWORK & FUNDRAISING SUPPORT
           </ScrollReveal>
 
-          <ScrollReveal
-            baseOpacity={0}
-            enableBlur={true}
-            baseRotation={5}
-            blurStrength={10}
+          <motion.h2
+            initial={{ opacity: 0, y: 30, filter: 'blur(14px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              display: 'block',
-              margin: '0 auto 1.5rem',
-              maxWidth: '850px',
-            }}
-            textStyle={{
               fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: 'clamp(2.75rem, 5vw, 4.25rem)',
+              fontSize: 'clamp(2.35rem, 3.8vw, 3.75rem)',
               fontWeight: 700,
               color: TEXT_MAIN,
               letterSpacing: '-0.02em',
-              lineHeight: 1.1,
-              margin: 0,
+              lineHeight: 1.2,
+              margin: '0 auto 1.5rem',
+              maxWidth: '900px',
+              display: 'block',
+              textAlign: 'center',
             }}
           >
-            Strategic Capital Support Beyond Investor Introductions.
-          </ScrollReveal>
+            Strategic Capital Support Beyond<br />
+            <span style={{ color: BLUE }}>Investor Introductions.</span>
+          </motion.h2>
 
           <ScrollReveal
             baseOpacity={0}

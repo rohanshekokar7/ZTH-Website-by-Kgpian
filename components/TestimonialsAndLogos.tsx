@@ -461,7 +461,7 @@ export default function TestimonialsAndLogos() {
                 transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 style={{ display: "inline-block", color: "#1976D2" }}
               >
-                Insider
+                Insider<span style={{ color: "#1976D2" }}>.</span>
               </motion.span>
             </div>
           </motion.div>
@@ -470,8 +470,8 @@ export default function TestimonialsAndLogos() {
             style={{
               opacity: pOpacity,
               marginTop: "2.5rem",
-              fontFamily: "'Times New Roman', Times, serif",
-              fontSize: "clamp(1.01rem, 1.21vw, 1.11rem)",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "clamp(1.1rem, 1.45vw, 1.3rem)",
               lineHeight: 1.7,
               color: "#4B5563",
               maxWidth: "600px",
