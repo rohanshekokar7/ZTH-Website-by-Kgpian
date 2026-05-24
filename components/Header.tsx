@@ -6,8 +6,8 @@ import Link from "next/link";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { 
-    label: "Pre-Fundraising", 
+  {
+    label: "Pre-Fundraising",
     href: "/book?service=pre-fundraising",
     dropdown: [
       {
@@ -44,8 +44,8 @@ const navLinks = [
       }
     ]
   },
-  { 
-    label: "Capital Network", 
+  {
+    label: "Strategic Partnership",
     href: "/book?service=capital-network",
     dropdown: [
       {
@@ -73,8 +73,8 @@ const navLinks = [
       }
     ]
   },
-  { 
-    label: "Post-Fundraise Partnership", 
+  {
+    label: "Post-Fundraise Partnership",
     href: "/book?service=post-fundraise",
     dropdown: [
       {
@@ -259,28 +259,28 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
               }}>
                 {link.dropdown.map((section, idx) => (
                   <div key={idx} style={{ display: "flex", flexDirection: "column", gap: "1.25rem", minWidth: "260px" }}>
-                    <h3 style={{ 
-                      color: "#90CAF9", fontSize: "0.85rem", fontWeight: 700, 
-                      letterSpacing: "0.5px", textTransform: "uppercase", margin: 0 
+                    <h3 style={{
+                      color: "#90CAF9", fontSize: "0.85rem", fontWeight: 700,
+                      letterSpacing: "0.5px", textTransform: "uppercase", margin: 0
                     }}>
                       {section.title}
                     </h3>
                     <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                       {section.items.map((item, i) => (
                         <li key={i}>
-                          <a href={link.href} style={{ 
+                          <a href={link.href} style={{
                             color: "rgba(255,255,255,0.75)", textDecoration: "none", fontSize: "0.85rem",
                             transition: "all 0.2s ease", cursor: "pointer", display: "inline-block",
                             fontWeight: 500
                           }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.color = "#ffffff";
-                            e.currentTarget.style.transform = "translateX(4px)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.color = "rgba(255,255,255,0.75)";
-                            e.currentTarget.style.transform = "translateX(0)";
-                          }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color = "#ffffff";
+                              e.currentTarget.style.transform = "translateX(4px)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color = "rgba(255,255,255,0.75)";
+                              e.currentTarget.style.transform = "translateX(0)";
+                            }}
                           >
                             {item}
                           </a>

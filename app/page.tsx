@@ -6,14 +6,14 @@ import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import ValuePropositionSection from "@/components/ValuePropositionSection";
+import CurvedMarquee from "@/components/CurvedMarquee";
 import PitchDeckSection from "@/components/PitchDeckSection";
 import MockRoomSection from "@/components/MockRoomSection";
-import TractionSection from "@/components/TractionSection";
 import TestimonialsAndLogos from "@/components/TestimonialsAndLogos";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import PitchDeckServices from "@/components/PitchDeckServices";
+import CapitalSection from "@/components/CapitalSection";
 
 export default function HomePage() {
   const [loaded, setLoaded] = useState(false);
@@ -56,11 +56,11 @@ export default function HomePage() {
           <HeroSection onCTAClick={goToBook} />
 
           {/* Wrapper for remaining sections so they slide over the sticky Hero */}
-          <div style={{ position: "relative", zIndex: 10, background: "#ffffff", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>
-            <ValuePropositionSection onCTAClick={goToBook} />
+          <div style={{ position: "relative", zIndex: 10, background: "#FFFFFF", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>
+            <CurvedMarquee />
             <PitchDeckServices />
-            <MockRoomSection onCTAClick={goToBook} />
-            <TractionSection />
+            <CapitalSection />
+            <MockRoomSection />
             <TestimonialsAndLogos />
             <CTASection onCTAClick={goToBook} />
           </div>
