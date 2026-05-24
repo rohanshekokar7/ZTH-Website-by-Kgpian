@@ -5,46 +5,31 @@ import { useRef, useState } from "react";
 
 // ─── Data ──────────────────────────────────────────────────────────────────
 
-const testimonials = [
+const informationCards = [
   {
     id: 1,
-    quote: "Tom's passion and unique ability to translate our social mission into compelling visuals made our brand instantly connect with people. He turned our product into a powerful movement.",
-    name: "Jabo Butera",
-    title: "Chief Executive",
-    company: "Jabulani Coffee",
-    photo: "https://randomuser.me/api/portraits/men/32.jpg"
+    title: "Investor Psychology",
+    content: "Understand how investors evaluate startups beyond just numbers and revenue. Learn what creates confidence during a pitch, how strong founders communicate vision, and why storytelling often influences decisions more than data alone. Discover the subtle signals investors notice while reviewing pitch decks, founder behavior, traction metrics, and market positioning before making funding decisions."
   },
   {
     id: 2,
-    quote: "Tom works at an exceptional level in demanding, fast-paced environments, capturing striking imagery that balances artistic vision and technical precision.",
-    name: "Oli White",
-    title: "Operations Manager",
-    company: "Vision Factory",
-    photo: "https://randomuser.me/api/portraits/men/45.jpg"
+    title: "Pitch Deck Breakdowns",
+    content: "Explore detailed analyses of high-performing pitch decks and understand why they successfully attract investor attention. From opening hooks and problem statements to business models and financial projections, ZTH Insider breaks down the exact structure, design language, and storytelling frameworks used by startups that successfully raise capital."
   },
   {
     id: 3,
-    quote: "Working with Tom is pure joy. His creativity, clarity, and passion inspire everyone, making ideas flourish and every collaboration seamless.",
-    name: "Christina Wilkins",
-    title: "Founder",
-    company: "Brand Biscuit Studio",
-    photo: "https://randomuser.me/api/portraits/women/44.jpg"
+    title: "Fundraising Strategy",
+    content: "Learn how founders strategically prepare for fundraising rounds with better clarity and execution. Understand how much capital to raise, how to approach investor outreach, how to create urgency and momentum, and how to structure fundraising conversations professionally. Gain insights into common mistakes that weaken investor confidence during early-stage fundraising."
   },
   {
     id: 4,
-    quote: "Tom immediately understands the vision from the brief and delivers exactly what we need, every time.",
-    name: "Adele Hemming",
-    title: "Marketing Manager",
-    company: "Baker Estates",
-    photo: "https://randomuser.me/api/portraits/women/68.jpg"
+    title: "Venture Growth Insights",
+    content: "Access practical insights on startup growth, scalability, market expansion, and operational readiness. Learn how investors evaluate growth potential, product-market fit, customer acquisition strategies, and business sustainability before funding startups. Designed to help founders build companies that are both investable and scalable."
   },
   {
     id: 5,
-    quote: "Tom is a fantastic, highly creative videographer and always a true pleasure to work with. His positive approach and warm energy make every project seamless.",
-    name: "Darren Foley",
-    title: "Co-founder",
-    company: "Plymouth Design Forum",
-    photo: "https://randomuser.me/api/portraits/men/22.jpg"
+    title: "Founder Insider Resources",
+    content: "Get access to premium founder-focused resources including investor outreach frameworks, fundraising checklists, pitch preparation systems, valuation guidance, financial modeling references, and strategic execution tools. Everything inside ZTH Insider is designed to help founders prepare professionally for high-stakes fundraising opportunities."
   }
 ];
 
@@ -83,7 +68,7 @@ function CompanyLogo({ name }: { name: string }) {
     case "Sequoia":
       return (
         <svg height="30" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 5 L25 35 L5 35 Z" fill="#111111" />
+          <path d="M15 5 L25 35 L5 35 Z" fill="#111111" opacity="0.8" />
           <path d="M15 15 L30 35 L0 35 Z" fill="#333333" />
           <text x="38" y="28" fontFamily="Georgia, serif" fontSize="20" fontWeight="400" fill="#000000" letterSpacing="2px">SEQUOIA</text>
         </svg>
@@ -124,7 +109,7 @@ function TestimonialCard({
   index,
   isEven,
 }: {
-  item: (typeof testimonials)[0];
+  item: (typeof informationCards)[0];
   index: number;
   isEven: boolean;
 }) {
@@ -202,7 +187,7 @@ function TestimonialCard({
             padding: "2.5rem",
             borderRadius: "1rem",
             border: "1px solid #e5e7eb",
-            borderTop: "6px solid #1A1A1A", // Black to match services section
+            borderTop: "6px solid #1976D2", // Blue top border
             boxShadow: isHovered
               ? "0 30px 60px rgba(0, 0, 0, 0.12)"
               : "0 20px 40px rgba(0, 0, 0, 0.06)",
@@ -215,90 +200,43 @@ function TestimonialCard({
             cursor: "default",
           }}
         >
-          {/* Animated quote mark floating above the card */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-1rem",
-              left: "-0.5rem",
-              fontSize: "6rem",
-              lineHeight: 1,
-              color: "rgba(26, 26, 26, 0.06)", // Grey/black quote mark
-              fontFamily: "Georgia, serif",
-              fontWeight: 900,
-              zIndex: 0,
-              userSelect: "none",
-              transform: "translateZ(30px)",
-            }}
-          >
-            “
-          </div>
-
           <div style={{
             transform: "translateZ(60px)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "2rem",
+            gap: "1.5rem",
             position: "relative",
             zIndex: 1
           }}>
+
+            <h3 style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "clamp(1.4rem, 2.5vw, 1.7rem)",
+                fontWeight: 800,
+                color: "#1A1A1A",
+                textAlign: "center",
+                lineHeight: 1.2,
+                letterSpacing: "-0.03em",
+                margin: 0
+            }}>
+              {item.title}
+            </h3>
             <p
               style={{
-                fontFamily: "Georgia, serif",
-                fontStyle: "italic",
-                fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "clamp(0.95rem, 1.5vw, 1.05rem)",
                 lineHeight: 1.6,
-                color: "#333333", // Dark text on light background
+                color: "#4B5563",
                 fontWeight: 400,
                 textAlign: "center",
+                margin: 0
               }}
             >
-              {item.quote}
+              {item.content}
             </p>
-
-            <div
-              style={{
-                width: "70px",
-                height: "70px",
-                borderRadius: "50%",
-                overflow: "hidden",
-                border: "none",
-                boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <img src={item.photo} alt={item.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            </div>
           </div>
         </motion.div>
-      </div>
-
-      {/* Author Name and Title */}
-      <div style={{ paddingLeft: "0.5rem" }}>
-        <div
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 800,
-            fontSize: "1.4rem",
-            color: "#1A1A1A",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          {item.name}
-        </div>
-        <div
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.8rem",
-            fontWeight: 600,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            color: "#666666",
-            marginTop: "0.4rem",
-          }}
-        >
-          {item.title} - {item.company}
-        </div>
       </div>
     </motion.div>
   );
@@ -366,7 +304,7 @@ export default function TestimonialsAndLogos() {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.03]);
   const pOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
-  const paragraphText = "Every great startup begins with a powerful story. These experiences from our clients reflect the impact of presenting ideas with clarity and confidence.";
+  const paragraphText = "Exclusive insights, fundraising strategies, investor psychology, and pitch deck breakdowns curated for ambitious founders.";
 
   return (
     <>
@@ -380,6 +318,58 @@ export default function TestimonialsAndLogos() {
           to   { transform: translateX(0); }
         }
       `}</style>
+
+      {/* Logo marquee strip */}
+      <div
+        style={{
+          borderTop: "1px solid #e5e7eb",
+          background: "#ffffff",
+          paddingTop: "clamp(3rem, 5vw, 4.5rem)",
+          paddingBottom: "clamp(3rem, 5vw, 4.5rem)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            width: "120px",
+            background: "linear-gradient(90deg, #ffffff 0%, transparent 100%)",
+            zIndex: 2,
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: "120px",
+            background: "linear-gradient(270deg, #ffffff 0%, transparent 100%)",
+            zIndex: 2,
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+          <span
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.7rem",
+              fontWeight: 600,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "#1976D2",
+            }}
+          >
+            Trusted & Featured By
+          </span>
+        </div>
+        <LogoMarquee direction={1} />
+      </div>
 
       <section
         ref={sectionRef}
@@ -460,7 +450,7 @@ export default function TestimonialsAndLogos() {
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 style={{ display: "inline-block", color: "#1A1A1A" }}
               >
-                What
+                ZTH
               </motion.span>
             </div>
             <div style={{ overflow: "hidden", paddingBottom: "0.15em", marginBottom: "-0.15em" }}>
@@ -471,18 +461,7 @@ export default function TestimonialsAndLogos() {
                 transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 style={{ display: "inline-block", color: "#1976D2" }}
               >
-                Founders
-              </motion.span>
-            </div>
-            <div style={{ overflow: "hidden", paddingBottom: "0.15em", marginBottom: "-0.15em" }}>
-              <motion.span
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                style={{ display: "inline-block", color: "#1A1A1A" }}
-              >
-                Say.
+                Insider
               </motion.span>
             </div>
           </motion.div>
@@ -491,10 +470,10 @@ export default function TestimonialsAndLogos() {
             style={{
               opacity: pOpacity,
               marginTop: "2.5rem",
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "clamp(1rem, 1.5vw, 1.25rem)",
-              lineHeight: 1.6,
-              color: "#52525B",
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontSize: "clamp(1.01rem, 1.21vw, 1.11rem)",
+              lineHeight: 1.7,
+              color: "#4B5563",
               maxWidth: "600px",
               textAlign: "center",
               padding: "0 1.5rem",
@@ -527,7 +506,7 @@ export default function TestimonialsAndLogos() {
           maxWidth: "1200px",
           margin: "0 auto",
         }}>
-          {testimonials.map((item, index) => (
+          {informationCards.map((item, index) => (
             <TestimonialCard
               key={item.id}
               item={item}
@@ -537,58 +516,6 @@ export default function TestimonialsAndLogos() {
           ))}
         </div>
       </section>
-
-      {/* Logo marquee strip */}
-      <div
-        style={{
-          borderTop: "1px solid #e5e7eb",
-          background: "#ffffff",
-          paddingTop: "clamp(3rem, 5vw, 4.5rem)",
-          paddingBottom: "clamp(3rem, 5vw, 4.5rem)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            width: "120px",
-            background: "linear-gradient(90deg, #ffffff 0%, transparent 100%)",
-            zIndex: 2,
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            bottom: 0,
-            width: "120px",
-            background: "linear-gradient(270deg, #ffffff 0%, transparent 100%)",
-            zIndex: 2,
-            pointerEvents: "none",
-          }}
-        />
-        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <span
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.7rem",
-              fontWeight: 600,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "#9ca3af",
-            }}
-          >
-            Trusted & Featured By
-          </span>
-        </div>
-        <LogoMarquee direction={1} />
-      </div>
     </>
   );
 }

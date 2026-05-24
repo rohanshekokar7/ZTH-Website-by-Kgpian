@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const testimonials = [
-  { quote: "The advisory services significantly refined our corporate positioning and capital strategy, culminating in multiple institutional offers.", name: "Arjun Mehta", role: "CEO, Flowstack", raised: "Secured $2.1M Seed" },
-  { quote: "Their rigorous simulation framework fortified our strategic delivery, ensuring comprehensive preparedness for institutional due diligence.", name: "Sarah Kim", role: "Founder, Verdant AI", raised: "Secured $8.5M Series A" },
-  { quote: "Zth distilled complex operational data into an exceptionally compelling narrative, which was highly commended by our strategic partners.", name: "David Osei", role: "Co-Founder, Paymint", raised: "Secured $500K Pre-Seed" },
+  { quote: "ZTH's approach to our pitch deck completely transformed how we tell our story. Their deep understanding of investor psychology helped us craft a narrative that secured multiple term sheets within weeks.", name: "Arjun Mehta", role: "CEO, Flowstack", raised: "Secured $2.1M Seed" },
+  { quote: "The team didn't just design a presentation; they stress-tested every metric and assumption in our financial model, ensuring our deck was bulletproof before we even stepped into the partner meeting.", name: "Sarah Kim", role: "Founder, Verdant AI", raised: "Secured $8.5M Series A" },
+  { quote: "Creating an institutional-grade pitch deck with ZTH was the highest ROI investment we made prior to our roadshow. Their strategic clarity directly translated into a $500K pre-seed round.", name: "David Osei", role: "Co-Founder, Paymint", raised: "Secured $500K Pre-Seed" },
 ];
 
 export default function TestimonialSection() {
@@ -19,12 +19,20 @@ export default function TestimonialSection() {
       }} />
 
       <div className="container-xl">
-        <motion.p style={{ textAlign: "center", marginBottom: "2.5rem" }}
-          className="label-small"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-        >
-          What Founders Say
-        </motion.p>
+        <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+          <motion.h2 
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(2.5rem, 4vw, 3.5rem)", fontWeight: 900, color: "#1A1A1A", letterSpacing: "-0.03em", margin: 0 }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          >
+            ZTH Insider
+          </motion.h2>
+          <motion.p
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: "1.1rem", color: "#555", maxWidth: "750px", margin: "1rem auto 0", lineHeight: 1.6 }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+          >
+            Every great startup begins with a powerful story. These experiences from our clients reflect the impact of presenting ideas with clarity and confidence.
+          </motion.p>
+        </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }}>
           {testimonials.map((t, i) => (

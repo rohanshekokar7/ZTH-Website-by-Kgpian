@@ -140,9 +140,9 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
           style={{
-            fontSize: "clamp(1rem, 2.2vw, 1.25rem)", maxWidth: 650,
-            margin: "0 auto 3rem", lineHeight: 1.6, fontWeight: 400,
-            color: "rgba(255,255,255,0.85)", fontFamily: "'Inter', sans-serif",
+            fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)", maxWidth: 650,
+            margin: "0 auto 3rem", lineHeight: 1.7, fontWeight: 400,
+            color: "rgba(255,255,255,0.85)", fontFamily: "'Space Grotesk', sans-serif",
             textShadow: "0 1px 8px rgba(0,0,0,0.3)",
           }}
         >

@@ -8,9 +8,9 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import CurvedMarquee from "@/components/CurvedMarquee";
 import PitchDeckSection from "@/components/PitchDeckSection";
-import MockRoomSection from "@/components/MockRoomSection";
+
 import TestimonialsAndLogos from "@/components/TestimonialsAndLogos";
-import CTASection from "@/components/CTASection";
+
 import Footer from "@/components/Footer";
 import PitchDeckServices from "@/components/PitchDeckServices";
 import CapitalSection from "@/components/CapitalSection";
@@ -60,9 +60,9 @@ export default function HomePage() {
             <CurvedMarquee />
             <PitchDeckServices />
             <CapitalSection />
-            <MockRoomSection />
+
             <TestimonialsAndLogos />
-            <CTASection onCTAClick={goToBook} />
+
           </div>
         </main>
 
