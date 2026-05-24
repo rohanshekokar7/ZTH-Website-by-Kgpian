@@ -15,6 +15,7 @@ import Footer from "@/components/Footer";
 import PitchDeckServices from "@/components/PitchDeckServices";
 import CapitalSection from "@/components/CapitalSection";
 import CapitalNetworkSection from "@/components/CapitalNetworkSection";
+import MockRoomSection from "@/components/MockRoomSection";
 
 export default function HomePage() {
   const [loaded, setLoaded] = useState(false);
@@ -59,9 +60,18 @@ export default function HomePage() {
           {/* Wrapper for remaining sections so they slide over the sticky Hero */}
           <div style={{ position: "relative", zIndex: 10, background: "#FFFFFF", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>
             <CurvedMarquee />
-            <PitchDeckServices />
-            <CapitalNetworkSection />
-            <CapitalSection />
+            <div id="pre-fundraising">
+              <PitchDeckServices />
+            </div>
+            <div id="strategic-partnership">
+              <CapitalNetworkSection />
+            </div>
+            <div id="post-fundraise">
+              <CapitalSection />
+            </div>
+            <div id="mock-room">
+              <MockRoomSection />
+            </div>
 
             <TestimonialsAndLogos />
 

@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   {
     label: "Pre-Fundraising",
-    href: "/book?service=pre-fundraising",
+    href: "/#pre-fundraising",
     dropdown: [
       {
         title: "Fundraising Support Services",
@@ -46,7 +46,7 @@ const navLinks = [
   },
   {
     label: "Strategic Partnership",
-    href: "/book?service=capital-network",
+    href: "/#strategic-partnership",
     dropdown: [
       {
         title: "Active Fundraising Assistance",
@@ -75,7 +75,7 @@ const navLinks = [
   },
   {
     label: "Post-Fundraise Partnership",
-    href: "/book?service=post-fundraise",
+    href: "/#post-fundraise",
     dropdown: [
       {
         title: "Strategic Partnership",

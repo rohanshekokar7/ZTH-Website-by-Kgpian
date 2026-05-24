@@ -2,125 +2,206 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Video, Users, Mic, ArrowRight, Play } from "lucide-react";
+import { Play, Users, MessageSquare, Target, UserCheck, BarChart } from "lucide-react";
+import Link from "next/link";
 
-const steps = [
-  { icon: Mic, title: "Practice Your Pitch", desc: "Walk through your deck with real pressure, hard questions, and investor-style scrutiny." },
-  { icon: Users, title: "Live Investor Simulation", desc: "Face a panel who thinks like a VC — tough but fair, focused on your weaknesses." },
-  { icon: Video, title: "Full Record & Review", desc: "Get recorded, scored, and debriefed with actionable feedback to sharpen your delivery." },
+const features = [
+  { icon: Users, title: "Live Investor Simulations", desc: "Experience realistic fundraising conversations designed to mirror actual VC and investor meetings." },
+  { icon: MessageSquare, title: "Strategic Pitch Feedback", desc: "Receive detailed feedback on storytelling, structure, communication clarity, and investor appeal." },
+  { icon: Target, title: "High-Pressure Q&A Practice", desc: "Prepare for difficult investor questions around traction, scalability, valuation, competition, and financials." },
+  { icon: UserCheck, title: "Founder Communication Training", desc: "Improve confidence, delivery, pacing, presentation flow, and executive presence during pitches." },
+  { icon: BarChart, title: "Fundraising Readiness Analysis", desc: "Understand how investor-ready your startup is before entering real fundraising conversations." },
 ];
 
-export default function MockRoomSection({ onCTAClick }: { onCTAClick: () => void }) {
+const stats = [
+  { value: "95%", label: "Founders feel more prepared after mock investor sessions." },
+  { value: "3x", label: "Better pitch clarity through structured feedback loops." },
+  { value: "Real-Time", label: "Investor questioning and strategic response analysis." },
+];
+
+export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
 
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.88, 1, 1, 0.95]);
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.95]);
   const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0.4]);
-  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-4, 0, 3]);
 
   return (
-    <section id="mock-room" ref={containerRef} className="section-pad" style={{ background: "#FFFFFF", position: "relative", overflow: "hidden" }}>
-      <div style={{
-        position: "absolute", top: 0, left: 0, right: 0, height: 1,
-        background: "linear-gradient(90deg, transparent, rgba(25,118,210,0.12), transparent)",
-      }} />
+    <section id="mock-room" ref={containerRef} style={{ background: "#FAFAFA", padding: "8rem 0", position: "relative", overflow: "hidden" }}>
+      <div className="container-xl" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem" }}>
 
-      <div className="container-xl">
+        {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <motion.p className="label-small"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            style={{ marginBottom: "1rem" }}
+            style={{ marginBottom: "1rem", color: "#1976D2", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", fontSize: "0.85rem" }}
           >
-            Investor Mock Room
+            INVESTOR MOCK ROOM
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 800,
-              fontSize: "clamp(1.75rem, 3.5vw, 2.8rem)", color: "#1A1A1A",
-              lineHeight: 1.15, letterSpacing: "-0.03em",
+              fontWeight: 800,
+              fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "#1A1A1A",
+              lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "1.5rem"
             }}
           >
-            Pitch Before You{" "}
-            <span style={{
-              color: "#1976D2",
-            }}>Pitch for Real</span>
+            Practice The Pitch Before<br />You Enter The Real Room.
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{
+              fontSize: "1.1rem", color: "#4A4A4A", maxWidth: 800, margin: "0 auto", lineHeight: 1.6
+            }}
+          >
+            Zth’s Investor Mock Room is designed to simulate real fundraising conversations before founders step into actual investor meetings. From pitch delivery and strategic storytelling to difficult investor questioning and live feedback sessions, founders gain the clarity, confidence, and preparation needed to raise capital more effectively.
+          </motion.p>
         </div>
 
-        {/* Video Card */}
-        <div style={{ perspective: 1400, perspectiveOrigin: "50% 40%", marginBottom: "4rem" }}>
-          <motion.div style={{ scale, opacity, rotateY, transformStyle: "preserve-3d" }}>
-            <div style={{
-              background: "linear-gradient(145deg, rgba(25,118,210,0.06), rgba(25,118,210,0.01))",
-              border: "1px solid rgba(25,118,210,0.1)",
-              borderRadius: "1.5rem", padding: "3px",
-              boxShadow: "0 30px 80px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
-              maxWidth: 860, margin: "0 auto",
-            }}>
-              <div style={{
-                background: "#1A1A1A", borderRadius: "1.35rem",
-                aspectRatio: "16/9", display: "flex", alignItems: "center",
-                justifyContent: "center", position: "relative", overflow: "hidden",
-              }}>
+        {/* Content Layout */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "4rem", alignItems: "start", marginBottom: "6rem" }}>
+
+          {/* Left Side: Features */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}
+              >
                 <div style={{
-                  position: "absolute", inset: 0,
-                  background: "radial-gradient(ellipse 70% 70% at 50% 50%, rgba(25,118,210,0.08) 0%, transparent 70%)",
-                }} />
-
-                {[1, 2, 3].map(i => (
-                  <div key={i} style={{
-                    position: "absolute", left: `${i * 25}%`, top: 0, bottom: 0,
-                    width: 1, background: "rgba(255,255,255,0.04)",
-                  }} />
-                ))}
-
-                <div style={{ display: "flex", gap: "1rem", position: "absolute", top: "1rem", right: "1rem" }}>
-                  {[1, 2].map(i => (
-                    <div key={i} style={{
-                      width: 110, height: 72, borderRadius: "0.6rem",
-                      background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                    }}>
-                      <div style={{ width: 28, height: 28, borderRadius: "50%", background: "rgba(25,118,210,0.3)" }} />
-                    </div>
-                  ))}
+                  width: 48, height: 48, borderRadius: "50%", background: "rgba(25,118,210,0.1)",
+                  display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+                }}>
+                  <feature.icon size={22} color="#1976D2" />
                 </div>
+                <div>
+                  <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#1A1A1A", marginBottom: "0.5rem" }}>
+                    {feature.title}
+                  </h3>
+                  <p style={{ fontSize: "1rem", color: "#5A5A5A", lineHeight: 1.6 }}>
+                    {feature.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
+          {/* Right Side: Video Card */}
+          <motion.div style={{ scale, opacity }}>
+            <div style={{
+              background: "#1A1A1A", borderRadius: "1.5rem", overflow: "hidden",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.1)", position: "relative",
+              aspectRatio: "4/5", display: "flex", flexDirection: "column", justifyContent: "center", padding: "3rem"
+            }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(25,118,210,0.15) 0%, transparent 100%)" }} />
+
+              <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   style={{
-                    width: 72, height: 72, borderRadius: "50%",
+                    width: 80, height: 80, borderRadius: "50%",
                     background: "linear-gradient(135deg, #1976D2, #90CAF9)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    cursor: "pointer", boxShadow: "0 0 40px rgba(25,118,210,0.4)", zIndex: 1,
+                    cursor: "pointer", boxShadow: "0 0 40px rgba(25,118,210,0.4)", margin: "0 auto 2.5rem"
                   }}
                 >
-                  <Play size={26} color="#fff" fill="#fff" />
+                  <Play size={32} color="#fff" fill="#fff" style={{ marginLeft: 4 }} />
                 </motion.div>
 
-                <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0,
-                  padding: "1rem 1.5rem",
-                  background: "linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 100%)",
-                  display: "flex", alignItems: "center", justifyContent: "space-between",
-                }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                    <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#ef4444" }} className="animate-pulse-gold" />
-                    <span style={{ fontFamily: "'Inter'", fontSize: "0.75rem", color: "rgba(255,255,255,0.7)" }}>Live Session</span>
-                  </div>
-                  <span style={{ fontFamily: "'Inter'", fontSize: "0.75rem", color: "#90CAF9" }}>12:34</span>
-                </div>
+                <h3 style={{ fontSize: "2rem", fontWeight: 800, color: "#FFFFFF", marginBottom: "1rem", lineHeight: 1.2 }}>
+                  Real Investor Pressure.<br />Simulated Before The Raise.
+                </h3>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "1.1rem", lineHeight: 1.5 }}>
+                  Mock sessions designed to sharpen founder confidence and fundraising performance.
+                </p>
               </div>
             </div>
           </motion.div>
         </div>
+
+        {/* Stats Section */}
+        <div style={{
+          background: "#FFFFFF", borderRadius: "1.5rem", padding: "4rem",
+          boxShadow: "0 10px 40px rgba(0,0,0,0.03)", marginBottom: "6rem",
+          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "3rem"
+        }}>
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ duration: 0.3, delay: index * 0.1, type: "spring", stiffness: 300 }}
+              style={{ textAlign: "center", padding: "1.5rem", borderRadius: "1rem", cursor: "default" }}
+            >
+              <div style={{ fontSize: "3rem", fontWeight: 900, color: "#1976D2", marginBottom: "0.5rem", transition: "transform 0.3s ease" }}>
+                {stat.value}
+              </div>
+              <p style={{ color: "#4A4A4A", fontSize: "1.05rem", lineHeight: 1.5 }}>
+                {stat.label}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{
+            background: "linear-gradient(135deg, #1A1A1A, #2A2A2A)", borderRadius: "1.5rem",
+            padding: "5rem 3rem", textAlign: "center", color: "#FFFFFF",
+            boxShadow: "0 20px 50px rgba(0,0,0,0.1)"
+          }}
+        >
+          <h2 style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", fontWeight: 800, marginBottom: "1.5rem", lineHeight: 1.1 }}>
+            Prepare Before The Real Investor<br />Meeting Happens.
+          </h2>
+          <p style={{ fontSize: "1.15rem", color: "rgba(255,255,255,0.8)", maxWidth: 700, margin: "0 auto 3rem", lineHeight: 1.6 }}>
+            Practice your pitch, strengthen your narrative, and improve investor confidence before entering high-stakes fundraising conversations.
+          </p>
+
+          <div style={{ display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
+            <Link href="/book" onClick={onCTAClick} style={{
+              background: "#1976D2", color: "#FFFFFF", padding: "1rem 2.5rem", borderRadius: "99px",
+              fontWeight: 700, fontSize: "1.1rem", textDecoration: "none",
+              boxShadow: "0 8px 20px rgba(25,118,210,0.3)", transition: "all 0.2s ease"
+            }}
+              onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
+              onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}>
+              Book Mock Session
+            </Link>
+            <Link href="/book" onClick={onCTAClick} style={{
+              background: "rgba(255,255,255,0.1)", color: "#FFFFFF", padding: "1rem 2.5rem", borderRadius: "99px",
+              fontWeight: 700, fontSize: "1.1rem", textDecoration: "none", border: "1px solid rgba(255,255,255,0.2)",
+              transition: "all 0.2s ease"
+            }}
+              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}
+              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"}>
+              Start Preparing
+            </Link>
+          </div>
+
+          <div style={{
+            display: "inline-block", background: "rgba(255,255,255,0.05)", padding: "1rem 2rem", borderRadius: "99px",
+            border: "1px solid rgba(255,255,255,0.1)"
+          }}>
+            <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.9)", margin: 0, fontWeight: 500 }}>
+              <span style={{ color: "#90CAF9", marginRight: 8 }}>✦</span>
+              The strongest fundraising pitches are refined long before investors hear them.
+            </p>
+          </div>
+        </motion.div>
       </div>
 
       <style jsx>{`
-        @media (max-width: 768px) {
-          div[style*="repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+        @media (max-width: 900px) {
+          div[style*="grid-template-columns: repeat(auto-fit, minmax(450px, 1fr))"] {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </section>
