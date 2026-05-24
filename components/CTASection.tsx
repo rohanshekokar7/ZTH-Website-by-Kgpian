@@ -75,9 +75,9 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontFamily: "'Inter', sans-serif", fontWeight: 800,
-                fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "#FFFFFF",
-                lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "1.5rem",
+                fontWeight: 700,
+                fontSize: "clamp(2.25rem, 4vw, 3.75rem)", color: "#FFFFFF",
+                lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "1.5rem",
               }}
             >
               Ready to Raise{" "}

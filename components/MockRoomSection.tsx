@@ -44,8 +44,8 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontWeight: 800,
-              fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "#1A1A1A",
+              fontWeight: 700,
+              fontSize: "clamp(2.25rem, 4vw, 3.75rem)", color: "#1A1A1A",
               lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "1.5rem"
             }}
           >

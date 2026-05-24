@@ -142,11 +142,12 @@ export default function CapitalNetworkSection({ className }: { className?: strin
               maxWidth: '850px',
             }}
             textStyle={{
-              fontSize: 'clamp(2.5rem, 4.5vw, 3.5rem)',
-              fontWeight: 900,
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: 'clamp(2.75rem, 5vw, 4.25rem)',
+              fontWeight: 700,
               color: TEXT_MAIN,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+              lineHeight: 1.1,
               margin: 0,
             }}
           >
@@ -161,14 +162,13 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             wordAnimationEnd="bottom 80%"
             style={{
               display: 'block',
-              maxWidth: '750px',
+              maxWidth: '680px',
               margin: '0 auto',
             }}
             textStyle={{
-              fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)',
+              fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
               color: TEXT_MUTED,
-              lineHeight: 1.7,
-              fontFamily: "'Times New Roman', Times, serif",
+              lineHeight: 1.75,
               margin: 0,
             }}
           >

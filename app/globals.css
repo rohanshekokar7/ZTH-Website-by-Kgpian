@@ -196,45 +196,125 @@ body {
 /* ============================
    TYPOGRAPHY
 ============================ */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Times New Roman', Times, serif;
+
+/*
+ * Type System
+ * --------------------------------------------------
+ * Display / Headings : Playfair Display (serif)
+ *   — editorial, premium, trustworthy
+ * Body / UI          : Inter (sans-serif)
+ *   — legible, modern, clean
+ *
+ * Scale (mobile → desktop)
+ *   --type-hero      : ~56px → ~88px
+ *   --type-display   : ~44px → ~72px
+ *   --type-section   : ~36px → ~56px
+ *   --type-heading   : ~32px → ~48px
+ *   --type-card-head : ~20px → ~26px
+ *   --type-body-lg   : 17px
+ *   --type-body      : 16px
+ *   --type-body-sm   : 14px
+ *   --type-label     : 11px
+ */
+
+:root {
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Type scale */
+  --type-hero:      clamp(3.5rem,  7vw,   5.5rem);
+  --type-display:   clamp(2.75rem, 5.5vw, 4.5rem);
+  --type-section:   clamp(2.25rem, 4.5vw, 3.5rem);
+  --type-heading:   clamp(2rem,    3.5vw, 3rem);
+  --type-card-head: clamp(1.25rem, 1.8vw, 1.625rem);
+  --type-body-lg:   1.0625rem;   /* 17 px */
+  --type-body:      1rem;        /* 16 px */
+  --type-body-sm:   0.875rem;    /* 14 px */
+  --type-label:     0.6875rem;   /* 11 px */
+
+  /* Weight shortcuts */
+  --w-regular:   400;
+  --w-medium:    500;
+  --w-semibold:  600;
+  --w-bold:      700;
+  --w-extrabold: 800;
+
+  /* Leading (line-height) */
+  --leading-tighter: 1.05;
+  --leading-tight:   1.15;
+  --leading-snug:    1.3;
+  --leading-normal:  1.65;
+  --leading-relaxed: 1.8;
+
+  /* Tracking (letter-spacing) */
+  --tracking-display: -0.03em;
+  --tracking-heading: -0.02em;
+  --tracking-tight:   -0.015em;
+  --tracking-label:   0.16em;
 }
 
+/* ── Heading base ────────────────────────────────────────────── */
+h1 {
+  font-family: var(--font-display);
+  font-weight: var(--w-bold);
+  line-height: var(--leading-tighter);
+  letter-spacing: var(--tracking-display);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: var(--w-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-heading);
+}
+
+h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-bold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: -0.01em;
+}
+
+p {
+  font-family: var(--font-sans);
+  line-height: var(--leading-normal);
+}
+
+/* ── Utility classes ─────────────────────────────────────────── */
 .heading-display {
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 800;
-  line-height: 1.0;
-  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  font-weight: var(--w-extrabold);
+  line-height: var(--leading-tighter);
+  letter-spacing: var(--tracking-display);
 }
 
-.heading-xl {
-  font-size: clamp(2rem, 4vw, 4rem);
-}
+.heading-xl  { font-size: var(--type-display); }
+.heading-lg  { font-size: var(--type-section); }
+.heading-md  { font-size: var(--type-heading); }
 
-.heading-lg {
-  font-size: clamp(1.5rem, 3vw, 2.8rem);
-}
-
-.heading-md {
-  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-}
-
-.text-gold {
-  color: #1976D2;
-}
+.text-gold { color: #1976D2; }
 
 .text-body {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  line-height: 1.7;
+  font-family: var(--font-sans);
+  font-size:   var(--type-body-lg);
+  font-weight: var(--w-regular);
+  line-height: var(--leading-normal);
   color: #555555;
 }
 
+/* Eyebrow / section labels */
 .label-small {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
+  font-family:    var(--font-sans);
+  font-size:      var(--type-label);
+  font-weight:    var(--w-bold);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: #1976D2;
 }

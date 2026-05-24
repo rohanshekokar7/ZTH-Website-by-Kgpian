@@ -54,9 +54,9 @@ export default function InsiderSection({ onCTAClick }: { onCTAClick: () => void 
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontFamily: "'Inter', sans-serif", fontWeight: 800,
-                fontSize: "clamp(1.75rem, 3.5vw, 2.8rem)", color: "#1A1A1A",
-                lineHeight: 1.15, letterSpacing: "-0.03em",
+                fontWeight: 700,
+                fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#1A1A1A",
+                lineHeight: 1.12, letterSpacing: "-0.02em",
               }}
             >
               Knowledge That{" "}

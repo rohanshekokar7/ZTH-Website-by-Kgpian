@@ -303,12 +303,11 @@ export default function PitchDeckServices({ className }: { className?: string })
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             style={{
-            fontFamily: "'Times New Roman', Times, serif",
-            fontSize: "clamp(2.5rem, 4.5vw, 3.5rem)",
-            fontWeight: 900,
+            fontSize: "clamp(2.75rem, 5vw, 4.25rem)",
+            fontWeight: 800,
             color: "#1A1A1A",
-            letterSpacing: "-0.04em",
-            lineHeight: 1.15,
+            letterSpacing: "-0.025em",
+            lineHeight: 1.1,
             margin: "0 auto 1.5rem",
             maxWidth: "850px"
           }}>

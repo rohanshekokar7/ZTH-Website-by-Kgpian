@@ -135,11 +135,11 @@ export default function CapitalSection({ className }: { className?: string }) {
             animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
             transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontSize: 'clamp(2.5rem, 4.5vw, 3.5rem)',
-              fontWeight: 900,
+              fontSize: 'clamp(2.75rem, 5vw, 4.25rem)',
+              fontWeight: 700,
               color: TEXT_MAIN,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+              lineHeight: 1.1,
               margin: '0 auto 1.5rem',
               maxWidth: 850,
             }}
@@ -152,12 +152,11 @@ export default function CapitalSection({ className }: { className?: string }) {
 
           <p
             style={{
-              fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)',
+              fontSize: 'clamp(1rem, 1.4vw, 1.125rem)',
               color: TEXT_MUTED,
-              lineHeight: 1.7,
-              maxWidth: 750,
+              lineHeight: 1.75,
+              maxWidth: 680,
               margin: '0 auto',
-              fontFamily: "'Times New Roman', Times, serif"
             }}
           >
             ZTH continues supporting ventures beyond fundraising through strategic advisory, operational execution, financial guidance, and long-term ecosystem partnerships designed for sustainable growth.
