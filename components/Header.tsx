@@ -104,7 +104,7 @@ const navLinks = [
       },
     ],
   },
-  { label: "Mock Room", href: "/#mock-room" },
+  { label: "Investor Mock Room", href: "/#mock-room" },
   { label: "ZTH Insider", href: "/#zth-insider" },
 ];
 
@@ -115,7 +115,7 @@ const sectionMap: Record<string, string> = {
   "capital-network": "Strategic Partnership",
   "post-fundraise": "Post-Fundraise",
   "funding": "Post-Fundraise",
-  "mock-room": "Mock Room",
+  "mock-room": "Investor Mock Room",
   "insider": "ZTH Insider",
   "zth-insider": "ZTH Insider",
 };
