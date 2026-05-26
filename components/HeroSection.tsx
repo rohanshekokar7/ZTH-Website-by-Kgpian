@@ -7,7 +7,7 @@ interface HeroProps {
   onCTAClick: () => void;
 }
 
-export default function HeroSection({ onCTAClick }: HeroProps) {
+export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
   const scrollDown = () => {
     window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
   };
@@ -40,6 +40,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           top: 0,
           objectFit: "cover",
           zIndex: 0,
+          filter: "blur(2px)",
         }}
       >
         <source src="/background.mp4" type="video/mp4" />
