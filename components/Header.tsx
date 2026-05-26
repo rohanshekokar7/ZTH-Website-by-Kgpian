@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ServiceModal from "./ServiceModal";
@@ -207,7 +207,11 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         transform: `translateY(${isHidden ? "-100%" : "0"})`,
         transition: "transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
         fontFamily: "'Inter', sans-serif",
-      }}>
+        "--nav-text": "#000000",
+        "--nav-muted": "rgba(0,0,0,0.85)",
+        "--nav-hover-bg": "rgba(0,0,0,0.05)",
+        "--nav-active-bg": "rgba(0,0,0,0.05)",
+      } as React.CSSProperties}>
 
         {/* ── Top accent line ─────────────────────────────────── */}
         <div style={{
@@ -217,12 +221,12 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
 
         {/* ── Main bar ────────────────────────────────────────── */}
         <div style={{
-          background: scrolled ? "rgba(5, 5, 12, 0.94)" : "rgba(5, 5, 12, 0.5)",
-          backdropFilter: "blur(28px)",
-          WebkitBackdropFilter: "blur(28px)",
-          borderBottom: `1px solid ${scrolled ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.04)"}`,
+          background: scrolled ? "rgba(248, 250, 252, 0.94)" : "transparent",
+          backdropFilter: scrolled ? "blur(28px)" : "blur(5px)",
+          WebkitBackdropFilter: scrolled ? "blur(28px)" : "blur(5px)",
+          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "none",
           boxShadow: scrolled
-            ? "0 8px 40px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.04)"
+            ? "0 8px 40px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04)"
             : "none",
           transition: "background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease",
           padding: "0 2.5rem",
@@ -268,11 +272,11 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                   onClick={() => handleNavClick(link.href, link.label)}
                   className={`nav-btn ${activeLink === link.label ? "nav-btn-active" : ""}`}
                   style={{
-                    background: activeLink === link.label ? "rgba(255,255,255,0.11)" : "transparent",
+                    background: activeLink === link.label ? "var(--nav-active-bg)" : "transparent",
                     border: "none", cursor: "pointer",
-                    color: activeLink === link.label ? "#ffffff" : "rgba(255,255,255,0.62)",
-                    fontSize: "0.875rem",
-                    fontWeight: activeLink === link.label ? 600 : 450,
+                    color: activeLink === link.label ? "var(--nav-text)" : "var(--nav-muted)",
+                    fontSize: "0.95rem",
+                    fontWeight: activeLink === link.label ? 600 : 500,
                     padding: "0.42rem 0.9rem",
                     borderRadius: "100px",
                     transition: "all 0.18s ease",
@@ -301,24 +305,45 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                     left: "50%",
                     transform: "translateX(-50%)",
                     minWidth: 560,
-                    background: "rgba(6, 6, 16, 0.98)",
+                    background: "rgba(255, 255, 255, 0.98)",
                     backdropFilter: "blur(32px)",
                     WebkitBackdropFilter: "blur(32px)",
-                    border: "1px solid rgba(255,255,255,0.08)",
+                    border: "1px solid rgba(0,0,0,0.08)",
                     borderRadius: "20px",
                     padding: "1.75rem 2rem",
                     display: "none",
-                    gap: "2.5rem",
-                    boxShadow: "0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.03)",
+                    gap: "2rem",
+                    boxShadow: "0 32px 80px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.03)",
                     cursor: "default",
                     textAlign: "left",
                     zIndex: 300,
+                    overflow: "hidden",
                   }}>
+                    {/* Top accent bar */}
+                    <div style={{
+                      position: "absolute", top: 0, left: 0, right: 0, height: 2,
+                      background: "linear-gradient(90deg, transparent 0%, rgba(25,118,210,0.7) 25%, rgba(144,202,249,0.5) 50%, rgba(25,118,210,0.7) 75%, transparent 100%)",
+                      borderRadius: "20px 20px 0 0",
+                    }} />
+                    {/* Bottom accent bar */}
+                    <div style={{
+                      position: "absolute", bottom: 0, left: 0, right: 0, height: 2,
+                      background: "linear-gradient(90deg, transparent 0%, rgba(25,118,210,0.7) 25%, rgba(144,202,249,0.5) 50%, rgba(25,118,210,0.7) 75%, transparent 100%)",
+                      borderRadius: "0 0 20px 20px",
+                    }} />
                     {/* Section columns */}
                     {link.dropdown.map((section, idx) => (
-                      <div key={idx} style={{ minWidth: 200 }}>
+                      <Fragment key={idx}>
+                        {idx > 0 && (
+                          <div style={{
+                            width: "1px",
+                            background: "linear-gradient(to bottom, rgba(25,118,210,0.4) 0%, rgba(25,118,210,0.05) 100%)",
+                            margin: "0.5rem 0",
+                          }} />
+                        )}
+                        <div style={{ minWidth: 200 }}>
                         <p style={{
-                          color: "rgba(144,202,249,0.85)",
+                          color: "#1976D2",
                           fontSize: "0.78rem",
                           fontWeight: 700,
                           letterSpacing: "0.16em",
@@ -340,7 +365,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                                 onClick={() => openServiceModal(item)}
                                 className="menu-item-link"
                                 style={{
-                                  color: "rgba(255,255,255,0.7)",
+                                  color: "rgba(24,24,27,0.7)",
                                   background: "none",
                                   border: "none",
                                   cursor: "pointer",
@@ -360,6 +385,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                           ))}
                         </ul>
                       </div>
+                    </Fragment>
                     ))}
                   </div>
                 )}
@@ -369,9 +395,9 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
             <Link
               href="/login"
               style={{
-                color: "rgba(255,255,255,0.62)",
-                fontSize: "0.875rem",
-                fontWeight: 450,
+                color: "var(--nav-muted)",
+                fontSize: "0.95rem",
+                fontWeight: 500,
                 textDecoration: "none",
                 transition: "all 0.18s ease",
                 padding: "0.42rem 0.9rem",
@@ -380,11 +406,11 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                 whiteSpace: "nowrap",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = "#fff";
-                e.currentTarget.style.background = "rgba(255,255,255,0.07)";
+                e.currentTarget.style.color = "var(--nav-text)";
+                e.currentTarget.style.background = "var(--nav-hover-bg)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = "rgba(255,255,255,0.62)";
+                e.currentTarget.style.color = "var(--nav-muted)";
                 e.currentTarget.style.background = "transparent";
               }}
             >
@@ -404,8 +430,8 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
             className="mobile-menu-btn"
             style={{
               background: "none", border: "none", cursor: "pointer",
-              color: "#fff", display: "none", padding: "0.5rem",
-              borderRadius: "8px", transition: "background 0.2s ease",
+              color: "var(--nav-text)", display: "none", padding: "0.5rem",
+              borderRadius: "8px", transition: "background 0.2s ease, color 0.2s ease",
             }}
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -416,7 +442,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
       {/* ── Mobile full-screen drawer ────────────────────────────── */}
       <div style={{
         position: "fixed", inset: 0, zIndex: 999,
-        background: "rgba(4, 4, 10, 0.98)",
+        background: "rgba(248, 250, 252, 0.98)",
         backdropFilter: "blur(32px)",
         WebkitBackdropFilter: "blur(32px)",
         display: "flex", flexDirection: "column",
@@ -430,10 +456,10 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           onClick={() => setMenuOpen(false)}
           style={{
             position: "absolute", top: "1.25rem", right: "1.25rem",
-            background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)",
+            background: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.1)",
             borderRadius: "50%", width: 40, height: 40,
             display: "flex", alignItems: "center", justifyContent: "center",
-            cursor: "pointer", color: "rgba(255,255,255,0.8)",
+            cursor: "pointer", color: "rgba(24,24,27,0.8)",
           }}
         >
           <X size={18} />
@@ -466,7 +492,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "1.1rem",
                 fontWeight: activeLink === link.label ? 700 : 500,
-                color: activeLink === link.label ? "#ffffff" : "rgba(255,255,255,0.55)",
+                color: activeLink === link.label ? "#18181B" : "rgba(24,24,27,0.65)",
                 letterSpacing: "-0.02em",
                 padding: "0.85rem 1rem",
                 borderRadius: "12px",
@@ -487,7 +513,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
 
         {/* Mobile footer actions */}
         <div style={{
-          borderTop: "1px solid rgba(255,255,255,0.07)",
+          borderTop: "1px solid rgba(0,0,0,0.07)",
           paddingTop: "1.5rem", marginTop: "1.5rem",
           display: "flex", flexDirection: "column", gap: "0.75rem",
           opacity: menuOpen ? 1 : 0,
@@ -499,9 +525,9 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
             onClick={() => setMenuOpen(false)}
             style={{
               fontFamily: "'Inter', sans-serif", fontSize: "0.9rem", fontWeight: 600,
-              color: "rgba(255,255,255,0.6)", textDecoration: "none",
+              color: "rgba(24,24,27,0.7)", textDecoration: "none",
               padding: "0.85rem 1rem", borderRadius: "12px",
-              border: "1px solid rgba(255,255,255,0.1)",
+              border: "1px solid rgba(0,0,0,0.1)",
               textAlign: "center",
             }}
           >
@@ -532,8 +558,8 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
 
         /* Nav button hover (JS handles active) */
         .nav-btn:hover:not(.nav-btn-active) {
-          background: rgba(255,255,255,0.07) !important;
-          color: #ffffff !important;
+          background: var(--nav-hover-bg) !important;
+          color: var(--nav-text) !important;
         }
 
         /* Chevron rotate on hover */
@@ -567,7 +593,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
 
         /* Mega menu item hover */
         .menu-item-link:hover {
-          color: #ffffff !important;
+          color: #18181B !important;
           transform: translateX(4px) !important;
         }
         .menu-item-link:hover ~ .menu-dot,

@@ -53,7 +53,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           left: 0,
           right: 0,
           height: "180px",
-          background: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.25) 100%)",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.3) 100%)",
           zIndex: 1,
           pointerEvents: "none",
         }}
@@ -84,7 +84,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
       />
 
       {/* Content */}
-      <div className="container-xl" style={{ textAlign: "center", position: "relative", zIndex: 3 }}>
+      <div className="container-xl" style={{ textAlign: "center", position: "relative", zIndex: 3, transform: "translateY(-1.5vh)" }}>
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.9 }}
@@ -94,8 +94,8 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           style={{
             display: "inline-flex", alignItems: "center", gap: "0.5rem",
             padding: "0.5rem 1.25rem",
-            background: "rgba(255,255,255,0.12)",
-            border: "1px solid rgba(255,255,255,0.25)",
+            background: "rgba(0,0,0,0.05)",
+            border: "1px solid rgba(0,0,0,0.15)",
             borderRadius: "100px", marginBottom: "2.5rem",
             cursor: "default", transition: "all 0.3s ease",
             backdropFilter: "blur(8px)",
@@ -106,7 +106,7 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           </motion.div>
           <span style={{
             fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", fontWeight: 600,
-            letterSpacing: "0.2em", textTransform: "uppercase", color: "#ffffff",
+            letterSpacing: "0.2em", textTransform: "uppercase", color: "#000000",
           }}>
             Comprehensive Capital Advisory
           </span>
@@ -121,8 +121,8 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
             marginBottom: "1.5rem", maxWidth: 900, margin: "0 auto 1.5rem",
             fontSize: "clamp(3rem, 6.5vw, 5.5rem)", fontWeight: 800,
             lineHeight: 1.05,
-            letterSpacing: "-0.025em", color: "#ffffff",
-            textShadow: "0 2px 20px rgba(0,0,0,0.4)",
+            letterSpacing: "-0.025em", color: "#000000",
+            textShadow: "none",
           }}
         >
           Create.
@@ -142,8 +142,8 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           style={{
             fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)", maxWidth: 650,
             margin: "0 auto 3rem", lineHeight: 1.7, fontWeight: 400,
-            color: "rgba(255,255,255,0.85)",
-            textShadow: "0 1px 8px rgba(0,0,0,0.3)",
+            color: "rgba(0,0,0,0.85)",
+            textShadow: "none",
           }}
         >
           End-to-end startup fundraising infrastructure combining AI tools, strategic advisory, and execution support for founders building scalable companies.
@@ -162,9 +162,9 @@ export default function HeroSection({ onCTAClick }: HeroProps) {
           position: "absolute", bottom: "2.5rem", left: "50%",
           transform: "translateX(-50%)", background: "none", border: "none",
           cursor: "pointer", display: "flex", flexDirection: "column",
-          alignItems: "center", gap: "0.5rem", color: "rgba(255,255,255,0.7)",
+          alignItems: "center", gap: "0.5rem", color: "rgba(0,0,0,0.7)",
         }}
-        whileHover={{ color: "#ffffff" }}
+        whileHover={{ color: "#000000" }}
       >
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", letterSpacing: "0.2em" }}>
           SCROLL
