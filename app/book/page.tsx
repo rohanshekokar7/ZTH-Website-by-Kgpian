@@ -92,22 +92,24 @@ export default function BookPage() {
         overflow: "hidden",
         minHeight: "100vh",
       }}>
-        {/* Dark abstract gradient background */}
+        {/* Background image */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #000000 100%)",
+          backgroundImage: "url('/pitch-deck-manual-2.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }} />
 
-        {/* Subtle accent glow */}
+        {/* Dark overlay to keep text readable */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "radial-gradient(circle at 0% 0%, rgba(25,118,210,0.15) 0%, transparent 50%)",
+          background: "linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(0,0,0,0.95) 100%)",
         }} />
 
         {/* Content on top of image */}
         <div style={{
           position: "relative", zIndex: 1,
-          display: "flex", flexDirection: "column", justifyContent: "space-between",
+          display: "flex", flexDirection: "column",
           padding: "clamp(2.5rem, 5vw, 5rem)",
           height: "100%",
           minHeight: "100vh",
@@ -124,8 +126,8 @@ export default function BookPage() {
               fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.1em",
               textTransform: "uppercase", transition: "color 0.2s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
             >
               ← Back to Zth
             </Link>
@@ -136,11 +138,11 @@ export default function BookPage() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: "4rem", paddingBottom: "4rem" }}
+            style={{ display: "flex", flexDirection: "column", marginTop: "15vh" }}
           >
             <p style={{
               fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.3em",
-              textTransform: "uppercase", color: "#90CAF9", marginBottom: "1.5rem",
+              textTransform: "uppercase", color: "#1976D2", marginBottom: "1.5rem",
             }}>
               / Pitch Deck Services
             </p>
@@ -153,7 +155,7 @@ export default function BookPage() {
             }}>
               Let&apos;s build<br />
               your{" "}
-              <span style={{ color: "#90CAF9" }}>perfect</span><br />
+              <span style={{ color: "#1976D2" }}>perfect</span><br />
               pitch together.
             </h1>
             <p style={{
@@ -181,37 +183,18 @@ export default function BookPage() {
             </div>
           </motion.div>
 
-          {/* Contact info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
-          >
-            <div style={{ width: "100%", height: "1px", background: "rgba(255,255,255,0.12)", marginBottom: "1.5rem" }} />
-            {[
-              { icon: Mail, text: "admin@zth.co.in" },
-              { icon: Phone, text: "+91 721 942 2299" },
-              { icon: MapPin, text: "Mumbai, India" },
-            ].map(({ icon: Icon, text }) => (
-              <div key={text} style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                <Icon size={14} color="rgba(255,255,255,0.4)" />
-                <span style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.5)", letterSpacing: "0.01em" }}>
-                  {text}
-                </span>
-              </div>
-            ))}
-          </motion.div>
+
         </div>
       </div>
 
       {/* ── RIGHT COLUMN — Light Form ── */}
       <div style={{
         background: "#ffffff",
-        display: "flex", flexDirection: "column", justifyContent: "center",
+        display: "flex", flexDirection: "column",
         padding: "clamp(2.5rem, 5vw, 5rem)",
         overflowY: "auto",
         borderLeft: "1px solid #f0f0f0",
+        minHeight: 0,
       }}>
         <AnimatePresence mode="wait">
           {submitted ? (
@@ -255,8 +238,8 @@ export default function BookPage() {
                   color: "#1A1A1A", fontSize: "0.85rem", fontWeight: 700,
                   transition: "all 0.2s ease", letterSpacing: "0.02em",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.color = "#1976D2"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1A1A1A"; e.currentTarget.style.color = "#1A1A1A"; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#1976D2"; e.currentTarget.style.color = "#1976D2"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1A1A1A"; e.currentTarget.style.color = "#1A1A1A"; }}
                 >
                   Back to home
                 </Link>
@@ -298,36 +281,8 @@ export default function BookPage() {
                     letterSpacing: "0.05em", color: "#888888", marginBottom: "1rem",
                     textTransform: "uppercase",
                   }}>
-                    Services selected*
+                    Select Category*
                   </label>
-
-                  {/* Selected chips */}
-                  {form.services.length > 0 && (
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginBottom: "1rem" }}>
-                      {form.services.map((s) => (
-                        <span key={s} style={{
-                          display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                          padding: "0.35rem 0.85rem",
-                          background: "rgba(25,118,210,0.08)",
-                          border: "1.5px solid #1976D2",
-                          borderRadius: "100px",
-                          fontSize: "0.8rem", fontWeight: 600, color: "#1976D2",
-                          fontFamily: "'Inter', sans-serif",
-                        }}>
-                          ✓ {s}
-                          <button type="button" onClick={() => toggleService(s)} style={{
-                            background: "none", border: "none", cursor: "pointer",
-                            color: "#1976D2", padding: 0, lineHeight: 1, fontSize: "0.9rem",
-                          }}>×</button>
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Broad category add-on tiles */}
-                  <p style={{ fontSize: "0.72rem", color: "#aaa", marginBottom: "0.65rem", fontFamily: "'Inter', sans-serif" }}>
-                    Add more categories:
-                  </p>
                   <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                     {[
                       { value: "Pre-Fundraising", sub: "Pitch decks, models & strategy" },
@@ -406,7 +361,7 @@ export default function BookPage() {
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "0.6rem",
                     padding: "0.9rem 2.5rem",
-                    background: loading ? "#aaa" : "#1A1A1A",
+                    background: loading ? "#aaa" : "#1976D2",
                     border: "none", borderRadius: "100px",
                     color: "#ffffff", fontSize: "0.9rem", fontWeight: 700,
                     cursor: loading ? "not-allowed" : "pointer",

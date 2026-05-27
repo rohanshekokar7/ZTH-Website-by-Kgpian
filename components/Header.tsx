@@ -331,52 +331,52 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                           }} />
                         )}
                         <div style={{ minWidth: 200 }}>
-                        <p style={{
-                          color: "#1976D2",
-                          fontSize: "0.78rem",
-                          fontWeight: 700,
-                          letterSpacing: "0.16em",
-                          textTransform: "uppercase",
-                          margin: "0 0 1.1rem",
-                          fontFamily: "'Inter', sans-serif",
-                        }}>
-                          {section.title}
-                        </p>
-                        <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.55rem" }}>
-                          {section.items.map((item, i) => (
-                            <li key={i} style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
-                              <span className="menu-dot" style={{
-                                width: 3, height: 3, borderRadius: "50%",
-                                background: "rgba(25,118,210,0.45)",
-                                flexShrink: 0, transition: "background 0.2s ease",
-                              }} />
-                              <button
-                                onClick={() => {
-                                  window.location.href = `/book?services=${encodeURIComponent(item)}`;
-                                }}
-                                className="menu-item-link"
-                                style={{
-                                  color: "rgba(24,24,27,0.7)",
-                                  background: "none",
-                                  border: "none",
-                                  cursor: "pointer",
-                                  fontSize: "0.9rem",
-                                  fontWeight: 450,
-                                  transition: "all 0.18s ease",
-                                  display: "inline-block",
-                                  fontFamily: "'Inter', sans-serif",
-                                  letterSpacing: "-0.01em",
-                                  padding: 0,
-                                  textAlign: "left",
-                                }}
-                              >
-                                {item}
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </Fragment>
+                          <p style={{
+                            color: "#1976D2",
+                            fontSize: "0.78rem",
+                            fontWeight: 700,
+                            letterSpacing: "0.16em",
+                            textTransform: "uppercase",
+                            margin: "0 0 1.1rem",
+                            fontFamily: "'Inter', sans-serif",
+                          }}>
+                            {section.title}
+                          </p>
+                          <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+                            {section.items.map((item, i) => (
+                              <li key={i} style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+                                <span className="menu-dot" style={{
+                                  width: 3, height: 3, borderRadius: "50%",
+                                  background: "rgba(25,118,210,0.45)",
+                                  flexShrink: 0, transition: "background 0.2s ease",
+                                }} />
+                                <button
+                                  onClick={() => {
+                                    window.location.href = `/book?services=${encodeURIComponent(link.label)}`;
+                                  }}
+                                  className="menu-item-link"
+                                  style={{
+                                    color: "rgba(24,24,27,0.7)",
+                                    background: "none",
+                                    border: "none",
+                                    cursor: "pointer",
+                                    fontSize: "0.9rem",
+                                    fontWeight: 450,
+                                    transition: "all 0.18s ease",
+                                    display: "inline-block",
+                                    fontFamily: "'Inter', sans-serif",
+                                    letterSpacing: "-0.01em",
+                                    padding: 0,
+                                    textAlign: "left",
+                                  }}
+                                >
+                                  {item}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </Fragment>
                     ))}
                   </div>
                 )}
