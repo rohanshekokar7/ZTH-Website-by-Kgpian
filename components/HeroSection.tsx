@@ -65,10 +65,10 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
       <div className="container-xl" style={{ textAlign: "center", position: "relative", zIndex: 3, transform: "translateY(-1.5vh)" }}>
         {/* Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          whileHover={{ scale: 1.05, boxShadow: "0 6px 20px rgba(25,118,210,0.12)" }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}
           style={{
             display: "inline-flex", alignItems: "center", gap: "0.5rem",
             padding: "0.5rem 1.25rem",
@@ -90,9 +90,9 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
 
         {/* Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 40, filter: "blur(16px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           style={{
             marginBottom: "1.5rem", maxWidth: 900, margin: "0 auto 1.5rem",
             fontSize: "clamp(3rem, 6.5vw, 5.5rem)", fontWeight: 800,
@@ -112,9 +112,9 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
 
         {/* Subheadline */}
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           style={{
             fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)", maxWidth: 650,
             margin: "0 auto 3rem", lineHeight: 1.7, fontWeight: 400,
