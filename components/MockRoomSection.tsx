@@ -28,12 +28,26 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
 
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-          <motion.p className="label-small"
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            style={{ marginBottom: "1rem", color: "#1976D2", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", fontSize: "0.85rem" }}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.35rem 1rem',
+              background: '#E3F0FF', border: '1px solid rgba(25,118,210,0.18)',
+              borderRadius: '100px', marginBottom: '1.5rem',
+            }}
           >
-            INVESTOR MOCK ROOM
-          </motion.p>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#1976D2' }} />
+            <span style={{
+              fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.2em',
+              textTransform: 'uppercase', color: '#1976D2', fontFamily: "'Inter', sans-serif",
+            }}>
+              INVESTOR MOCK ROOM
+            </span>
+          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

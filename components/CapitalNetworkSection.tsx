@@ -188,7 +188,6 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: 'clamp(2.35rem, 3.8vw, 3.75rem)',
               fontWeight: 700, color: TEXT_MAIN,
               letterSpacing: '-0.02em', lineHeight: 1.15,

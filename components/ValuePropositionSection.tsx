@@ -41,14 +41,23 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
         >
           {/* Header Section */}
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-            <motion.p variants={itemVariants} style={{
-              color: "#1976D2", fontSize: "0.85rem", fontWeight: 700,
-              letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1.25rem",
-              display: "inline-flex", alignItems: "center", padding: "0.4rem 1rem",
-              background: "rgba(25,118,210,0.08)", borderRadius: "100px", border: "1px solid rgba(25,118,210,0.15)"
-            }}>
-              PRE-FUNDRAISING INFRASTRUCTURE
-            </motion.p>
+            <motion.div
+              variants={itemVariants}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.35rem 1rem',
+                background: '#E3F0FF', border: '1px solid rgba(25,118,210,0.18)',
+                borderRadius: '100px', marginBottom: '1.5rem',
+              }}
+            >
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#1976D2' }} />
+              <span style={{
+                fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.2em',
+                textTransform: 'uppercase', color: '#1976D2', fontFamily: "'Inter', sans-serif",
+              }}>
+                PRE-FUNDRAISING INFRASTRUCTURE
+              </span>
+            </motion.div>
             <motion.h2 variants={itemVariants} style={{
               fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800,
               color: "#111827", lineHeight: 1.15, letterSpacing: "-0.03em",

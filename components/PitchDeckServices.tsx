@@ -286,17 +286,22 @@ export default function PitchDeckServices({ className }: { className?: string })
             viewport={{ once: true }}
             style={{ textAlign: "center", padding: "0 2rem" }}
           >
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.85rem",
-              fontWeight: 700,
-              letterSpacing: "0.25em",
-              color: "#1976D2",
-              textTransform: "uppercase",
-              marginBottom: "1rem"
-            }}>
-              PRE-FUNDRAISING
-            </p>
+            <div
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.35rem 1rem',
+                background: '#E3F0FF', border: '1px solid rgba(25,118,210,0.18)',
+                borderRadius: '100px', marginBottom: '1.5rem',
+              }}
+            >
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#1976D2' }} />
+              <span style={{
+                fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.2em',
+                textTransform: 'uppercase', color: '#1976D2', fontFamily: "'Inter', sans-serif",
+              }}>
+                PRE-FUNDRAISING
+              </span>
+            </div>
             <motion.h2
               initial={{ filter: "blur(14px)", opacity: 0 }}
               whileInView={{ filter: "blur(0px)", opacity: 1 }}
