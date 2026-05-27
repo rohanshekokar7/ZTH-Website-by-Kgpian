@@ -187,10 +187,9 @@ function TestimonialCard({
             padding: "2.5rem",
             borderRadius: "1rem",
             border: "1px solid #e5e7eb",
-            borderTop: "6px solid #1976D2", // Blue top border
             boxShadow: isHovered
-              ? "0 30px 60px rgba(0, 0, 0, 0.12)"
-              : "0 20px 40px rgba(0, 0, 0, 0.06)",
+              ? "0 12px 30px rgba(0, 0, 0, 0.05)"
+              : "0 4px 15px rgba(0, 0, 0, 0.03)",
             aspectRatio: "3/4",
             display: "flex",
             flexDirection: "column",
@@ -497,15 +496,11 @@ export default function TestimonialsAndLogos() {
         </div>
 
         {/* Scrolling Cards */}
-        <div style={{
+        <div className="container-lg" style={{
           position: "relative",
           zIndex: 2,
           paddingTop: "90vh",
           paddingBottom: "10vh",
-          paddingLeft: "clamp(1.5rem, 5vw, 4rem)",
-          paddingRight: "clamp(1.5rem, 5vw, 4rem)",
-          maxWidth: "1200px",
-          margin: "0 auto",
         }}>
           {informationCards.map((item, index) => (
             <TestimonialCard

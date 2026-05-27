@@ -135,8 +135,8 @@ export default function CapitalSection({ className }: { className?: string }) {
     <section
       ref={sectionRef}
       id="post-fundraise"
-      className={className}
-      style={{ background: BG, padding: '7rem 0 8rem', position: 'relative', overflow: 'hidden' }}
+      className={`${className || ''} section-pad`}
+      style={{ background: BG, position: 'relative', overflow: 'hidden' }}
     >
       {/* ── Decorative background ────────────────────────────────── */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
@@ -160,7 +160,7 @@ export default function CapitalSection({ className }: { className?: string }) {
         }} />
       </div>
 
-      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 3rem)', position: 'relative', zIndex: 10 }}>
+      <div className="container-lg" style={{ position: 'relative', zIndex: 10 }}>
 
         {/* ── Header ──────────────────────────────────────────────── */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>

@@ -23,8 +23,8 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="mock-room" ref={containerRef} style={{ background: "#FAFAFA", padding: "8rem 0", position: "relative", overflow: "hidden" }}>
-      <div className="container-xl" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem" }}>
+    <section id="mock-room" ref={containerRef} className="section-pad" style={{ background: "#FAFAFA", position: "relative", overflow: "hidden" }}>
+      <div className="container-lg">
 
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
