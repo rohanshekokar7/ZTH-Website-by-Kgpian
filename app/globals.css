@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&f[]=clash-display@200,400,700,500,600,300&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -218,19 +219,19 @@ body {
  */
 
 :root {
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Clash Display', system-ui, -apple-system, sans-serif;
+  --font-sans:    'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Type scale */
-  --type-hero:      clamp(3.5rem,  7vw,   5.5rem);
-  --type-display:   clamp(2.75rem, 5.5vw, 4.5rem);
-  --type-section:   clamp(2.25rem, 4.5vw, 3.5rem);
-  --type-heading:   clamp(2rem,    3.5vw, 3rem);
-  --type-card-head: clamp(1.25rem, 1.8vw, 1.625rem);
-  --type-body-lg:   1.0625rem;   /* 17 px */
-  --type-body:      1rem;        /* 16 px */
+  /* Type scale - Upgraded sizes */
+  --type-hero:      clamp(4rem, 8.5vw, 7.5rem);
+  --type-display:   clamp(3rem, 6vw, 5.5rem);
+  --type-section:   clamp(2.5rem, 5vw, 4.5rem);
+  --type-heading:   clamp(2rem, 4vw, 3.5rem);
+  --type-card-head: clamp(1.25rem, 2vw, 1.75rem);
+  --type-body-lg:   1.125rem;    /* 18 px */
+  --type-body:      1.0625rem;   /* 17 px */
   --type-body-sm:   0.875rem;    /* 14 px */
-  --type-label:     0.6875rem;   /* 11 px */
+  --type-label:     0.75rem;     /* 12 px */
 
   /* Weight shortcuts */
   --w-regular:   400;
@@ -239,18 +240,18 @@ body {
   --w-bold:      700;
   --w-extrabold: 800;
 
-  /* Leading (line-height) */
-  --leading-tighter: 1.05;
-  --leading-tight:   1.15;
+  /* Leading (line-height) - Tighter headings, looser body */
+  --leading-tighter: 1.0;
+  --leading-tight:   1.1;
   --leading-snug:    1.3;
-  --leading-normal:  1.65;
-  --leading-relaxed: 1.8;
+  --leading-normal:  1.7;
+  --leading-relaxed: 1.85;
 
-  /* Tracking (letter-spacing) */
-  --tracking-display: -0.03em;
-  --tracking-heading: -0.02em;
-  --tracking-tight:   -0.015em;
-  --tracking-label:   0.16em;
+  /* Tracking (letter-spacing) - Tighter headings */
+  --tracking-display: -0.04em;
+  --tracking-heading: -0.03em;
+  --tracking-tight:   -0.02em;
+  --tracking-label:   0.2em;
 }
 
 /* ── Heading base ────────────────────────────────────────────── */

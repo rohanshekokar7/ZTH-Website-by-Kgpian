@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, Sparkles } from "lucide-react";
 
 interface HeroProps {
@@ -11,6 +11,17 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
   const scrollDown = () => {
     window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
   };
+
+  const { scrollY } = useScroll();
+  
+  // Decrease the blur effect slightly per user request
+  const videoBlur = useTransform(scrollY, [0, 400], ["blur(2px)", "blur(12px)"]);
+  
+  // Add a white wash effect that fades in
+  const whiteOverlayOpacity = useTransform(scrollY, [0, 400], [0, 0.45]);
+  
+  // Move the text downwards as the user scrolls
+  const textY = useTransform(scrollY, [0, 800], [0, 300]);
 
   return (
     <section
@@ -27,7 +38,7 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
       }}
     >
       {/* Background Video */}
-      <video
+      <motion.video
         autoPlay
         loop
         muted
@@ -40,11 +51,23 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
           top: 0,
           objectFit: "cover",
           zIndex: 0,
-          filter: "blur(2px)",
+          filter: videoBlur,
         }}
       >
         <source src="/background.mp4" type="video/mp4" />
-      </video>
+      </motion.video>
+
+      {/* White wash overlay that fades in on scroll */}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "#ffffff",
+          opacity: whiteOverlayOpacity,
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      />
 
       {/* Very subtle bottom fade so scroll indicator stays legible */}
       <div
@@ -62,7 +85,16 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
 
 
       {/* Content */}
-      <div className="container-xl" style={{ textAlign: "center", position: "relative", zIndex: 3, transform: "translateY(-1.5vh)" }}>
+      <motion.div 
+        className="container-xl" 
+        style={{ 
+          textAlign: "center", 
+          position: "relative", 
+          zIndex: 3, 
+          y: textY,
+          marginTop: "-3vh" // Base offset
+        }}
+      >
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -81,8 +113,8 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
         >
           <Sparkles size={14} color="#1976D2" />
           <span style={{
-            fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", fontWeight: 600,
-            letterSpacing: "0.2em", textTransform: "uppercase", color: "#000000",
+            fontSize: "0.65rem", fontWeight: 700,
+            letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(0,0,0,0.6)",
           }}>
             Comprehensive Capital Advisory
           </span>
@@ -126,7 +158,7 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
         </motion.p>
 
         {/* CTAs */}
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.button
