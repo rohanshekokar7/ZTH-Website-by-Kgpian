@@ -13,13 +13,13 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
   };
 
   const { scrollY } = useScroll();
-  
+
   // Decrease the blur effect slightly per user request
   const videoBlur = useTransform(scrollY, [0, 400], ["blur(2px)", "blur(12px)"]);
-  
+
   // Add a white wash effect that fades in
   const whiteOverlayOpacity = useTransform(scrollY, [0, 400], [0, 0.25]);
-  
+
   // Move the text downwards as the user scrolls
   const textY = useTransform(scrollY, [0, 800], [0, 300]);
 
@@ -85,12 +85,12 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
 
 
       {/* Content */}
-      <motion.div 
-        className="container-xl" 
-        style={{ 
-          textAlign: "center", 
-          position: "relative", 
-          zIndex: 3, 
+      <motion.div
+        className="container-xl"
+        style={{
+          textAlign: "center",
+          position: "relative",
+          zIndex: 3,
           y: textY,
           marginTop: "-3vh" // Base offset
         }}
@@ -127,6 +127,7 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           style={{
             marginBottom: "1.5rem", maxWidth: 900, margin: "0 auto 1.5rem",
+            fontFamily: "'Playfair Display', serif",
             fontSize: "clamp(3rem, 6.5vw, 5.5rem)", fontWeight: 800,
             lineHeight: 1.05,
             letterSpacing: "-0.025em", color: "#000000",

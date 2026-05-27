@@ -210,14 +210,14 @@ function TestimonialCard({
           }}>
 
             <h3 style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "clamp(1.4rem, 2.5vw, 1.7rem)",
-                fontWeight: 800,
-                color: "#1A1A1A",
-                textAlign: "center",
-                lineHeight: 1.2,
-                letterSpacing: "-0.03em",
-                margin: 0
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "clamp(1.4rem, 2.5vw, 1.7rem)",
+              fontWeight: 800,
+              color: "#1A1A1A",
+              textAlign: "center",
+              lineHeight: 1.2,
+              letterSpacing: "-0.03em",
+              margin: 0
             }}>
               {item.title}
             </h3>

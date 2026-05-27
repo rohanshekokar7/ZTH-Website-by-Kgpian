@@ -7,11 +7,15 @@
 
 :root {
   /* Brand Colors — 60-30-10 Light Mode */
-  --zth-bg: #F8FAFC;        /* 60% Background */
-  --zth-text: #18181B;      /* 30% Typography/Secondary */
-  --zth-accent: #1976D2;    /* 10% Accent */
-  --zth-card: #FFFFFF;      /* Slide Canvas */
-  
+  --zth-bg: #F8FAFC;
+  /* 60% Background */
+  --zth-text: #18181B;
+  /* 30% Typography/Secondary */
+  --zth-accent: #1976D2;
+  /* 10% Accent */
+  --zth-card: #FFFFFF;
+  /* Slide Canvas */
+
   --zth-black: #18181B;
   --zth-dark: #18181B;
   --zth-border: #52525B;
@@ -220,38 +224,42 @@ body {
 
 :root {
   --font-display: 'Clash Display', system-ui, -apple-system, sans-serif;
-  --font-sans:    'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
 
   /* Type scale - Upgraded sizes */
-  --type-hero:      clamp(4rem, 8.5vw, 7.5rem);
-  --type-display:   clamp(3rem, 6vw, 5.5rem);
-  --type-section:   clamp(2.5rem, 5vw, 4.5rem);
-  --type-heading:   clamp(2rem, 4vw, 3.5rem);
+  --type-hero: clamp(4rem, 8.5vw, 7.5rem);
+  --type-display: clamp(3rem, 6vw, 5.5rem);
+  --type-section: clamp(2.5rem, 5vw, 4.5rem);
+  --type-heading: clamp(2rem, 4vw, 3.5rem);
   --type-card-head: clamp(1.25rem, 2vw, 1.75rem);
-  --type-body-lg:   1.125rem;    /* 18 px */
-  --type-body:      1.0625rem;   /* 17 px */
-  --type-body-sm:   0.875rem;    /* 14 px */
-  --type-label:     0.75rem;     /* 12 px */
+  --type-body-lg: 1.125rem;
+  /* 18 px */
+  --type-body: 1.0625rem;
+  /* 17 px */
+  --type-body-sm: 0.875rem;
+  /* 14 px */
+  --type-label: 0.75rem;
+  /* 12 px */
 
   /* Weight shortcuts */
-  --w-regular:   400;
-  --w-medium:    500;
-  --w-semibold:  600;
-  --w-bold:      700;
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+  --w-bold: 700;
   --w-extrabold: 800;
 
   /* Leading (line-height) - Tighter headings, looser body */
   --leading-tighter: 1.0;
-  --leading-tight:   1.1;
-  --leading-snug:    1.3;
-  --leading-normal:  1.7;
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-normal: 1.7;
   --leading-relaxed: 1.85;
 
   /* Tracking (letter-spacing) - Tighter headings */
   --tracking-display: -0.04em;
   --tracking-heading: -0.03em;
-  --tracking-tight:   -0.02em;
-  --tracking-label:   0.2em;
+  --tracking-tight: -0.02em;
+  --tracking-label: 0.2em;
 }
 
 /* ── Heading base ────────────────────────────────────────────── */
@@ -276,7 +284,9 @@ h3 {
   letter-spacing: var(--tracking-tight);
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   font-family: var(--font-sans);
   font-weight: var(--w-semibold);
   line-height: var(--leading-snug);
@@ -296,15 +306,25 @@ p {
   letter-spacing: var(--tracking-display);
 }
 
-.heading-xl  { font-size: var(--type-display); }
-.heading-lg  { font-size: var(--type-section); }
-.heading-md  { font-size: var(--type-heading); }
+.heading-xl {
+  font-size: var(--type-display);
+}
 
-.text-gold { color: #1976D2; }
+.heading-lg {
+  font-size: var(--type-section);
+}
+
+.heading-md {
+  font-size: var(--type-heading);
+}
+
+.text-gold {
+  color: #1976D2;
+}
 
 .text-body {
   font-family: var(--font-sans);
-  font-size:   var(--type-body-lg);
+  font-size: var(--type-body-lg);
   font-weight: var(--w-regular);
   line-height: var(--leading-normal);
   color: #555555;
@@ -312,9 +332,9 @@ p {
 
 /* Eyebrow / section labels */
 .label-small {
-  font-family:    var(--font-sans);
-  font-size:      var(--type-label);
-  font-weight:    var(--w-bold);
+  font-family: var(--font-sans);
+  font-size: var(--type-label);
+  font-weight: var(--w-bold);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: #1976D2;
@@ -920,6 +940,7 @@ p {
 }
 
 @media (max-width: 480px) {
+
   /* ── Testimonial cards: portrait ratio off, auto height ── */
   div[style*="aspectRatio: \"3/4\""] {
     aspect-ratio: auto !important;
