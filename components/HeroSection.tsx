@@ -18,7 +18,7 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
   const videoBlur = useTransform(scrollY, [0, 400], ["blur(2px)", "blur(12px)"]);
   
   // Add a white wash effect that fades in
-  const whiteOverlayOpacity = useTransform(scrollY, [0, 400], [0, 0.45]);
+  const whiteOverlayOpacity = useTransform(scrollY, [0, 400], [0, 0.25]);
   
   // Move the text downwards as the user scrolls
   const textY = useTransform(scrollY, [0, 800], [0, 300]);
