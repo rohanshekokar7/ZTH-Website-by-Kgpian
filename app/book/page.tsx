@@ -92,19 +92,16 @@ export default function BookPage() {
         overflow: "hidden",
         minHeight: "100vh",
       }}>
-        {/* Pitch deck image as background */}
+        {/* Dark abstract gradient background */}
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "url('/pitch-deck-manual-2.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          filter: "brightness(0.35)",
+          background: "linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #000000 100%)",
         }} />
 
-        {/* Gradient overlay for readability */}
+        {/* Subtle accent glow */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(135deg, rgba(25,118,210,0.4) 0%, rgba(10,25,47,0.7) 60%, rgba(0,0,0,0.6) 100%)",
+          background: "radial-gradient(circle at 0% 0%, rgba(25,118,210,0.15) 0%, transparent 50%)",
         }} />
 
         {/* Content on top of image */}
@@ -334,7 +331,7 @@ export default function BookPage() {
                   <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                     {[
                       { value: "Pre-Fundraising", sub: "Pitch decks, models & strategy" },
-                      { value: "Capital Network", sub: "Investor prep & ecosystem" },
+                      { value: "Strategic Partnership", sub: "Investor prep & ecosystem" },
                       { value: "Post-Fundraise", sub: "Growth, hiring & execution" },
                     ].map((opt) => {
                       const isSelected = form.services.includes(opt.value);

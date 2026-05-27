@@ -221,10 +221,10 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
 
         {/* ── Main bar ────────────────────────────────────────── */}
         <div style={{
-          background: scrolled ? "rgba(248, 250, 252, 0.94)" : "transparent",
-          backdropFilter: scrolled ? "blur(28px)" : "blur(5px)",
-          WebkitBackdropFilter: scrolled ? "blur(28px)" : "blur(5px)",
-          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "none",
+          background: scrolled ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.5)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "1px solid rgba(0,0,0,0.03)",
           boxShadow: scrolled
             ? "0 8px 40px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04)"
             : "none",
@@ -243,18 +243,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
             className="mobile-logo-wrap"
             style={{ textDecoration: "none", display: "flex", alignItems: "center", flexShrink: 0 }}
           >
-            <div style={{
-              width: "40px", height: "40px", borderRadius: "50%",
-              background: "linear-gradient(135deg, #1976D2, #0D47A1)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: "white", fontFamily: "'Inter', sans-serif",
-              boxShadow: "0 2px 10px rgba(25,118,210,0.2)",
-              transition: "box-shadow 0.3s ease",
-            }}>
-              <span style={{ fontSize: "1.5rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-1px", position: "relative", left: "-3px" }}>
-                Z<span style={{ fontSize: "0.65rem", position: "absolute", top: "2px", right: "-11px", fontWeight: 800 }}>th</span>
-              </span>
-            </div>
+            <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "64px", width: "auto", objectFit: "contain" }} />
           </a>
 
           {/* ── Desktop Nav (fills full width between logo & CTA) ── */}
@@ -362,7 +351,9 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                                 flexShrink: 0, transition: "background 0.2s ease",
                               }} />
                               <button
-                                onClick={() => openServiceModal(item)}
+                                onClick={() => {
+                                  window.location.href = `/book?services=${encodeURIComponent(item)}`;
+                                }}
                                 className="menu-item-link"
                                 style={{
                                   color: "rgba(24,24,27,0.7)",
@@ -467,17 +458,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
 
         {/* Mobile logo */}
         <div style={{ marginBottom: "3rem" }}>
-          <div style={{
-            width: "40px", height: "40px", borderRadius: "50%",
-            background: "linear-gradient(135deg, #1976D2, #0D47A1)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            color: "white", fontFamily: "'Inter', sans-serif",
-            boxShadow: "0 2px 10px rgba(25,118,210,0.2)",
-          }}>
-            <span style={{ fontSize: "1.5rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-1px", position: "relative", left: "-3px" }}>
-              Z<span style={{ fontSize: "0.65rem", position: "absolute", top: "2px", right: "-11px", fontWeight: 800 }}>th</span>
-            </span>
-          </div>
+          <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "64px", width: "auto", objectFit: "contain" }} />
         </div>
 
         {/* Mobile nav links */}
@@ -642,17 +623,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         .book-now-btn:active { transform: translateY(0); }
       `}</style>
 
-      {/* ── Service selection modal ──────────────────────────────── */}
-      <ServiceModal
-        isOpen={modalOpen}
-        initialService={pendingService}
-        onClose={() => setModalOpen(false)}
-        onBook={(services) => {
-          // Navigate to booking page with selected services in query
-          const query = encodeURIComponent(services.join(","));
-          window.location.href = `/book?services=${query}`;
-        }}
-      />
+      {/* Modal bypassed as per user request */}
     </>
   );
 }

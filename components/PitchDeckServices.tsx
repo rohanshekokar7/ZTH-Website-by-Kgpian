@@ -280,40 +280,40 @@ export default function PitchDeckServices({ className }: { className?: string })
             marginBottom: "0",
             pointerEvents: 'auto'
           }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          style={{ textAlign: "center", padding: "0 2rem" }}
-        >
-          <p style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.85rem",
-            fontWeight: 700,
-            letterSpacing: "0.25em",
-            color: "#1976D2",
-            textTransform: "uppercase",
-            marginBottom: "1rem"
-          }}>
-            PRE-FUNDRAISING
-          </p>
-          <motion.h2
-            initial={{ filter: "blur(14px)", opacity: 0 }}
-            whileInView={{ filter: "blur(0px)", opacity: 1 }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            style={{
-            fontSize: "clamp(2.75rem, 5vw, 4.25rem)",
-            fontWeight: 800,
-            color: "#1A1A1A",
-            letterSpacing: "-0.025em",
-            lineHeight: 1.1,
-            margin: "0 auto 1.5rem",
-            maxWidth: "850px"
-          }}>
-            Pre-Fundraising <span style={{ color: "#1976D2" }}>Infrastructure.</span>
-          </motion.h2>
-        </motion.div>
+            style={{ textAlign: "center", padding: "0 2rem" }}
+          >
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.85rem",
+              fontWeight: 700,
+              letterSpacing: "0.25em",
+              color: "#1976D2",
+              textTransform: "uppercase",
+              marginBottom: "1rem"
+            }}>
+              PRE-FUNDRAISING
+            </p>
+            <motion.h2
+              initial={{ filter: "blur(14px)", opacity: 0 }}
+              whileInView={{ filter: "blur(0px)", opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              style={{
+                fontSize: "clamp(2.75rem, 5vw, 4.25rem)",
+                fontWeight: 800,
+                color: "#1A1A1A",
+                letterSpacing: "-0.025em",
+                lineHeight: 1.1,
+                margin: "0 auto 1.5rem",
+                maxWidth: "850px"
+              }}>
+              Pre-Fundraising <span style={{ color: "#1976D2" }}>Infrastructure.</span>
+            </motion.h2>
+          </motion.div>
         </div>
       </div>
 
