@@ -158,25 +158,6 @@ export default function CapitalSection({ className }: { className?: string }) {
           borderRadius: '50%', background: 'radial-gradient(circle, rgba(144,202,249,0.07) 0%, transparent 70%)',
           filter: 'blur(50px)',
         }} />
-        {/* Floating dots */}
-        {[
-          { top: '10%', right: '8%', size: 5 },
-          { top: '45%', left: '5%', size: 4 },
-          { bottom: '18%', right: '15%', size: 6 },
-          { top: '70%', left: '12%', size: 3 },
-        ].map((dot, i) => (
-          <motion.div
-            key={i}
-            animate={{ y: [0, -14, 0], opacity: [0.25, 0.65, 0.25] }}
-            transition={{ duration: 3.5 + i * 0.6, repeat: Infinity, ease: 'easeInOut', delay: i * 0.6 }}
-            style={{
-              position: 'absolute', ...dot,
-              width: dot.size, height: dot.size,
-              borderRadius: '50%', background: BLUE,
-              boxShadow: `0 0 ${dot.size * 3}px ${BLUE}`,
-            }}
-          />
-        ))}
       </div>
 
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 3rem)', position: 'relative', zIndex: 10 }}>
@@ -204,9 +185,9 @@ export default function CapitalSection({ className }: { className?: string }) {
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 30, filter: 'blur(14px)' }}
-            animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: 'clamp(2.35rem, 3.8vw, 3.75rem)',

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Play, Users, MessageSquare, Target, UserCheck, BarChart } from "lucide-react";
 import Link from "next/link";
 
@@ -21,10 +21,6 @@ const stats = [
 
 export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.95]);
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0.4]);
 
   return (
     <section id="mock-room" ref={containerRef} style={{ background: "#FAFAFA", padding: "8rem 0", position: "relative", overflow: "hidden" }}>
@@ -39,10 +35,10 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
             INVESTOR MOCK ROOM
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontWeight: 700,
               fontSize: "clamp(2.25rem, 4vw, 3.75rem)", color: "#1A1A1A",
@@ -94,7 +90,12 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
           </div>
 
           {/* Right Side: Video Card */}
-          <motion.div style={{ scale, opacity }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div style={{
               background: "#1A1A1A", borderRadius: "1.5rem", overflow: "hidden",
               boxShadow: "0 25px 60px rgba(0,0,0,0.1)", position: "relative",
@@ -104,7 +105,7 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
 
               <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
                 <motion.div
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   style={{
                     width: 80, height: 80, borderRadius: "50%",
                     background: "linear-gradient(135deg, #1976D2, #90CAF9)",
@@ -136,8 +137,7 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ duration: 0.3, delay: index * 0.1, type: "spring", stiffness: 300 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
               style={{ textAlign: "center", padding: "1.5rem", borderRadius: "1rem", cursor: "default" }}
             >
               <div style={{ fontSize: "3rem", fontWeight: 900, color: "#1976D2", marginBottom: "0.5rem", transition: "transform 0.3s ease" }}>

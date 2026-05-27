@@ -5,37 +5,39 @@ import { motion, useInView } from 'framer-motion';
 import SpotlightCard from './SpotlightCard';
 
 const BLUE = '#1976D2';
+const BLUE_DARK = '#0D47A1';
 const BLUE_LIGHT = '#E3F0FF';
-const BG = '#F8FAFD';
+const BG = '#FFFFFF';
 const TEXT_MAIN = '#0f172a';
 const TEXT_MUTED = '#64748b';
 
 const cat1 = [
-  { n: '01', title: 'Investor Meeting Preparation', desc: 'Preparation support for investor conversations, presentations, and fundraising discussions.' },
-  { n: '02', title: 'Pitch Day Support', desc: 'Strategic support during pitch events, demo days, and investor-facing opportunities.' },
-  { n: '03', title: 'Deal Structuring Support', desc: 'Assistance across fundraising structuring, documentation coordination, and strategic financial discussions.' },
-  { n: '04', title: 'Due Diligence Coordination', desc: 'Support for investor data preparation, documentation workflows, and fundraising readiness processes.' },
-  { n: '05', title: 'Investor Communication Support', desc: 'Ongoing support across investor follow-ups, fundraising updates, and strategic communication.' },
+  { n: '01', title: 'ZTH at Cap Table', desc: 'Long-term aligned partnerships with ventures across growth and strategic expansion journeys.' },
+  { n: '02', title: 'Financial Advisory', desc: 'Ongoing financial guidance, strategic planning, and operational decision support.' },
+  { n: '03', title: 'Growth & Governance', desc: 'Support across scaling strategy, investor communication, governance, and business structuring.' },
+  { n: '04', title: 'Follow-On Fundraising Support', desc: 'Preparation and strategic guidance for future fundraising rounds and investor engagement.' },
 ];
 
 const cat2 = [
-  { n: '01', title: 'Founder Onboarding', desc: 'Access fundraising preparation, strategic support, and ecosystem connectivity through ZTH.' },
-  { n: '02', title: 'Investor Network', desc: 'Connect with curated ventures, strategic opportunities, and founder ecosystems.' },
-  { n: '03', title: 'Strategic Partnerships', desc: 'Collaborate across execution, advisory, operational support, and ecosystem growth initiatives.' },
+  { n: '01', title: 'Product & Technology Support', desc: 'Strategic oversight for MVP development, technical architecture scaling, and engineering team building.' },
+  { n: '02', title: 'Branding & GTM Execution', desc: 'Go-to-market strategies, brand positioning, and execution support for acquiring early customers.' },
+  { n: '03', title: 'Legal & Compliance Coordination', desc: 'Guidance on venture structuring, IP protection, regulatory compliance, and term sheet structuring.' },
+  { n: '04', title: 'Finance & Accounting Support', desc: 'Financial modeling, bookkeeping oversight, cap table management, and unit economics optimization.' },
+  { n: '05', title: 'Operational Scaling Assistance', desc: 'Process optimization, talent acquisition strategies, and foundational business operations setup.' },
 ];
 
 const traction = [
-  'Founder & Investor Ecosystem',
-  'Strategic Fundraising Coordination',
-  'Curated Venture Support',
-  'Multi-Stage Capital Preparation',
+  'Long-Term Founder Partnerships',
+  'Strategic Growth Support',
+  'Cross-Functional Execution Network',
+  'Venture Scaling Advisory',
 ];
 
 /* ── 3-D Card ───────────────────────────────────────────────────── */
 function Card3D({
-  title, desc, delay, color = BLUE,
+  title, desc, delay, accent = BLUE,
 }: {
-  n: string; title: string; desc: string; delay: number; color?: string;
+  n: string; title: string; desc: string; delay: number; accent?: string;
 }) {
   return (
     <motion.div
@@ -47,7 +49,7 @@ function Card3D({
     >
       <SpotlightCard
         spotlightColor="rgba(25, 118, 210, 0.18)"
-        className="spotlight-card-net"
+        className="spotlight-card-cap"
         style={{
           background: '#ffffff',
           borderRadius: '1.25rem',
@@ -62,17 +64,17 @@ function Card3D({
           position: 'relative',
         }}
       >
-        {/* Top accent line */}
+        {/* Top accent */}
         <div style={{
           position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-          background: `linear-gradient(90deg, ${color}, #90CAF9, transparent)`,
+          background: `linear-gradient(90deg, ${accent}, #90CAF9, transparent)`,
           borderRadius: '1.25rem 1.25rem 0 0',
         }} />
 
-        {/* Bottom underline — appears on hover via CSS */}
-        <div className="card-underline-net" style={{
+        {/* Bottom underline — on hover via CSS */}
+        <div className="card-underline-cap" style={{
           position: 'absolute', bottom: 0, left: '10%', right: '10%', height: 2,
-          background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
+          background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
           borderRadius: '0 0 4px 4px',
           opacity: 0,
           transition: 'opacity 0.35s ease, transform 0.35s ease',
@@ -86,6 +88,7 @@ function Card3D({
         }}>
           {title}
         </h3>
+
         <p style={{
           color: TEXT_MUTED, fontSize: '0.875rem', lineHeight: 1.65,
           margin: 0, fontFamily: "'Inter', sans-serif",
@@ -97,14 +100,14 @@ function Card3D({
   );
 }
 
-/* ── Section heading ────────────────────────────────────────────── */
-function SectionLabel({ title, delay }: { title: string; delay?: number }) {
+/* ── Section label ──────────────────────────────────────────────── */
+function SectionLabel({ title, delay = 0 }: { title: string; delay?: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -16 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: delay ?? 0, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
       style={{
         display: 'flex', alignItems: 'center', gap: '1rem',
         marginBottom: '2rem', marginTop: '5rem',
@@ -123,45 +126,62 @@ function SectionLabel({ title, delay }: { title: string; delay?: number }) {
   );
 }
 
-/* ── Main ───────────────────────────────────────────────────────── */
-export default function CapitalNetworkSection({ className }: { className?: string }) {
+/* ── Main component ─────────────────────────────────────────────── */
+export default function CapitalSection({ className }: { className?: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-80px' });
 
   return (
     <section
       ref={sectionRef}
-      id="capital-network"
+      id="post-fundraise"
       className={className}
       style={{ background: BG, padding: '7rem 0 8rem', position: 'relative', overflow: 'hidden' }}
     >
       {/* ── Decorative background ────────────────────────────────── */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-        {/* Grid */}
-        <svg width="100%" height="100%" style={{ opacity: 0.4 }}>
+        <svg width="100%" height="100%" style={{ opacity: 0.35 }}>
           <defs>
-            <pattern id="cn-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <pattern id="cap-grid" width="48" height="48" patternUnits="userSpaceOnUse">
               <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(25,118,210,0.06)" strokeWidth="1" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#cn-grid)" />
+          <rect width="100%" height="100%" fill="url(#cap-grid)" />
         </svg>
-        {/* Glow blobs */}
         <div style={{
-          position: 'absolute', top: '-10%', right: '-5%', width: '45vw', height: '45vw',
-          borderRadius: '50%', background: 'radial-gradient(circle, rgba(25,118,210,0.07) 0%, transparent 70%)',
+          position: 'absolute', top: '-8%', left: '-4%', width: '42vw', height: '42vw',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(25,118,210,0.06) 0%, transparent 70%)',
           filter: 'blur(60px)',
         }} />
         <div style={{
-          position: 'absolute', bottom: '-5%', left: '-5%', width: '35vw', height: '35vw',
-          borderRadius: '50%', background: 'radial-gradient(circle, rgba(144,202,249,0.08) 0%, transparent 70%)',
+          position: 'absolute', bottom: '-6%', right: '-4%', width: '38vw', height: '38vw',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(144,202,249,0.07) 0%, transparent 70%)',
           filter: 'blur(50px)',
         }} />
+        {/* Floating dots */}
+        {[
+          { top: '10%', right: '8%', size: 5 },
+          { top: '45%', left: '5%', size: 4 },
+          { bottom: '18%', right: '15%', size: 6 },
+          { top: '70%', left: '12%', size: 3 },
+        ].map((dot, i) => (
+          <motion.div
+            key={i}
+            animate={{ y: [0, -14, 0], opacity: [0.25, 0.65, 0.25] }}
+            transition={{ duration: 3.5 + i * 0.6, repeat: Infinity, ease: 'easeInOut', delay: i * 0.6 }}
+            style={{
+              position: 'absolute', ...dot,
+              width: dot.size, height: dot.size,
+              borderRadius: '50%', background: BLUE,
+              boxShadow: `0 0 ${dot.size * 3}px ${BLUE}`,
+            }}
+          />
+        ))}
       </div>
 
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 3rem)', position: 'relative', zIndex: 10 }}>
 
-        {/* ── Section header ──────────────────────────────────────── */}
+        {/* ── Header ──────────────────────────────────────────────── */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -170,7 +190,7 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.35rem 1rem',
-              background: BLUE_LIGHT, border: `1px solid rgba(25,118,210,0.18)`,
+              background: BLUE_LIGHT, border: '1px solid rgba(25,118,210,0.18)',
               borderRadius: '100px', marginBottom: '1.5rem',
             }}
           >
@@ -179,25 +199,25 @@ export default function CapitalNetworkSection({ className }: { className?: strin
               fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.2em',
               textTransform: 'uppercase', color: BLUE, fontFamily: "'Inter', sans-serif",
             }}>
-              Capital Network &amp; Fundraising Support
+              Post-Fundraising &amp; Strategic Partnership
             </span>
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(14px)' }}
+            animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: 'clamp(2.35rem, 3.8vw, 3.75rem)',
               fontWeight: 700, color: TEXT_MAIN,
               letterSpacing: '-0.02em', lineHeight: 1.15,
-              margin: '0 auto 1.5rem', maxWidth: 900, display: 'block',
-              textAlign: 'center',
+              margin: '0 auto 1.5rem', maxWidth: 850,
+              display: 'block', textAlign: 'center',
             }}
           >
-            Strategic Capital Support Beyond{' '}
-            <span style={{ color: BLUE }}>Investor Introductions.</span>
+            Built For Long-Term Venture Alignment{' '}
+            <span style={{ color: BLUE }}>Beyond Capital.</span>
           </motion.h2>
 
           <motion.p
@@ -210,28 +230,28 @@ export default function CapitalNetworkSection({ className }: { className?: strin
               fontFamily: "'Inter', sans-serif",
             }}
           >
-            ZTH supports ventures during active fundraising through strategic guidance, investor preparation, curated ecosystem access, and structured fundraising coordination.
+            ZTH continues supporting ventures beyond fundraising through strategic advisory, operational execution, financial guidance, and long-term ecosystem partnerships designed for sustainable growth.
           </motion.p>
         </div>
 
-        {/* ── During Fundraising Support ──────────────────────────── */}
-        <SectionLabel title="During Fundraising Support" delay={0.15} />
-        <div className="cards-grid-net">
+        {/* ── Strategic Partnership ────────────────────────────────── */}
+        <SectionLabel title="Strategic Partnership" delay={0.15} />
+        <div className="cards-grid-cap">
           {cat1.map((item, i) => (
-            <Card3D key={item.title} {...item} delay={0.1 + i * 0.07} />
+            <Card3D key={item.title} {...item} delay={0.1 + i * 0.08} accent={BLUE} />
           ))}
         </div>
 
-        {/* ── Capital Network ─────────────────────────────────────── */}
-        <SectionLabel title="Capital Network" delay={0.2} />
-        <div className="exec-grid-net">
+        {/* ── Execution Network ────────────────────────────────────── */}
+        <SectionLabel title="Execution Network" delay={0.2} />
+        <div className="exec-grid-cap">
           {cat2.map((item, i) => (
-            <Card3D key={item.title} {...item} delay={0.1 + i * 0.09} color="#0D47A1" />
+            <Card3D key={item.title} {...item} delay={0.1 + i * 0.07} accent={BLUE_DARK} />
           ))}
         </div>
 
-        {/* ── Ecosystem Highlights ────────────────────────────────── */}
-        <SectionLabel title="Ecosystem Highlights" delay={0.25} />
+        {/* ── Traction strip ──────────────────────────────────────── */}
+        <SectionLabel title="Traction Strip" delay={0.25} />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -254,12 +274,13 @@ export default function CapitalNetworkSection({ className }: { className?: strin
               initial={{ opacity: 0, x: -12 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 + i * 0.07 }}
+              transition={{ duration: 0.4, delay: 0.08 + i * 0.07 }}
               style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}
             >
               <div style={{
                 width: 36, height: 36, borderRadius: '10px',
-                background: BLUE_LIGHT, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: BLUE_LIGHT,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,
               }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE }} />
@@ -287,16 +308,17 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             whileTap={{ scale: 0.97 }}
             onClick={() => window.location.href = '/book'}
             style={{
-              background: `linear-gradient(135deg, ${BLUE}, #0D47A1)`,
+              background: `linear-gradient(135deg, ${BLUE}, ${BLUE_DARK})`,
               color: '#fff', border: 'none', borderRadius: '9999px',
               padding: '1rem 2.5rem', fontSize: '1rem', fontWeight: 700,
               cursor: 'pointer', fontFamily: "'Inter', sans-serif",
-              boxShadow: '0 8px 24px rgba(25,118,210,0.25)', letterSpacing: '-0.01em',
-              transition: 'all 0.3s ease',
+              boxShadow: '0 8px 24px rgba(25,118,210,0.25)',
+              letterSpacing: '-0.01em', transition: 'all 0.3s ease',
             }}
           >
-            Apply For Capital Support →
+            Explore Strategic Partnership →
           </motion.button>
+
           <motion.button
             whileHover={{ scale: 1.04, borderColor: BLUE, color: BLUE, background: BLUE_LIGHT }}
             whileTap={{ scale: 0.97 }}
@@ -309,29 +331,29 @@ export default function CapitalNetworkSection({ className }: { className?: strin
               letterSpacing: '-0.01em', transition: 'all 0.3s ease',
             }}
           >
-            Join The Network
+            Partner With ZTH
           </motion.button>
         </motion.div>
       </div>
 
       <style jsx>{`
-        .spotlight-card-net:hover .card-underline-net {
+        .spotlight-card-cap:hover .card-underline-cap {
           opacity: 1 !important;
           transform: scaleX(1) !important;
         }
-        .cards-grid-net {
+        .cards-grid-cap {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.25rem;
+        }
+        .exec-grid-cap {
           display: grid;
           grid-template-columns: repeat(5, 1fr);
           gap: 1.25rem;
         }
-        .exec-grid-net {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
-        }
-        @media (max-width: 1400px) { .cards-grid-net { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 1024px) { .cards-grid-net { grid-template-columns: repeat(2, 1fr); } .exec-grid-net { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 640px)  { .cards-grid-net { grid-template-columns: 1fr; } .exec-grid-net { grid-template-columns: 1fr; } }
+        @media (max-width: 1400px) { .exec-grid-cap { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 1024px) { .cards-grid-cap { grid-template-columns: repeat(2, 1fr); } .exec-grid-cap { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px)  { .cards-grid-cap { grid-template-columns: 1fr; } .exec-grid-cap { grid-template-columns: 1fr; } }
       `}</style>
     </section>
   );

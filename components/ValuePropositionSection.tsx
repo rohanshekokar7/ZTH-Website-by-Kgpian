@@ -164,8 +164,8 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
           <motion.div variants={itemVariants} style={{ textAlign: "center" }}>
             <motion.button
               onClick={onCTAClick}
-              whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(25,118,210,0.3)" }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 24px rgba(25,118,210,0.22)" }}
+              whileTap={{ scale: 0.98 }}
               style={{
                 fontSize: "1.05rem", padding: "1.2rem 2.75rem",
                 display: "inline-flex", alignItems: "center", gap: "0.75rem",

@@ -1,17 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const scale = useTransform(scrollYProgress, [0, 0.4, 1], [0.9, 1, 0.96]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.5]);
 
   return (
-    <section ref={containerRef} className="section-pad"
+    <section className="section-pad"
       style={{ background: "#FFFFFF", position: "relative", overflow: "hidden" }}
     >
       {/* Top separator */}
@@ -28,8 +23,13 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
         filter: "blur(80px)", pointerEvents: "none",
       }} />
 
-      <div className="container-xl" style={{ perspective: 1200 }}>
-        <motion.div style={{ scale, opacity, transformStyle: "preserve-3d" }}>
+      <div className="container-xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div style={{
             background: "linear-gradient(145deg, #0A192F 0%, #112240 100%)",
             border: "1px solid rgba(25,118,210,0.3)",
@@ -70,10 +70,10 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
             </motion.div>
 
             <motion.h2
-              initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 fontWeight: 700,
                 fontSize: "clamp(2.25rem, 4vw, 3.75rem)", color: "#FFFFFF",
@@ -102,8 +102,8 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
             >
               <motion.button
                 onClick={onCTAClick}
-                whileHover={{ scale: 1.05, boxShadow: "0 12px 48px rgba(25,118,210,0.4)" }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02, boxShadow: "0 10px 32px rgba(25,118,210,0.3)" }}
+                whileTap={{ scale: 0.98 }}
                 style={{
                   fontSize: "1.05rem", padding: "1.1rem 2.75rem",
                   background: "#1976D2", color: "#fff", border: "none",
@@ -117,8 +117,8 @@ export default function CTASection({ onCTAClick }: { onCTAClick: () => void }) {
               </motion.button>
               <motion.button
                 onClick={() => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })}
-                whileHover={{ scale: 1.05, borderColor: "#90CAF9", color: "#90CAF9" }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ borderColor: "#90CAF9", color: "#90CAF9" }}
+                whileTap={{ scale: 0.98 }}
                 style={{
                   fontSize: "1.05rem", padding: "1.1rem 2.75rem",
                   background: "transparent", color: "#FFFFFF",

@@ -60,29 +60,6 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
         }}
       />
 
-      {/* Floating orbs */}
-      <motion.div
-        animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          position: "absolute", top: "15%", right: "8%",
-          width: 350, height: 350, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(25,118,210,0.06) 0%, transparent 65%)",
-          filter: "blur(50px)", pointerEvents: "none",
-          zIndex: 2,
-        }}
-      />
-      <motion.div
-        animate={{ y: [0, 15, 0], x: [0, -8, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        style={{
-          position: "absolute", bottom: "20%", left: "5%",
-          width: 280, height: 280, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(25,118,210,0.05) 0%, transparent 65%)",
-          filter: "blur(50px)", pointerEvents: "none",
-          zIndex: 2,
-        }}
-      />
 
       {/* Content */}
       <div className="container-xl" style={{ textAlign: "center", position: "relative", zIndex: 3, transform: "translateY(-1.5vh)" }}>
@@ -102,9 +79,7 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
             backdropFilter: "blur(8px)",
           }}
         >
-          <motion.div animate={{ rotate: [0, 180, 360] }} transition={{ duration: 3, repeat: Infinity }}>
-            <Sparkles size={14} color="#1976D2" />
-          </motion.div>
+          <Sparkles size={14} color="#1976D2" />
           <span style={{
             fontFamily: "'Inter', sans-serif", fontSize: "0.7rem", fontWeight: 600,
             letterSpacing: "0.2em", textTransform: "uppercase", color: "#000000",

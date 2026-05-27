@@ -41,8 +41,8 @@ export default function FundingSection({ onCTAClick }: { onCTAClick?: () => void
       <div className="container-xl" style={{ position: "relative" }}>
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             style={{
               display: "inline-flex", alignItems: "center", gap: "0.5rem",
@@ -60,10 +60,10 @@ export default function FundingSection({ onCTAClick }: { onCTAClick?: () => void
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontWeight: 700,
               fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#1A1A1A",
@@ -149,8 +149,8 @@ export default function FundingSection({ onCTAClick }: { onCTAClick?: () => void
           <motion.button
             className="btn-primary"
             onClick={onCTAClick}
-            whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(25,118,210,0.25)" }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02, boxShadow: "0 10px 28px rgba(25,118,210,0.22)" }}
+            whileTap={{ scale: 0.98 }}
             style={{
               fontSize: "1rem", padding: "1rem 2.5rem", background: "#1976D2",
               color: "#fff", border: "none", borderRadius: "100px",

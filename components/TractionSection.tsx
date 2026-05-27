@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 function AnimatedCounter({ value, suffix, delay }: { value: number; suffix: string; delay: number }) {
@@ -41,10 +41,6 @@ function AnimatedCounter({ value, suffix, delay }: { value: number; suffix: stri
 
 export default function TractionSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [60, 0, 0, -40]);
 
   return (
     <section
@@ -62,7 +58,7 @@ export default function TractionSection() {
         background: "linear-gradient(90deg, transparent, rgba(25,118,210,0.12), transparent)",
       }} />
 
-      <motion.div className="container-xl" style={{ opacity, y }}>
+      <div className="container-xl">
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <motion.p
             className="label-small"
@@ -111,12 +107,10 @@ export default function TractionSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.3, delay: stat.delay * 0.5, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -6, boxShadow: "0 20px 50px rgba(0,0,0,0.08)" }}
               style={{
                 padding: "2rem", display: "flex", flexDirection: "column",
                 textAlign: "left", background: "#F5F7FA", borderRadius: "1.25rem",
-                border: "1px solid #e5e7eb", cursor: "pointer",
-                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                border: "1px solid #e5e7eb",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
               }}
             >
@@ -136,7 +130,7 @@ export default function TractionSection() {
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

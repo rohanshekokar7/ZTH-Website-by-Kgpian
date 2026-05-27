@@ -55,7 +55,7 @@ export default function ServicesSection({ onCTAClick }: { onCTAClick: () => void
               key={service.title}
               initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.04 }}
-              whileHover={{ y: -6, boxShadow: "0 20px 50px rgba(0,0,0,0.08)", borderColor: "rgba(25,118,210,0.2)" }}
+              whileHover={{ y: -3, boxShadow: "0 12px 32px rgba(0,0,0,0.07)", borderColor: "rgba(25,118,210,0.18)" }}
               style={{
                 padding: "2rem", position: "relative", cursor: "pointer",
                 borderRadius: "1.25rem", background: "#ffffff",
@@ -113,8 +113,8 @@ export default function ServicesSection({ onCTAClick }: { onCTAClick: () => void
         >
           <motion.button
             onClick={onCTAClick}
-            whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(25,118,210,0.25)" }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02, boxShadow: "0 10px 28px rgba(25,118,210,0.22)" }}
+            whileTap={{ scale: 0.98 }}
             style={{
               background: "#1976D2", color: "#fff", border: "none", borderRadius: "100px",
               padding: "0.875rem 2rem", fontFamily: "'Inter', sans-serif", fontWeight: 600,
