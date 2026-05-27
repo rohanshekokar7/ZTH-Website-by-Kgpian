@@ -128,6 +128,8 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
   const [activeLink, setActiveLink] = useState("Home");
   const [modalOpen, setModalOpen] = useState(false);
   const [pendingService, setPendingService] = useState<string | undefined>(undefined);
+  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
+  const [isNavHovered, setIsNavHovered] = useState(false);
 
   const openServiceModal = (service: string) => {
     setPendingService(service);
@@ -220,21 +222,24 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         }} />
 
         {/* ── Main bar ────────────────────────────────────────── */}
-        <div style={{
-          background: scrolled ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.5)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "1px solid rgba(0,0,0,0.03)",
-          boxShadow: scrolled
-            ? "0 8px 40px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04)"
-            : "none",
-          transition: "background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease",
-          padding: "0 2.5rem",
-          height: 66,
-          display: "flex", alignItems: "center",
-          justifyContent: "space-between",
-          gap: "1.5rem",
-        }}>
+        <div
+          onMouseEnter={() => setIsNavHovered(true)}
+          onMouseLeave={() => setIsNavHovered(false)}
+          style={{
+            background: isNavHovered ? "rgba(255, 255, 255, 1)" : (scrolled ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.5)"),
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "1px solid rgba(0,0,0,0.03)",
+            boxShadow: scrolled
+              ? "0 8px 40px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04)"
+              : "none",
+            transition: "background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease",
+            padding: "0 2.5rem",
+            height: 66,
+            display: "flex", alignItems: "center",
+            justifyContent: "space-between",
+            gap: "1.5rem",
+          }}>
 
           {/* ── Logo ──────────────────────────────────────────── */}
           <a
@@ -256,7 +261,13 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
             }}
           >
             {navLinks.map((link) => (
-              <div key={link.label} className="nav-item-container" style={{ position: "relative" }}>
+              <div
+                key={link.label}
+                className="nav-item-container"
+                style={{ position: "relative" }}
+                onMouseEnter={() => link.dropdown && setHoveredMenu(link.label)}
+                onMouseLeave={() => setHoveredMenu(null)}
+              >
                 <button
                   onClick={() => handleNavClick(link.href, link.label)}
                   className={`nav-btn ${activeLink === link.label ? "nav-btn-active" : ""}`}
@@ -279,9 +290,14 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                   {link.label}
                   {link.dropdown && (
                     <ChevronDown
-                      size={11}
+                      size={14}
                       className="dropdown-icon"
-                      style={{ opacity: 0.6, transition: "transform 0.25s ease", flexShrink: 0 }}
+                      style={{
+                        opacity: 0.6,
+                        transition: "transform 0.25s ease",
+                        flexShrink: 0,
+                        transform: hoveredMenu === link.label ? "rotate(180deg)" : "rotate(0deg)"
+                      }}
                     />
                   )}
                 </button>
@@ -293,7 +309,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                     top: "calc(100% + 16px)",
                     left: "50%",
                     transform: "translateX(-50%)",
-                    minWidth: 560,
+                    minWidth: 680,
                     background: "rgba(255, 255, 255, 0.98)",
                     backdropFilter: "blur(32px)",
                     WebkitBackdropFilter: "blur(32px)",
@@ -330,12 +346,12 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                             margin: "0.5rem 0",
                           }} />
                         )}
-                        <div style={{ minWidth: 200 }}>
+                        <div style={{ minWidth: 260 }}>
                           <p style={{
                             color: "#1976D2",
-                            fontSize: "0.78rem",
-                            fontWeight: 700,
-                            letterSpacing: "0.16em",
+                            fontSize: "0.95rem",
+                            fontWeight: 800,
+                            letterSpacing: "0.15em",
                             textTransform: "uppercase",
                             margin: "0 0 1.1rem",
                             fontFamily: "'Inter', sans-serif",
@@ -529,6 +545,24 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           </button>
         </div>
       </div>
+
+      {/* ── Page Blur Overlay ── */}
+      <div
+        style={{
+          position: "fixed",
+          top: 66,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: "rgba(255, 255, 255, 0.08)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          zIndex: 999,
+          pointerEvents: "none",
+          opacity: hoveredMenu ? 1 : 0,
+          transition: "opacity 0.3s ease",
+        }}
+      />
 
       <style jsx>{`
         /* Responsive */

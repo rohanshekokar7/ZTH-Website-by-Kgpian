@@ -83,14 +83,14 @@ export default function BookPage() {
       background: "#ffffff",
       fontFamily: "'Inter', sans-serif",
       position: "relative",
-      overflow: "hidden",
     }}>
 
       {/* ── LEFT COLUMN — Pitch Deck Background ── */}
       <div style={{
-        position: "relative",
+        position: "sticky",
+        top: 0,
         overflow: "hidden",
-        minHeight: "100vh",
+        height: "100vh",
       }}>
         {/* Background image */}
         <div style={{
@@ -192,9 +192,7 @@ export default function BookPage() {
         background: "#ffffff",
         display: "flex", flexDirection: "column",
         padding: "clamp(2.5rem, 5vw, 5rem)",
-        overflowY: "auto",
         borderLeft: "1px solid #f0f0f0",
-        minHeight: 0,
       }}>
         <AnimatePresence mode="wait">
           {submitted ? (
