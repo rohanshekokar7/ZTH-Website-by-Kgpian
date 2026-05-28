@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { Play, MessageSquare, Target, UserCheck, BarChart } from "lucide-react";
 import Link from "next/link";
 
@@ -17,6 +17,61 @@ const stats = [
   { value: "5×", label: "Higher Response Rate" },
   { value: "80%", label: "Higher Conversion Chances" },
 ];
+
+function AnimatedStat({ stat, index }: { stat: { value: string, label: string }, index: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [count, setCount] = useState(0);
+
+  const targetStr = stat.value;
+  const targetNum = parseInt(targetStr.replace(/\D/g, ""));
+  const suffix = targetStr.replace(/[0-9]/g, "");
+
+  useEffect(() => {
+    if (isInView) {
+      let start = 0;
+      const duration = 2000;
+      const increment = targetNum / (duration / 16);
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= targetNum) {
+          setCount(targetNum);
+          clearInterval(timer);
+        } else {
+          setCount(Math.ceil(start));
+        }
+      }, 16);
+      return () => clearInterval(timer);
+    }
+  }, [isInView, targetNum]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }} 
+      whileInView={{ opacity: 1, y: 0 }} 
+      viewport={{ once: true }}
+      whileHover={{ y: -8, scale: 1.03 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      style={{ 
+        textAlign: "center", 
+        padding: "2.5rem 1.5rem", 
+        borderRadius: "1.25rem", 
+        cursor: "default",
+        background: "linear-gradient(145deg, #ffffff 0%, #f4f9ff 100%)",
+        border: "1px solid rgba(25, 118, 210, 0.1)",
+        boxShadow: "0 10px 30px rgba(25, 118, 210, 0.05)"
+      }}
+    >
+      <div style={{ fontSize: "2.5rem", fontWeight: 900, color: "#1976D2", marginBottom: "0.75rem" }}>
+        {count}{suffix}
+      </div>
+      <p style={{ color: "#4A4A4A", fontSize: "0.95rem", lineHeight: 1.6, fontWeight: 500 }}>
+        {stat.label}
+      </p>
+    </motion.div>
+  );
+}
 
 export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -141,28 +196,45 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
         </div>
 
         {/* Stats Section */}
-        <div style={{
-          background: "#FFFFFF", borderRadius: "1.5rem", padding: "4rem",
-          boxShadow: "0 10px 40px rgba(0,0,0,0.03)", marginBottom: "6rem",
-          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "3rem"
-        }}>
+        <motion.div 
+          initial="rest"
+          whileHover="hover"
+          animate="rest"
+          style={{ position: "relative", borderRadius: "1.5rem", marginBottom: "6rem" }}
+        >
+          {/* Animated Gradient Border Layer */}
+          <motion.div
+            variants={{
+              rest: { opacity: 0, scale: 0.98 },
+              hover: { opacity: 1, scale: 1 }
+            }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            style={{
+              position: "absolute", inset: "-2px", borderRadius: "calc(1.5rem + 2px)",
+              background: "linear-gradient(135deg, #1976D2 0%, #90CAF9 100%)",
+              zIndex: 0, pointerEvents: "none"
+            }}
+          />
+          
+          {/* Main White Content Card */}
+          <motion.div
+            variants={{
+              rest: { boxShadow: "0 10px 40px rgba(0,0,0,0.03)" },
+              hover: { boxShadow: "0 25px 60px rgba(25,118,210,0.12)" }
+            }}
+            transition={{ duration: 0.4 }}
+            style={{
+              position: "relative", zIndex: 1,
+              background: "#FFFFFF", borderRadius: "1.5rem", padding: "4rem",
+              display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "3rem",
+              height: "100%"
+            }}
+          >
           {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              whileHover={{ y: -5, scale: 1.05 }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              style={{ textAlign: "center", padding: "1.5rem", borderRadius: "1rem", cursor: "default" }}
-            >
-              <div style={{ fontSize: "2.25rem", fontWeight: 900, color: "#1976D2", marginBottom: "0.5rem", transition: "color 0.3s ease" }}>
-                {stat.value}
-              </div>
-              <p style={{ color: "#4A4A4A", fontSize: "0.95rem", lineHeight: 1.5 }}>
-                {stat.label}
-              </p>
-            </motion.div>
+            <AnimatedStat key={index} stat={stat} index={index} />
           ))}
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* CTA Section */}
         <motion.div
