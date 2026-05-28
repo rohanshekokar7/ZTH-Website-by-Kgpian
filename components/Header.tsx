@@ -105,7 +105,6 @@ const navLinks = [
     ],
   },
   { label: "Investor Mock Room", href: "/#mock-room" },
-  { label: "ZTH Insider", href: "/#zth-insider" },
 ];
 
 // Map section IDs → nav label
@@ -116,8 +115,6 @@ const sectionMap: Record<string, string> = {
   "post-fundraise": "Post-Fundraise",
   "funding": "Post-Fundraise",
   "mock-room": "Investor Mock Room",
-  "insider": "ZTH Insider",
-  "zth-insider": "ZTH Insider",
 };
 
 export default function Header({ onBookNow }: { onBookNow: () => void }) {

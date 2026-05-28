@@ -2,11 +2,10 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Play, Users, MessageSquare, Target, UserCheck, BarChart } from "lucide-react";
+import { Play, MessageSquare, Target, UserCheck, BarChart } from "lucide-react";
 import Link from "next/link";
 
 const features = [
-  { icon: Users, title: "Live Investor Simulations", desc: "Experience realistic fundraising conversations designed to mirror actual VC and investor meetings." },
   { icon: MessageSquare, title: "Strategic Pitch Feedback", desc: "Receive detailed feedback on storytelling, structure, communication clarity, and investor appeal." },
   { icon: Target, title: "High-Pressure Q&A Practice", desc: "Prepare for difficult investor questions around traction, scalability, valuation, competition, and financials." },
   { icon: UserCheck, title: "Founder Communication Training", desc: "Improve confidence, delivery, pacing, presentation flow, and executive presence during pitches." },
@@ -14,9 +13,9 @@ const features = [
 ];
 
 const stats = [
-  { value: "95%", label: "Founders feel more prepared after mock investor sessions." },
-  { value: "3x", label: "Better pitch clarity through structured feedback loops." },
-  { value: "Real-Time", label: "Investor questioning and strategic response analysis." },
+  { value: "73%", label: "Of decks fail early, we fix that with investor-first narratives." },
+  { value: "5×", label: "Higher Response Rate" },
+  { value: "80%", label: "Higher Conversion Chances" },
 ];
 
 export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => void }) {
@@ -113,7 +112,7 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
             <div style={{
               background: "#1A1A1A", borderRadius: "1.5rem", overflow: "hidden",
               boxShadow: "0 25px 60px rgba(0,0,0,0.1)", position: "relative",
-              aspectRatio: "4/5", display: "flex", flexDirection: "column", justifyContent: "center", padding: "3rem"
+              display: "flex", flexDirection: "column", justifyContent: "center", padding: "4rem 3rem"
             }}>
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(25,118,210,0.15) 0%, transparent 100%)" }} />
 
@@ -151,13 +150,14 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              whileHover={{ y: -5, scale: 1.05 }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
               style={{ textAlign: "center", padding: "1.5rem", borderRadius: "1rem", cursor: "default" }}
             >
-              <div style={{ fontSize: "3rem", fontWeight: 900, color: "#1976D2", marginBottom: "0.5rem", transition: "transform 0.3s ease" }}>
+              <div style={{ fontSize: "2.25rem", fontWeight: 900, color: "#1976D2", marginBottom: "0.5rem", transition: "color 0.3s ease" }}>
                 {stat.value}
               </div>
-              <p style={{ color: "#4A4A4A", fontSize: "1.05rem", lineHeight: 1.5 }}>
+              <p style={{ color: "#4A4A4A", fontSize: "0.95rem", lineHeight: 1.5 }}>
                 {stat.label}
               </p>
             </motion.div>

@@ -15,6 +15,7 @@ import PitchDeckServices from "@/components/PitchDeckServices";
 import CapitalSection from "@/components/CapitalSection";
 import CapitalNetworkSection from "@/components/CapitalNetworkSection";
 import MockRoomSection from "@/components/MockRoomSection";
+import ZthInsiderSection from "@/components/ZthInsiderSection";
 
 export default function HomePage() {
   const router = useRouter();
@@ -52,6 +53,7 @@ export default function HomePage() {
             </div>
 
             <TestimonialsAndLogos />
+            <ZthInsiderSection />
 
           </div>
         </main>
