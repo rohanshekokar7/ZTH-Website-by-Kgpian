@@ -11,37 +11,91 @@ const pitchDeckCards = [
     color: '#ffffff',
     title: 'Compelling Narrative',
     description: 'Craft a story that captures investor attention from the first slide.',
-    label: 'Storytelling'
+    label: 'Storytelling',
+    content: (
+      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+          <li style={{ marginBottom: "0.5rem" }}>✓ The "Why Now" factor</li>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Problem formulation</li>
+          <li>✓ Founder's vision & origin</li>
+        </ul>
+      </div>
+    )
   },
   {
     color: '#ffffff',
     title: 'Financial Modeling',
     description: 'Showcase solid unit economics and a clear path to profitability.',
-    label: 'Numbers'
+    label: 'Numbers',
+    content: (
+      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+          <li style={{ marginBottom: "0.5rem" }}>✓ 3-5 Year Projections</li>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Customer Acquisition Cost (CAC)</li>
+          <li>✓ Lifetime Value (LTV)</li>
+        </ul>
+      </div>
+    )
   },
   {
     color: '#ffffff',
     title: 'Market Analysis',
     description: 'Demonstrate deep understanding of market size and dynamics.',
-    label: 'Opportunity'
+    label: 'Opportunity',
+    content: (
+      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Total Addressable Market (TAM)</li>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Ideal Customer Profile (ICP)</li>
+          <li>✓ Emerging Growth Trends</li>
+        </ul>
+      </div>
+    )
   },
   {
     color: '#ffffff',
     title: 'Competitive Edge',
     description: 'Highlight your unique value propositions and defensive moats.',
-    label: 'Strategy'
+    label: 'Strategy',
+    content: (
+      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Direct/Indirect Competitor Matrix</li>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Unique Selling Proposition (USP)</li>
+          <li>✓ Long-term Defensive Moats</li>
+        </ul>
+      </div>
+    )
   },
   {
     color: '#ffffff',
     title: 'Proven Traction',
     description: 'Provide hard evidence of growth and product-market fit.',
-    label: 'Momentum'
+    label: 'Momentum',
+    content: (
+      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Monthly Recurring Revenue (MRR)</li>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Active Users & Engagement</li>
+          <li>✓ Key Strategic Partnerships</li>
+        </ul>
+      </div>
+    )
   },
   {
     color: '#ffffff',
     title: 'The Ask',
     description: 'Clearly define capital requirements and exact use of funds.',
-    label: 'Investment'
+    label: 'Investment',
+    content: (
+      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Total Capital Required</li>
+          <li style={{ marginBottom: "0.5rem" }}>✓ Fund Allocation Breakdown</li>
+          <li>✓ 18-24 Month Runway Milestones</li>
+        </ul>
+      </div>
+    )
   }
 ];
 

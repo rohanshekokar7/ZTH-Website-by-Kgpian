@@ -117,7 +117,7 @@ export default function TestimonialsAndLogos() {
           fadeOut={true}
           fadeOutColor="#ffffff"
           ariaLabel="Featured in logos"
-          renderItem={(item) => (
+          renderItem={(item: any) => (
             <div className="logoloop__node">
               <div
                 style={{
