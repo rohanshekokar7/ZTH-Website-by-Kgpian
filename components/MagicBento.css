@@ -53,16 +53,10 @@
 }
 
 .magic-bento-card__label {
-  font-size: 13px;
+  font-size: 15px;
   font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(25, 118, 210, 0.9);
-  background: rgba(25, 118, 210, 0.12);
-  padding: 0.2em 0.65em;
-  border-radius: 100px;
-  border: 1px solid rgba(25, 118, 210, 0.3);
+  font-weight: 400;
+  color: #475569;
   display: inline-block;
 }
 
@@ -107,12 +101,10 @@
   position: absolute;
   inset: 0;
   padding: 6px;
-  background: radial-gradient(
-    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
-    rgba(25, 118, 210, calc(var(--glow-intensity) * 0.8)) 0%,
-    rgba(25, 118, 210, calc(var(--glow-intensity) * 0.4)) 30%,
-    transparent 60%
-  );
+  background: radial-gradient(var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+      rgba(25, 118, 210, calc(var(--glow-intensity) * 0.8)) 0%,
+      rgba(25, 118, 210, calc(var(--glow-intensity) * 0.4)) 30%,
+      transparent 60%);
   border-radius: inherit;
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -177,6 +169,7 @@
     margin: 0 auto;
     padding: 0.5em;
   }
+
   .magic-bento-card {
     width: 100%;
     min-height: 180px;

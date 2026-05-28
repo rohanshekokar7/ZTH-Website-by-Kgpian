@@ -38,10 +38,6 @@ export default function HomePage() {
 
           {/* Wrapper for remaining sections so they slide over the sticky Hero */}
           <div style={{ position: "relative", zIndex: 10, background: "#FFFFFF", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>
-            <CurvedMarquee />
-            <div id="pre-fundraising">
-              <PitchDeckServices />
-            </div>
             <div id="strategic-partnership">
               <CapitalNetworkSection />
             </div>

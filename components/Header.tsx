@@ -206,30 +206,24 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         transform: `translateY(${isHidden ? "-100%" : "0"})`,
         transition: "transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
         fontFamily: "'Inter', sans-serif",
-        "--nav-text": "#000000",
-        "--nav-muted": "rgba(0,0,0,0.85)",
-        "--nav-hover-bg": "rgba(0,0,0,0.05)",
-        "--nav-active-bg": "rgba(0,0,0,0.05)",
+        "--nav-text": isNavHovered ? "#000000" : "#ffffff",
+        "--nav-muted": isNavHovered ? "rgba(0,0,0,0.85)" : "rgba(255,255,255,0.85)",
+        "--nav-hover-bg": isNavHovered ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.1)",
+        "--nav-active-bg": isNavHovered ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.1)",
       } as React.CSSProperties}>
-
-        {/* ── Top accent line ─────────────────────────────────── */}
-        <div style={{
-          height: 1,
-          background: "linear-gradient(90deg, transparent 0%, rgba(25,118,210,0.7) 25%, rgba(144,202,249,0.5) 50%, rgba(25,118,210,0.7) 75%, transparent 100%)",
-        }} />
 
         {/* ── Main bar ────────────────────────────────────────── */}
         <div
           onMouseEnter={() => setIsNavHovered(true)}
           onMouseLeave={() => setIsNavHovered(false)}
           style={{
-            background: isNavHovered ? "rgba(255, 255, 255, 1)" : (scrolled ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.5)"),
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
-            borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "1px solid rgba(0,0,0,0.03)",
-            boxShadow: scrolled
-              ? "0 8px 40px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04)"
-              : "none",
+            background: isNavHovered ? "rgba(255, 255, 255, 1)" : (scrolled ? "rgba(255, 255, 255, 0.05)" : "transparent"),
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            borderBottom: isNavHovered ? "1px solid rgba(0,0,0,0.07)" : (scrolled ? "1px solid rgba(255,255,255,0.1)" : "1px solid transparent"),
+            boxShadow: isNavHovered 
+              ? "0 8px 40px rgba(0,0,0,0.08)" 
+              : (scrolled ? "0 8px 40px rgba(0,0,0,0.08)" : "none"),
             transition: "background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease",
             padding: "0 2.5rem",
             height: 66,

@@ -17,7 +17,7 @@ export default function CurvedMarquee() {
 
     const animate = () => {
       offset -= 1.5; // adjust speed here
-      
+
       if (phraseWidth > 0 && offset <= -phraseWidth) {
         offset += phraseWidth;
       } else if (phraseWidth === 0 && offset <= -1000) {
@@ -43,11 +43,11 @@ export default function CurvedMarquee() {
 
   return (
     <div className="curved-marquee-container">
-      <svg className="curved-marquee-svg" viewBox="0 0 1200 250" preserveAspectRatio="xMidYMid meet">
-        {/* A very shallow, smooth sine wave that does one revolution per 1200px */}
+      <svg className="curved-marquee-svg" viewBox="0 0 1200 250" preserveAspectRatio="xMidYMid slice" overflow="visible">
+        {/* A shallower, smooth sine wave that fits in a smaller height */}
         <path
           id="curve-path"
-          d="M -200 125 Q 100 50 400 125 T 1000 125 T 1600 125 T 2200 125 T 2800 125 T 3400 125 T 4000 125 T 4600 125"
+          d="M -200 125 Q 100 85 400 125 T 1000 125 T 1600 125 T 2200 125 T 2800 125 T 3400 125 T 4000 125 T 4600 125"
           fill="transparent"
           stroke="transparent"
         />
@@ -60,7 +60,7 @@ export default function CurvedMarquee() {
       <style jsx>{`
         .curved-marquee-container {
           width: 100%;
-          height: 180px;
+          height: 120px; /* Reduced container height */
           overflow: hidden;
           background: transparent;
           display: flex;
@@ -68,21 +68,21 @@ export default function CurvedMarquee() {
           align-items: center;
           position: relative;
           z-index: 5;
-          padding: 1rem 0;
+          padding: 0; /* Removed padding to make it shorter */
         }
         .curved-marquee-svg {
           width: 100%;
-          min-width: 1000px; /* ensure the curve doesn't squish too much */
-          height: 200px;
+          min-width: 1000px;
+          height: 140px; /* Reduced SVG height */
           display: block;
         }
         .curved-marquee-text {
           font-family: 'Playfair Display', 'Georgia', serif;
-          font-size: 56px;
+          font-size: 30px; 
           font-style: normal;
           font-weight: 500;
           letter-spacing: 0.05em;
-          fill: #111827; /* dark text for light theme */
+          fill: #111827; 
         }
       `}</style>
     </div>

@@ -1,5 +1,7 @@
+"use client";
 import { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
+import { useRouter } from 'next/navigation';
 import './MagicBento.css';
 
 const DEFAULT_PARTICLE_COUNT = 12;
@@ -50,7 +52,8 @@ const ParticleCard = ({
   glowColor = DEFAULT_GLOW_COLOR,
   enableTilt = true,
   clickEffect = false,
-  enableMagnetism = false
+  enableMagnetism = false,
+  onClick
 }) => {
   const cardRef = useRef(null);
   const particlesRef = useRef([]);
@@ -208,7 +211,10 @@ const ParticleCard = ({
     };
 
     const handleClick = e => {
-      if (!clickEffect) return;
+      if (!clickEffect) {
+        if (onClick) onClick(e);
+        return;
+      }
 
       const rect = element.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -250,7 +256,10 @@ const ParticleCard = ({
           opacity: 0,
           duration: 0.6,
           ease: 'power2.out',
-          onComplete: () => ripple.remove()
+          onComplete: () => {
+            ripple.remove();
+            if (onClick) onClick(e);
+          }
         }
       );
     };
@@ -449,6 +458,7 @@ const MagicBento = ({
   enableMagnetism = true
 }) => {
   const gridRef = useRef(null);
+  const router = useRouter();
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
 
@@ -486,6 +496,9 @@ const MagicBento = ({
                 enableTilt={enableTilt}
                 clickEffect={clickEffect}
                 enableMagnetism={enableMagnetism}
+                onClick={() => {
+                  if (card.href) router.push(card.href);
+                }}
               >
                 <div className="magic-bento-card__header">
                   <div className="magic-bento-card__label">{card.label}</div>
@@ -566,7 +579,12 @@ const MagicBento = ({
                 };
 
                 const handleClick = e => {
-                  if (!clickEffect || shouldDisableAnimations) return;
+                  if (!clickEffect || shouldDisableAnimations) {
+                    if (card.href) {
+                      router.push(card.href);
+                    }
+                    return;
+                  }
 
                   const rect = el.getBoundingClientRect();
                   const x = e.clientX - rect.left;
@@ -608,7 +626,12 @@ const MagicBento = ({
                       opacity: 0,
                       duration: 0.6,
                       ease: 'power2.out',
-                      onComplete: () => ripple.remove()
+                      onComplete: () => {
+                        ripple.remove();
+                        if (card.href) {
+                          router.push(card.href);
+                        }
+                      }
                     }
                   );
                 };

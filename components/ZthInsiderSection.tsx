@@ -9,93 +9,45 @@ const BLUE = "#1976D2";
 const pitchDeckCards = [
   {
     color: '#ffffff',
-    title: 'Compelling Narrative',
-    description: 'Craft a story that captures investor attention from the first slide.',
-    label: 'Storytelling',
-    content: (
-      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
-        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-          <li style={{ marginBottom: "0.5rem" }}>✓ The "Why Now" factor</li>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Problem formulation</li>
-          <li>✓ Founder's vision & origin</li>
-        </ul>
-      </div>
-    )
+    title: 'Founder Narrative',
+    description: 'Craft a story that creates trust and conviction.',
+    label: 'INSIDER 01',
+    href: '/pitch-deck#founder-narrative'
   },
   {
     color: '#ffffff',
-    title: 'Financial Modeling',
-    description: 'Showcase solid unit economics and a clear path to profitability.',
-    label: 'Numbers',
-    content: (
-      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
-        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-          <li style={{ marginBottom: "0.5rem" }}>✓ 3-5 Year Projections</li>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Customer Acquisition Cost (CAC)</li>
-          <li>✓ Lifetime Value (LTV)</li>
-        </ul>
-      </div>
-    )
+    title: 'Investor Thinking',
+    description: 'Understand how investors evaluate startups.',
+    label: 'PLAYBOOK 02',
+    href: '/pitch-deck#investor-thinking'
   },
   {
     color: '#ffffff',
-    title: 'Market Analysis',
-    description: 'Demonstrate deep understanding of market size and dynamics.',
-    label: 'Opportunity',
-    content: (
-      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
-        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Total Addressable Market (TAM)</li>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Ideal Customer Profile (ICP)</li>
-          <li>✓ Emerging Growth Trends</li>
-        </ul>
-      </div>
-    )
+    title: 'Market Positioning',
+    description: 'Position your startup as an inevitable market leader.',
+    label: 'SIGNAL 03',
+    href: '/pitch-deck#market-positioning'
   },
   {
     color: '#ffffff',
-    title: 'Competitive Edge',
-    description: 'Highlight your unique value propositions and defensive moats.',
-    label: 'Strategy',
-    content: (
-      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
-        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Direct/Indirect Competitor Matrix</li>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Unique Selling Proposition (USP)</li>
-          <li>✓ Long-term Defensive Moats</li>
-        </ul>
-      </div>
-    )
+    title: 'Strategic Moats',
+    description: 'Build advantages competitors cannot easily replicate.',
+    label: 'FRAMEWORK 04',
+    href: '/pitch-deck#strategic-moats'
   },
   {
     color: '#ffffff',
-    title: 'Proven Traction',
-    description: 'Provide hard evidence of growth and product-market fit.',
-    label: 'Momentum',
-    content: (
-      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
-        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Monthly Recurring Revenue (MRR)</li>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Active Users & Engagement</li>
-          <li>✓ Key Strategic Partnerships</li>
-        </ul>
-      </div>
-    )
+    title: 'Growth Momentum',
+    description: 'Show signals that indicate long-term potential.',
+    label: 'STRATEGY 05',
+    href: '/pitch-deck#growth-momentum'
   },
   {
     color: '#ffffff',
-    title: 'The Ask',
-    description: 'Clearly define capital requirements and exact use of funds.',
-    label: 'Investment',
-    content: (
-      <div style={{ padding: "0 1rem", color: "#475569", fontSize: "0.95rem", lineHeight: 1.6 }}>
-        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Total Capital Required</li>
-          <li style={{ marginBottom: "0.5rem" }}>✓ Fund Allocation Breakdown</li>
-          <li>✓ 18-24 Month Runway Milestones</li>
-        </ul>
-      </div>
-    )
+    title: 'Raise Preparation',
+    description: 'Prepare for investor conversations with clarity.',
+    label: 'CAPITAL 06',
+    href: '/pitch-deck#raise-preparation'
   }
 ];
 
@@ -162,7 +114,7 @@ export default function ZthInsiderSection() {
 
         {/* Magic Bento Integration */}
         <div style={{ position: "relative", zIndex: 10 }}>
-          <MagicBento 
+          <MagicBento
             cards={pitchDeckCards}
             textAutoHide={false}
             enableStars={false}
