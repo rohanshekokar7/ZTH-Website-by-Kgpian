@@ -240,17 +240,21 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             background: '#ffffff',
             border: '1px solid rgba(25,118,210,0.1)',
             borderRadius: '1.5rem',
-            padding: '2.5rem 0',
+            padding: '1.75rem 0',
             overflow: 'hidden',
             boxShadow: '0 8px 32px rgba(25,118,210,0.05)',
             position: 'relative',
+            // Fade the strip in/out at the edges
+            WebkitMaskImage: 'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent)',
+            maskImage: 'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent)',
           }}
         >
+          {/* Items are duplicated so the -50% loop wraps seamlessly */}
           <div className="marquee-container" style={{ display: 'flex', width: 'max-content' }}>
-            {[...traction, ...traction, ...traction, ...traction].map((label, i) => (
+            {[...traction, ...traction].map((label, i) => (
               <div
                 key={`${label}-${i}`}
-                style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', paddingRight: '3rem' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', marginRight: '4rem' }}
               >
                 <div style={{
                   width: 36, height: 36, borderRadius: '10px',
@@ -317,10 +321,13 @@ export default function CapitalNetworkSection({ className }: { className?: strin
           100% { transform: translateX(-50%); }
         }
         .marquee-container {
-          animation: scroll-marquee 20s linear infinite;
+          animation: scroll-marquee 22s linear infinite;
         }
         .marquee-container:hover {
           animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-container { animation: none; }
         }
         .spotlight-card-net:hover .card-underline-net {
           opacity: 1 !important;

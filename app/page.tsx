@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import HeroCardsOverlay from "@/components/HeroCardsOverlay";
 import TestimonialsAndLogos from "@/components/TestimonialsAndLogos";
 import Footer from "@/components/Footer";
 import CapitalSection from "@/components/CapitalSection";
@@ -31,6 +32,10 @@ export default function HomePage() {
 
         <main>
           <HeroSection onCTAClick={goToBook} />
+
+          {/* Hero cards lifted above the content wrapper (z:10) so they stay on
+              top of the next section as it scrolls over the sticky hero */}
+          <HeroCardsOverlay />
 
           {/* Wrapper for remaining sections so they slide over the sticky Hero */}
           <div style={{ position: "relative", zIndex: 10, background: "#FFFFFF", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>

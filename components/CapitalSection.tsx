@@ -241,38 +241,36 @@ export default function CapitalSection({ className }: { className?: string }) {
             background: '#ffffff',
             border: '1px solid rgba(25,118,210,0.1)',
             borderRadius: '1.5rem',
-            padding: '2.5rem 3rem',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1.5rem',
+            padding: '1.75rem 0',
             boxShadow: '0 8px 32px rgba(25,118,210,0.05)',
+            overflow: 'hidden',
+            // Fade the strip in/out at the edges
+            WebkitMaskImage: 'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent)',
+            maskImage: 'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent)',
           }}
         >
-          {traction.map((label, i) => (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, x: -12 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.08 + i * 0.07 }}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}
-            >
-              <div style={{
-                width: 36, height: 36, borderRadius: '10px',
-                background: BLUE_LIGHT,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                flexShrink: 0,
-              }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE }} />
+          {/* Items are duplicated so the -50% loop wraps seamlessly */}
+          <div className="traction-track">
+            {[...traction, ...traction].map((label, i) => (
+              <div key={i} className="traction-item">
+                <div style={{
+                  width: 36, height: 36, borderRadius: '10px',
+                  background: BLUE_LIGHT,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0,
+                }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE }} />
+                </div>
+                <span style={{
+                  color: TEXT_MAIN, fontSize: '0.95rem', fontWeight: 700,
+                  fontFamily: "'Inter', sans-serif", letterSpacing: '-0.01em',
+                  whiteSpace: 'nowrap',
+                }}>
+                  {label}
+                </span>
               </div>
-              <span style={{
-                color: TEXT_MAIN, fontSize: '0.95rem', fontWeight: 700,
-                fontFamily: "'Inter', sans-serif", letterSpacing: '-0.01em',
-              }}>
-                {label}
-              </span>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </motion.div>
 
         {/* ── CTAs ────────────────────────────────────────────────── */}
@@ -320,6 +318,28 @@ export default function CapitalSection({ className }: { className?: string }) {
         .spotlight-card-cap:hover .card-underline-cap {
           opacity: 1 !important;
           transform: scaleX(1) !important;
+        }
+        /* ── Traction strip marquee ── */
+        .traction-track {
+          display: flex;
+          width: max-content;
+          animation: traction-marquee 22s linear infinite;
+        }
+        .traction-track:hover {
+          animation-play-state: paused;
+        }
+        .traction-item {
+          display: flex;
+          align-items: center;
+          gap: 0.875rem;
+          margin-right: 4rem; /* uniform spacing incl. the wrap boundary → seamless loop */
+        }
+        @keyframes traction-marquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .traction-track { animation: none; }
         }
         .cards-grid-cap {
           display: grid;

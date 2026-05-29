@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/lib/ThemeContext";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-import SmoothScroll from "@/components/SmoothScroll";
+
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -54,9 +54,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <SmoothScroll>
-          <ThemeProvider>{children}</ThemeProvider>
-        </SmoothScroll>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
