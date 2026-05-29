@@ -7,7 +7,7 @@ const riseVariants = {
   hidden: { y: -280, rotateX: -30, opacity: 0, scale: 0.82 },
   visible: (i: number) => ({
     y: 0, rotateX: 0, opacity: 1, scale: 1,
-    transition: { duration: 1.2, delay: i * 0.22, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 1.2, delay: i * 0.22, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
   }),
 };
 

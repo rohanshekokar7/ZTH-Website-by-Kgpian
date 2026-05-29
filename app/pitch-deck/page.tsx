@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } }
 };
 
 const staggerContainer = {
@@ -21,7 +21,7 @@ const staggerContainer = {
 
 const listItem = {
   hidden: { opacity: 0, x: -10 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" as const } }
 };
 
 export default function PitchDeckPage() {
