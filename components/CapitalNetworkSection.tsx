@@ -240,37 +240,35 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             background: '#ffffff',
             border: '1px solid rgba(25,118,210,0.1)',
             borderRadius: '1.5rem',
-            padding: '2.5rem 3rem',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1.5rem',
+            padding: '2.5rem 0',
+            overflow: 'hidden',
             boxShadow: '0 8px 32px rgba(25,118,210,0.05)',
+            position: 'relative',
           }}
         >
-          {traction.map((label, i) => (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, x: -12 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 + i * 0.07 }}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}
-            >
-              <div style={{
-                width: 36, height: 36, borderRadius: '10px',
-                background: BLUE_LIGHT, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                flexShrink: 0,
-              }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE }} />
+          <div className="marquee-container" style={{ display: 'flex', width: 'max-content' }}>
+            {[...traction, ...traction, ...traction, ...traction].map((label, i) => (
+              <div
+                key={`${label}-${i}`}
+                style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', paddingRight: '3rem' }}
+              >
+                <div style={{
+                  width: 36, height: 36, borderRadius: '10px',
+                  background: BLUE_LIGHT, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0,
+                }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE }} />
+                </div>
+                <span style={{
+                  color: TEXT_MAIN, fontSize: '0.95rem', fontWeight: 700,
+                  fontFamily: "'Inter', sans-serif", letterSpacing: '-0.01em',
+                  whiteSpace: 'nowrap'
+                }}>
+                  {label}
+                </span>
               </div>
-              <span style={{
-                color: TEXT_MAIN, fontSize: '0.95rem', fontWeight: 700,
-                fontFamily: "'Inter', sans-serif", letterSpacing: '-0.01em',
-              }}>
-                {label}
-              </span>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </motion.div>
 
         {/* ── CTAs ────────────────────────────────────────────────── */}
@@ -314,6 +312,16 @@ export default function CapitalNetworkSection({ className }: { className?: strin
       </div>
 
       <style jsx>{`
+        @keyframes scroll-marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-container {
+          animation: scroll-marquee 20s linear infinite;
+        }
+        .marquee-container:hover {
+          animation-play-state: paused;
+        }
         .spotlight-card-net:hover .card-underline-net {
           opacity: 1 !important;
           transform: scaleX(1) !important;

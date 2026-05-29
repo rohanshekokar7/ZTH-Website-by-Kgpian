@@ -5,15 +5,11 @@ import { useRouter } from "next/navigation";
 
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import CurvedMarquee from "@/components/CurvedMarquee";
-import PitchDeckSection from "@/components/PitchDeckSection";
-
 import TestimonialsAndLogos from "@/components/TestimonialsAndLogos";
-
 import Footer from "@/components/Footer";
-import PitchDeckServices from "@/components/PitchDeckServices";
 import CapitalSection from "@/components/CapitalSection";
 import CapitalNetworkSection from "@/components/CapitalNetworkSection";
+import CardShowcaseSection from "@/components/CardShowcaseSection";
 import MockRoomSection from "@/components/MockRoomSection";
 import ZthInsiderSection from "@/components/ZthInsiderSection";
 
@@ -38,6 +34,7 @@ export default function HomePage() {
 
           {/* Wrapper for remaining sections so they slide over the sticky Hero */}
           <div style={{ position: "relative", zIndex: 10, background: "#FFFFFF", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>
+            <CardShowcaseSection />
             <div id="strategic-partnership">
               <CapitalNetworkSection />
             </div>

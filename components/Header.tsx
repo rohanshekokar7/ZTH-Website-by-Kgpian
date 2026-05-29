@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, Fragment } from "react";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import ServiceModal from "./ServiceModal";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -123,15 +122,8 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
   const lastScrollY = useRef(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
-  const [modalOpen, setModalOpen] = useState(false);
-  const [pendingService, setPendingService] = useState<string | undefined>(undefined);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   const [isNavHovered, setIsNavHovered] = useState(false);
-
-  const openServiceModal = (service: string) => {
-    setPendingService(service);
-    setModalOpen(true);
-  };
 
   // Scroll hide/show + scrolled state
   useEffect(() => {
@@ -206,10 +198,10 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
         transform: `translateY(${isHidden ? "-100%" : "0"})`,
         transition: "transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
         fontFamily: "'Inter', sans-serif",
-        "--nav-text": isNavHovered ? "#000000" : "#ffffff",
-        "--nav-muted": isNavHovered ? "rgba(0,0,0,0.85)" : "rgba(255,255,255,0.85)",
-        "--nav-hover-bg": isNavHovered ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.1)",
-        "--nav-active-bg": isNavHovered ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.1)",
+        "--nav-text": (scrolled || isNavHovered) ? "#000000" : "#ffffff",
+        "--nav-muted": (scrolled || isNavHovered) ? "rgba(0,0,0,0.75)" : "rgba(255,255,255,0.85)",
+        "--nav-hover-bg": (scrolled || isNavHovered) ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.1)",
+        "--nav-active-bg": (scrolled || isNavHovered) ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.1)",
       } as React.CSSProperties}>
 
         {/* ── Main bar ────────────────────────────────────────── */}
@@ -217,44 +209,32 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           onMouseEnter={() => setIsNavHovered(true)}
           onMouseLeave={() => setIsNavHovered(false)}
           style={{
-            background: isNavHovered ? "rgba(255, 255, 255, 1)" : (scrolled ? "rgba(255, 255, 255, 0.05)" : "transparent"),
+            background: (scrolled || isNavHovered) ? "rgba(255, 255, 255, 0.97)" : "transparent",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
-            borderBottom: isNavHovered ? "1px solid rgba(0,0,0,0.07)" : (scrolled ? "1px solid rgba(255,255,255,0.1)" : "1px solid transparent"),
-            boxShadow: isNavHovered 
-              ? "0 8px 40px rgba(0,0,0,0.08)" 
-              : (scrolled ? "0 8px 40px rgba(0,0,0,0.08)" : "none"),
+            borderBottom: (scrolled || isNavHovered) ? "1px solid rgba(0,0,0,0.07)" : "1px solid transparent",
+            boxShadow: (scrolled || isNavHovered) ? "0 8px 40px rgba(0,0,0,0.08)" : "none",
             transition: "background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease",
             padding: "0 2.5rem",
             height: 66,
             display: "flex", alignItems: "center",
             justifyContent: "space-between",
-            gap: "1.5rem",
           }}>
 
-          {/* ── Logo ──────────────────────────────────────────── */}
+          {/* ── Logo — left corner ─────────────────────────────── */}
           <a
             href="/"
             onClick={(e) => { e.preventDefault(); handleNavClick("/", "Home"); }}
-            className="mobile-logo-wrap"
             style={{ textDecoration: "none", display: "flex", alignItems: "center", flexShrink: 0 }}
           >
             <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "64px", width: "auto", objectFit: "contain" }} />
           </a>
 
-          {/* ── Desktop Nav (fills full width between logo & CTA) ── */}
-          <nav
-            className="mobile-hide"
-            style={{
-              display: "flex", alignItems: "center",
-              justifyContent: "space-evenly",
-              flex: 1,
-            }}
-          >
+          {/* ── Nav items — equal space between every item ─────── */}
             {navLinks.map((link) => (
               <div
                 key={link.label}
-                className="nav-item-container"
+                className="nav-item-container mobile-hide"
                 style={{ position: "relative" }}
                 onMouseEnter={() => link.dropdown && setHoveredMenu(link.label)}
                 onMouseLeave={() => setHoveredMenu(null)}
@@ -389,9 +369,10 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                 )}
               </div>
             ))}
-            {/* Login — last item inside the evenly-spaced nav */}
+            {/* Login */}
             <Link
               href="/login"
+              className="mobile-hide"
               style={{
                 color: "var(--nav-muted)",
                 fontSize: "0.95rem",
@@ -414,15 +395,14 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
             >
               Login
             </Link>
-          </nav>
 
-          {/* ── Book a Call — pinned to far right ─────────────── */}
-          <button onClick={onBookNow} className="book-now-btn mobile-hide" style={{ flexShrink: 0 }}>
+          {/* ── Book a Call — right corner (desktop) ────────────── */}
+          <button onClick={onBookNow} className="book-now-btn mobile-hide">
             Book a Call
             <ArrowRight size={12} />
           </button>
 
-          {/* Mobile burger */}
+          {/* ── Burger — right corner (mobile) ──────────────────── */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="mobile-menu-btn"

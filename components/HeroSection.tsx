@@ -1,86 +1,171 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, Sparkles } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 
 interface HeroProps {
   onCTAClick: () => void;
 }
 
-import CardSwap, { Card } from './CardSwap';
+import CardSwapBase, { Card as CardBase } from './CardSwap';
+import type { ComponentType } from 'react';
+const CardSwap = CardSwapBase as ComponentType<any>;
+const Card = CardBase as ComponentType<any>;
 import CurvedMarquee from './CurvedMarquee';
 
+const CardRow = ({ icon, title, subtitle, badge }: { icon: string; title: string; subtitle: string; badge: string }) => (
+  <div style={{ padding: "14px 16px", display: "flex", alignItems: "center", gap: "14px", borderBottom: "1px solid #f1f5f9" }}>
+    <div style={{ width: "36px", height: "36px", borderRadius: "10px", background: "#f8fafc", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", flexShrink: 0 }}>{icon}</div>
+    <div style={{ flex: 1 }}>
+      <div style={{ fontSize: "13px", fontWeight: 600, color: "#1e293b", marginBottom: "2px" }}>{title}</div>
+      <div style={{ fontSize: "11px", color: "#94a3b8" }}>{subtitle}</div>
+    </div>
+    <span style={{ fontSize: "10px", fontWeight: 600, color: "#64748b", background: "#f1f5f9", padding: "3px 9px", borderRadius: "20px", whiteSpace: "nowrap" }}>{badge}</span>
+  </div>
+);
+
+const CardFooter = ({ label }: { label: string }) => (
+  <div style={{ padding: "18px 22px 22px", background: "linear-gradient(to bottom, #f8fafc 0%, #ffffff 100%)", borderTop: "1px solid #f1f5f9" }}>
+    <div style={{ fontSize: "24px", fontWeight: 700, color: "#0f172a", letterSpacing: "-0.03em", marginBottom: "14px", lineHeight: 1.1 }}>{label}</div>
+    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <span style={{ fontSize: "14px", fontWeight: 600, color: "#3b82f6" }}>Explore</span>
+      <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "#eff6ff", border: "1px solid #bfdbfe", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 8l4 4 4-4" stroke="#3b82f6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </div>
+    </div>
+  </div>
+);
+
 const AnimatedHeroCards = () => {
+  const barHeights = [38, 55, 48, 72, 62, 85, 70];
+
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <CardSwap
-        width={320}
-        height={220}
-        cardDistance={40}
-        verticalDistance={50}
-        delay={4000}
-        pauseOnHover={true}
-        skewAmount={5}
-      >
-        <Card style={{
-          background: "#ffffff", borderRadius: "16px", boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
-          padding: "20px", display: "flex", flexDirection: "column", gap: "10px",
-          border: "1px solid rgba(0,0,0,0.05)"
-        }}>
-          <div style={{ width: "40%", height: "8px", background: "#f1f5f9", borderRadius: "4px" }} />
-          <div style={{ flex: 1, background: "#f8fafc", borderRadius: "8px", border: "1px dashed #cbd5e1" }} />
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div style={{ width: "20%", height: "6px", background: "#e2e8f0", borderRadius: "3px" }} />
-            <div style={{ width: "20%", height: "6px", background: "#e2e8f0", borderRadius: "3px" }} />
-          </div>
-        </Card>
+    <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "flex-end", paddingBottom: "60px" }}>
+      {/* 3D tilt — viewing the stack from slightly above-left, like the Stripe Enterprise page */}
+      <div style={{ transform: "perspective(1600px) rotateX(-10deg) rotateY(14deg)", transformStyle: "preserve-3d" }}>
+        <CardSwap
+          width={390}
+          height={490}
+          cardDistance={52}
+          verticalDistance={46}
+          delay={5000}
+          pauseOnHover={false}
+          skewAmount={3}
+        >
+          {/* Card 1: Investor Outreach (front) */}
+          <Card style={{
+            background: "#ffffff", borderRadius: "20px",
+            boxShadow: "0 32px 80px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.07)",
+            border: "1px solid #e2e8f0", overflow: "hidden",
+            display: "flex", flexDirection: "column"
+          }}>
+            <div style={{ padding: "22px 22px 0", flex: 1 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
+                <span style={{ fontSize: "15px", fontWeight: 600, color: "#1e293b" }}>Investor Outreach</span>
+                {/* India flag */}
+                <div style={{ width: "26px", height: "17px", borderRadius: "3px", overflow: "hidden", flexShrink: 0 }}>
+                  <div style={{ height: "33.3%", background: "#FF9933" }} />
+                  <div style={{ height: "33.3%", background: "#ffffff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "5px", height: "5px", borderRadius: "50%", border: "1px solid #000080" }} />
+                  </div>
+                  <div style={{ height: "33.3%", background: "#138808" }} />
+                </div>
+              </div>
+              <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid #e2e8f0" }}>
+                <CardRow icon="🎯" title="Angel Investors" subtitle="₹50L – ₹2Cr ticket size" badge="42 matches" />
+                <CardRow icon="💼" title="Series A VCs" subtitle="Strategic growth capital" badge="18 active" />
+                <CardRow icon="🤝" title="Strategic Partners" subtitle="Corporate & family offices" badge="12 lined up" />
+              </div>
+            </div>
+            <CardFooter label="AI-Powered Fundraising" />
+          </Card>
 
-        <Card style={{
-          background: "#ffffff", borderRadius: "20px", boxShadow: "0 30px 60px rgba(0,0,0,0.12)",
-          padding: "24px", display: "flex", flexDirection: "column", gap: "16px",
-          border: "1px solid rgba(0,0,0,0.05)"
-        }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontSize: "14px", fontWeight: 600, color: "#0f172a" }}>MRR Growth</span>
-            <span style={{ fontSize: "12px", fontWeight: 700, color: "#10b981", background: "#d1fae5", padding: "4px 8px", borderRadius: "12px" }}>+22%</span>
-          </div>
-          <div style={{ display: "flex", alignItems: "flex-end", gap: "8px", flex: 1, paddingBottom: "10px" }}>
-            {[30, 45, 35, 60, 55, 80, 100].map((h, i) => (
-              <div key={i} style={{ flex: 1, height: `${h}%`, background: h === 100 ? "linear-gradient(to top, #3b82f6, #8b5cf6)" : "#e2e8f0", borderRadius: "4px 4px 0 0" }} />
-            ))}
-          </div>
-        </Card>
+          {/* Card 2: Funding Pipeline */}
+          <Card style={{
+            background: "#ffffff", borderRadius: "20px",
+            boxShadow: "0 32px 80px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.07)",
+            border: "1px solid #e2e8f0", overflow: "hidden",
+            display: "flex", flexDirection: "column"
+          }}>
+            <div style={{ padding: "22px 22px 0", flex: 1 }}>
+              <div style={{ marginBottom: "16px" }}>
+                <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600, letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "4px" }}>Total Raised</div>
+                <div style={{ fontSize: "32px", fontWeight: 700, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>₹4.2 Cr</div>
+                <span style={{ fontSize: "12px", color: "#22c55e", fontWeight: 600 }}>+34% this quarter</span>
+              </div>
+              <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid #e2e8f0" }}>
+                {[
+                  { amount: "₹85L", label: "Angel Round", color: "#3b82f6" },
+                  { amount: "₹1.4 Cr", label: "Pre-Seed VC", color: "#22c55e" },
+                  { amount: "₹2.7 Cr", label: "Seed Round", color: "#8b5cf6" },
+                ].map((t, i) => (
+                  <div key={i} style={{ padding: "13px 16px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: i < 2 ? "1px solid #f1f5f9" : "none", background: "#ffffff" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: t.color, flexShrink: 0 }} />
+                      <span style={{ fontSize: "12px", color: "#64748b" }}>{t.label}</span>
+                    </div>
+                    <span style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a" }}>{t.amount}</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{ marginTop: "14px", padding: "10px 14px", background: "#1e40af", borderRadius: "8px", textAlign: "center" }}>
+                <span style={{ fontSize: "11px", fontWeight: 700, color: "#ffffff", letterSpacing: "0.06em" }}>VIEW FULL PIPELINE</span>
+              </div>
+            </div>
+            <CardFooter label="Funding Pipeline" />
+          </Card>
 
-        <Card style={{
-          background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)", borderRadius: "16px", boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
-          padding: "20px", display: "flex", flexDirection: "column", justifyContent: "center", gap: "12px",
-          border: "1px solid rgba(255,255,255,0.8)", backdropFilter: "blur(10px)"
-        }}>
-          <div style={{ fontSize: "13px", fontWeight: 600, color: "#64748b" }}>Capital Raised</div>
-          <div style={{ fontSize: "32px", fontWeight: 800, color: "#0f172a", letterSpacing: "-1px" }}>$2.4M</div>
-          <div style={{ width: "100%", height: "6px", background: "#e2e8f0", borderRadius: "3px", overflow: "hidden" }}>
-            <div style={{ width: "75%", height: "100%", background: "#3b82f6", borderRadius: "3px" }} />
-          </div>
-        </Card>
-      </CardSwap>
+          {/* Card 3: Pitch Intelligence (back) */}
+          <Card style={{
+            background: "#ffffff", borderRadius: "20px",
+            boxShadow: "0 32px 80px rgba(0,0,0,0.18), 0 4px 24px rgba(0,0,0,0.07)",
+            border: "1px solid #e2e8f0", overflow: "hidden",
+            display: "flex", flexDirection: "column"
+          }}>
+            <div style={{ padding: "22px 22px 0", flex: 1 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
+                <div>
+                  <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600, letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "4px" }}>Pitch Score</div>
+                  <div style={{ fontSize: "32px", fontWeight: 700, color: "#0f172a", lineHeight: 1, marginBottom: "4px" }}>87<span style={{ fontSize: "16px", color: "#94a3b8", fontWeight: 500 }}>/100</span></div>
+                  <span style={{ fontSize: "12px", color: "#3b82f6", fontWeight: 600 }}>Investor Ready</span>
+                </div>
+                <div style={{ background: "#eff6ff", borderRadius: "8px", padding: "6px 10px" }}>
+                  <span style={{ fontSize: "11px", color: "#1d4ed8", fontWeight: 600 }}>Data as of today</span>
+                </div>
+              </div>
+              {/* Bar chart */}
+              <div style={{ display: "flex", alignItems: "flex-end", gap: "6px", height: "80px", marginBottom: "16px" }}>
+                {barHeights.map((h, i) => (
+                  <div key={i} style={{ flex: 1, height: "100%", display: "flex", alignItems: "flex-end" }}>
+                    <div style={{ width: "100%", height: `${h}%`, background: i === barHeights.length - 1 ? "#3b82f6" : `rgba(59,130,246,${0.2 + i * 0.09})`, borderRadius: "3px 3px 0 0" }} />
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", padding: "12px 0", borderTop: "1px solid #f1f5f9" }}>
+                <div>
+                  <div style={{ fontSize: "10px", color: "#94a3b8", marginBottom: "3px" }}>Meetings Set</div>
+                  <div style={{ fontSize: "18px", fontWeight: 700, color: "#0f172a" }}>24</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: "10px", color: "#94a3b8", marginBottom: "3px" }}>Close Rate</div>
+                  <div style={{ fontSize: "18px", fontWeight: 700, color: "#22c55e" }}>73%</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: "10px", color: "#94a3b8", marginBottom: "3px" }}>New Intros</div>
+                  <div style={{ fontSize: "18px", fontWeight: 700, color: "#0f172a" }}>12</div>
+                </div>
+              </div>
+            </div>
+            <CardFooter label="Pitch Intelligence" />
+          </Card>
+        </CardSwap>
+      </div>
     </div>
   );
 };
 
 export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
-  const scrollDown = () => {
-    window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
-  };
-
   const { scrollY } = useScroll();
-
-  // Decrease the blur effect slightly per user request
-  const videoBlur = useTransform(scrollY, [0, 400], ["blur(2px)", "blur(12px)"]);
-
-  // Add a white wash effect that fades in
-  const whiteOverlayOpacity = useTransform(scrollY, [0, 400], [0, 0.25]);
-
-  // Move the text downwards as the user scrolls
   const textY = useTransform(scrollY, [0, 800], [0, 300]);
 
   return (
@@ -108,13 +193,25 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
           backgroundImage: "url('/background.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          zIndex: 0,
-          animation: "wave-pan 20s infinite alternate ease-in-out"
+          opacity: 1,
+          zIndex: -2,
+          willChange: "transform",
         }}
+        animate={{
+          y: scrollY.get() * 0.5,
+        }}
+        transition={{ type: "tween", ease: "linear", duration: 0 }}
       />
 
-
-
+      {/* Dark overlay for better text readability */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to right, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.05) 100%)",
+          zIndex: -1,
+        }}
+      />
 
       {/* Content */}
       <motion.div
@@ -134,7 +231,7 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
         }}
       >
         {/* LEFT COLUMN: Text */}
-        <div style={{ flex: "1 1 45%", textAlign: "left", maxWidth: "600px", marginTop: "-12vh", marginLeft: "8%" }}>
+        <div style={{ flex: "1 1 50%", textAlign: "left", maxWidth: "550px", marginTop: "-8vh", marginLeft: "12%" }}>
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
@@ -142,23 +239,24 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             style={{
               marginBottom: "1.5rem",
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "clamp(3rem, 6.5vw, 5.5rem)", fontWeight: 800,
-              lineHeight: 1,
-              letterSpacing: "-0.04em", color: "#ffffff",
+              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: "70px", 
+              fontWeight: 700,
+              lineHeight: 1.05,
+              letterSpacing: "-0.04em", 
+              color: "#ffffff",
               textShadow: "none",
             }}
           >
-            Create.
-            <br />
-            Convert.
-            <br />
+            Create.<br />
+            Convert.<br />
             <span style={{
-              background: "linear-gradient(90deg, #93c5fd 0%, #3b82f6 50%, #1e40af 100%)",
+              backgroundImage: "linear-gradient(90deg, #93c5fd 0%, #3b82f6 50%, #1e40af 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              color: "transparent"
+              color: "transparent",
+              display: "inline-block"
             }}>
               Scale.
             </span>
@@ -170,14 +268,16 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             style={{
-              fontSize: "clamp(1rem, 1.3vw, 1.15rem)",
-              margin: "0 0 2.5rem", lineHeight: 1.6, fontWeight: 500,
-              color: "rgba(255,255,255,0.85)",
-              textShadow: "none",
-              maxWidth: "500px"
+              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: "1.125rem",
+              margin: "0 0 2rem", 
+              lineHeight: 1.6, 
+              fontWeight: 400,
+              color: "#ffffff", 
+              maxWidth: "480px"
             }}
           >
-            Leading founders use ZTH to revolutionise their fundraising – from seed preparation into global markets to building scalable infrastructure.
+            End-to-end startup fundraising infrastructure combining AI tools, strategic advisory, and execution support for founders building scalable companies.
           </motion.p>
 
           {/* CTAs */}
@@ -187,33 +287,40 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           >
             <button
+              className="cta-btn"
               onClick={_onCTAClick}
               style={{
-                background: "#ffffff", color: "#0f172a",
-                padding: "0.875rem 1.75rem", borderRadius: "100px",
-                fontWeight: 700, fontSize: "1.1rem",
-                border: "none", cursor: "pointer",
-                display: "inline-flex", alignItems: "center", gap: "8px",
+                background: "#ffffff", 
+                color: "#0f172a",
+                padding: "0.5rem 1.25rem", /* Smaller, more elegant padding like Stripe */
+                borderRadius: "9999px",
+                fontWeight: 600, /* Medium-bold */
+                fontSize: "0.95rem",
+                border: "none", 
+                cursor: "pointer",
+                display: "inline-flex", 
+                alignItems: "center", 
+                gap: "6px",
                 transition: "all 0.2s ease",
-                boxShadow: "0 4px 14px rgba(0,0,0,0.1)"
+                boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "#f8fafc";
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)";
+                e.currentTarget.style.transform = "translateY(-1px)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "#ffffff";
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 14px rgba(0,0,0,0.1)";
               }}
             >
-              Book a call <ChevronDown size={20} strokeWidth={3} style={{ transform: 'rotate(-90deg)' }} />
+              Book a call 
+              <span className="icon-default" style={{ display: "inline-flex", alignItems: "center" }}><ChevronDown size={16} strokeWidth={3} style={{ transform: 'rotate(-90deg)' }} /></span>
+              <span className="icon-hover" style={{ display: "none", alignItems: "center" }}><ArrowRight size={16} strokeWidth={3} /></span>
             </button>
           </motion.div>
         </div>
 
-        {/* RIGHT COLUMN: Animated Cards */}
+        {/* RIGHT COLUMN: 3D Cards */}
         <div style={{ flex: "1 1 50%", position: "relative", height: "700px", display: "flex", justifyContent: "center", alignItems: "center" }}>
           <AnimatedHeroCards />
         </div>
@@ -227,6 +334,11 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
 
 
       <style jsx>{`
+        .cta-btn .icon-default { display: inline-flex !important; }
+        .cta-btn .icon-hover { display: none !important; }
+        .cta-btn:hover .icon-default { display: none !important; }
+        .cta-btn:hover .icon-hover { display: inline-flex !important; }
+
         @keyframes gradient-shift {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }

@@ -1,30 +1,27 @@
-// @ts-nocheck
-"use client";
-
 import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef } from 'react';
 import gsap from 'gsap';
 import './CardSwap.css';
 
 export const Card = forwardRef(({ customClass, ...rest }, ref) => (
-  <div ref={ref} {...rest} className={`card-swap-card ${customClass ?? ''} ${rest.className ?? ''}`.trim()} />
+  <div ref={ref} {...rest} className={`card ${customClass ?? ''} ${rest.className ?? ''}`.trim()} />
 ));
 Card.displayName = 'Card';
 
-const makeSlot = (i, distX, distY, total) => ({
+const makeSlot = (i, distX, distY, total, skew) => ({
   x: i * distX,
   y: -i * distY,
   z: -i * distX * 1.5,
-  zIndex: total - i
+  zIndex: total - i,
+  rotationZ: i * skew
 });
-
-const placeNow = (el, slot, skew) =>
+const placeNow = (el, slot) =>
   gsap.set(el, {
     x: slot.x,
     y: slot.y,
     z: slot.z,
     xPercent: -50,
     yPercent: -50,
-    skewY: skew,
+    rotationZ: slot.rotationZ,
     transformOrigin: 'center center',
     zIndex: slot.zIndex,
     force3D: true
@@ -76,7 +73,7 @@ const CardSwap = ({
 
   useEffect(() => {
     const total = refs.length;
-    refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount));
+    refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total, skewAmount)));
 
     const swap = () => {
       if (order.current.length < 2) return;
@@ -95,7 +92,7 @@ const CardSwap = ({
       tl.addLabel('promote', `-=${config.durDrop * config.promoteOverlap}`);
       rest.forEach((idx, i) => {
         const el = refs[idx].current;
-        const slot = makeSlot(i, cardDistance, verticalDistance, refs.length);
+        const slot = makeSlot(i, cardDistance, verticalDistance, refs.length, skewAmount);
         tl.set(el, { zIndex: slot.zIndex }, 'promote');
         tl.to(
           el,
@@ -103,6 +100,7 @@ const CardSwap = ({
             x: slot.x,
             y: slot.y,
             z: slot.z,
+            rotationZ: slot.rotationZ,
             duration: config.durMove,
             ease: config.ease
           },
@@ -110,7 +108,7 @@ const CardSwap = ({
         );
       });
 
-      const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
+      const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length, skewAmount);
       tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`);
       tl.call(
         () => {
@@ -125,6 +123,7 @@ const CardSwap = ({
           x: backSlot.x,
           y: backSlot.y,
           z: backSlot.z,
+          rotationZ: backSlot.rotationZ,
           duration: config.durReturn,
           ease: config.ease
         },
@@ -136,11 +135,8 @@ const CardSwap = ({
       });
     };
 
-    // Delay start for initial render
-    const timeout = setTimeout(() => {
-        swap();
-        intervalRef.current = window.setInterval(swap, delay);
-    }, delay);
+    swap();
+    intervalRef.current = window.setInterval(swap, delay);
 
     if (pauseOnHover) {
       const node = container.current;
@@ -157,15 +153,10 @@ const CardSwap = ({
       return () => {
         node.removeEventListener('mouseenter', pause);
         node.removeEventListener('mouseleave', resume);
-        clearTimeout(timeout);
         clearInterval(intervalRef.current);
       };
     }
-    
-    return () => {
-      clearTimeout(timeout);
-      clearInterval(intervalRef.current);
-    };
+    return () => clearInterval(intervalRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
 
