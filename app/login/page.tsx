@@ -36,14 +36,7 @@ export default function AuthPage() {
       }}>
         <motion.div layout initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} style={{ marginBottom: "1.25rem" }}>
           <Link href="/" style={{ textDecoration: "none" }}>
-            <div style={{
-              width: "56px", height: "56px", borderRadius: "50%", backgroundColor: "#1976D2",
-              display: "flex", alignItems: "center", justifyContent: "center", color: "white", boxShadow: "0 10px 30px rgba(25,118,210,0.3)"
-            }}>
-              <span style={{ fontSize: "2rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-1.5px", position: "relative", left: "-4px" }}>
-                Z<span style={{ fontSize: "0.9rem", position: "absolute", top: "3px", right: "-16px", fontWeight: 800 }}>th</span>
-              </span>
-            </div>
+            <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "64px", width: "auto", objectFit: "contain" }} />
           </Link>
         </motion.div>
 
@@ -126,14 +119,7 @@ export default function AuthPage() {
         
         <div style={{ position: "absolute", top: "10%", width: "100%", display: "flex", justifyContent: "center", zIndex: 10 }}>
           <Link href="/" style={{ textDecoration: "none" }}>
-            <div style={{
-              width: "68px", height: "68px", borderRadius: "50%", background: "linear-gradient(135deg, #1976D2, #90CAF9)",
-              display: "flex", alignItems: "center", justifyContent: "center", color: "white", boxShadow: "0 10px 40px rgba(0,0,0,0.5)"
-            }}>
-              <span style={{ fontSize: "2.2rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-1.5px", position: "relative", left: "-4px" }}>
-                Z<span style={{ fontSize: "1rem", position: "absolute", top: "3px", right: "-18px", fontWeight: 800 }}>th</span>
-              </span>
-            </div>
+            <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "72px", width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
           </Link>
         </div>
 
