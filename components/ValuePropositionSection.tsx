@@ -118,10 +118,11 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
               </h3>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {[
-                  { title: "Company Incorporation", desc: "End-to-end support for registering your startup as a private limited, LLP, or OPC entity with full MCA compliance." },
-                  { title: "GST & Regulatory Support", desc: "GST registration, filing support, and guidance through the regulatory requirements relevant to your business." },
-                  { title: "Legal & Financial Documentation", desc: "Drafting and review of founder agreements, term sheets, NDAs, and key legal instruments for your venture." },
-                  { title: "Accounting, CA & DPIIT Support", desc: "Certified CA support for bookkeeping and reporting, plus Startup India / DPIIT registration to unlock tax benefits." },
+                  { title: "Company Incorporation", desc: "Registering your startup as a private limited company, LLP, or OPC with full MCA compliance." },
+                  { title: "GST Registration & Regulatory Support", desc: "GST onboarding, return filing, and guidance through regulatory requirements for your business." },
+                  { title: "Legal & Financial Documentation", desc: "Drafting and review of founder agreements, term sheets, NDAs, and key legal instruments." },
+                  { title: "Accounting & CA Support", desc: "Bookkeeping, financial reporting, and certified CA support to keep your accounts audit-ready." },
+                  { title: "Startup India / DPIIT Assistance", desc: "DPIIT recognition and Startup India registration to unlock tax benefits and government schemes." },
                 ].map((item, idx) => (
                   <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "0.85rem" }}>
                     <CheckCircle2 size={22} color="#1976D2" style={{ flexShrink: 0, marginTop: "0.2rem" }} />
