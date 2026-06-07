@@ -88,9 +88,14 @@ export default function ZthInsiderSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "3rem",
               fontWeight: 700,
-              fontSize: "clamp(2.25rem, 4vw, 3.75rem)", color: "#1A1A1A",
-              lineHeight: 1.1, letterSpacing: "-0.02em", margin: "0 0 1.5rem 0"
+              color: "#0f172a",
+              lineHeight: 1.2,
+              letterSpacing: "-0.02em",
+              marginBottom: "1.5rem",
+              textAlign: "center"
             }}
           >
             Pitch Decks that <span style={{ color: "#1976D2" }}>convert.</span>

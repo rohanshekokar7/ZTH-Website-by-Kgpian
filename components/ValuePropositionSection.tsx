@@ -17,7 +17,7 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
 
   return (
     <>
-      <div style={{ position: "relative", zIndex: 10, width: "100%", background: "#F5F7FA", paddingTop: "2rem" }}>
+      <div style={{ background: "#F5F7FA", paddingTop: "2rem" }}>
         <CurvedMarquee />
       </div>
 
@@ -59,11 +59,12 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
               </span>
             </motion.div>
             <motion.h2 variants={itemVariants} style={{
-              fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800,
-              color: "#111827", lineHeight: 1.15, letterSpacing: "-0.03em",
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "3rem", fontWeight: 700,
+              color: "#0f172a", lineHeight: 1.2, letterSpacing: "-0.02em",
               maxWidth: 800, margin: "0 auto 1.5rem"
             }}>
-              Built To Prepare Ventures Before They Raise Capital.
+              Built To Prepare Ventures Before <span style={{ color: "#1976D2" }}>They Raise Capital.</span>
             </motion.h2>
             <motion.p variants={itemVariants} style={{
               fontSize: "1.1rem", color: "#4B5563", lineHeight: 1.7,
@@ -115,17 +116,19 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
               <h3 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#111827", marginBottom: "2rem", letterSpacing: "-0.02em" }}>
                 Compliance & Operations
               </h3>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {[
-                  "Company Incorporation",
-                  "GST Registration & Regulatory Support",
-                  "Legal & Financial Documentation",
-                  "Accounting & CA Support",
-                  "Startup India / DPIIT Assistance"
+                  { title: "Company Incorporation", desc: "End-to-end support for registering your startup as a private limited, LLP, or OPC entity with full MCA compliance." },
+                  { title: "GST & Regulatory Support", desc: "GST registration, filing support, and guidance through the regulatory requirements relevant to your business." },
+                  { title: "Legal & Financial Documentation", desc: "Drafting and review of founder agreements, term sheets, NDAs, and key legal instruments for your venture." },
+                  { title: "Accounting, CA & DPIIT Support", desc: "Certified CA support for bookkeeping and reporting, plus Startup India / DPIIT registration to unlock tax benefits." },
                 ].map((item, idx) => (
-                  <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "0.85rem", padding: "0.75rem", background: "#F9FAFB", borderRadius: "12px", border: "1px solid #F3F4F6" }}>
-                    <CheckCircle2 size={22} color="#1976D2" style={{ flexShrink: 0 }} />
-                    <span style={{ color: "#374151", fontSize: "1rem", fontWeight: 500, lineHeight: 1.4 }}>{item}</span>
+                  <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "0.85rem" }}>
+                    <CheckCircle2 size={22} color="#1976D2" style={{ flexShrink: 0, marginTop: "0.2rem" }} />
+                    <div>
+                      <strong style={{ display: "block", color: "#1976D2", fontSize: "1.05rem", marginBottom: "0.35rem", fontWeight: 700 }}>{item.title}</strong>
+                      <span style={{ color: "#4B5563", fontSize: "0.95rem", lineHeight: 1.6, display: "block" }}>{item.desc}</span>
+                    </div>
                   </li>
                 ))}
               </ul>

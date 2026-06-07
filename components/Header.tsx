@@ -45,8 +45,8 @@ const navLinks = [
     ],
   },
   {
-    label: "Strategic Partnership",
-    href: "/#strategic-partnership",
+    label: "Capital Network",
+    href: "/#capital-network",
     dropdown: [
       {
         title: "Active Fundraising Assistance",
@@ -74,8 +74,8 @@ const navLinks = [
     ],
   },
   {
-    label: "Post-Fundraise",
-    href: "/#post-fundraise",
+    label: "Post-Fundraise Partnership",
+    href: "/#growth-strategic-partnership",
     dropdown: [
       {
         title: "Strategic Partnership",
@@ -104,16 +104,16 @@ const navLinks = [
     ],
   },
   { label: "Investor Mock Room", href: "/#mock-room" },
+  { label: "Zth Insider", href: "/#zth-insider" },
 ];
 
 // Map section IDs → nav label
 const sectionMap: Record<string, string> = {
   "pre-fundraising": "Pre-Fundraising",
-  "strategic-partnership": "Strategic Partnership",
-  "capital-network": "Strategic Partnership",
-  "post-fundraise": "Post-Fundraise",
-  "funding": "Post-Fundraise",
+  "capital-network": "Capital Network",
+  "growth-strategic-partnership": "Post-Fundraise Partnership",
   "mock-room": "Investor Mock Room",
+  "zth-insider": "Zth Insider",
 };
 
 export default function Header({ onBookNow }: { onBookNow: () => void }) {
@@ -209,10 +209,10 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
           onMouseEnter={() => setIsNavHovered(true)}
           onMouseLeave={() => setIsNavHovered(false)}
           style={{
-            background: (scrolled || isNavHovered) ? "rgba(255, 255, 255, 0.97)" : "transparent",
+            background: (scrolled || isNavHovered) ? "rgba(255, 255, 255, 0.97)" : "rgba(0, 0, 0, 0.2)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
-            borderBottom: (scrolled || isNavHovered) ? "1px solid rgba(0,0,0,0.07)" : "1px solid transparent",
+            borderBottom: (scrolled || isNavHovered) ? "1px solid rgba(0,0,0,0.07)" : "1px solid rgba(255, 255, 255, 0.15)",
             boxShadow: (scrolled || isNavHovered) ? "0 8px 40px rgba(0,0,0,0.08)" : "none",
             transition: "background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease",
             padding: "0 2.5rem",
@@ -243,14 +243,13 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                   onClick={() => handleNavClick(link.href, link.label)}
                   className={`nav-btn ${activeLink === link.label ? "nav-btn-active" : ""}`}
                   style={{
-                    background: activeLink === link.label ? "var(--nav-active-bg)" : "transparent",
+                    background: "transparent",
                     border: "none", cursor: "pointer",
                     color: activeLink === link.label ? "var(--nav-text)" : "var(--nav-muted)",
                     fontSize: "0.95rem",
                     fontWeight: activeLink === link.label ? 600 : 500,
                     padding: "0.42rem 0.9rem",
-                    borderRadius: "100px",
-                    transition: "all 0.18s ease",
+                    transition: "color 0.18s ease",
                     fontFamily: "'Inter', sans-serif",
                     display: "flex", alignItems: "center", gap: "3px",
                     whiteSpace: "nowrap",
@@ -258,7 +257,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                     outline: "none",
                   }}
                 >
-                  {link.label}
+                  <span className="nav-label-text">{link.label}</span>
                   {link.dropdown && (
                     <ChevronDown
                       size={14}
@@ -280,15 +279,15 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                     top: "calc(100% + 16px)",
                     left: "50%",
                     transform: "translateX(-50%)",
-                    minWidth: 680,
+                    minWidth: 560,
                     background: "rgba(255, 255, 255, 0.98)",
                     backdropFilter: "blur(32px)",
                     WebkitBackdropFilter: "blur(32px)",
                     border: "1px solid rgba(0,0,0,0.08)",
                     borderRadius: "20px",
-                    padding: "1.75rem 2rem",
+                    padding: "1.5rem 1.75rem",
                     display: "none",
-                    gap: "2rem",
+                    gap: "1.75rem",
                     boxShadow: "0 32px 80px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.03)",
                     cursor: "default",
                     textAlign: "left",
@@ -317,14 +316,14 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                             margin: "0.5rem 0",
                           }} />
                         )}
-                        <div style={{ minWidth: 260 }}>
+                        <div style={{ minWidth: 240 }}>
                           <p style={{
                             color: "#1976D2",
-                            fontSize: "0.95rem",
+                            fontSize: "0.875rem",
                             fontWeight: 800,
                             letterSpacing: "0.15em",
                             textTransform: "uppercase",
-                            margin: "0 0 1.1rem",
+                            margin: "0 0 1rem",
                             fontFamily: "'Inter', sans-serif",
                           }}>
                             {section.title}
@@ -347,7 +346,7 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
                                     background: "none",
                                     border: "none",
                                     cursor: "pointer",
-                                    fontSize: "0.9rem",
+                                    fontSize: "0.875rem",
                                     fontWeight: 450,
                                     transition: "all 0.18s ease",
                                     display: "inline-block",
@@ -372,28 +371,21 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
             {/* Login */}
             <Link
               href="/login"
-              className="mobile-hide"
+              className="mobile-hide nav-btn"
               style={{
+                background: "transparent",
                 color: "var(--nav-muted)",
                 fontSize: "0.95rem",
                 fontWeight: 500,
                 textDecoration: "none",
-                transition: "all 0.18s ease",
+                transition: "color 0.18s ease",
                 padding: "0.42rem 0.9rem",
                 letterSpacing: "-0.01em",
-                borderRadius: "100px",
                 whiteSpace: "nowrap",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--nav-text)";
-                e.currentTarget.style.background = "var(--nav-hover-bg)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--nav-muted)";
-                e.currentTarget.style.background = "transparent";
+                display: "flex", alignItems: "center",
               }}
             >
-              Login
+              <span className="nav-label-text">Login</span>
             </Link>
 
           {/* ── Book a Call — right corner (desktop) ────────────── */}
@@ -544,8 +536,28 @@ export default function Header({ onBookNow }: { onBookNow: () => void }) {
 
         /* Nav button hover (JS handles active) */
         .nav-btn:hover:not(.nav-btn-active) {
-          background: var(--nav-hover-bg) !important;
           color: var(--nav-text) !important;
+        }
+
+        .nav-label-text {
+          position: relative;
+        }
+
+        .nav-label-text::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: #1976D2;
+          transition: width 0.25s ease;
+          border-radius: 2px;
+        }
+
+        .nav-btn:hover .nav-label-text::after,
+        .nav-btn-active .nav-label-text::after {
+          width: 100%;
         }
 
         /* Chevron rotate on hover */

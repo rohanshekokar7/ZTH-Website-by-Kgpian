@@ -188,14 +188,20 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontSize: 'clamp(2.35rem, 3.8vw, 3.75rem)',
-              fontWeight: 700, color: TEXT_MAIN,
-              letterSpacing: '-0.02em', lineHeight: 1.15,
-              margin: '0 auto 1.5rem', maxWidth: 900, display: 'block',
-              textAlign: 'center',
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "3rem",
+              fontWeight: 700,
+              color: "#0f172a",
+              lineHeight: 1.2,
+              letterSpacing: "-0.02em",
+              marginBottom: "1.5rem",
+              margin: "0 auto 1.5rem",
+              maxWidth: 900,
+              display: "block",
+              textAlign: "center",
             }}
           >
-            Strategic Capital Support Beyond{' '}
+            Strategic Capital Support Beyond<br />
             <span style={{ color: BLUE }}>Investor Introductions.</span>
           </motion.h2>
 

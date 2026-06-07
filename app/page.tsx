@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import HeroCardsOverlay from "@/components/HeroCardsOverlay";
 import TestimonialsAndLogos from "@/components/TestimonialsAndLogos";
 import Footer from "@/components/Footer";
 import CapitalSection from "@/components/CapitalSection";
 import CapitalNetworkSection from "@/components/CapitalNetworkSection";
-import CardShowcaseSection from "@/components/CardShowcaseSection";
+import ValuePropositionSection from "@/components/ValuePropositionSection";
+
 import MockRoomSection from "@/components/MockRoomSection";
 import ZthInsiderSection from "@/components/ZthInsiderSection";
 
@@ -31,19 +31,19 @@ export default function HomePage() {
         <Header onBookNow={goToBook} />
 
         <main>
-          <HeroSection onCTAClick={goToBook} />
-
-          {/* Hero cards lifted above the content wrapper (z:10) so they stay on
-              top of the next section as it scrolls over the sticky hero */}
-          <HeroCardsOverlay />
+          <HeroSection />
 
           {/* Wrapper for remaining sections so they slide over the sticky Hero */}
           <div style={{ position: "relative", zIndex: 10, background: "#FFFFFF", boxShadow: "0 -20px 40px rgba(0, 0, 0, 0.05)" }}>
-            <CardShowcaseSection />
-            <div id="strategic-partnership">
+
+            <div id="pre-fundraising">
+              <ValuePropositionSection onCTAClick={goToBook} />
+            </div>
+
+            <div id="capital-network">
               <CapitalNetworkSection />
             </div>
-            <div id="post-fundraise">
+            <div id="growth-strategic-partnership">
               <CapitalSection />
             </div>
             <div id="mock-room">
@@ -51,7 +51,9 @@ export default function HomePage() {
             </div>
 
             <TestimonialsAndLogos />
-            <ZthInsiderSection />
+            <div id="zth-insider">
+              <ZthInsiderSection />
+            </div>
 
           </div>
         </main>

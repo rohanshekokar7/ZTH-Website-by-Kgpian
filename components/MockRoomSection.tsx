@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { Play, MessageSquare, Target, UserCheck, BarChart } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Play, MessageSquare, Target, UserCheck, BarChart, ChevronRight, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 const features = [
@@ -30,7 +30,7 @@ function AnimatedStat({ stat, index }: { stat: { value: string, label: string },
   useEffect(() => {
     if (isInView) {
       let start = 0;
-      const duration = 2000;
+      const duration = 800; // Faster animation
       const increment = targetNum / (duration / 16);
       const timer = setInterval(() => {
         start += increment;
@@ -48,25 +48,34 @@ function AnimatedStat({ stat, index }: { stat: { value: string, label: string },
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }} 
-      whileInView={{ opacity: 1, y: 0 }} 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       whileHover={{ y: -8, scale: 1.03 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      style={{ 
-        textAlign: "center", 
-        padding: "2.5rem 1.5rem", 
-        borderRadius: "1.25rem", 
+      style={{
+        textAlign: "center",
+        padding: "1rem",
         cursor: "default",
-        background: "linear-gradient(145deg, #ffffff 0%, #f4f9ff 100%)",
-        border: "1px solid rgba(25, 118, 210, 0.1)",
-        boxShadow: "0 10px 30px rgba(25, 118, 210, 0.05)"
       }}
     >
-      <div style={{ fontSize: "2.5rem", fontWeight: 900, color: "#1976D2", marginBottom: "0.75rem" }}>
+      <div style={{
+        fontSize: "5rem",
+        fontWeight: 900,
+        color: "#FFFFFF",
+        marginBottom: "1rem",
+        textShadow: "0 4px 20px rgba(0,0,0,0.5)",
+        fontFamily: "'Playfair Display', serif"
+      }}>
         {count}{suffix}
       </div>
-      <p style={{ color: "#4A4A4A", fontSize: "0.95rem", lineHeight: 1.6, fontWeight: 500 }}>
+      <p style={{
+        color: "rgba(255,255,255,0.9)",
+        fontSize: "1.2rem",
+        lineHeight: 1.6,
+        fontWeight: 500,
+        textShadow: "0 2px 10px rgba(0,0,0,0.5)"
+      }}>
         {stat.label}
       </p>
     </motion.div>
@@ -75,6 +84,23 @@ function AnimatedStat({ stat, index }: { stat: { value: string, label: string },
 
 export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentStatIndex, setCurrentStatIndex] = useState(0);
+
+  // Auto-cycle through the stats every 1.5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentStatIndex((prev) => (prev + 1) % stats.length);
+    }, 1500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleNextStat = () => {
+    setCurrentStatIndex((prev) => (prev + 1) % stats.length);
+  };
+
+  const handlePrevStat = () => {
+    setCurrentStatIndex((prev) => (prev - 1 + stats.length) % stats.length);
+  };
 
   return (
     <section id="mock-room" ref={containerRef} className="section-pad" style={{ background: "#FAFAFA", position: "relative", overflow: "hidden" }}>
@@ -108,9 +134,14 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "3rem",
               fontWeight: 700,
-              fontSize: "clamp(2.25rem, 4vw, 3.75rem)", color: "#1A1A1A",
-              lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "1.5rem"
+              color: "#0f172a",
+              lineHeight: 1.2,
+              letterSpacing: "-0.02em",
+              marginBottom: "1.5rem",
+              textAlign: "center"
             }}
           >
             Practice The Pitch Before<br />
@@ -175,13 +206,13 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   style={{
-                    width: 80, height: 80, borderRadius: "50%",
+                    width: 84, height: 84, borderRadius: "1.2rem",
                     background: "linear-gradient(135deg, #1976D2, #90CAF9)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    cursor: "pointer", boxShadow: "0 0 40px rgba(25,118,210,0.4)", margin: "0 auto 2.5rem"
+                    cursor: "pointer", boxShadow: "0 0 40px rgba(25,118,210,0.4)", margin: "0 auto 2rem"
                   }}
                 >
-                  <Play size={32} color="#fff" fill="#fff" style={{ marginLeft: 4 }} />
+                  <Play size={36} color="#fff" fill="#fff" style={{ marginLeft: 0 }} />
                 </motion.div>
 
                 <h3 style={{ fontSize: "2rem", fontWeight: 800, color: "#FFFFFF", marginBottom: "1rem", lineHeight: 1.2 }}>
@@ -194,48 +225,112 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
             </div>
           </motion.div>
         </div>
+      </div>
 
-        {/* Stats Section */}
-        <motion.div 
-          initial="rest"
-          whileHover="hover"
-          animate="rest"
-          style={{ position: "relative", borderRadius: "1.5rem", marginBottom: "6rem" }}
-        >
-          {/* Animated Gradient Border Layer */}
-          <motion.div
-            variants={{
-              rest: { opacity: 0, scale: 0.98 },
-              hover: { opacity: 1, scale: 1 }
-            }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+      {/* Stats Section - Full Width */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          background: "url('/numberanimation.png') center/cover no-repeat, #111111",
+          borderRadius: "0", // Sharp rectangle corners
+          padding: "4rem",
+          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+          minHeight: "740px",
+          marginBottom: "6rem",
+          boxShadow: "0 25px 60px rgba(0,0,0,0.2)",
+          overflow: "hidden"
+        }}
+      >
+        <div style={{ width: "100%", maxWidth: "600px", zIndex: 2, marginTop: "-10px" }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStatIndex}
+              initial={{ opacity: 0, y: 30, filter: "blur(12px)", scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+              exit={{ opacity: 0, y: -30, filter: "blur(12px)", scale: 0.95 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "250px"
+              }}
+            >
+              <AnimatedStat stat={stats[currentStatIndex]} index={0} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <div style={{
+          position: "absolute",
+          bottom: "3rem",
+          display: "flex",
+          gap: "1.5rem",
+          zIndex: 2
+        }}>
+          <button
+            onClick={handlePrevStat}
             style={{
-              position: "absolute", inset: "-2px", borderRadius: "calc(1.5rem + 2px)",
-              background: "linear-gradient(135deg, #1976D2 0%, #90CAF9 100%)",
-              zIndex: 0, pointerEvents: "none"
+              width: "56px",
+              height: "56px",
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.1)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "1px solid rgba(255,255,255,0.2)",
+              cursor: "pointer",
+              color: "#FFFFFF",
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
             }}
-          />
-          
-          {/* Main White Content Card */}
-          <motion.div
-            variants={{
-              rest: { boxShadow: "0 10px 40px rgba(0,0,0,0.03)" },
-              hover: { boxShadow: "0 25px 60px rgba(25,118,210,0.12)" }
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.2)";
+              e.currentTarget.style.transform = "scale(1.08)";
             }}
-            transition={{ duration: 0.4 }}
-            style={{
-              position: "relative", zIndex: 1,
-              background: "#FFFFFF", borderRadius: "1.5rem", padding: "4rem",
-              display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "3rem",
-              height: "100%"
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+              e.currentTarget.style.transform = "scale(1)";
             }}
           >
-          {stats.map((stat, index) => (
-            <AnimatedStat key={index} stat={stat} index={index} />
-          ))}
-          </motion.div>
-        </motion.div>
+            <ChevronLeft size={26} strokeWidth={2.5} />
+          </button>
 
+          <button
+            onClick={handleNextStat}
+            style={{
+              width: "56px",
+              height: "56px",
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.1)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "1px solid rgba(255,255,255,0.2)",
+              cursor: "pointer",
+              color: "#FFFFFF",
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.2)";
+              e.currentTarget.style.transform = "scale(1.08)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            <ChevronRight size={26} strokeWidth={2.5} />
+          </button>
+        </div>
+      </div>
+
+      <div className="container-lg">
         {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

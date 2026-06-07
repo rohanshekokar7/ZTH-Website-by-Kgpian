@@ -1,15 +1,11 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, ArrowRight } from "lucide-react";
 
-interface HeroProps {
-  onCTAClick: () => void;
-}
+interface HeroProps {}
 
-import CurvedMarquee from './CurvedMarquee';
 
-export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
+export default function HeroSection({}: HeroProps = {}) {
   const { scrollY } = useScroll();
   const textY = useTransform(scrollY, [0, 800], [0, 300]);
 
@@ -27,7 +23,7 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
         paddingTop: "6rem",
       }}
     >
-      {/* Animated Background Image */}
+      {/* Animated Background Video */}
       <motion.div
         style={{
           position: "absolute",
@@ -35,9 +31,6 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
           height: "120%",
           left: "-10%",
           top: "-10%",
-          backgroundImage: "url('/background.png')",
-          backgroundSize: "100% 100%",
-          backgroundPosition: "center bottom",
           opacity: 1,
           zIndex: -2,
           willChange: "transform",
@@ -46,7 +39,18 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
           y: scrollY.get() * 0.5,
         }}
         transition={{ type: "tween", ease: "linear", duration: 0 }}
-      />
+      >
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          suppressHydrationWarning
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
 
       {/* Dark overlay for better text readability */}
       <div
@@ -63,20 +67,19 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
         className="container-xl"
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
-          gap: "2rem",
+          justifyContent: "center",
           position: "relative",
           zIndex: 3,
           y: textY,
-          marginTop: "-3vh", // Base offset
+          marginTop: "0",
           width: "100%",
           padding: "0 2rem",
         }}
       >
-        {/* LEFT COLUMN: Text */}
-        <div style={{ flex: "1 1 50%", textAlign: "left", maxWidth: "550px", marginTop: "-8vh", marginLeft: "12%" }}>
+        {/* CENTER COLUMN: Text */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", maxWidth: "800px", marginTop: "-5px" }}>
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
@@ -84,11 +87,11 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             style={{
               marginBottom: "1.5rem",
-              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-              fontSize: "70px", 
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(64px, 9vw, 96px)",
               fontWeight: 700,
               lineHeight: 1.05,
-              letterSpacing: "-0.04em", 
+              letterSpacing: "-0.04em",
               color: "#ffffff",
               textShadow: "none",
             }}
@@ -96,11 +99,7 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
             Create.<br />
             Convert.<br />
             <span style={{
-              backgroundImage: "linear-gradient(90deg, #93c5fd 0%, #3b82f6 50%, #1e40af 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              color: "transparent",
+              color: "#3b82f6",
               display: "inline-block"
             }}>
               Scale.
@@ -114,74 +113,26 @@ export default function HeroSection({ onCTAClick: _onCTAClick }: HeroProps) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             style={{
               fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-              fontSize: "1.125rem",
-              margin: "0 0 2rem", 
-              lineHeight: 1.6, 
+              fontSize: "1.15rem",
+              margin: "0 0 2rem",
+              lineHeight: 1.6,
               fontWeight: 400,
-              color: "#ffffff", 
-              maxWidth: "480px"
+              color: "#ffffff",
+              maxWidth: "620px"
             }}
           >
             End-to-end startup fundraising infrastructure combining AI tools, strategic advisory, and execution support for founders building scalable companies.
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          >
-            <button
-              className="cta-btn"
-              onClick={_onCTAClick}
-              style={{
-                background: "#ffffff", 
-                color: "#0f172a",
-                padding: "0.5rem 1.25rem", /* Smaller, more elegant padding like Stripe */
-                borderRadius: "9999px",
-                fontWeight: 600, /* Medium-bold */
-                fontSize: "0.95rem",
-                border: "none", 
-                cursor: "pointer",
-                display: "inline-flex", 
-                alignItems: "center", 
-                gap: "6px",
-                transition: "all 0.2s ease",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#f8fafc";
-                e.currentTarget.style.transform = "translateY(-1px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "#ffffff";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              Book a call 
-              <span className="icon-default" style={{ display: "inline-flex", alignItems: "center" }}><ChevronDown size={16} strokeWidth={3} style={{ transform: 'rotate(-90deg)' }} /></span>
-              <span className="icon-hover" style={{ display: "none", alignItems: "center" }}><ArrowRight size={16} strokeWidth={3} /></span>
-            </button>
-          </motion.div>
-        </div>
 
-        {/* RIGHT COLUMN: spacer — the 3D cards are rendered in HeroCardsOverlay,
-            lifted above the next section's stacking context so they stay on top while scrolling */}
-        <div style={{ flex: "1 1 50%", position: "relative", height: "700px" }} aria-hidden />
+        </div>
       </motion.div>
 
-      {/* Curved Marquee layered over the wavy background at the bottom of the Hero Section */}
-      <div style={{ position: "absolute", bottom: "-3vh", width: "100%", zIndex: 10 }}>
-        <CurvedMarquee />
-      </div>
 
 
 
       <style jsx>{`
-        .cta-btn .icon-default { display: inline-flex !important; }
-        .cta-btn .icon-hover { display: none !important; }
-        .cta-btn:hover .icon-default { display: none !important; }
-        .cta-btn:hover .icon-hover { display: inline-flex !important; }
+
 
         @keyframes gradient-shift {
           0%, 100% { background-position: 0% 50%; }

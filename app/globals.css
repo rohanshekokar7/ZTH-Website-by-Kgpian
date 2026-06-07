@@ -223,7 +223,7 @@ body {
  */
 
 :root {
-  --font-display: 'Clash Display', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', 'Georgia', serif;
   --font-sans: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
 
   /* Type scale - Upgraded sizes */

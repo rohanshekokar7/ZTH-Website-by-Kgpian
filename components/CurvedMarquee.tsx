@@ -62,7 +62,7 @@ export default function CurvedMarquee() {
           width: 100%;
           height: 120px; /* Reduced container height */
           overflow: hidden;
-          background: #FFFFFF;
+          background: transparent;
           display: flex;
           justify-content: center;
           align-items: center;

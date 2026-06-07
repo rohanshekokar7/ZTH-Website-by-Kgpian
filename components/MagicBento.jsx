@@ -43,7 +43,7 @@ const updateCardGlowProperties = (card, mouseX, mouseY, glow, radius) => {
   card.style.setProperty('--glow-radius', `${radius}px`);
 };
 
-const ParticleCard = ({
+export const ParticleCard = ({
   children,
   className = '',
   disableAnimations = false,
@@ -290,7 +290,7 @@ const ParticleCard = ({
   );
 };
 
-const GlobalSpotlight = ({
+export const GlobalSpotlight = ({
   gridRef,
   disableAnimations = false,
   enabled = true,
