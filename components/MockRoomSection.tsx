@@ -86,11 +86,11 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentStatIndex, setCurrentStatIndex] = useState(0);
 
-  // Auto-cycle through the stats every 1.5 seconds
+  // Auto-cycle through the stats every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStatIndex((prev) => (prev + 1) % stats.length);
-    }, 2500);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -354,11 +354,23 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
                 Book Mock Session
               </Link>
             </span>
-            <span className="vp-btn-border">
-              <Link href="/book" onClick={onCTAClick} className="vp-btn-inner" style={{ textDecoration: 'none' }}>
-                Start Preparing
-              </Link>
-            </span>
+            <motion.button
+              whileHover={{ scale: 1.04, borderColor: "#1976D2", color: "#1976D2", background: "#E3F0FF" }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => {
+                if (onCTAClick) onCTAClick();
+                window.location.href = '/book';
+              }}
+              style={{
+                background: '#ffffff', color: '#0f172a',
+                border: '1.5px solid rgba(0,0,0,0.1)', borderRadius: '9999px',
+                padding: '1rem 2.5rem', fontSize: '1.1rem', fontWeight: 600,
+                cursor: 'pointer', fontFamily: "'Inter', sans-serif",
+                letterSpacing: '-0.01em', transition: 'all 0.3s ease',
+              }}
+            >
+              Start Preparing
+            </motion.button>
           </div>
 
           <div style={{
