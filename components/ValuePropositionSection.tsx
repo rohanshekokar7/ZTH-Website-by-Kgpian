@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, TrendingUp, Users, Target, Rocket } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import CurvedMarquee from "@/components/CurvedMarquee";
 
 const BLUE = "#1976D2";
@@ -24,11 +24,11 @@ const rightItems = [
   { title: "Startup India / DPIIT Assistance", desc: "DPIIT recognition and Startup India registration to unlock tax benefits and government schemes." },
 ];
 
-const stats = [
-  { icon: <Users size={26} />, value: "100+", label: "Ventures Supported" },
-  { icon: <TrendingUp size={26} />, value: "₹11–12 Cr+", label: "Capital Facilitated" },
-  { icon: <Target size={26} />, value: "Multi-Sector", label: "Founder Advisory" },
-  { icon: <Rocket size={26} />, value: "Strategic", label: "Fundraising Preparation" },
+const marqueeItems = [
+  "100+ Ventures Supported",
+  "₹11–12 Cr+ Capital Facilitated",
+  "Multi-Sector Founder Advisory",
+  "Strategic Fundraising Preparation",
 ];
 
 function Card({ title, items, delay }: { title: string; items: typeof leftItems; delay: number; fromX?: number }) {
@@ -164,51 +164,58 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
             <Card title="Compliance & Operations" items={rightItems} delay={0.2} />
           </div>
 
-          {/* Traction Strip — infinite scroll */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            style={{ marginBottom: "4.5rem", overflow: "hidden" }}
-          >
-            <style>{`
-              @keyframes traction-scroll {
-                0%   { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-              }
-              .traction-track {
-                display: flex;
-                width: max-content;
-                animation: traction-scroll 18s linear infinite;
-              }
-              .traction-track:hover { animation-play-state: paused; }
-            `}</style>
-            <div className="traction-track">
-              {[...stats, ...stats].map((stat, idx) => (
-                <div key={idx} style={{
-                  minWidth: 240, textAlign: "center", padding: "2rem 1.75rem",
-                  background: "#ffffff", borderRadius: "20px", margin: "0 0.75rem",
-                  boxShadow: "0 8px 28px -8px rgba(0,0,0,0.07)",
-                  border: "1px solid rgba(25,118,210,0.08)",
-                }}>
-                  <div style={{ background: "rgba(25,118,210,0.09)", width: 52, height: 52, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 0.9rem", color: BLUE }}>
-                    {stat.icon}
-                  </div>
-                  <div style={{ fontWeight: 800, fontSize: "1.6rem", color: "#0f172a", marginBottom: "0.2rem", letterSpacing: "-0.02em" }}>{stat.value}</div>
-                  <div style={{ fontSize: "0.88rem", color: "#6B7280", fontWeight: 500 }}>{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+        </div>
 
-          {/* CTA */}
+        {/* ── Full-width dark marquee band ── */}
+        <div style={{ overflow: "hidden", background: "#0f172a", padding: "1.5rem 0", margin: "0 0 4rem" }}>
+          <style>{`
+            @keyframes vp-marquee {
+              from { transform: translateX(0); }
+              to   { transform: translateX(-50%); }
+            }
+            .vp-marquee-track {
+              display: flex;
+              width: max-content;
+              animation: vp-marquee 20s linear infinite;
+            }
+            .vp-marquee-track:hover { animation-play-state: paused; }
+            .vp-marquee-item {
+              display: flex;
+              align-items: center;
+              gap: 2rem;
+              padding: 0 3rem;
+              white-space: nowrap;
+            }
+          `}</style>
+          <div className="vp-marquee-track">
+            {[...marqueeItems, ...marqueeItems].map((item, i) => (
+              <div key={i} className="vp-marquee-item">
+                <span style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  letterSpacing: "-0.01em",
+                }}>
+                  {item}
+                </span>
+                <span style={{
+                  display: "inline-block",
+                  width: 8, height: 8, borderRadius: "50%",
+                  background: BLUE, flexShrink: 0,
+                }} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 1.5rem 2rem", textAlign: "center" }}>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            style={{ textAlign: "center" }}
           >
             <motion.button
               onClick={onCTAClick}
@@ -227,8 +234,8 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
               Apply For Fundraising Preparation <ArrowRight size={18} />
             </motion.button>
           </motion.div>
-
         </div>
+
       </section>
     </>
   );
