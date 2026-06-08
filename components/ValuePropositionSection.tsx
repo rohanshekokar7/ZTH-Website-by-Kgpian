@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import CurvedMarquee from "@/components/CurvedMarquee";
+import FlowingMenu from "@/components/FlowingMenu";
 
 const BLUE = "#1976D2";
 const BLUE_DARK = "#0D47A1";
@@ -24,16 +25,16 @@ const rightItems = [
   { title: "Startup India / DPIIT Assistance", desc: "DPIIT recognition and Startup India registration to unlock tax benefits and government schemes." },
 ];
 
-const marqueeItems = [
-  "100+ Ventures Supported",
-  "₹11–12 Cr+ Capital Facilitated",
-  "Multi-Sector Founder Advisory",
-  "Strategic Fundraising Preparation",
-];
 
-function Card({ title, items, delay }: { title: string; items: typeof leftItems; delay: number; fromX?: number }) {
-  const ref = useRef(null);
+function Card({ title, items, delay }: { title: string; items: typeof leftItems; delay: number }) {
+  const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [spotlight, setSpotlight] = useState({ x: 0, y: 0, visible: false });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
+  };
 
   return (
     <motion.div
@@ -41,38 +42,54 @@ function Card({ title, items, delay }: { title: string; items: typeof leftItems;
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setSpotlight(s => ({ ...s, visible: false }))}
       style={{
         background: "#ffffff",
-        borderRadius: "28px",
+        borderRadius: "6px",
         padding: "2.75rem",
-        boxShadow: "0 8px 32px -8px rgba(0,0,0,0.08)",
-        border: "1px solid rgba(25,118,210,0.08)",
+        boxShadow: spotlight.visible
+          ? "0 2px 4px rgba(100,116,139,0.1), 0 8px 16px rgba(100,116,139,0.14), 0 24px 56px -8px rgba(100,116,139,0.32)"
+          : "0 2px 4px rgba(100,116,139,0.08), 0 6px 14px rgba(100,116,139,0.1), 0 16px 40px -8px rgba(100,116,139,0.18)",
+        border: "1px solid rgba(100,116,139,0.12)",
         position: "relative",
         overflow: "hidden",
+        transition: "box-shadow 0.35s ease",
       }}
     >
+      {/* spotlight overlay */}
+      <div style={{
+        position: "absolute", inset: 0, borderRadius: "6px", pointerEvents: "none", zIndex: 0,
+        background: spotlight.visible
+          ? `radial-gradient(320px circle at ${spotlight.x}px ${spotlight.y}px, rgba(25,118,210,0.09) 0%, transparent 70%)`
+          : "transparent",
+        transition: spotlight.visible ? "none" : "background 0.5s ease",
+      }} />
+
       {/* top accent bar */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: 4,
         background: `linear-gradient(90deg, ${BLUE}, ${BLUE_DARK})`,
-        borderRadius: "28px 28px 0 0",
+        borderRadius: "6px 6px 0 0", zIndex: 1,
       }} />
 
       <h3 style={{
         fontSize: "1.4rem", fontWeight: 800, color: "#0f172a",
         marginBottom: "2rem", letterSpacing: "-0.02em",
-        fontFamily: "'Inter', sans-serif",
+        fontFamily: "'Inter', sans-serif", position: "relative", zIndex: 1,
       }}>
         {title}
       </h3>
 
-      <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1.4rem" }}>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "1.4rem", position: "relative", zIndex: 1 }}>
         {items.map((item, idx) => (
-          <li
-            key={idx}
-            style={{ paddingLeft: "1rem", borderLeft: `3px solid ${BLUE}` }}
-          >
-            <strong style={{ display: "block", color: BLUE, fontSize: "0.98rem", marginBottom: "0.3rem", fontWeight: 700, fontFamily: "'Inter', sans-serif" }}>
+          <li key={idx} style={{ paddingLeft: "1rem", borderLeft: `3px solid ${BLUE}` }}>
+            <strong style={{
+              display: "inline-block", fontSize: "0.98rem", marginBottom: "0.3rem", fontWeight: 700,
+              fontFamily: "'Inter', sans-serif",
+              background: `linear-gradient(120deg, ${BLUE} 0%, ${BLUE_DARK} 100%)`,
+              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+            }}>
               {item.title}
             </strong>
             <span style={{ color: "#4B5563", fontSize: "0.9rem", lineHeight: 1.65, display: "block", fontFamily: "'Inter', sans-serif" }}>
@@ -98,7 +115,7 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
       <section
         style={{
           position: "relative",
-          padding: "clamp(3rem, 8vw, 6rem) 1.5rem clamp(5rem, 10vw, 8rem)",
+          padding: "clamp(3rem, 8vw, 6rem) 1.5rem 0",
           overflow: "hidden",
           background: "linear-gradient(160deg, #EEF4FF 0%, #F5F7FA 45%, #EDF2FF 100%)",
           marginTop: "-20px",
@@ -144,7 +161,7 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
                 maxWidth: 820, margin: "0 auto 1.5rem",
               }}
             >
-              Built To Prepare Ventures Before{" "}
+              Built To Prepare Ventures Before<br />
               <span style={{ color: BLUE }}>They Raise Capital.</span>
             </motion.h2>
 
@@ -166,73 +183,77 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
 
         </div>
 
-        {/* ── Full-width dark marquee band ── */}
-        <div style={{ overflow: "hidden", background: "#0f172a", padding: "1.5rem 0", margin: "0 0 4rem" }}>
-          <style>{`
-            @keyframes vp-marquee {
-              from { transform: translateX(0); }
-              to   { transform: translateX(-50%); }
-            }
-            .vp-marquee-track {
-              display: flex;
-              width: max-content;
-              animation: vp-marquee 20s linear infinite;
-            }
-            .vp-marquee-track:hover { animation-play-state: paused; }
-            .vp-marquee-item {
-              display: flex;
-              align-items: center;
-              gap: 2rem;
-              padding: 0 3rem;
-              white-space: nowrap;
-            }
-          `}</style>
-          <div className="vp-marquee-track">
-            {[...marqueeItems, ...marqueeItems].map((item, i) => (
-              <div key={i} className="vp-marquee-item">
-                <span style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  letterSpacing: "-0.01em",
-                }}>
-                  {item}
-                </span>
-                <span style={{
-                  display: "inline-block",
-                  width: 8, height: 8, borderRadius: "50%",
-                  background: BLUE, flexShrink: 0,
-                }} />
-              </div>
-            ))}
-          </div>
+        {/* ── FlowingMenu 4-block strip ── */}
+        <div style={{ height: "clamp(300px, 42vh, 480px)", width: "calc(100% + 3rem)", margin: "0 -1.5rem" }}>
+          <FlowingMenu
+            items={[
+              { link: "#", text: "Multi-Stage Capital Preparation",    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" },
+              { link: "#", text: "Founder & Investor Ecosystem",       image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&h=400&fit=crop" },
+              { link: "#", text: "Strategic Fundraising Coordination", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" },
+              { link: "#", text: "Curated Venture Support",            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" },
+            ]}
+            speed={20}
+            bgColor="#0a0f1e"
+            textColor="#e2e8f0"
+            marqueeBgColor={BLUE}
+            marqueeTextColor="#ffffff"
+            borderColor="rgba(255,255,255,0.07)"
+          />
         </div>
 
         {/* CTA */}
-        <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 1.5rem 2rem", textAlign: "center" }}>
+        <style>{`
+          @property --btn-angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+          }
+          @keyframes btn-border-spin {
+            to { --btn-angle: 360deg; }
+          }
+          .vp-btn-border {
+            display: inline-block;
+            padding: 2px;
+            border-radius: 100px;
+            background: conic-gradient(from var(--btn-angle), #1976D2, #63b3ed, #ffffff, #63b3ed, #1976D2);
+            animation: btn-border-spin 3s linear infinite;
+            box-shadow: 0 0 18px rgba(25,118,210,0.25), 0 0 40px rgba(25,118,210,0.12);
+          }
+          .vp-btn-inner {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.05rem 2.6rem;
+            border-radius: 100px;
+            background: linear-gradient(135deg, #0D47A1 0%, #1976D2 100%);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            border: none;
+            white-space: nowrap;
+            transition: background 0.3s ease, transform 0.15s ease;
+          }
+          .vp-btn-inner:hover {
+            background: linear-gradient(135deg, #1565C0 0%, #1E88E5 100%);
+            transform: scale(1.02);
+          }
+          .vp-btn-inner:active { transform: scale(0.97); }
+        `}</style>
+        <div style={{ padding: "4rem 1.5rem 5rem", textAlign: "center" }}>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <motion.button
-              onClick={onCTAClick}
-              whileHover={{ scale: 1.03, boxShadow: "0 12px 28px rgba(25,118,210,0.28)" }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                fontSize: "1rem", padding: "1.15rem 2.75rem",
-                display: "inline-flex", alignItems: "center", gap: "0.75rem",
-                fontFamily: "'Inter', sans-serif", fontWeight: 600,
-                background: `linear-gradient(135deg, ${BLUE}, ${BLUE_DARK})`, color: "#fff",
-                border: "none", borderRadius: "100px", cursor: "pointer",
-                boxShadow: "0 4px 18px rgba(25,118,210,0.22)",
-                transition: "all 0.3s ease",
-              }}
-            >
-              Apply For Fundraising Preparation <ArrowRight size={18} />
-            </motion.button>
+            <span className="vp-btn-border">
+              <button className="vp-btn-inner" onClick={onCTAClick}>
+                Apply For Fundraising Preparation <ArrowRight size={18} />
+              </button>
+            </span>
           </motion.div>
         </div>
 

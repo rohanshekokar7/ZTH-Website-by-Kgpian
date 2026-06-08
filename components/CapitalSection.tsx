@@ -237,47 +237,49 @@ export default function CapitalSection({ className }: { className?: string }) {
         </div>
 
         {/* ── Traction strip ──────────────────────────────────────── */}
-        <SectionLabel title="Traction Strip" delay={0.25} />
+        <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            background: '#ffffff',
-            border: '1px solid rgba(25,118,210,0.1)',
-            borderRadius: '1.5rem',
-            padding: '1.75rem 0',
-            boxShadow: '0 8px 32px rgba(25,118,210,0.05)',
+            background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1a35 50%, #0a0f1e 100%)',
+            borderTop: '1px solid rgba(99,179,237,0.12)',
+            borderBottom: '1px solid rgba(99,179,237,0.12)',
+            borderRadius: 0,
+            padding: '1.6rem 0',
             overflow: 'hidden',
-            // Fade the strip in/out at the edges
-            WebkitMaskImage: 'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent)',
-            maskImage: 'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent)',
+            position: 'relative',
           }}
         >
-          {/* Items are duplicated so the -50% loop wraps seamlessly */}
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to right, #0a0f1e 0%, transparent 100%)' }} />
+          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to left, #0a0f1e 0%, transparent 100%)' }} />
           <div className="traction-track">
             {[...traction, ...traction].map((label, i) => (
               <div key={i} className="traction-item">
-                <div style={{
-                  width: 36, height: 36, borderRadius: '10px',
-                  background: BLUE_LIGHT,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0,
-                }}>
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE }} />
-                </div>
                 <span style={{
-                  color: TEXT_MAIN, fontSize: '0.95rem', fontWeight: 700,
-                  fontFamily: "'Inter', sans-serif", letterSpacing: '-0.01em',
+                  color: '#e2e8f0',
+                  fontSize: 'clamp(1.1rem, 1.8vw, 1.5rem)',
+                  fontWeight: 800,
+                  fontFamily: "'Inter', sans-serif",
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
                   whiteSpace: 'nowrap',
                 }}>
                   {label}
                 </span>
+                <span style={{
+                  fontSize: 'clamp(1rem, 1.6vw, 1.4rem)',
+                  color: 'rgba(99,179,237,0.7)',
+                  flexShrink: 0,
+                  filter: 'drop-shadow(0 0 6px rgba(99,179,237,0.5))',
+                }}>✦</span>
               </div>
             ))}
           </div>
         </motion.div>
+        </div>
 
         {/* ── CTAs ────────────────────────────────────────────────── */}
         <motion.div
@@ -287,21 +289,11 @@ export default function CapitalSection({ className }: { className?: string }) {
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{ display: 'flex', justifyContent: 'center', gap: '1.25rem', flexWrap: 'wrap', marginTop: '5rem' }}
         >
-          <motion.button
-            whileHover={{ scale: 1.04, boxShadow: '0 16px 36px rgba(25,118,210,0.3)' }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => window.location.href = '/book'}
-            style={{
-              background: `linear-gradient(135deg, ${BLUE}, ${BLUE_DARK})`,
-              color: '#fff', border: 'none', borderRadius: '9999px',
-              padding: '1rem 2.5rem', fontSize: '1rem', fontWeight: 700,
-              cursor: 'pointer', fontFamily: "'Inter', sans-serif",
-              boxShadow: '0 8px 24px rgba(25,118,210,0.25)',
-              letterSpacing: '-0.01em', transition: 'all 0.3s ease',
-            }}
-          >
-            Explore Strategic Partnership →
-          </motion.button>
+          <span className="vp-btn-border">
+            <button className="vp-btn-inner" onClick={() => window.location.href = '/book'}>
+              Explore Strategic Partnership →
+            </button>
+          </span>
 
           <motion.button
             whileHover={{ scale: 1.04, borderColor: BLUE, color: BLUE, background: BLUE_LIGHT }}
@@ -337,8 +329,8 @@ export default function CapitalSection({ className }: { className?: string }) {
         .traction-item {
           display: flex;
           align-items: center;
-          gap: 0.875rem;
-          margin-right: 4rem; /* uniform spacing incl. the wrap boundary → seamless loop */
+          gap: 2.5rem;
+          padding: 0 2.5rem;
         }
         @keyframes traction-marquee {
           from { transform: translateX(0); }

@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import SpotlightCard from './SpotlightCard';
+import AppleCardsCarouselDemo from './apple-cards-carousel-demo';
 
 const BLUE = '#1976D2';
 const BLUE_LIGHT = '#E3F0FF';
@@ -10,118 +10,12 @@ const BG = '#F8FAFD';
 const TEXT_MAIN = '#0f172a';
 const TEXT_MUTED = '#64748b';
 
-const cat1 = [
-  { n: '01', title: 'Investor Meeting Preparation', desc: 'Preparation support for investor conversations, presentations, and fundraising discussions.' },
-  { n: '02', title: 'Pitch Day Support', desc: 'Strategic support during pitch events, demo days, and investor-facing opportunities.' },
-  { n: '03', title: 'Deal Structuring Support', desc: 'Assistance across fundraising structuring, documentation coordination, and strategic financial discussions.' },
-  { n: '04', title: 'Due Diligence Coordination', desc: 'Support for investor data preparation, documentation workflows, and fundraising readiness processes.' },
-  { n: '05', title: 'Investor Communication Support', desc: 'Ongoing support across investor follow-ups, fundraising updates, and strategic communication.' },
-];
-
-const cat2 = [
-  { n: '01', title: 'Founder Onboarding', desc: 'Access fundraising preparation, strategic support, and ecosystem connectivity through ZTH.' },
-  { n: '02', title: 'Investor Network', desc: 'Connect with curated ventures, strategic opportunities, and founder ecosystems.' },
-  { n: '03', title: 'Strategic Partnerships', desc: 'Collaborate across execution, advisory, operational support, and ecosystem growth initiatives.' },
-];
-
 const traction = [
   'Founder & Investor Ecosystem',
   'Strategic Fundraising Coordination',
   'Curated Venture Support',
   'Multi-Stage Capital Preparation',
 ];
-
-/* ── 3-D Card ───────────────────────────────────────────────────── */
-function Card3D({
-  title, desc, delay, color = BLUE,
-}: {
-  n: string; title: string; desc: string; delay: number; color?: string;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
-      style={{ height: '100%' }}
-    >
-      <SpotlightCard
-        spotlightColor="rgba(25, 118, 210, 0.18)"
-        className="spotlight-card-net"
-        style={{
-          background: '#ffffff',
-          borderRadius: '1.25rem',
-          padding: '2rem 1.75rem',
-          height: '100%',
-          border: '1px solid rgba(0,0,0,0.06)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.75rem',
-          cursor: 'default',
-          position: 'relative',
-        }}
-      >
-        {/* Top accent line */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-          background: `linear-gradient(90deg, ${color}, #90CAF9, transparent)`,
-          borderRadius: '1.25rem 1.25rem 0 0',
-        }} />
-
-        {/* Bottom underline — appears on hover via CSS */}
-        <div className="card-underline-net" style={{
-          position: 'absolute', bottom: 0, left: '10%', right: '10%', height: 2,
-          background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
-          borderRadius: '0 0 4px 4px',
-          opacity: 0,
-          transition: 'opacity 0.35s ease, transform 0.35s ease',
-          transform: 'scaleX(0.4)',
-        }} />
-
-        <h3 style={{
-          color: TEXT_MAIN, fontSize: '1.05rem', fontWeight: 700,
-          lineHeight: 1.3, letterSpacing: '-0.01em', margin: 0,
-          fontFamily: "'Inter', sans-serif",
-        }}>
-          {title}
-        </h3>
-        <p style={{
-          color: TEXT_MUTED, fontSize: '0.875rem', lineHeight: 1.65,
-          margin: 0, fontFamily: "'Inter', sans-serif",
-        }}>
-          {desc}
-        </p>
-      </SpotlightCard>
-    </motion.div>
-  );
-}
-
-/* ── Section heading ────────────────────────────────────────────── */
-function SectionLabel({ title, delay }: { title: string; delay?: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -16 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: delay ?? 0, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        display: 'flex', alignItems: 'center', gap: '1rem',
-        marginBottom: '2rem', marginTop: '5rem',
-      }}
-    >
-      <div style={{ width: 6, height: 6, borderRadius: '50%', background: BLUE, boxShadow: `0 0 8px ${BLUE}` }} />
-      <h3 style={{
-        fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.18em',
-        textTransform: 'uppercase', color: BLUE, margin: 0,
-        fontFamily: "'Inter', sans-serif",
-      }}>
-        {title}
-      </h3>
-      <div style={{ flex: 1, height: 1, background: 'linear-gradient(to right, rgba(25,118,210,0.2), transparent)' }} />
-    </motion.div>
-  );
-}
 
 /* ── Main ───────────────────────────────────────────────────────── */
 export default function CapitalNetworkSection({ className }: { className?: string }) {
@@ -219,67 +113,58 @@ export default function CapitalNetworkSection({ className }: { className?: strin
           </motion.p>
         </div>
 
-        {/* ── During Fundraising Support ──────────────────────────── */}
-        <SectionLabel title="During Fundraising Support" delay={0.15} />
-        <div className="cards-grid-net">
-          {cat1.map((item, i) => (
-            <Card3D key={item.title} {...item} delay={0.1 + i * 0.07} />
-          ))}
-        </div>
-
-        {/* ── Capital Network ─────────────────────────────────────── */}
-        <SectionLabel title="Capital Network" delay={0.2} />
-        <div className="exec-grid-net">
-          {cat2.map((item, i) => (
-            <Card3D key={item.title} {...item} delay={0.1 + i * 0.09} color="#0D47A1" />
-          ))}
+        {/* ── Carousel Cards ──────────────────────────── */}
+        <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)', marginTop: '3rem', marginBottom: '3rem' }}>
+          <AppleCardsCarouselDemo />
         </div>
 
         {/* ── Ecosystem Highlights ────────────────────────────────── */}
-        <SectionLabel title="Ecosystem Highlights" delay={0.25} />
+        <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            background: '#ffffff',
-            border: '1px solid rgba(25,118,210,0.1)',
-            borderRadius: '1.5rem',
-            padding: '1.75rem 0',
+            background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1a35 50%, #0a0f1e 100%)',
+            borderTop: '1px solid rgba(99,179,237,0.12)',
+            borderBottom: '1px solid rgba(99,179,237,0.12)',
+            borderRadius: 0,
+            padding: '1.6rem 0',
             overflow: 'hidden',
-            boxShadow: '0 8px 32px rgba(25,118,210,0.05)',
             position: 'relative',
-            // Fade the strip in/out at the edges
-            WebkitMaskImage: 'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent)',
-            maskImage: 'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent)',
           }}
         >
-          {/* Items are duplicated so the -50% loop wraps seamlessly */}
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to right, #0a0f1e 0%, transparent 100%)' }} />
+          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to left, #0a0f1e 0%, transparent 100%)' }} />
           <div className="marquee-container" style={{ display: 'flex', width: 'max-content' }}>
             {[...traction, ...traction].map((label, i) => (
               <div
                 key={`${label}-${i}`}
-                style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', marginRight: '4rem' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '2.5rem', padding: '0 2.5rem' }}
               >
-                <div style={{
-                  width: 36, height: 36, borderRadius: '10px',
-                  background: BLUE_LIGHT, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0,
-                }}>
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: BLUE }} />
-                </div>
                 <span style={{
-                  color: TEXT_MAIN, fontSize: '0.95rem', fontWeight: 700,
-                  fontFamily: "'Inter', sans-serif", letterSpacing: '-0.01em',
-                  whiteSpace: 'nowrap'
+                  color: '#e2e8f0',
+                  fontSize: 'clamp(1.1rem, 1.8vw, 1.5rem)',
+                  fontWeight: 800,
+                  fontFamily: "'Inter', sans-serif",
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  whiteSpace: 'nowrap',
                 }}>
                   {label}
                 </span>
+                <span style={{
+                  fontSize: 'clamp(1rem, 1.6vw, 1.4rem)',
+                  color: 'rgba(99,179,237,0.7)',
+                  flexShrink: 0,
+                  filter: 'drop-shadow(0 0 6px rgba(99,179,237,0.5))',
+                }}>✦</span>
               </div>
             ))}
           </div>
         </motion.div>
+        </div>
 
         {/* ── CTAs ────────────────────────────────────────────────── */}
         <motion.div
@@ -289,21 +174,11 @@ export default function CapitalNetworkSection({ className }: { className?: strin
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{ display: 'flex', justifyContent: 'center', gap: '1.25rem', flexWrap: 'wrap', marginTop: '5rem' }}
         >
-          <motion.button
-            whileHover={{ scale: 1.04, boxShadow: '0 16px 36px rgba(25,118,210,0.3)' }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => window.location.href = '/book'}
-            style={{
-              background: `linear-gradient(135deg, ${BLUE}, #0D47A1)`,
-              color: '#fff', border: 'none', borderRadius: '9999px',
-              padding: '1rem 2.5rem', fontSize: '1rem', fontWeight: 700,
-              cursor: 'pointer', fontFamily: "'Inter', sans-serif",
-              boxShadow: '0 8px 24px rgba(25,118,210,0.25)', letterSpacing: '-0.01em',
-              transition: 'all 0.3s ease',
-            }}
-          >
-            Apply For Capital Support →
-          </motion.button>
+          <span className="vp-btn-border">
+            <button className="vp-btn-inner" onClick={() => window.location.href = '/book'}>
+              Apply For Capital Support →
+            </button>
+          </span>
           <motion.button
             whileHover={{ scale: 1.04, borderColor: BLUE, color: BLUE, background: BLUE_LIGHT }}
             whileTap={{ scale: 0.97 }}

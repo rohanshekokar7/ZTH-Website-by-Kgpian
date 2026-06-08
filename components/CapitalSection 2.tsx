@@ -308,21 +308,11 @@ export default function CapitalSection({ className }: { className?: string }) {
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{ display: 'flex', justifyContent: 'center', gap: '1.25rem', flexWrap: 'wrap', marginTop: '5rem' }}
         >
-          <motion.button
-            whileHover={{ scale: 1.04, boxShadow: '0 16px 36px rgba(25,118,210,0.3)' }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => window.location.href = '/book'}
-            style={{
-              background: `linear-gradient(135deg, ${BLUE}, ${BLUE_DARK})`,
-              color: '#fff', border: 'none', borderRadius: '9999px',
-              padding: '1rem 2.5rem', fontSize: '1rem', fontWeight: 700,
-              cursor: 'pointer', fontFamily: "'Inter', sans-serif",
-              boxShadow: '0 8px 24px rgba(25,118,210,0.25)',
-              letterSpacing: '-0.01em', transition: 'all 0.3s ease',
-            }}
-          >
-            Explore Strategic Partnership →
-          </motion.button>
+          <span className="vp-btn-border">
+            <button className="vp-btn-inner" onClick={() => window.location.href = '/book'}>
+              Explore Strategic Partnership →
+            </button>
+          </span>
 
           <motion.button
             whileHover={{ scale: 1.04, borderColor: BLUE, color: BLUE, background: BLUE_LIGHT }}

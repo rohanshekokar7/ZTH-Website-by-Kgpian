@@ -90,7 +90,7 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStatIndex((prev) => (prev + 1) % stats.length);
-    }, 1500);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -349,24 +349,16 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
           </p>
 
           <div style={{ display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
-            <Link href="/book" onClick={onCTAClick} style={{
-              background: "#1976D2", color: "#FFFFFF", padding: "1rem 2.5rem", borderRadius: "99px",
-              fontWeight: 700, fontSize: "1.1rem", textDecoration: "none",
-              boxShadow: "0 8px 20px rgba(25,118,210,0.3)", transition: "all 0.2s ease"
-            }}
-              onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
-              onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}>
-              Book Mock Session
-            </Link>
-            <Link href="/book" onClick={onCTAClick} style={{
-              background: "rgba(255,255,255,0.1)", color: "#FFFFFF", padding: "1rem 2.5rem", borderRadius: "99px",
-              fontWeight: 700, fontSize: "1.1rem", textDecoration: "none", border: "1px solid rgba(255,255,255,0.2)",
-              transition: "all 0.2s ease"
-            }}
-              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}
-              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"}>
-              Start Preparing
-            </Link>
+            <span className="vp-btn-border">
+              <Link href="/book" onClick={onCTAClick} className="vp-btn-inner" style={{ textDecoration: 'none' }}>
+                Book Mock Session
+              </Link>
+            </span>
+            <span className="vp-btn-border">
+              <Link href="/book" onClick={onCTAClick} className="vp-btn-inner" style={{ textDecoration: 'none' }}>
+                Start Preparing
+              </Link>
+            </span>
           </div>
 
           <div style={{

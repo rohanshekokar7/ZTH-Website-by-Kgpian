@@ -92,18 +92,20 @@ export default function TestimonialsAndLogos() {
         }}
       >
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <span
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.7rem",
-              fontWeight: 600,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "#1976D2",
-            }}
-          >
-            Trusted & Featured By
-          </span>
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: "0.5rem",
+            padding: "0.35rem 1rem",
+            background: "#E3F0FF", border: "1px solid rgba(25,118,210,0.18)",
+            borderRadius: "100px",
+          }}>
+            <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#1976D2", flexShrink: 0 }} />
+            <span style={{
+              fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.2em",
+              textTransform: "uppercase", color: "#1976D2", fontFamily: "'Inter', sans-serif",
+            }}>
+              Trusted &amp; Featured By
+            </span>
+          </div>
         </div>
 
         <LogoLoop

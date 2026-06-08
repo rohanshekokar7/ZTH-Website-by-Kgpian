@@ -34,9 +34,9 @@ export default function AuthPage() {
         alignItems: "center", justifyContent: "center", backgroundColor: "#ffffff", 
         fontFamily: "'Inter', sans-serif", padding: "2rem"
       }}>
-        <motion.div layout initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} style={{ marginBottom: "1.25rem" }}>
+        <motion.div layout initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} style={{ marginBottom: "2rem" }}>
           <Link href="/" style={{ textDecoration: "none" }}>
-            <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "64px", width: "auto", objectFit: "contain" }} />
+            <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "100px", width: "auto", objectFit: "contain" }} />
           </Link>
         </motion.div>
 
@@ -119,7 +119,7 @@ export default function AuthPage() {
         
         <div style={{ position: "absolute", top: "10%", width: "100%", display: "flex", justifyContent: "center", zIndex: 10 }}>
           <Link href="/" style={{ textDecoration: "none" }}>
-            <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "72px", width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+            <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "110px", width: "auto", objectFit: "contain" }} />
           </Link>
         </div>
 

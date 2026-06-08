@@ -1010,3 +1010,46 @@ p {
     @apply font-sans;
   }
 }
+/* ============================
+   VP Button Styles (Animated Border)
+============================ */
+@property --btn-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes btn-border-spin {
+  to { --btn-angle: 360deg; }
+}
+.vp-btn-border {
+  display: inline-block;
+  padding: 2px;
+  border-radius: 100px;
+  background: conic-gradient(from var(--btn-angle), #1976D2, #63b3ed, #ffffff, #63b3ed, #1976D2);
+  animation: btn-border-spin 3s linear infinite;
+  box-shadow: 0 0 18px rgba(25,118,210,0.25), 0 0 40px rgba(25,118,210,0.12);
+}
+.vp-btn-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.05rem 2.6rem;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #0D47A1 0%, #1976D2 100%);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  transition: background 0.3s ease, transform 0.15s ease;
+  text-decoration: none;
+}
+.vp-btn-inner:hover {
+  background: linear-gradient(135deg, #1565C0 0%, #1E88E5 100%);
+  transform: scale(1.02);
+}
+.vp-btn-inner:active { transform: scale(0.97); }
