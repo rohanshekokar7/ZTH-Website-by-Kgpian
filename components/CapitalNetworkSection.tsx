@@ -328,10 +328,9 @@ export default function CapitalNetworkSection({ className }: { className?: strin
         }
         .marquee-container {
           animation: scroll-marquee 22s linear infinite;
-          animation-play-state: paused;
         }
         .marquee-container:hover {
-          animation-play-state: running;
+          animation-play-state: paused;
         }
         @media (prefers-reduced-motion: reduce) {
           .marquee-container { animation: none; }

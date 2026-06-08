@@ -181,9 +181,8 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
                 display: flex;
                 width: max-content;
                 animation: traction-scroll 18s linear infinite;
-                animation-play-state: paused;
               }
-              .traction-track:hover { animation-play-state: running; }
+              .traction-track:hover { animation-play-state: paused; }
             `}</style>
             <div className="traction-track">
               {[...stats, ...stats].map((stat, idx) => (

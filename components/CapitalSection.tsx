@@ -330,10 +330,9 @@ export default function CapitalSection({ className }: { className?: string }) {
           display: flex;
           width: max-content;
           animation: traction-marquee 22s linear infinite;
-          animation-play-state: paused;
         }
         .traction-track:hover {
-          animation-play-state: running;
+          animation-play-state: paused;
         }
         .traction-item {
           display: flex;
