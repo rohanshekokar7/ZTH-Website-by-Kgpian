@@ -113,9 +113,9 @@ export default function HeroSection({}: HeroProps = {}) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             style={{
               fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-              fontSize: "1.15rem",
+              fontSize: "clamp(1.2rem, 1.8vw, 1.45rem)",
               margin: "0 0 2rem",
-              lineHeight: 1.6,
+              lineHeight: 1.7,
               fontWeight: 400,
               color: "#ffffff",
               maxWidth: "620px"

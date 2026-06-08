@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import AppleCardsCarouselDemo from './apple-cards-carousel-demo';
+import AppleCardsCarouselDemo from '@/components/apple-cards-carousel-demo';
 
 const BLUE = '#1976D2';
 const BLUE_LIGHT = '#E3F0FF';
@@ -113,10 +113,15 @@ export default function CapitalNetworkSection({ className }: { className?: strin
           </motion.p>
         </div>
 
-        {/* ── Carousel Cards ──────────────────────────── */}
-        <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)', marginTop: '3rem', marginBottom: '3rem' }}>
+        {/* ── Support Cards Carousel ──────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}
+        >
           <AppleCardsCarouselDemo />
-        </div>
+        </motion.div>
 
         {/* ── Ecosystem Highlights ────────────────────────────────── */}
         <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}>

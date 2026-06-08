@@ -2,14 +2,14 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Play, MessageSquare, Target, UserCheck, BarChart, ChevronRight, ChevronLeft } from "lucide-react";
+import { Play, Award, Zap, Mic, TrendingUp, ChevronRight, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 const features = [
-  { icon: MessageSquare, title: "Strategic Pitch Feedback", desc: "Receive detailed feedback on storytelling, structure, communication clarity, and investor appeal." },
-  { icon: Target, title: "High-Pressure Q&A Practice", desc: "Prepare for difficult investor questions around traction, scalability, valuation, competition, and financials." },
-  { icon: UserCheck, title: "Founder Communication Training", desc: "Improve confidence, delivery, pacing, presentation flow, and executive presence during pitches." },
-  { icon: BarChart, title: "Fundraising Readiness Analysis", desc: "Understand how investor-ready your startup is before entering real fundraising conversations." },
+  { icon: Award, title: "Strategic Pitch Feedback", desc: "Receive detailed feedback on storytelling, structure, communication clarity, and investor appeal." },
+  { icon: Zap, title: "High-Pressure Q&A Practice", desc: "Prepare for difficult investor questions around traction, scalability, valuation, competition, and financials." },
+  { icon: Mic, title: "Founder Communication Training", desc: "Improve confidence, delivery, pacing, presentation flow, and executive presence during pitches." },
+  { icon: TrendingUp, title: "Fundraising Readiness Analysis", desc: "Understand how investor-ready your startup is before entering real fundraising conversations." },
 ];
 
 const stats = [
@@ -79,6 +79,55 @@ function AnimatedStat({ stat, index }: { stat: { value: string, label: string },
         {stat.label}
       </p>
     </motion.div>
+  );
+}
+
+function FeatureItem({ feature, index }: { feature: typeof features[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <div ref={ref} style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start" }}>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={inView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          width: 52, height: 52, borderRadius: "14px", flexShrink: 0,
+          background: "linear-gradient(135deg, rgba(25,118,210,0.12) 0%, rgba(25,118,210,0.06) 100%)",
+          border: "1px solid rgba(25,118,210,0.2)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          boxShadow: "0 2px 12px rgba(25,118,210,0.1)",
+        }}
+      >
+        <feature.icon size={22} color="#1976D2" strokeWidth={2} />
+      </motion.div>
+
+      <div style={{ flex: 1 }}>
+        <motion.h3
+          initial={{ opacity: 0, y: 14 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: index * 0.08 + 0.1, ease: [0.16, 1, 0.3, 1] }}
+          style={{ fontSize: "1.25rem", fontWeight: 700, color: "#1A1A1A", marginBottom: "0.55rem", lineHeight: 1.3 }}
+        >
+          {feature.title}
+        </motion.h3>
+
+        <p style={{ fontSize: "1rem", color: "#5A5A5A", lineHeight: 1.65, margin: 0 }}>
+          {feature.desc.split(" ").map((word, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 10, filter: "blur(3px)" }}
+              animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+              transition={{ duration: 0.55, delay: index * 0.08 + 0.18 + i * 0.045, ease: [0.16, 1, 0.3, 1] }}
+              style={{ display: "inline-block", marginRight: "0.27em" }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -162,29 +211,9 @@ export default function MockRoomSection({ onCTAClick }: { onCTAClick?: () => voi
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "4rem", alignItems: "start", marginBottom: "6rem" }}>
 
           {/* Left Side: Features */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "2.25rem" }}>
             {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start" }}
-              >
-                <div style={{
-                  width: 48, height: 48, borderRadius: "50%", background: "rgba(25,118,210,0.1)",
-                  display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
-                }}>
-                  <feature.icon size={22} color="#1976D2" />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#1A1A1A", marginBottom: "0.5rem" }}>
-                    {feature.title}
-                  </h3>
-                  <p style={{ fontSize: "1rem", color: "#5A5A5A", lineHeight: 1.6 }}>
-                    {feature.desc}
-                  </p>
-                </div>
-              </motion.div>
+              <FeatureItem key={index} feature={feature} index={index} />
             ))}
           </div>
 

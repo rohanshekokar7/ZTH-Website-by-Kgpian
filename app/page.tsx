@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import CapitalSection from "@/components/CapitalSection";
 import CapitalNetworkSection from "@/components/CapitalNetworkSection";
 import ValuePropositionSection from "@/components/ValuePropositionSection";
-
+import SmoothScroll from "@/components/SmoothScroll";
 import MockRoomSection from "@/components/MockRoomSection";
 import ZthInsiderSection from "@/components/ZthInsiderSection";
 
@@ -20,7 +20,7 @@ export default function HomePage() {
   const goToBook = useCallback(() => router.push("/book"), [router]);
 
   return (
-    <>
+    <SmoothScroll>
       {/* Main app  */}
       <div
         style={{
@@ -60,6 +60,6 @@ export default function HomePage() {
 
         <Footer onCTAClick={goToBook} />
       </div>
-    </>
+    </SmoothScroll>
   );
 }
