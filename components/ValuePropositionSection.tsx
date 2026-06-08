@@ -25,10 +25,10 @@ const rightItems = [
 ];
 
 const marqueeItems = [
-  { text: "Strategic Fundraising Preparation", highlight: false },
-  { text: "100+ Ventures Supported",           highlight: true  },
-  { text: "₹11–12 Cr+ Capital Facilitated",    highlight: true  },
-  { text: "Multi-Sector Founder Advisory",      highlight: false },
+  "100+ Ventures Supported",
+  "₹11–12 Cr+ Capital Facilitated",
+  "Multi-Sector Founder Advisory",
+  "Strategic Fundraising Preparation",
 ];
 
 function Card({ title, items, delay }: { title: string; items: typeof leftItems; delay: number; fromX?: number }) {
@@ -166,114 +166,47 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
 
         </div>
 
-        {/* ── Premium Achievement Marquee Band ── */}
-        <div style={{ position: "relative", overflow: "hidden", padding: "4.5rem 0", margin: "0 0 4rem" }}>
-
-          {/* Dark layered background */}
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, #06091a 0%, #0c1428 50%, #06091a 100%)" }} />
-
-          {/* Animated grid */}
-          <div style={{
-            position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none",
-            backgroundImage: "linear-gradient(rgba(25,118,210,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(25,118,210,0.04) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }} />
-
-          {/* Moving spotlight glow */}
-          <div style={{
-            position: "absolute", top: "50%", width: "50%", height: "300%",
-            background: "radial-gradient(ellipse, rgba(25,118,210,0.1) 0%, transparent 70%)",
-            zIndex: 0, pointerEvents: "none",
-            animation: "vp-spotlight 9s ease-in-out infinite",
-          }} />
-
+        {/* ── Full-width dark marquee band ── */}
+        <div style={{ overflow: "hidden", background: "#0f172a", padding: "1.5rem 0", margin: "0 0 4rem" }}>
           <style>{`
-            @keyframes vp-spotlight {
-              0%, 100% { left: -10%; transform: translateY(-50%); }
-              50%       { left:  60%; transform: translateY(-50%); }
-            }
-            @keyframes vp-scroll {
+            @keyframes vp-marquee {
               from { transform: translateX(0); }
               to   { transform: translateX(-50%); }
             }
-            .vp-track {
+            .vp-marquee-track {
+              display: flex;
+              width: max-content;
+              animation: vp-marquee 20s linear infinite;
+            }
+            .vp-marquee-track:hover { animation-play-state: paused; }
+            .vp-marquee-item {
               display: flex;
               align-items: center;
-              width: max-content;
-              will-change: transform;
-              animation: vp-scroll 32s linear infinite;
-            }
-            .vp-track:hover { animation-play-state: paused; }
-            .vp-pill {
-              display: inline-flex;
-              align-items: center;
-              padding: 1rem 2.5rem;
-              border-radius: 100px;
-              border: 1px solid rgba(255,255,255,0.07);
-              background: rgba(255,255,255,0.03);
-              backdrop-filter: blur(16px);
-              -webkit-backdrop-filter: blur(16px);
+              gap: 2rem;
+              padding: 0 3rem;
               white-space: nowrap;
-              transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
-              cursor: default;
-            }
-            .vp-pill:hover {
-              transform: scale(1.06) translateY(-3px);
-              filter: brightness(1.3);
-            }
-            .vp-pill--gold {
-              background: rgba(245,158,11,0.05);
-              border: 1px solid rgba(245,158,11,0.18);
-              box-shadow: 0 0 28px rgba(245,158,11,0.08), inset 0 0 20px rgba(245,158,11,0.03);
-            }
-            .vp-pill--gold:hover {
-              box-shadow: 0 0 48px rgba(245,158,11,0.2), inset 0 0 28px rgba(245,158,11,0.06);
-            }
-            .vp-text {
-              font-family: 'Playfair Display', serif;
-              font-size: clamp(1.1rem, 2.2vw, 1.7rem);
-              font-weight: 700;
-              color: rgba(255,255,255,0.88);
-              letter-spacing: -0.01em;
-            }
-            .vp-text--gold {
-              background: linear-gradient(135deg, #F59E0B 0%, #FCD34D 45%, #F59E0B 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              background-clip: text;
-            }
-            .vp-sep {
-              margin: 0 2rem;
-              color: rgba(96,165,250,0.4);
-              font-size: 0.55rem;
-              letter-spacing: 0.3em;
-              user-select: none;
-            }
-            @media (prefers-reduced-motion: reduce) {
-              .vp-track { animation: none; }
             }
           `}</style>
-
-          {/* Edge fades + scrolling track */}
-          <div style={{
-            position: "relative", zIndex: 2, overflow: "hidden",
-            WebkitMaskImage: "linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)",
-            maskImage:        "linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)",
-          }}>
-            <div className="vp-track">
-              {[...marqueeItems, ...marqueeItems].map((item, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center" }}>
-                  <div className={`vp-pill${item.highlight ? " vp-pill--gold" : ""}`}>
-                    <span className={`vp-text${item.highlight ? " vp-text--gold" : ""}`}>
-                      {item.text}
-                    </span>
-                  </div>
-                  <span className="vp-sep">◆ ◆ ◆</span>
-                </div>
-              ))}
-            </div>
+          <div className="vp-marquee-track">
+            {[...marqueeItems, ...marqueeItems].map((item, i) => (
+              <div key={i} className="vp-marquee-item">
+                <span style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  letterSpacing: "-0.01em",
+                }}>
+                  {item}
+                </span>
+                <span style={{
+                  display: "inline-block",
+                  width: 8, height: 8, borderRadius: "50%",
+                  background: BLUE, flexShrink: 0,
+                }} />
+              </div>
+            ))}
           </div>
-
         </div>
 
         {/* CTA */}
