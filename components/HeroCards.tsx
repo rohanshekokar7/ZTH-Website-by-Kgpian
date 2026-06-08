@@ -23,6 +23,7 @@ function SimpleFeatureCard({
       enableMagnetism={false}
       clickEffect={true}
       glowColor="25, 118, 210"
+      onClick={() => {}}
       style={{
         width: "100%",
         background: "#ffffff",

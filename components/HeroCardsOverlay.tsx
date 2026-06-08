@@ -148,9 +148,9 @@ export default function HeroCardsOverlay() {
   const sGroupY = useSpring(groupY, SPRING);
 
   const cards = [
-    <FundraisingSupportCard key="fundraising" reveal={reveal} />,
-    <ComplianceCard key="compliance" reveal={reveal} />,
-    <TractionCard key="traction" reveal={reveal} />,
+    <FundraisingSupportCard key="fundraising" />,
+    <ComplianceCard key="compliance" />,
+    <TractionCard key="traction" />,
   ];
 
   return (
