@@ -52,21 +52,46 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     const scroll = carouselRef.current;
     if (!outer || !scroll) return;
 
+    let targetLeft = scroll.scrollLeft;
+    let rafId: number | null = null;
+
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+    const tick = () => {
+      const el = carouselRef.current;
+      if (!el) { rafId = null; return; }
+      const diff = targetLeft - el.scrollLeft;
+      if (Math.abs(diff) < 0.5) {
+        el.scrollLeft = targetLeft;
+        rafId = null;
+        return;
+      }
+      el.scrollLeft = lerp(el.scrollLeft, targetLeft, 0.09);
+      rafId = requestAnimationFrame(tick);
+    };
+
     const handleWheel = (e: WheelEvent) => {
-      const atEnd = scroll.scrollLeft >= scroll.scrollWidth - scroll.clientWidth - 1;
-      const atStart = scroll.scrollLeft <= 0;
+      const el = carouselRef.current;
+      if (!el) return;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const atEnd = targetLeft >= maxScroll - 1;
+      const atStart = targetLeft <= 0;
       const goingRight = e.deltaY > 0 && !atEnd;
       const goingLeft = e.deltaY < 0 && !atStart;
 
       if (goingRight || goingLeft) {
         e.preventDefault();
         e.stopPropagation();
-        scroll.scrollLeft += e.deltaY * 2;
+        targetLeft = Math.max(0, Math.min(maxScroll, targetLeft + e.deltaY * 2.5));
+        if (!rafId) rafId = requestAnimationFrame(tick);
       }
     };
 
     outer.addEventListener('wheel', handleWheel, { passive: false });
-    return () => outer.removeEventListener('wheel', handleWheel);
+    return () => {
+      outer.removeEventListener('wheel', handleWheel);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const checkScrollability = () => {
