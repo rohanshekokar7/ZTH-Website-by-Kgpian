@@ -49,9 +49,9 @@ function Card({ title, items, delay }: { title: string; items: typeof leftItems;
         borderRadius: "6px",
         padding: "2.75rem",
         boxShadow: spotlight.visible
-          ? "0 2px 4px rgba(100,116,139,0.1), 0 8px 16px rgba(100,116,139,0.14), 0 24px 56px -8px rgba(100,116,139,0.32)"
-          : "0 2px 4px rgba(100,116,139,0.08), 0 6px 14px rgba(100,116,139,0.1), 0 16px 40px -8px rgba(100,116,139,0.18)",
-        border: "1px solid rgba(100,116,139,0.12)",
+          ? "0 4px 8px rgba(0,0,0,0.06), 0 12px 28px rgba(100,116,139,0.18), 0 32px 64px -8px rgba(25,118,210,0.18), 0 0 0 1px rgba(25,118,210,0.06)"
+          : "0 2px 6px rgba(0,0,0,0.05), 0 8px 24px rgba(100,116,139,0.14), 0 24px 56px -8px rgba(100,116,139,0.22)",
+        border: "1px solid rgba(100,116,139,0.1)",
         position: "relative",
         overflow: "hidden",
         transition: "box-shadow 0.35s ease",
