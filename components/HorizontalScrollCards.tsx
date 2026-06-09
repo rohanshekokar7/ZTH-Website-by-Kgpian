@@ -294,10 +294,8 @@ export default function HorizontalScrollCards() {
       const track   = trackRef.current;
       if (!wrapper || !track) return;
 
-      const GAP     = 24; // px – matches gap in track
-      const LPAD    = 80; // px – left padding of track
       const getDistance = () =>
-        Math.max(0, track.scrollWidth - window.innerWidth + LPAD);
+        Math.max(0, (track.scrollWidth - window.innerWidth) * 0.7);
 
       const applyHeight = () => {
         wrapper.style.height = `calc(100vh + ${getDistance()}px)`;
