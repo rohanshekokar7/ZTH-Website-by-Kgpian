@@ -204,7 +204,7 @@ export default function CapitalNetworkSection({ className }: { className?: strin
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1.25rem',
+            gap: '2rem',
             marginBottom: '3.5rem',
           }}
             className="cn-grid"

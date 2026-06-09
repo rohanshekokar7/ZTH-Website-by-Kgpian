@@ -199,7 +199,6 @@ function DataCard({ card }: { card: CardItem }) {
 export default function HorizontalScrollCards() {
   const wrapperRef  = useRef<HTMLDivElement>(null);
   const trackRef    = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
   const hintRef     = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -232,12 +231,6 @@ export default function HorizontalScrollCards() {
             scrub: 1.2,
             invalidateOnRefresh: true,
             onUpdate(self) {
-              if (progressRef.current) {
-                gsap.set(progressRef.current, {
-                  scaleX: self.progress,
-                  transformOrigin: "left center",
-                });
-              }
               if (hintRef.current && self.progress > 0.04) {
                 gsap.to(hintRef.current, { opacity: 0, duration: 0.4, overwrite: true });
               }
@@ -274,25 +267,6 @@ export default function HorizontalScrollCards() {
             alignItems: "center",
           }}
         >
-          {/* progress bar */}
-          <div
-            style={{
-              position: "absolute", bottom: 0, left: 0, right: 0,
-              height: "3px", background: "rgba(25,118,210,0.1)", zIndex: 20,
-            }}
-          >
-            <div
-              ref={progressRef}
-              style={{
-                height: "100%",
-                background: `linear-gradient(to right, ${BLUE}, #0D47A1)`,
-                width: "100%",
-                transform: "scaleX(0)",
-                transformOrigin: "left center",
-              }}
-            />
-          </div>
-
           {/* scroll hint */}
           <div
             ref={hintRef}
