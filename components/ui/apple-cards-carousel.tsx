@@ -66,7 +66,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         rafId = null;
         return;
       }
-      el.scrollLeft = lerp(el.scrollLeft, targetLeft, 0.09);
+      el.scrollLeft = lerp(el.scrollLeft, targetLeft, 0.18);
       rafId = requestAnimationFrame(tick);
     };
 
@@ -82,7 +82,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
       if (goingRight || goingLeft) {
         e.preventDefault();
         e.stopPropagation();
-        targetLeft = Math.max(0, Math.min(maxScroll, targetLeft + e.deltaY * 2.5));
+        targetLeft = Math.max(0, Math.min(maxScroll, targetLeft + e.deltaY * 5));
         if (!rafId) rafId = requestAnimationFrame(tick);
       }
     };
