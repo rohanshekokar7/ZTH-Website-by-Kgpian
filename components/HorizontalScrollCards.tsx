@@ -295,7 +295,7 @@ export default function HorizontalScrollCards() {
       if (!wrapper || !track) return;
 
       const getDistance = () =>
-        Math.max(0, track.scrollWidth - window.innerWidth);
+        Math.max(0, track.scrollWidth - window.innerWidth - 280);
 
       const applyHeight = () => {
         wrapper.style.height = `calc(100vh + ${getDistance()}px)`;
