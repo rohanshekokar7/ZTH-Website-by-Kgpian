@@ -1,15 +1,98 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import HorizontalScrollCards, { type CardData } from '@/components/HorizontalScrollCards';
 
 const BLUE = '#1976D2';
 const BLUE_LIGHT = '#E3F0FF';
-const BG = '#FFFFFF';
+const BG = '#F8FAFD';
 
 const TEXT_MAIN = '#0f172a';
 const TEXT_MUTED = '#64748b';
 
+
+const postFundraiseCards: CardData[] = [
+  {
+    isLabel: true,
+    category: "POST-FUNDRAISE",
+    title: "Long-Term Founder Partnerships",
+    desc: "Sustained support across every dimension of venture growth, from the close and beyond.",
+    accent: "#1565C0",
+    image: "/networking_illustration.png",
+    bullets: [],
+  },
+  {
+    isLabel: false,
+    category: "STRATEGIC ADVISORY",
+    title: "Growth Strategy Support",
+    desc: "Ongoing strategic counsel to navigate scaling decisions, market expansion, and competitive positioning.",
+    accent: "#1565C0",
+    image: "",
+    bullets: [
+      "Quarterly strategy review sessions",
+      "Market expansion planning & analysis",
+      "Competitive landscape monitoring",
+      "Board and investor narrative alignment",
+    ],
+  },
+  {
+    isLabel: false,
+    category: "OPERATIONS",
+    title: "Operational Execution Support",
+    desc: "Hands-on support across hiring, process design, and operational infrastructure for scaling teams.",
+    accent: "#1565C0",
+    image: "",
+    bullets: [
+      "Hiring strategy and talent planning",
+      "Process design and documentation",
+      "Vendor and partner management",
+      "OKR setting and performance tracking",
+    ],
+  },
+  {
+    isLabel: false,
+    category: "FINANCIAL GUIDANCE",
+    title: "Post-Raise Financial Management",
+    desc: "Structured financial oversight to manage runway, reporting, and investor obligations post-close.",
+    accent: "#0D47A1",
+    image: "",
+    bullets: [
+      "Runway management and forecasting",
+      "Investor reporting templates",
+      "Financial controls and governance",
+      "Cap table maintenance and updates",
+    ],
+  },
+  {
+    isLabel: false,
+    category: "COMPLIANCE & LEGAL",
+    title: "Regulatory & Compliance Support",
+    desc: "Ongoing legal and compliance guidance to maintain regulatory alignment as the venture scales.",
+    accent: "#1565C0",
+    image: "",
+    bullets: [
+      "Regulatory framework navigation",
+      "Corporate governance documentation",
+      "Compliance audits and assessments",
+      "Legal structure optimisation",
+    ],
+  },
+  {
+    isLabel: false,
+    category: "ECOSYSTEM ACCESS",
+    title: "Network & Ecosystem Activation",
+    desc: "Active introductions and partnership facilitation across ZTH's curated venture and investor ecosystem.",
+    accent: "#1565C0",
+    image: "",
+    bullets: [
+      "Curated partner introductions",
+      "Co-investment opportunity access",
+      "Founder community & peer network",
+      "Strategic alliance facilitation",
+    ],
+  },
+];
 
 const traction = [
   'Long-Term Founder Partnerships',
@@ -18,6 +101,146 @@ const traction = [
   'Venture Scaling Advisory',
 ];
 
+
+/* ── Strategic Partnership data ────────────────────────────────── */
+const partnershipItems = [
+  {
+    title: 'ZTH at Cap Table',
+    desc: 'Long-term aligned partnerships with ventures across growth and strategic expansion journeys.',
+    icon: '⬡',
+  },
+  {
+    title: 'Financial Advisory',
+    desc: 'Ongoing financial guidance, strategic planning, and operational decision support.',
+    icon: '◈',
+  },
+  {
+    title: 'Growth & Governance',
+    desc: 'Support across scaling strategy, investor communication, governance, and business structuring.',
+    icon: '◎',
+  },
+  {
+    title: 'Follow-On Fundraising Support',
+    desc: 'Preparation and strategic guidance for future fundraising rounds and investor engagement.',
+    icon: '◇',
+  },
+];
+
+function PartnershipCard({ item, index }: { item: typeof partnershipItems[0]; index: number }) {
+  const [spot, setSpot] = useState({ x: 0, y: 0, on: false });
+  const move = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setSpot({ x: e.clientX - r.left, y: e.clientY - r.top, on: true });
+  };
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      onMouseMove={move}
+      onMouseLeave={() => setSpot(s => ({ ...s, on: false }))}
+      style={{
+        left: index % 2 === 0 ? '-10%' : 0,
+        background: '#ffffff',
+        borderRadius: '12px',
+        border: '1px solid rgba(0,0,0,0.07)',
+        boxShadow: spot.on
+          ? '0 8px 24px rgba(100,116,139,0.12), 0 24px 48px rgba(100,116,139,0.18)'
+          : '0 4px 24px rgba(0,0,0,0.06)',
+        padding: '1.75rem 2.5rem 2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.75rem',
+        position: 'relative',
+        overflow: 'hidden',
+        cursor: 'default',
+        transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+        transform: spot.on ? 'translateY(-8px) scale(1.015)' : 'none',
+      }}
+    >
+      {/* spotlight */}
+      <div style={{
+        position: 'absolute', inset: 0, borderRadius: '12px',
+        pointerEvents: 'none', zIndex: 0,
+        background: spot.on
+          ? `radial-gradient(320px circle at ${spot.x}px ${spot.y}px, rgba(25,118,210,0.09) 0%, transparent 80%)`
+          : 'transparent',
+        transition: spot.on ? 'none' : 'background 0.5s ease',
+      }} />
+
+      {/* title */}
+      <p style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: '1.1rem',
+        fontWeight: 700,
+        color: BLUE,
+        lineHeight: 1.2,
+        letterSpacing: '-0.02em',
+        margin: 0,
+        position: 'relative',
+        zIndex: 1,
+      }}>{item.title}</p>
+
+      {/* desc */}
+      <p style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: '0.875rem',
+        color: TEXT_MUTED,
+        lineHeight: 1.65,
+        margin: 0,
+        position: 'relative',
+        zIndex: 1,
+      }}>{item.desc}</p>
+    </motion.div>
+  );
+}
+
+function StrategicPartnershipGrid() {
+  return (
+    <>
+      {/* Plain <style> — not scoped by styled-jsx, so .sp-grid reaches this component */}
+      <style>{`
+        .sp-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2.25rem;
+          margin-bottom: 4rem;
+        }
+        @media (max-width: 640px) { .sp-grid { grid-template-columns: 1fr; } }
+      `}</style>
+
+      <div style={{ padding: '1.5rem 0 0' }}>
+        {/* heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          style={{ marginBottom: '2.5rem', textAlign: 'center' }}
+        >
+          <p style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(2rem, 3vw, 2.75rem)',
+            fontWeight: 700,
+            color: '#0f172a',
+            letterSpacing: '-0.02em',
+            lineHeight: 1.2,
+            margin: 0,
+          }}>
+            Strategic <span style={{ color: BLUE }}>Partnership.</span>
+          </p>
+        </motion.div>
+
+        <div className="sp-grid">
+          {partnershipItems.map((item, i) => (
+            <PartnershipCard key={item.title} item={item} index={i} />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
 
 /* ── Main component ─────────────────────────────────────────────── */
 export default function CapitalSection({ className }: { className?: string }) {
@@ -29,10 +252,10 @@ export default function CapitalSection({ className }: { className?: string }) {
       ref={sectionRef}
       id="post-fundraise"
       className={`${className || ''} section-pad`}
-      style={{ background: BG, position: 'relative', overflow: 'hidden' }}
+      style={{ background: BG, position: 'relative', paddingBottom: '3rem', paddingTop: '80px' }}
     >
       {/* ── Decorative background ────────────────────────────────── */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
         <svg width="100%" height="100%" style={{ opacity: 0.35 }}>
           <defs>
             <pattern id="cap-grid" width="48" height="48" patternUnits="userSpaceOnUse">
@@ -56,7 +279,7 @@ export default function CapitalSection({ className }: { className?: string }) {
       <div className="container-lg" style={{ position: 'relative', zIndex: 10 }}>
 
         {/* ── Header ──────────────────────────────────────────────── */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -113,49 +336,57 @@ export default function CapitalSection({ className }: { className?: string }) {
           </motion.p>
         </div>
 
+      </div>
+      {/* ── Post-fundraise horizontal scroll cards ──────────────── */}
+      <HorizontalScrollCards cards={postFundraiseCards} />
+      <div className="container-lg" style={{ position: 'relative', zIndex: 10 }}>
+
+        {/* ── Strategic Partnership grid ──────────────────────────── */}
+        <StrategicPartnershipGrid />
+
         {/* ── Traction strip ──────────────────────────────────────── */}
         <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1a35 50%, #0a0f1e 100%)',
-            borderTop: '1px solid rgba(99,179,237,0.12)',
-            borderBottom: '1px solid rgba(99,179,237,0.12)',
-            borderRadius: 0,
-            padding: '1.6rem 0',
-            overflow: 'hidden',
-            position: 'relative',
-          }}
-        >
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to right, #0a0f1e 0%, transparent 100%)' }} />
-          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to left, #0a0f1e 0%, transparent 100%)' }} />
-          <div className="traction-track">
-            {[...traction, ...traction].map((label, i) => (
-              <div key={i} className="traction-item">
-                <span style={{
-                  color: '#e2e8f0',
-                  fontSize: 'clamp(1.1rem, 1.8vw, 1.5rem)',
-                  fontWeight: 800,
-                  fontFamily: "'Inter', sans-serif",
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {label}
-                </span>
-                <span style={{
-                  fontSize: 'clamp(1rem, 1.6vw, 1.4rem)',
-                  color: 'rgba(99,179,237,0.7)',
-                  flexShrink: 0,
-                  filter: 'drop-shadow(0 0 6px rgba(99,179,237,0.5))',
-                }}>✦</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1a35 50%, #0a0f1e 100%)',
+              borderTop: '1px solid rgba(99,179,237,0.12)',
+              borderBottom: '1px solid rgba(99,179,237,0.12)',
+              borderRadius: 0,
+              padding: '1.6rem 0',
+              overflow: 'hidden',
+              position: 'relative',
+            }}
+          >
+            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to right, #0a0f1e 0%, transparent 100%)' }} />
+            <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to left, #0a0f1e 0%, transparent 100%)' }} />
+            <div className="traction-track">
+              {[...traction, ...traction].map((label, i) => (
+                <div key={i} className="traction-item">
+                  <span style={{
+                    color: '#e2e8f0',
+                    fontSize: 'clamp(1.1rem, 1.8vw, 1.5rem)',
+                    fontWeight: 800,
+                    fontFamily: "'Inter', sans-serif",
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {label}
+                  </span>
+                  <span style={{
+                    fontSize: 'clamp(1rem, 1.6vw, 1.4rem)',
+                    color: 'rgba(99,179,237,0.7)',
+                    flexShrink: 0,
+                    filter: 'drop-shadow(0 0 6px rgba(99,179,237,0.5))',
+                  }}>✦</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
         {/* ── CTAs ────────────────────────────────────────────────── */}

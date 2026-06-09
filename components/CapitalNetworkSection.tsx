@@ -53,11 +53,12 @@ function GridCard({ card, i }: { card: { title: string; desc: string }; i: numbe
         boxShadow: spot.on
           ? '0 8px 24px rgba(100,116,139,0.12), 0 24px 48px rgba(100,116,139,0.18)'
           : '0 4px 24px rgba(0,0,0,0.06)',
-        padding: '2rem 2rem 2.25rem',
-        display: 'flex', flexDirection: 'column', gap: '0.75rem',
+        padding: '2.75rem 2.5rem 3rem',
+        display: 'flex', flexDirection: 'column', gap: '1.1rem',
         position: 'relative', overflow: 'hidden',
         transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
-        transform: spot.on ? 'translateY(-8px) scale(1.015)' : 'none',
+        left: i === 0 ? -40 : i === 2 ? 20 : 0,
+        transform: spot.on ? 'translateY(-8px) scale(1.015)' : undefined,
         cursor: 'default',
       }}
     >
@@ -92,7 +93,7 @@ export default function CapitalNetworkSection({ className }: { className?: strin
       ref={sectionRef}
       id="capital-network"
       className={`${className || ''} section-pad`}
-      style={{ background: BG, position: 'relative' }}
+      style={{ background: BG, position: 'relative', paddingBottom: 0 }}
     >
       {/* ── Decorative background ────────────────────────────────── */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
@@ -205,7 +206,7 @@ export default function CapitalNetworkSection({ className }: { className?: strin
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '2rem',
-            marginBottom: '3.5rem',
+            marginBottom: '4.5rem',
           }}
             className="cn-grid"
           >
@@ -217,50 +218,50 @@ export default function CapitalNetworkSection({ className }: { className?: strin
 
         {/* ── Ecosystem Highlights ────────────────────────────────── */}
         <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1a35 50%, #0a0f1e 100%)',
-            borderTop: '1px solid rgba(99,179,237,0.12)',
-            borderBottom: '1px solid rgba(99,179,237,0.12)',
-            borderRadius: 0,
-            padding: '1.6rem 0',
-            overflow: 'hidden',
-            position: 'relative',
-          }}
-        >
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to right, #0a0f1e 0%, transparent 100%)' }} />
-          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to left, #0a0f1e 0%, transparent 100%)' }} />
-          <div className="marquee-container" style={{ display: 'flex', width: 'max-content' }}>
-            {[...traction, ...traction].map((label, i) => (
-              <div
-                key={`${label}-${i}`}
-                style={{ display: 'flex', alignItems: 'center', gap: '2.5rem', padding: '0 2.5rem' }}
-              >
-                <span style={{
-                  color: '#e2e8f0',
-                  fontSize: 'clamp(1.1rem, 1.8vw, 1.5rem)',
-                  fontWeight: 800,
-                  fontFamily: "'Inter', sans-serif",
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {label}
-                </span>
-                <span style={{
-                  fontSize: 'clamp(1rem, 1.6vw, 1.4rem)',
-                  color: 'rgba(99,179,237,0.7)',
-                  flexShrink: 0,
-                  filter: 'drop-shadow(0 0 6px rgba(99,179,237,0.5))',
-                }}>✦</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1a35 50%, #0a0f1e 100%)',
+              borderTop: '1px solid rgba(99,179,237,0.12)',
+              borderBottom: '1px solid rgba(99,179,237,0.12)',
+              borderRadius: 0,
+              padding: '1.6rem 0',
+              overflow: 'hidden',
+              position: 'relative',
+            }}
+          >
+            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to right, #0a0f1e 0%, transparent 100%)' }} />
+            <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '10%', zIndex: 2, pointerEvents: 'none', background: 'linear-gradient(to left, #0a0f1e 0%, transparent 100%)' }} />
+            <div className="marquee-container" style={{ display: 'flex', width: 'max-content' }}>
+              {[...traction, ...traction].map((label, i) => (
+                <div
+                  key={`${label}-${i}`}
+                  style={{ display: 'flex', alignItems: 'center', gap: '2.5rem', padding: '0 2.5rem' }}
+                >
+                  <span style={{
+                    color: '#e2e8f0',
+                    fontSize: 'clamp(1.1rem, 1.8vw, 1.5rem)',
+                    fontWeight: 800,
+                    fontFamily: "'Inter', sans-serif",
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {label}
+                  </span>
+                  <span style={{
+                    fontSize: 'clamp(1rem, 1.6vw, 1.4rem)',
+                    color: 'rgba(99,179,237,0.7)',
+                    flexShrink: 0,
+                    filter: 'drop-shadow(0 0 6px rgba(99,179,237,0.5))',
+                  }}>✦</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
         {/* ── CTAs ────────────────────────────────────────────────── */}

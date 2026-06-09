@@ -187,10 +187,10 @@ export default function ValuePropositionSection({ onCTAClick }: { onCTAClick: ()
         <div style={{ height: "clamp(300px, 42vh, 480px)", width: "calc(100% + 3rem)", margin: "0 -1.5rem" }}>
           <FlowingMenu
             items={[
-              { link: "#", text: "Multi-Stage Capital Preparation", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" },
-              { link: "#", text: "Founder & Investor Ecosystem", image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&h=400&fit=crop" },
-              { link: "#", text: "Strategic Fundraising Coordination", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" },
-              { link: "#", text: "Curated Venture Support", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" },
+              { link: "#", text: "100+ Ventures Supported", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" },
+              { link: "#", text: "₹11–12 Cr+ Capital Facilitated", image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&h=400&fit=crop" },
+              { link: "#", text: "Multi-Sector Founder Advisory", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" },
+              { link: "#", text: "Strategic Fundraising Preparation", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" },
             ]}
             speed={20}
             bgColor="#0a0f1e"
