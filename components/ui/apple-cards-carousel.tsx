@@ -10,6 +10,8 @@ import {
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import { getLenis } from "@/lib/lenisStore";
 
 interface CarouselProps {
   items: React.ReactNode[];
@@ -49,48 +51,41 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
   useEffect(() => {
     const outer = outerRef.current;
-    const scroll = carouselRef.current;
-    if (!outer || !scroll) return;
+    const el = carouselRef.current;
+    if (!outer || !el) return;
 
-    let targetLeft = scroll.scrollLeft;
-    let rafId: number | null = null;
-
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-    const tick = () => {
-      const el = carouselRef.current;
-      if (!el) { rafId = null; return; }
-      const diff = targetLeft - el.scrollLeft;
-      if (Math.abs(diff) < 0.5) {
-        el.scrollLeft = targetLeft;
-        rafId = null;
-        return;
-      }
-      el.scrollLeft = lerp(el.scrollLeft, targetLeft, 0.18);
-      rafId = requestAnimationFrame(tick);
-    };
+    let targetLeft = 0;
 
     const handleWheel = (e: WheelEvent) => {
-      const el = carouselRef.current;
-      if (!el) return;
-      const maxScroll = el.scrollWidth - el.clientWidth;
+      const scroll = carouselRef.current;
+      if (!scroll) return;
+      const maxScroll = scroll.scrollWidth - scroll.clientWidth;
       const atEnd = targetLeft >= maxScroll - 1;
       const atStart = targetLeft <= 0;
       const goingRight = e.deltaY > 0 && !atEnd;
-      const goingLeft = e.deltaY < 0 && !atStart;
+      const goingLeft  = e.deltaY < 0 && !atStart;
 
       if (goingRight || goingLeft) {
         e.preventDefault();
         e.stopPropagation();
-        targetLeft = Math.max(0, Math.min(maxScroll, targetLeft + e.deltaY * 5));
-        if (!rafId) rafId = requestAnimationFrame(tick);
+        getLenis()?.stop();
+        targetLeft = Math.max(0, Math.min(maxScroll, targetLeft + e.deltaY * 3));
+        gsap.to(scroll, {
+          scrollLeft: targetLeft,
+          duration: 1.2,
+          ease: "expo.out",
+          overwrite: true,
+        });
+      } else {
+        getLenis()?.start();
       }
     };
 
     outer.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
       outer.removeEventListener('wheel', handleWheel);
-      if (rafId) cancelAnimationFrame(rafId);
+      gsap.killTweensOf(el);
+      getLenis()?.start();
     };
   }, []);
 
