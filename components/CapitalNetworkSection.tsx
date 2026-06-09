@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import HorizontalScrollCards from '@/components/HorizontalScrollCards';
 
@@ -16,6 +16,71 @@ const traction = [
   'Curated Venture Support',
   'Multi-Stage Capital Preparation',
 ];
+
+const capitalNetworkCards = [
+  {
+    title: 'Founder Onboarding',
+    desc: 'Access fundraising preparation, strategic support, and ecosystem connectivity through ZTH.',
+  },
+  {
+    title: 'Investor Network',
+    desc: 'Connect with curated ventures, strategic opportunities, and founder ecosystems.',
+  },
+  {
+    title: 'Strategic Partnerships',
+    desc: 'Collaborate across execution, advisory, operational support, and ecosystem growth initiatives.',
+  },
+];
+
+function GridCard({ card, i }: { card: { title: string; desc: string }; i: number }) {
+  const [spot, setSpot] = useState({ x: 0, y: 0, on: false });
+  const move = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setSpot({ x: e.clientX - r.left, y: e.clientY - r.top, on: true });
+  };
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      onMouseMove={move}
+      onMouseLeave={() => setSpot(s => ({ ...s, on: false }))}
+      style={{
+        background: '#ffffff',
+        borderRadius: '12px',
+        border: '1px solid rgba(0,0,0,0.07)',
+        boxShadow: spot.on
+          ? '0 8px 24px rgba(100,116,139,0.12), 0 24px 48px rgba(100,116,139,0.18)'
+          : '0 4px 24px rgba(0,0,0,0.06)',
+        padding: '2rem 2rem 2.25rem',
+        display: 'flex', flexDirection: 'column', gap: '0.75rem',
+        position: 'relative', overflow: 'hidden',
+        transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+        transform: spot.on ? 'translateY(-8px) scale(1.015)' : 'none',
+        cursor: 'default',
+      }}
+    >
+      <div style={{
+        position: 'absolute', inset: 0, borderRadius: '12px', pointerEvents: 'none', zIndex: 0,
+        background: spot.on
+          ? `radial-gradient(320px circle at ${spot.x}px ${spot.y}px, rgba(25,118,210,0.09) 0%, transparent 80%)`
+          : 'transparent',
+        transition: spot.on ? 'none' : 'background 0.5s ease',
+      }} />
+      <p style={{
+        fontFamily: "'Inter', sans-serif", fontSize: '1.1rem', fontWeight: 700,
+        color: BLUE, lineHeight: 1.2, letterSpacing: '-0.02em',
+        position: 'relative', zIndex: 1, margin: 0,
+      }}>{card.title}</p>
+      <p style={{
+        fontFamily: "'Inter', sans-serif", fontSize: '0.875rem',
+        color: TEXT_MUTED, lineHeight: 1.65,
+        position: 'relative', zIndex: 1, margin: 0,
+      }}>{card.desc}</p>
+    </motion.div>
+  );
+}
 
 /* ── Main ───────────────────────────────────────────────────────── */
 export default function CapitalNetworkSection({ className }: { className?: string }) {
@@ -118,6 +183,38 @@ export default function CapitalNetworkSection({ className }: { className?: strin
       <HorizontalScrollCards />
       <div className="container-lg" style={{ position: 'relative', zIndex: 10 }}>
 
+        {/* ── Capital Network Grid ────────────────────────────────── */}
+        <div style={{ padding: '4rem 0 0' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 'clamp(2.2rem, 3.5vw, 3rem)',
+                fontWeight: 700, color: '#0f172a',
+                letterSpacing: '-0.02em', lineHeight: 1.2, margin: 0,
+              }}
+            >
+              Capital <span style={{ color: BLUE }}>Network.</span>
+            </motion.p>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '1.25rem',
+            marginBottom: '3.5rem',
+          }}
+            className="cn-grid"
+          >
+            {capitalNetworkCards.map((card, i) => (
+              <GridCard key={card.title} card={card} i={i} />
+            ))}
+          </div>
+        </div>
+
         {/* ── Ecosystem Highlights ────────────────────────────────── */}
         <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}>
         <motion.div
@@ -210,6 +307,9 @@ export default function CapitalNetworkSection({ className }: { className?: strin
         @media (prefers-reduced-motion: reduce) {
           .marquee-container { animation: none; }
         }
+        .cn-grid { grid-template-columns: repeat(3, 1fr); }
+        @media (max-width: 768px) { .cn-grid { grid-template-columns: 1fr; } }
+        @media (min-width: 769px) and (max-width: 1024px) { .cn-grid { grid-template-columns: repeat(2, 1fr); } }
         .spotlight-card-net:hover .card-underline-net {
           opacity: 1 !important;
           transform: scaleX(1) !important;
