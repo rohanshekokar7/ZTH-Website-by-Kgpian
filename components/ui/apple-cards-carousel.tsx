@@ -69,10 +69,10 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         e.preventDefault();
         e.stopPropagation();
         getLenis()?.stop();
-        targetLeft = Math.max(0, Math.min(maxScroll, targetLeft + e.deltaY * 1.2));
+        targetLeft = Math.max(0, Math.min(maxScroll, targetLeft + e.deltaY * 3));
         gsap.to(scroll, {
           scrollLeft: targetLeft,
-          duration: 1.6,
+          duration: 1.2,
           ease: "expo.out",
           overwrite: true,
         });
