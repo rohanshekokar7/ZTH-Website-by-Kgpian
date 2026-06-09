@@ -10,8 +10,6 @@ import {
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import gsap from "gsap";
-import { getLenis } from "@/lib/lenisStore";
 
 interface CarouselProps {
   items: React.ReactNode[];
@@ -37,7 +35,6 @@ export const CarouselContext = createContext<{
 
 export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const carouselRef = React.useRef<HTMLDivElement>(null);
-  const outerRef = React.useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
   const [canScrollRight, setCanScrollRight] = React.useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -49,45 +46,6 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     }
   }, [initialScroll]);
 
-  useEffect(() => {
-    const outer = outerRef.current;
-    const el = carouselRef.current;
-    if (!outer || !el) return;
-
-    let targetLeft = 0;
-
-    const handleWheel = (e: WheelEvent) => {
-      const scroll = carouselRef.current;
-      if (!scroll) return;
-      const maxScroll = scroll.scrollWidth - scroll.clientWidth;
-      const atEnd = targetLeft >= maxScroll - 1;
-      const atStart = targetLeft <= 0;
-      const goingRight = e.deltaY > 0 && !atEnd;
-      const goingLeft  = e.deltaY < 0 && !atStart;
-
-      if (goingRight || goingLeft) {
-        e.preventDefault();
-        e.stopPropagation();
-        getLenis()?.stop();
-        targetLeft = Math.max(0, Math.min(maxScroll, targetLeft + e.deltaY * 3));
-        gsap.to(scroll, {
-          scrollLeft: targetLeft,
-          duration: 1.2,
-          ease: "expo.out",
-          overwrite: true,
-        });
-      } else {
-        getLenis()?.start();
-      }
-    };
-
-    outer.addEventListener('wheel', handleWheel, { passive: false });
-    return () => {
-      outer.removeEventListener('wheel', handleWheel);
-      gsap.killTweensOf(el);
-      getLenis()?.start();
-    };
-  }, []);
 
   const checkScrollability = () => {
     if (carouselRef.current) {
@@ -130,7 +88,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     <CarouselContext.Provider
       value={{ onCardClose: handleCardClose, currentIndex }}
     >
-      <div ref={outerRef} className="relative w-full">
+      <div className="relative w-full">
         <style>{`
           .hide-scrollbar::-webkit-scrollbar {
             display: none;

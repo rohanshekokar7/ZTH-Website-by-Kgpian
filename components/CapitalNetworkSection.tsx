@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import AppleCardsCarouselDemo from '@/components/apple-cards-carousel-demo';
+import HorizontalScrollCards from '@/components/HorizontalScrollCards';
 
 const BLUE = '#1976D2';
 const BLUE_LIGHT = '#E3F0FF';
@@ -27,10 +27,10 @@ export default function CapitalNetworkSection({ className }: { className?: strin
       ref={sectionRef}
       id="capital-network"
       className={`${className || ''} section-pad`}
-      style={{ background: BG, position: 'relative', overflow: 'hidden' }}
+      style={{ background: BG, position: 'relative' }}
     >
       {/* ── Decorative background ────────────────────────────────── */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
         {/* Grid */}
         <svg width="100%" height="100%" style={{ opacity: 0.4 }}>
           <defs>
@@ -113,15 +113,10 @@ export default function CapitalNetworkSection({ className }: { className?: strin
           </motion.p>
         </div>
 
-        {/* ── Support Cards Carousel ──────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}
-        >
-          <AppleCardsCarouselDemo />
-        </motion.div>
+        {/* ── Horizontal scroll cards ─────────────────────────────── */}
+      </div>
+      <HorizontalScrollCards />
+      <div className="container-lg" style={{ position: 'relative', zIndex: 10 }}>
 
         {/* ── Ecosystem Highlights ────────────────────────────────── */}
         <div style={{ width: '100vw', marginLeft: 'calc(50% - 50vw)' }}>
