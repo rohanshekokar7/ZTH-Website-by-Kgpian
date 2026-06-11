@@ -29,10 +29,11 @@ export default function AuthPage() {
 
   return (
     <>
-      <div className="desktop-view" style={{ 
+      {/* ── DESKTOP VIEW ── */}
+      <div className="desktop-view" style={{
         minHeight: "100vh", display: "flex", flexDirection: "column",
-        alignItems: "center", justifyContent: "center", backgroundColor: "#ffffff", 
-        fontFamily: "'Inter', sans-serif", padding: "2rem"
+        alignItems: "center", justifyContent: "center", backgroundColor: "#ffffff",
+        fontFamily: "'Inter', sans-serif", padding: "2rem",
       }}>
         <motion.div layout initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} style={{ marginBottom: "2rem" }}>
           <Link href="/" style={{ textDecoration: "none" }}>
@@ -43,14 +44,12 @@ export default function AuthPage() {
         <motion.div layout initial={{ opacity: 0, y: 30, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
           style={{
             display: "flex", flexDirection: isLogin ? "row" : "row-reverse", width: "100%", maxWidth: "850px", height: "580px",
-            backgroundColor: "#ffffff", borderRadius: "1.25rem", overflow: "hidden", boxShadow: "0 20px 60px rgba(0,0,0,0.06)", border: "2px solid #e0ebf5", position: "relative"
+            backgroundColor: "#ffffff", borderRadius: "1.25rem", overflow: "hidden",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.06)", border: "2px solid #e0ebf5", position: "relative",
           }}
         >
-          <motion.div layout transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }} 
-            style={{
-              flex: "1", backgroundColor: "#f2f8fc", padding: "2.5rem 3.5rem", display: "flex", flexDirection: "column",
-              alignItems: "center", justifyContent: "center", position: "relative"
-            }}
+          <motion.div layout transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+            style={{ flex: "1", backgroundColor: "#f2f8fc", padding: "2.5rem 3.5rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}
           >
             <AnimatePresence mode="wait">
               {isLogin ? (
@@ -89,7 +88,8 @@ export default function AuthPage() {
               )}
             </AnimatePresence>
           </motion.div>
-          <motion.div layout transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }} 
+
+          <motion.div layout transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
             style={{ flex: "1", backgroundColor: "#ffffff", padding: "2.5rem 3.5rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
             <AnimatePresence mode="wait">
               {isLogin ? (
@@ -110,31 +110,32 @@ export default function AuthPage() {
         </motion.div>
       </div>
 
-      <div className="mobile-view" style={{ 
+      {/* ── MOBILE VIEW ── */}
+      <div className="mobile-view" style={{
         minHeight: "100vh", position: "relative", fontFamily: "'Inter', sans-serif", overflow: "hidden", backgroundColor: "#0f172a",
         backgroundImage: "url('https://images.pexels.com/photos/6340631/pexels-photo-6340631.jpeg?cs=srgb&dl=pexels-pavel-danilyuk-6340631.jpg&fm=jpg')",
         backgroundSize: "cover", backgroundPosition: "center",
       }}>
         <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(15, 23, 42, 0.45)" }} />
-        
+
         <div style={{ position: "absolute", top: "10%", width: "100%", display: "flex", justifyContent: "center", zIndex: 10 }}>
           <Link href="/" style={{ textDecoration: "none" }}>
             <img src="/zth%20logo.png" alt="ZTH Logo" style={{ height: "110px", width: "auto", objectFit: "contain" }} />
           </Link>
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ y: "100%" }} animate={{ y: 0 }} transition={{ type: "spring", damping: 22, stiffness: 180, delay: 0.1 }}
           style={{
             position: "absolute", bottom: 0, width: "100%", padding: "clamp(1.5rem, 5vw, 2rem)", paddingTop: "clamp(2rem, 6vw, 2.5rem)",
             background: "rgba(255, 255, 255, 0.88)", backdropFilter: "blur(25px)", WebkitBackdropFilter: "blur(25px)",
             borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem", boxShadow: "0 -10px 40px rgba(0,0,0,0.15)",
-            display: "flex", flexDirection: "column", maxHeight: "85vh", overflowY: "auto"
+            display: "flex", flexDirection: "column", maxHeight: "85vh", overflowY: "auto",
           }}
         >
           <div style={{ display: "flex", background: "rgba(0,0,0,0.06)", borderRadius: "100px", padding: "0.3rem", marginBottom: "1.75rem" }}>
-            <button onClick={() => setIsLogin(true)} style={{ flex: 1, padding: "0.6rem", borderRadius: "100px", background: isLogin ? "#ffffff" : "transparent", color: isLogin ? "#1A1A1A" : "#555555", border: "none", fontSize: "0.95rem", fontWeight: 700, pointerEvents: "auto", boxShadow: isLogin ? "0 2px 10px rgba(0,0,0,0.05)" : "none", transition: "all 0.3s ease", cursor: "pointer" }}>Login</button>
-            <button onClick={() => setIsLogin(false)} style={{ flex: 1, padding: "0.6rem", borderRadius: "100px", background: !isLogin ? "#ffffff" : "transparent", color: !isLogin ? "#1A1A1A" : "#555555", border: "none", fontSize: "0.95rem", fontWeight: 700, pointerEvents: "auto", boxShadow: !isLogin ? "0 2px 10px rgba(0,0,0,0.05)" : "none", transition: "all 0.3s ease", cursor: "pointer" }}>Sign Up</button>
+            <button onClick={() => setIsLogin(true)} style={{ flex: 1, padding: "0.6rem", borderRadius: "100px", background: isLogin ? "#ffffff" : "transparent", color: isLogin ? "#1A1A1A" : "#555555", border: "none", fontSize: "0.95rem", fontWeight: 700, boxShadow: isLogin ? "0 2px 10px rgba(0,0,0,0.05)" : "none", transition: "all 0.3s ease", cursor: "pointer" }}>Login</button>
+            <button onClick={() => setIsLogin(false)} style={{ flex: 1, padding: "0.6rem", borderRadius: "100px", background: !isLogin ? "#ffffff" : "transparent", color: !isLogin ? "#1A1A1A" : "#555555", border: "none", fontSize: "0.95rem", fontWeight: 700, boxShadow: !isLogin ? "0 2px 10px rgba(0,0,0,0.05)" : "none", transition: "all 0.3s ease", cursor: "pointer" }}>Sign Up</button>
           </div>
 
           <h1 style={{ fontSize: "1.75rem", fontWeight: 800, color: "#1A1A1A", marginBottom: "1.25rem", letterSpacing: "-0.02em" }}>
@@ -164,16 +165,13 @@ export default function AuthPage() {
             <span style={{ padding: "0 0.75rem", fontSize: "0.85rem", color: "#555555", fontWeight: 600 }}>Or</span>
             <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(0,0,0,0.08)" }} />
           </div>
-
           <SocialButtons />
-          
         </motion.div>
       </div>
 
       <style jsx>{`
         .mobile-view { display: none; }
         .desktop-view { display: flex; }
-        
         @media (max-width: 768px) {
           .desktop-view { display: none !important; }
           .mobile-view { display: block !important; }

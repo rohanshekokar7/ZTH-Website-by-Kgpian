@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Mail, Phone, MapPin, CheckCircle } from "lucide-react";
+import { ArrowUpRight, CheckCircle, AlertCircle } from "lucide-react";
 import Link from "next/link";
+import { supabase } from "@/lib/supabase";
 
 export default function BookPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [form, setForm] = useState<{
     name: string;
     email: string;
@@ -26,7 +28,6 @@ export default function BookPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      // Support both ?services=a,b,c (from modal) and legacy ?service=x
       const multi = params.get("services");
       const single = params.get("service");
       if (multi) {
@@ -41,6 +42,7 @@ export default function BookPage() {
   const update = (field: string, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
     setErrors((e) => ({ ...e, [field]: "" }));
+    setSubmitError(null);
   };
 
   const toggleService = (value: string) => {
@@ -69,10 +71,49 @@ export default function BookPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1600));
-    setLoading(false);
-    setSubmitted(true);
+    setSubmitError(null);
+
+    try {
+      // 1. Insert into Supabase
+      const { error: dbError } = await supabase.from("bookings").insert([
+        {
+          name: form.name.trim(),
+          email: form.email.trim().toLowerCase(),
+          company: form.company.trim(),
+          services: form.services,
+          message: form.message.trim(),
+        },
+      ]);
+
+      if (dbError) throw new Error(dbError.message);
+
+      // 2. Trigger confirmation email via API route
+      try {
+        await fetch("/api/send-confirmation", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: form.name.trim(),
+            email: form.email.trim(),
+            company: form.company.trim(),
+            services: form.services,
+            message: form.message.trim(),
+          }),
+        });
+      } catch {
+        // Email failure is non-blocking — booking is already saved
+        console.warn("Email send failed, but booking was saved.");
+      }
+
+      setSubmitted(true);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setSubmitError(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -100,13 +141,13 @@ export default function BookPage() {
           backgroundPosition: "center",
         }} />
 
-        {/* Dark overlay to keep text readable */}
+        {/* Dark overlay */}
         <div style={{
           position: "absolute", inset: 0,
           background: "linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(0,0,0,0.95) 100%)",
         }} />
 
-        {/* Content on top of image */}
+        {/* Content */}
         <div style={{
           position: "relative", zIndex: 1,
           display: "flex", flexDirection: "column",
@@ -182,12 +223,10 @@ export default function BookPage() {
               ))}
             </div>
           </motion.div>
-
-
         </div>
       </div>
 
-      {/* ── RIGHT COLUMN — Light Form ── */}
+      {/* ── RIGHT COLUMN — Form ── */}
       <div style={{
         background: "#ffffff",
         display: "flex", flexDirection: "column",
@@ -225,7 +264,7 @@ export default function BookPage() {
                 <span style={{ color: "#1976D2" }}>Thank you</span> for<br />contacting us!
               </h2>
               <p style={{ fontSize: "1rem", color: "#666666", lineHeight: 1.7, maxWidth: "380px" }}>
-                We have received your message and will contact you shortly to follow up. If you would like to speak to someone immediately, feel free to call.
+                We have received your message and will contact you shortly. A confirmation email has been sent to your inbox.
               </p>
               <div style={{ marginTop: "0.5rem" }}>
                 <Link href="/" style={{
@@ -265,6 +304,24 @@ export default function BookPage() {
               }}>
                 We&apos;re here to bring your concept to life, craft your investor story, or build your pitch deck from the ground up.
               </p>
+
+              {/* Global error */}
+              {submitError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    display: "flex", alignItems: "center", gap: "0.5rem",
+                    background: "#fff5f5", border: "1px solid #fca5a5",
+                    borderRadius: "0.5rem", padding: "0.75rem 1rem",
+                    marginBottom: "1.5rem",
+                    color: "#dc2626", fontSize: "0.85rem",
+                  }}
+                >
+                  <AlertCircle size={16} />
+                  {submitError}
+                </motion.div>
+              )}
 
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
 
@@ -354,8 +411,8 @@ export default function BookPage() {
                 <motion.button
                   type="submit"
                   disabled={loading}
-                  whileHover={{ scale: 1.03, boxShadow: "0 12px 30px rgba(25,118,210,0.2)" }}
-                  whileTap={{ scale: 0.97 }}
+                  whileHover={!loading ? { scale: 1.03, boxShadow: "0 12px 30px rgba(25,118,210,0.2)" } : {}}
+                  whileTap={!loading ? { scale: 0.97 } : {}}
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "0.6rem",
                     padding: "0.9rem 2.5rem",
